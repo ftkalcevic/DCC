@@ -1,0 +1,418 @@
+<html>
+<head>
+<title>DCC Servo Decoder</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<link rel="stylesheet" type="text/css" href="/Site.css" />
+		<script type="text/javascript" src="/menu.js"></script>
+		<style type="text/css">
+		.servo1, .servo3, .servo5, .servo7
+		{
+		background-color:#F0F0F0;
+		}
+		.servo2, .servo4, .servo6, .servo8
+		{
+		background-color:#E0E0E0;
+		}
+		</style>
+	</head>
+	<body>
+		<div id="mainContainer">
+			<div id="topBar">
+				<h1 align="center">DCC Servo Decoder</h1>
+			</div>
+		
+            <div id="leftColumn" w3-include-html="/menu.html"></div>
+		
+			<div id="mainContent">
+				<p>
+					I built the servo decoder to switch my hand laid turnouts.  I looked at the standard solutions, such as
+					<a href="http://www.circuitron.com/index_files/Tortoise.htm">the 
+					tortoise</a>, but they were enormous for a z-scale layout.&nbsp; 
+					I planned to use ultra-miniature rc servos to do the 
+					switching.&nbsp; <!--The following CAD drawing compares a 
+					tortoise to the RC servo (based on manufacturers 
+					specifications).--></p>
+				<h2>Functionality</h2>
+				<ol>
+					<li>Drive up to 8 RC servos to simulate the opening and 
+					closing of a turnout.</li>
+					<li>Provide outputs for each servo to control the signal 
+					lights surrounding the turnout.<ul>
+						<li>Support for individual, bicolour and tricolour LEDs</li>
+					</ul>
+				</li>
+				<li>Controlled by DCC</li>
+				<li>Supports configuration variables with acknowledgement<ul>
+						<li>Accessory Address Lo</li>
+					<li>Accessory Address Hi</li>
+						<li>Configuration byte</li>
+					<li>Interactive Programming Address</li>
+						<li>Enable Interactive Servo</li>
+					<li>And for each servo,<ul>
+							<li>Servo Min position</li>
+						<li>Servo Max position</li>
+							<li>Servo switching time</li>
+						<li>Servo Configuration byte</li>
+						</ul>
+						</li>
+					</ul>
+					</li>
+					<li>Support a simulated &quot;run&quot; where adjusting the accessory 
+					&quot;speed&quot; sets the min/max positions of the turn out.</li>
+</ol>
+<h2>Design</h2>
+					<p>The electronics design is quite simple.&nbsp;  The schematic is shown below (click 
+					on it for the pdf)</p>
+				<p><a href="DCCServoSchematic.pdf">
+				<img border="0" src="DCCServoSch.jpg" width="695" height="422" /></a></p>
+				<p>Things of interest...</p>
+				<ul>
+					<li>U4 is a high speed opto-coupler used to read the signal 
+					transmitted in the track lines.</li>
+					<li>U5 and Q1 are used to load the track (draw more than 
+					?mA) .&nbsp; 
+					This is how the DCC accessory acknowledges commands.</li>
+					<li>J4, is the RS232 TTL connector is for debug.</li>
+					<li>J1 provides power for the module.&nbsp; I prefer a 
+					separate supply, rather than using the track power, but the 
+					track power can be used here.</li>
+					<li>U1 provides 5v power for the the microcontroller.</li>
+					<li>U2 provides adjustable power for the servos.&nbsp; This 
+					is currently set to 5.75v.</li>
+					<li>JP5, JP6, JP7 provides drive for 8 servos, a signal 
+					wire, plus power and ground.</li>
+					<li>JP1, JP2, JP3, JP4 provides the drive for the signalling 
+					LEDs, an open signal, a closed signal, power and ground.</li>
+			</ul>
+				<p>The PCB is here.</p>
+				<p><a href="DCCServoPCBArtwork.pdf">
+				<img border="0" src="PCB.png" width="434" height="292"/></a></p>
+				<p>Here's an action shot of the PCB, wired up to 3 turnouts and 
+				signal LEDs.&nbsp; This is from my
+				<a href="../TestLayout/TestLayout.htm">Test Layout</a>.</p>
+				<p><img border="0" src="DCCPCB.jpg" width="694" height="455" /></p>
+			<h2>Firmware</h2>
+				<p>The important interfacing is done via interrupts.</p>
+				<p>The DCC input signal is picked up and decoded in the External 
+				Interrupt 0 handler.&nbsp; The interrupt triggers on any change, 
+				so the interrupt handler is called twice for each bit.&nbsp; Each transition is timed using 16bit 
+				Timer2.&nbsp; A short time is a 1.&nbsp; A long time is a 0.&nbsp; 
+				The time is checked to fit in a min/max range for each of 0 and 
+				1.&nbsp; If the time falls outside this range, it is an error 
+				and the packet is discarded.&nbsp; A completed packet is stored 
+				in an array and a global flag is set to let the main loop know 
+				to process it.</p>
+				<p>Timer 0 fires every 2.5ms.&nbsp; This is to start a new servo 
+				output.&nbsp; Because the servo signal only lasts 2ms and is 
+				repeated every 20ms, we can service all 8 servos sequentially in 
+				20ms, every 2.5ms.&nbsp; The interrupt also updates the position 
+				of any servos in motion every 1/10th	of a second.</p>
+				<p>The servo pulse is started in the timer 0 interrupt by 
+				starting the timer 1 counter and outputting a value to the servo 
+				signal line.&nbsp; The output compare register is used to time 
+				the servo pulse.&nbsp; When the output compare interrupt 
+				triggers, the pulse is set to 0.&nbsp; This is not a good way of 
+				doing this because delays to the interrupt (for example, it is 
+				busy processing another interrupt), can cause jitter.&nbsp; A 
+				better way would be to use the output compare feature to set the 
+				signal to 0, but there are not 8 lines that do that.</p>
+				<p>The main loop is responsible for processing any packets that 
+				have been received from the DCC bus.&nbsp; This include CV 
+				changes, and operation changes.&nbsp; Opening and closing the 
+				turnouts is initiated by the main loop.&nbsp; The main loop 
+				updates the signalling LEDs.</p>
+				<p>The source for the firmware can be found here 
+				<a href="DCCServoFirmware.zip"><img style="background-color:white" border="0" src="../../gplv3-88x31.png" width="88" height="31" /></a>.  
+				I must apologise for this code.&nbsp; It hasn't been touched for 
+				3 years, lacks comments, and it's full of magic numbers and 
+				debug.&nbsp; And I don't think it compiles, although I think 
+				they are only issues with header files.</p>
+				<p id="Build">
+				The source code is compiled with <a href="http://winavr.sourceforge.net/">winavr</a> although any gcc avr distribution should work.
+				</p>
+				<p>
+				I program the device and the fuses using <a href="http://www.atmel.com/dyn/products/tools_card.asp?tool_id=2725">AVRStudio 4</a> and an AVRISP clone.  
+				The fuses are set to...
+				</p>
+				<img src="fuses.png" />
+				<h2>Interface</h2>
+				<p>The interface to the Servo Decode is a standard DCC Accessory 
+				(as far as I could interpret the standard).</p>
+				<p>The device is configured via configuration variables.&nbsp; 
+				These are listed below...</p>
+				<table border="1" id="table1">
+					<colgroup>
+						<col width="50"/>	
+					</colgroup>
+					<tr>
+						<td>CV</td>
+						<td>Description</td>
+					</tr>
+					<tr>
+						<td>513</td>
+						<td>Accessory Address LSB </td>
+					</tr>
+					<tr>
+						<td>514</td>
+						<td>Accessory Address MSB</td>
+					</tr>
+					<tr>
+						<td>515</td>
+						<td>Configuration byte.&nbsp; Currently none of the bits 
+						are used.</td>
+					</tr>
+					<tr class="servo1">
+						<td>545</td>
+						<td>Servo 1 min position.&nbsp; The position the servo 
+						should move to when the turnout is closed.</td>
+					</tr>
+					<tr class="servo1">
+						<td>546</td>
+						<td>Servo 1 max position.&nbsp; The position the servo 
+						should move to when the turnout is open.</td>
+					</tr>
+					<tr class="servo1">
+						<td>547</td>
+						<td>Servo 1 switch time.&nbsp; The time, in tenths of a 
+						second, that it takes the turnout to close.</td>
+					</tr>
+					<tr class="servo1">
+						<td>548</td>
+						<td>Servo 1 configuration byte.&nbsp; Bit 0 - Reverse 
+						turnout open/close direction.&nbsp; Bit 1 - Reverse the 
+						LED outputs.&nbsp; Bit 2 - LED is a tricolour LED.</td>
+					</tr>
+					
+					<tr class="servo2">
+						<td>549</td>
+						<td>Servo 2 min position.&nbsp; The position the servo 
+						should move to when the turnout is closed.</td>
+					</tr>
+					<tr class="servo2">
+						<td>550</td>
+						<td>Servo 2 max position.&nbsp; The position the servo 
+						should move to when the turnout is open.</td>
+					</tr>
+					<tr class="servo2">
+						<td>551</td>
+						<td>Servo 2 switch time.&nbsp; The time, in tenths of a 
+						second, that it takes the turnout to close.</td>
+					</tr>
+					<tr class="servo2">
+						<td>552</td>
+						<td>Servo 2 configuration byte.&nbsp; Bit 0 - Reverse 
+						turnout open/close direction.&nbsp; Bit 1 - Reverse the 
+						LED outputs.&nbsp; Bit 2 - LED is a tricolour LED.</td>
+					</tr>
+					
+					<tr class="servo3">
+						<td>553</td>
+						<td>Servo 3 min position.&nbsp; The position the servo 
+						should move to when the turnout is closed.</td>
+					</tr>
+					<tr class="servo3">
+						<td>554</td>
+						<td>Servo 3 max position.&nbsp; The position the servo 
+						should move to when the turnout is open.</td>
+					</tr>
+					<tr class="servo3">
+						<td>555</td>
+						<td>Servo 3 switch time.&nbsp; The time, in tenths of a 
+						second, that it takes the turnout to close.</td>
+					</tr>
+					<tr class="servo3">
+						<td>556</td>
+						<td>Servo 3 configuration byte.&nbsp; Bit 0 - Reverse 
+						turnout open/close direction.&nbsp; Bit 1 - Reverse the 
+						LED outputs.&nbsp; Bit 2 - LED is a tricolour LED.</td>
+					</tr>
+					
+					<tr class="servo4">
+						<td>557</td>
+						<td>Servo 4 min position.&nbsp; The position the servo 
+						should move to when the turnout is closed.</td>
+					</tr>
+					<tr class="servo4">
+						<td>558</td>
+						<td>Servo 4 max position.&nbsp; The position the servo 
+						should move to when the turnout is open.</td>
+					</tr>
+					<tr class="servo4">
+						<td>559</td>
+						<td>Servo 4 switch time.&nbsp; The time, in tenths of a 
+						second, that it takes the turnout to close.</td>
+					</tr>
+					<tr class="servo4">
+						<td>560</td>
+						<td>Servo 4 configuration byte.&nbsp; Bit 0 - Reverse 
+						turnout open/close direction.&nbsp; Bit 1 - Reverse the 
+						LED outputs.&nbsp; Bit 2 - LED is a tricolour LED.</td>
+					</tr>
+					
+					<tr class="servo5">
+						<td>561</td>
+						<td>Servo 5 min position.&nbsp; The position the servo 
+						should move to when the turnout is closed.</td>
+					</tr>
+					<tr class="servo5">
+						<td>562</td>
+						<td>Servo 5 max position.&nbsp; The position the servo 
+						should move to when the turnout is open.</td>
+					</tr>
+					<tr class="servo5">
+						<td>563</td>
+						<td>Servo 5 switch time.&nbsp; The time, in tenths of a 
+						second, that it takes the turnout to close.</td>
+					</tr>
+					<tr class="servo5">
+						<td>564</td>
+						<td>Servo 5 configuration byte.&nbsp; Bit 0 - Reverse 
+						turnout open/close direction.&nbsp; Bit 1 - Reverse the 
+						LED outputs.&nbsp; Bit 2 - LED is a tricolour LED.</td>
+					</tr>
+					
+					<tr class="servo6">
+						<td>565</td>
+						<td>Servo 6 min position.&nbsp; The position the servo 
+						should move to when the turnout is closed.</td>
+					</tr>
+					<tr class="servo6">
+						<td>566</td>
+						<td>Servo 6 max position.&nbsp; The position the servo 
+						should move to when the turnout is open.</td>
+					</tr>
+					<tr class="servo6">
+						<td>567</td>
+						<td>Servo 6 switch time.&nbsp; The time, in tenths of a 
+						second, that it takes the turnout to close.</td>
+					</tr>
+					<tr class="servo6">
+						<td>568</td>
+						<td>Servo 6 configuration byte.&nbsp; Bit 0 - Reverse 
+						turnout open/close direction.&nbsp; Bit 1 - Reverse the 
+						LED outputs.&nbsp; Bit 2 - LED is a tricolour LED.</td>
+					</tr>
+					
+					<tr class="servo7">
+						<td>569</td>
+						<td>Servo 7 min position.&nbsp; The position the servo 
+						should move to when the turnout is closed.</td>
+					</tr>
+					<tr class="servo7">
+						<td>570</td>
+						<td>Servo 7 max position.&nbsp; The position the servo 
+						should move to when the turnout is open.</td>
+					</tr>
+					<tr class="servo7">
+						<td>571</td>
+						<td>Servo 7 switch time.&nbsp; The time, in tenths of a 
+						second, that it takes the turnout to close.</td>
+					</tr>
+					<tr class="servo7">
+						<td>572</td>
+						<td>Servo 7 configuration byte.&nbsp; Bit 0 - Reverse 
+						turnout open/close direction.&nbsp; Bit 1 - Reverse the 
+						LED outputs.&nbsp; Bit 2 - LED is a tricolour LED.</td>
+					</tr>
+					
+					<tr class="servo8">
+						<td>573</td>
+						<td>Servo 8 min position.&nbsp; The position the servo 
+						should move to when the turnout is closed.</td>
+					</tr>
+					<tr class="servo8">
+						<td>574</td>
+						<td>Servo 8 max position.&nbsp; The position the servo 
+						should move to when the turnout is open.</td>
+					</tr>
+					<tr class="servo8">
+						<td>575</td>
+						<td>Servo 8 switch time.&nbsp; The time, in tenths of a 
+						second, that it takes the turnout to close.</td>
+					</tr>
+					<tr class="servo8">
+						<td>576</td>
+						<td>Servo 8 configuration byte.&nbsp; Bit 0 - Reverse 
+						turnout open/close direction.&nbsp; Bit 1 - Reverse the 
+						LED outputs.&nbsp; Bit 2 - LED is a tricolour LED.</td>
+					</tr>
+					
+					<tr>
+						<td>577</td>
+						<td>Interactive programming address.</td>
+					</tr>
+					
+					<tr>
+						<td>578</td>
+						<td>Enable Interactive servo.&nbsp; When this variable 
+						is set to non-zero, the accessory decoder will start 
+						treating the accessory as a locomotive, listening for 
+						7-bit speed commands on the address specified in CV577.&nbsp; 
+						If a speed is detected, it is used to set the position 
+						of the servo arm.&nbsp; The servo is selected by the 
+						non-zero value of CV578 (this CV).&nbsp; If the turnout 
+						is open, the open value (max) is set.&nbsp; It the 
+						turnout is closed, the closed (min) value is set.&nbsp; 
+						The min/max values will only be stored when this CV, 
+						CV578 is set back to 0.</td>
+					</tr>
+					
+				</table>
+				<p>The normal operation accessory decode packet is shown 
+				below...</p>
+				<p class="code">{preamble} 0 10AAAAAA 0 1AAACDDD 0 EEEEEEEE 1</p>
+		<p>Bit C is used open and close a turnout. DDD is used to select a 
+		servo.&nbsp; The DCC specification suggests that accessory outputs are 
+		paired so that the lowest D bit selects the output, and the upper two D 
+		bits select 1 of 4 devices.&nbsp; I just use the whole 3 bits to select 
+		one of 8 devices.&nbsp; I don't have a commercial DCC controller so I 
+		can't confirm this works elsewhere.</p>
+				
+				
+			<h2>Wiring</h2>
+				<p>Here's a diagram of the wiring options...</p>
+				<p><img border="0" src="Wiring.png" width="871" height="384" /></p>
+				<p>Servos are easy.&nbsp; They just plug in.</p>
+				<p>There are many signalling options...</p>
+				<ul>
+					<li>No signalling</li>
+					<li>Separate On/Off LEDs (where on is an open turnout, and 
+					off is a closed turnout)</li>
+					<li>Bicolour LEDs.&nbsp; These LEDs have 2 legs: power them 
+					in one direction and they show one colour.&nbsp; Reverse the 
+					polarity and they show another colour.</li>
+					<li>Tricolour LEDs.&nbsp; These are effectively 2 LEDs in 
+					the one body.&nbsp; One leg for each colour and a common 
+					ground (cathode).&nbsp; Three colour combinations can be 
+					made by lighting LED A, LED B, or both A and B.</li>
+					<li>Only one LED on the on or off lines.</li>
+				</ul>
+				<p>LEDs can also be connected in parallel to have more lights, 
+				or redundant signals.</p>
+				<p>A current limiting resistor must be installed.&nbsp; The LEDs 
+				are driven directly from the microcontroller pins.&nbsp; They 
+				must be limited to 20mA each, according to the Atmel spec.</p>
+				<h2>Next Version</h2>
+				<p>A few improvements are necessary...</p>
+				<ul>
+					<li>Moving the servo arm is very noisy (audible).&nbsp; I'd 
+					like to try changing the voltage on the servos to see if 
+					lowering it would make a difference.&nbsp; Some micro servos 
+					work down to 3.0 volts.</li>
+				<li>The servos seem very susceptible to electrical noise.&nbsp; 
+				I reduced this by putting the PCB in a metal box, and using 
+				shielded servo cables.&nbsp; I need to look into this.</li>
+					<li>A pretty LED or two to show the device is powered up, 
+					and flash it to acknowledge commands.</li>
+				<li>Servos are usually highly geared, such that there is no need 
+				to continue providing power to hold the position.&nbsp; Maybe 
+				just removing the positioning signal will work.</li>
+					<li>Rethink how to generate the servo timing signals.&nbsp; 
+					The timing seems to be a bit in accurate making the servos 
+					jiggle - maybe using a timer output and a 1-in-8 decoder.</li>
+			</ul>
+				</div>
+		</div>
+<!-- #include file="/analytics.html" -->
+</body>
+</html>
