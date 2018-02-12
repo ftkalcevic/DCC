@@ -107,7 +107,7 @@ debug.
 I program the device and the fuses using AVRStudio and an AVRISP clone.  
 The fuses are set to...
 
-<img src="fuses.png" />
+<img src="./ReadmeSource/fuses.png" />
 
 ##Interface
 The interface to the Servo Decode is a standard DCC Accessory 
@@ -137,176 +137,175 @@ These are listed below...
 		<td>Configuration byte. Currently none of the bits 
 		are used.</td>
 	</tr>
-	<tr class="servo1">
+	<tr>
 		<td>545</td>
 		<td>Servo 1 min position. The position the servo 
 		should move to when the turnout is closed.</td>
 	</tr>
-	<tr class="servo1">
+	<tr>
 		<td>546</td>
 		<td>Servo 1 max position. The position the servo 
 		should move to when the turnout is open.</td>
 	</tr>
-	<tr class="servo1">
+	<tr>
 		<td>547</td>
 		<td>Servo 1 switch time. The time, in tenths of a 
 		second, that it takes the turnout to close.</td>
 	</tr>
-	<tr class="servo1">
+	<tr>
 		<td>548</td>
 		<td>Servo 1 configuration byte. Bit 0 - Reverse 
 		turnout open/close direction. Bit 1 - Reverse the 
 		LED outputs. Bit 2 - LED is a tricolour LED.</td>
 	</tr>
 					
-	<tr class="servo2">
+	<tr>
 		<td>549</td>
 		<td>Servo 2 min position. The position the servo 
 		should move to when the turnout is closed.</td>
 	</tr>
-	<tr class="servo2">
+	<tr>
 		<td>550</td>
 		<td>Servo 2 max position. The position the servo 
 		should move to when the turnout is open.</td>
 	</tr>
-	<tr class="servo2">
+	<tr>
 		<td>551</td>
 		<td>Servo 2 switch time. The time, in tenths of a 
 		second, that it takes the turnout to close.</td>
 	</tr>
-	<tr class="servo2">
+	<tr>
 		<td>552</td>
 		<td>Servo 2 configuration byte. Bit 0 - Reverse 
 		turnout open/close direction. Bit 1 - Reverse the 
 		LED outputs. Bit 2 - LED is a tricolour LED.</td>
 	</tr>
-					
-	<tr class="servo3">
+	<tr>
 		<td>553</td>
 		<td>Servo 3 min position. The position the servo 
 		should move to when the turnout is closed.</td>
 	</tr>
-	<tr class="servo3">
+	<tr>
 		<td>554</td>
 		<td>Servo 3 max position. The position the servo 
 		should move to when the turnout is open.</td>
 	</tr>
-	<tr class="servo3">
+	<tr>
 		<td>555</td>
 		<td>Servo 3 switch time. The time, in tenths of a 
 		second, that it takes the turnout to close.</td>
 	</tr>
-	<tr class="servo3">
+	<tr>
 		<td>556</td>
 		<td>Servo 3 configuration byte. Bit 0 - Reverse 
 		turnout open/close direction. Bit 1 - Reverse the 
 		LED outputs. Bit 2 - LED is a tricolour LED.</td>
 	</tr>
 					
-	<tr class="servo4">
+	<tr>
 		<td>557</td>
 		<td>Servo 4 min position. The position the servo 
 		should move to when the turnout is closed.</td>
 	</tr>
-	<tr class="servo4">
+	<tr>
 		<td>558</td>
 		<td>Servo 4 max position. The position the servo 
 		should move to when the turnout is open.</td>
 	</tr>
-	<tr class="servo4">
+	<tr>
 		<td>559</td>
 		<td>Servo 4 switch time. The time, in tenths of a 
 		second, that it takes the turnout to close.</td>
 	</tr>
-	<tr class="servo4">
+	<tr>
 		<td>560</td>
 		<td>Servo 4 configuration byte. Bit 0 - Reverse 
 		turnout open/close direction. Bit 1 - Reverse the 
 		LED outputs. Bit 2 - LED is a tricolour LED.</td>
 	</tr>
 					
-	<tr class="servo5">
+	<tr>
 		<td>561</td>
 		<td>Servo 5 min position. The position the servo 
 		should move to when the turnout is closed.</td>
 	</tr>
-	<tr class="servo5">
+	<tr>
 		<td>562</td>
 		<td>Servo 5 max position. The position the servo 
 		should move to when the turnout is open.</td>
 	</tr>
-	<tr class="servo5">
+	<tr>
 		<td>563</td>
 		<td>Servo 5 switch time. The time, in tenths of a 
 		second, that it takes the turnout to close.</td>
 	</tr>
-	<tr class="servo5">
+	<tr>
 		<td>564</td>
 		<td>Servo 5 configuration byte. Bit 0 - Reverse 
 		turnout open/close direction. Bit 1 - Reverse the 
 		LED outputs. Bit 2 - LED is a tricolour LED.</td>
 	</tr>
 					
-	<tr class="servo6">
+	<tr>
 		<td>565</td>
 		<td>Servo 6 min position. The position the servo 
 		should move to when the turnout is closed.</td>
 	</tr>
-	<tr class="servo6">
+	<tr>
 		<td>566</td>
 		<td>Servo 6 max position. The position the servo 
 		should move to when the turnout is open.</td>
 	</tr>
-	<tr class="servo6">
+	<tr>
 		<td>567</td>
 		<td>Servo 6 switch time. The time, in tenths of a 
 		second, that it takes the turnout to close.</td>
 	</tr>
-	<tr class="servo6">
+	<tr>
 		<td>568</td>
 		<td>Servo 6 configuration byte. Bit 0 - Reverse 
 		turnout open/close direction. Bit 1 - Reverse the 
 		LED outputs. Bit 2 - LED is a tricolour LED.</td>
 	</tr>
 					
-	<tr class="servo7">
+	<tr>
 		<td>569</td>
 		<td>Servo 7 min position. The position the servo 
 		should move to when the turnout is closed.</td>
 	</tr>
-	<tr class="servo7">
+	<tr>
 		<td>570</td>
 		<td>Servo 7 max position. The position the servo 
 		should move to when the turnout is open.</td>
 	</tr>
-	<tr class="servo7">
+	<tr>
 		<td>571</td>
 		<td>Servo 7 switch time. The time, in tenths of a 
 		second, that it takes the turnout to close.</td>
 	</tr>
-	<tr class="servo7">
+	<tr>
 		<td>572</td>
 		<td>Servo 7 configuration byte. Bit 0 - Reverse 
 		turnout open/close direction. Bit 1 - Reverse the 
 		LED outputs. Bit 2 - LED is a tricolour LED.</td>
 	</tr>
 					
-	<tr class="servo8">
+	<tr>
 		<td>573</td>
 		<td>Servo 8 min position. The position the servo 
 		should move to when the turnout is closed.</td>
 	</tr>
-	<tr class="servo8">
+	<tr>
 		<td>574</td>
 		<td>Servo 8 max position. The position the servo 
 		should move to when the turnout is open.</td>
 	</tr>
-	<tr class="servo8">
+	<tr>
 		<td>575</td>
 		<td>Servo 8 switch time. The time, in tenths of a 
 		second, that it takes the turnout to close.</td>
 	</tr>
-	<tr class="servo8">
+	<tr>
 		<td>576</td>
 		<td>Servo 8 configuration byte. Bit 0 - Reverse 
 		turnout open/close direction. Bit 1 - Reverse the 
