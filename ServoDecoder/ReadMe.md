@@ -109,7 +109,7 @@ The fuses are set to...
 
 <img src="./ReadmeSource/fuses.png" />
 
-##Interface
+## Interface
 The interface to the Servo Decode is a standard DCC Accessory 
 (as far as I could interpret the standard).
 
@@ -158,7 +158,6 @@ These are listed below...
 		turnout open/close direction. Bit 1 - Reverse the 
 		LED outputs. Bit 2 - LED is a tricolour LED.</td>
 	</tr>
-					
 	<tr>
 		<td>549</td>
 		<td>Servo 2 min position. The position the servo 
@@ -201,7 +200,6 @@ These are listed below...
 		turnout open/close direction. Bit 1 - Reverse the 
 		LED outputs. Bit 2 - LED is a tricolour LED.</td>
 	</tr>
-					
 	<tr>
 		<td>557</td>
 		<td>Servo 4 min position. The position the servo 
@@ -223,7 +221,6 @@ These are listed below...
 		turnout open/close direction. Bit 1 - Reverse the 
 		LED outputs. Bit 2 - LED is a tricolour LED.</td>
 	</tr>
-					
 	<tr>
 		<td>561</td>
 		<td>Servo 5 min position. The position the servo 
@@ -245,7 +242,6 @@ These are listed below...
 		turnout open/close direction. Bit 1 - Reverse the 
 		LED outputs. Bit 2 - LED is a tricolour LED.</td>
 	</tr>
-					
 	<tr>
 		<td>565</td>
 		<td>Servo 6 min position. The position the servo 
@@ -267,7 +263,6 @@ These are listed below...
 		turnout open/close direction. Bit 1 - Reverse the 
 		LED outputs. Bit 2 - LED is a tricolour LED.</td>
 	</tr>
-					
 	<tr>
 		<td>569</td>
 		<td>Servo 7 min position. The position the servo 
@@ -289,7 +284,6 @@ These are listed below...
 		turnout open/close direction. Bit 1 - Reverse the 
 		LED outputs. Bit 2 - LED is a tricolour LED.</td>
 	</tr>
-					
 	<tr>
 		<td>573</td>
 		<td>Servo 8 min position. The position the servo 
@@ -311,12 +305,10 @@ These are listed below...
 		turnout open/close direction. Bit 1 - Reverse the 
 		LED outputs. Bit 2 - LED is a tricolour LED.</td>
 	</tr>
-					
 	<tr>
 		<td>577</td>
 		<td>Interactive programming address.</td>
 	</tr>
-					
 	<tr>
 		<td>578</td>
 		<td>Enable Interactive servo. When this variable 
@@ -331,7 +323,6 @@ These are listed below...
 		The min/max values will only be stored when this CV, 
 		CV578 is set back to 0.</td>
 	</tr>
-					
 </table>
 
 The normal operation accessory decode packet is shown below...
