@@ -42,7 +42,6 @@
 		#include "Webserver.h"
 		#include "Descriptors.h"
 		#include "Lib/uIPManagement.h"
-		#include "Lib/SCSI.h"
 		#include "Config/AppConfig.h"
 
 	/* External Variables: */
@@ -56,7 +55,6 @@
 		void EVENT_USB_Device_ConfigurationChanged(void);
 		void EVENT_USB_Device_ControlRequest(void);
 
-		bool CALLBACK_MS_Device_SCSICommandReceived(USB_ClassInfo_MS_Device_t* const MSInterfaceInfo);
 
 #endif
 

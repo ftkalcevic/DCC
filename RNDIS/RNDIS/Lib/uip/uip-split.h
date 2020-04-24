@@ -75,8 +75,7 @@
 #include <string.h>
 #include <uip.h>
 
-#include "../../USBHostMode.h"
-
+#include "../../USBDeviceMode.h"
 #include <LUFA/Drivers/USB/USB.h>
 
 /**

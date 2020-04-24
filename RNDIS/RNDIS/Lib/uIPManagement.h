@@ -46,10 +46,7 @@
 
 		#include "Config/AppConfig.h"
 
-		#include "DHCPClientApp.h"
-		#include "DHCPServerApp.h"
 		#include "HTTPServerApp.h"
-		#include "TELNETServerApp.h"
 
 	/* External Variables: */
 		extern struct uip_eth_addr MACAddress;

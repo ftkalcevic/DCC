@@ -624,7 +624,6 @@ void uip_log(char *msg);
 /** @} */
 /*------------------------------------------------------------------------------*/
 
-#include <ff.h>
 #include <stdbool.h>
 #include <stdint.h>
 
@@ -693,20 +692,12 @@ typedef union
 		uint8_t  CurrentState;
 		uint8_t  NextState;
 
-		char     FileName[MAX_URI_LENGTH];
-		FIL      FileHandle;
-		bool     FileOpen;
+		const char * buffer;
+		uint16_t buffer_len;
+
 		uint32_t ACKedFilePos;
 		uint16_t SentChunkSize;
 	} HTTPServer;
-
-	struct
-	{
-		uint8_t  CurrentState;
-		uint8_t  NextState;
-
-		uint8_t  IssuedCommand;
-	} TELNETServer;
 } uip_tcp_appstate_t;
 
 /**

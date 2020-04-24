@@ -73,30 +73,7 @@ USB_ClassInfo_RNDIS_Device_t Ethernet_RNDIS_Interface_Device =
 			},
 	};
 
-/** LUFA Mass Storage Class driver interface configuration and state information. This structure is
- *  passed to all Mass Storage Class driver functions, so that multiple instances of the same class
- *  within a device can be differentiated from one another.
- */
-USB_ClassInfo_MS_Device_t Disk_MS_Interface =
-	{
-		.Config =
-			{
-				.InterfaceNumber                = INTERFACE_ID_MassStorage,
-				.DataINEndpoint                 =
-					{
-						.Address                = MASS_STORAGE_IN_EPADDR,
-						.Size                   = MASS_STORAGE_IO_EPSIZE,
-						.Banks                  = 1,
-					},
-				.DataOUTEndpoint                =
-					{
-						.Address                = MASS_STORAGE_OUT_EPADDR,
-						.Size                   = MASS_STORAGE_IO_EPSIZE,
-						.Banks                  = 1,
-					},
-				.TotalLUNs                 = 1,
-			},
-	};
+
 
 
 /** USB device mode management task. This function manages the Mass Storage Device class driver when the device is
@@ -110,7 +87,6 @@ void USBDeviceMode_USBTask(void)
 	uIPManagement_ManageNetwork();
 
 	RNDIS_Device_USBTask(&Ethernet_RNDIS_Interface_Device);
-	MS_Device_USBTask(&Disk_MS_Interface);
 }
 
 /** Event handler for the library USB Connection event. */
@@ -133,7 +109,6 @@ void EVENT_USB_Device_ConfigurationChanged(void)
 	bool ConfigSuccess = true;
 
 	ConfigSuccess &= RNDIS_Device_ConfigureEndpoints(&Ethernet_RNDIS_Interface_Device);
-	ConfigSuccess &= MS_Device_ConfigureEndpoints(&Disk_MS_Interface);
 
 	LEDs_SetAllLEDs(ConfigSuccess ? LEDMASK_USB_READY : LEDMASK_USB_ERROR);
 }
@@ -142,21 +117,5 @@ void EVENT_USB_Device_ConfigurationChanged(void)
 void EVENT_USB_Device_ControlRequest(void)
 {
 	RNDIS_Device_ProcessControlRequest(&Ethernet_RNDIS_Interface_Device);
-	MS_Device_ProcessControlRequest(&Disk_MS_Interface);
-}
-
-/** Mass Storage class driver callback function the reception of SCSI commands from the host, which must be processed.
- *
- *  \param[in] MSInterfaceInfo  Pointer to the Mass Storage class interface configuration structure being referenced
- */
-bool CALLBACK_MS_Device_SCSICommandReceived(USB_ClassInfo_MS_Device_t* const MSInterfaceInfo)
-{
-	bool CommandSuccess;
-
-	LEDs_SetAllLEDs(LEDMASK_USB_BUSY);
-	CommandSuccess = SCSI_DecodeSCSICommand(MSInterfaceInfo);
-	LEDs_SetAllLEDs(LEDMASK_USB_READY);
-
-	return CommandSuccess;
 }
 

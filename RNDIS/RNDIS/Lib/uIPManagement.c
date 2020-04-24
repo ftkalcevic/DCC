@@ -113,7 +113,10 @@ void uIPManagement_Init(void)
  */
 void uIPManagement_ManageNetwork(void)
 {
-	if (((USB_CurrentMode == USB_MODE_Host)   && (USB_HostState   == HOST_STATE_Configured)) ||
+	if (
+#if !defined(USB_DEVICE_ONLY)
+	((USB_CurrentMode == USB_MODE_Host)   && (USB_HostState   == HOST_STATE_Configured)) ||
+#endif
 	    ((USB_CurrentMode == USB_MODE_Device) && (USB_DeviceState == DEVICE_STATE_Configured)))
 	{
 		uIPManagement_ProcessIncomingPacket();
@@ -164,29 +167,15 @@ void uIPManagement_UDPCallback(void)
 /** Processes Incoming packets to the server from the connected RNDIS device, creating responses as needed. */
 static void uIPManagement_ProcessIncomingPacket(void)
 {
-	/* Determine which USB mode the system is currently initialized in */
-	if (USB_CurrentMode == USB_MODE_Device)
-	{
-		/* If no packet received, exit processing routine */
-		if (!(RNDIS_Device_IsPacketReceived(&Ethernet_RNDIS_Interface_Device)))
-		  return;
 
-		LEDs_SetAllLEDs(LEDMASK_USB_BUSY);
+	/* If no packet received, exit processing routine */
+	if (!(RNDIS_Device_IsPacketReceived(&Ethernet_RNDIS_Interface_Device)))
+		return;
 
-		/* Read the Incoming packet straight into the UIP packet buffer */
-		RNDIS_Device_ReadPacket(&Ethernet_RNDIS_Interface_Device, uip_buf, &uip_len);
-	}
-	else
-	{
-		/* If no packet received, exit processing routine */
-		if (!(RNDIS_Host_IsPacketReceived(&Ethernet_RNDIS_Interface_Host)))
-		  return;
+	LEDs_SetAllLEDs(LEDMASK_USB_BUSY);
 
-		LEDs_SetAllLEDs(LEDMASK_USB_BUSY);
-
-		/* Read the Incoming packet straight into the UIP packet buffer */
-		RNDIS_Host_ReadPacket(&Ethernet_RNDIS_Interface_Host, uip_buf, &uip_len);
-	}
+	/* Read the Incoming packet straight into the UIP packet buffer */
+	RNDIS_Device_ReadPacket(&Ethernet_RNDIS_Interface_Device, uip_buf, &uip_len);
 
 	/* If the packet contains an Ethernet frame, process it */
 	if (uip_len > 0)

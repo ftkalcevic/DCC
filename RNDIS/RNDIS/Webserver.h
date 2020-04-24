@@ -44,13 +44,11 @@
 		#include <avr/interrupt.h>
 
 		#include <LUFA/Drivers/Board/LEDs.h>
-		#include <LUFA/Drivers/Board/Dataflash.h>
 		#include <LUFA/Drivers/Peripheral/SPI.h>
 		#include <LUFA/Drivers/USB/USB.h>
 		#include <LUFA/Platform/Platform.h>
 
 		#include "USBDeviceMode.h"
-		#include "USBHostMode.h"
 		#include "Config/AppConfig.h"
 
 	/* Macros: */

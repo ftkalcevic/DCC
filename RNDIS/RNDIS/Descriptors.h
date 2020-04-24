@@ -43,16 +43,6 @@
 
 		#include "Config/AppConfig.h"
 
-	/* Macros: */
-		/** Endpoint address of the Mass Storage device-to-host data IN endpoint. */
-		#define MASS_STORAGE_IN_EPADDR         (ENDPOINT_DIR_IN  | 3)
-
-		/** Endpoint address of the Mass Storage host-to-device data OUT endpoint. */
-		#define MASS_STORAGE_OUT_EPADDR        (ENDPOINT_DIR_OUT | 4)
-
-		/** Size in bytes of the Mass Storage data endpoints. */
-		#define MASS_STORAGE_IO_EPSIZE         64
-
 		/** Endpoint address of the CDC device-to-host notification IN endpoint. */
 		#define CDC_NOTIFICATION_EPADDR        (ENDPOINT_DIR_IN  | 5)
 
@@ -89,11 +79,6 @@
 			USB_Descriptor_Interface_t             CDC_DCI_Interface;
 			USB_Descriptor_Endpoint_t              RNDIS_DataOutEndpoint;
 			USB_Descriptor_Endpoint_t              RNDIS_DataInEndpoint;
-
-			// Mass Storage Interface
-			USB_Descriptor_Interface_t             MS_Interface;
-			USB_Descriptor_Endpoint_t              MS_DataInEndpoint;
-			USB_Descriptor_Endpoint_t              MS_DataOutEndpoint;
 		} USB_Descriptor_Configuration_t;
 
 		/** Enum for the device interface descriptor IDs within the device. Each interface descriptor
@@ -104,7 +89,6 @@
 		{
 			INTERFACE_ID_CDC_CCI     = 0, /**< CDC CCI interface descriptor ID */
 			INTERFACE_ID_CDC_DCI     = 1, /**< CDC DCI interface descriptor ID */
-			INTERFACE_ID_MassStorage = 2, /**< Mass storage interface descriptor ID */
 		};
 
 		/** Enum for the device string descriptor IDs within the device. Each string descriptor should

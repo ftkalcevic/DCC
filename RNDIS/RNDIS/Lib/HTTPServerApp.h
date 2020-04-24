@@ -45,7 +45,6 @@
 		#include "Config/AppConfig.h"
 
 		#include <uip.h>
-		#include <ff.h>
 
 	/* Enums: */
 		/** States for each HTTP connection to the webserver. */

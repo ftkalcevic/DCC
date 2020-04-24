@@ -70,8 +70,7 @@ void SetupHardware(void)
 #endif
 
 	/* Hardware Initialization */
-	Dataflash_Init();
 	LEDs_Init();
-	USB_Init(USB_MODE_UID);
+	USB_Init();
 }
 

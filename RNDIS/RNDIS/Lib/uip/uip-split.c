@@ -83,10 +83,7 @@ uip_split_output(void)
 #if UIP_CONF_IPV6
     tcpip_ipv6_output();
 #else
-	if (USB_CurrentMode == USB_MODE_Device)
-	  RNDIS_Device_SendPacket(&Ethernet_RNDIS_Interface_Device, uip_buf, uip_len);
-	else
-	  RNDIS_Host_SendPacket(&Ethernet_RNDIS_Interface_Host, uip_buf, uip_len);
+	RNDIS_Device_SendPacket(&Ethernet_RNDIS_Interface_Device, uip_buf, uip_len);
 #endif /* UIP_CONF_IPV6 */
 
     /* Now, create the second packet. To do this, it is not enough to
@@ -127,10 +124,7 @@ uip_split_output(void)
 #if UIP_CONF_IPV6
     tcpip_ipv6_output();
 #else
-	if (USB_CurrentMode == USB_MODE_Device)
-	  RNDIS_Device_SendPacket(&Ethernet_RNDIS_Interface_Device, uip_buf, uip_len);
-	else
-	  RNDIS_Host_SendPacket(&Ethernet_RNDIS_Interface_Host, uip_buf, uip_len);
+	RNDIS_Device_SendPacket(&Ethernet_RNDIS_Interface_Device, uip_buf, uip_len);
 #endif /* UIP_CONF_IPV6 */
     return;
   }
@@ -140,10 +134,7 @@ uip_split_output(void)
 #if UIP_CONF_IPV6
 	tcpip_ipv6_output();
 #else
-	if (USB_CurrentMode == USB_MODE_Device)
-	  RNDIS_Device_SendPacket(&Ethernet_RNDIS_Interface_Device, uip_buf, uip_len);
-	else
-	  RNDIS_Host_SendPacket(&Ethernet_RNDIS_Interface_Host, uip_buf, uip_len);
+	RNDIS_Device_SendPacket(&Ethernet_RNDIS_Interface_Device, uip_buf, uip_len);
 #endif /* UIP_CONF_IPV6 */
 }
 
