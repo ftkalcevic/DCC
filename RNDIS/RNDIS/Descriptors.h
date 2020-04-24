@@ -44,7 +44,7 @@
 		#include "Config/AppConfig.h"
 
 		/** Endpoint address of the CDC device-to-host notification IN endpoint. */
-		#define CDC_NOTIFICATION_EPADDR        (ENDPOINT_DIR_IN  | 5)
+		#define CDC_NOTIFICATION_EPADDR        (ENDPOINT_DIR_IN  | 3)
 
 		/** Endpoint address of the CDC device-to-host data IN endpoint. */
 		#define CDC_TX_EPADDR                  (ENDPOINT_DIR_IN  | 1)

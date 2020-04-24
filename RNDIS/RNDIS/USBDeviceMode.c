@@ -81,9 +81,6 @@ USB_ClassInfo_RNDIS_Device_t Ethernet_RNDIS_Interface_Device =
  */
 void USBDeviceMode_USBTask(void)
 {
-	if (USB_CurrentMode != USB_MODE_Device)
-	  return;
-
 	uIPManagement_ManageNetwork();
 
 	RNDIS_Device_USBTask(&Ethernet_RNDIS_Interface_Device);

@@ -57,9 +57,9 @@
 	#define UIP_CONF_BROADCAST            0
 	#define UIP_CONF_TCP                  1
 	#define UIP_CONF_UDP_CONNS            1
-	#define UIP_CONF_MAX_CONNECTIONS      3
-	#define UIP_CONF_MAX_LISTENPORTS      5
-	#define UIP_CONF_BUFFER_SIZE          1514
+	#define UIP_CONF_MAX_CONNECTIONS      1
+	#define UIP_CONF_MAX_LISTENPORTS      1
+	#define UIP_CONF_BUFFER_SIZE          512
 	#define UIP_CONF_LL_802154            0
 	#define UIP_CONF_LL_80211             0
 	#define UIP_CONF_ROUTER               0
@@ -69,5 +69,6 @@
 	#define UIP_ARCH_CHKSUM               0
 	#define UIP_ARCH_ADD32                0
 	#define UIP_NEIGHBOR_CONF_ADDRTYPE    0
+	#define UIP_CONF_ARPTAB_SIZE		  1
 
 #endif

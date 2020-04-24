@@ -48,10 +48,7 @@ int main(void)
 
 	for (;;)
 	{
-		if (USB_CurrentMode == USB_MODE_Host)
-		  USBHostMode_USBTask();
-		else
-		  USBDeviceMode_USBTask();
+		USBDeviceMode_USBTask();
 
 		USB_USBTask();
 	}
