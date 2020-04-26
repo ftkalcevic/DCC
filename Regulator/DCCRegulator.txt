@@ -1,0 +1,23 @@
+Field=Description,String,Description,100|Field=Designator,String,Designator,100|Field=Footprint,String,Footprint,100|Field=LibRef,String,LibRef,100|Field=Quantity,String,Quantity,100|Field=Value,String,Value,100|ReportField=ProjectFileName,DCCRegulator.PrjPCB|ReportField=ProjectFullPath,D:\Projects\avr\Projects\DCC\Regulator\DCCRegulator.PrjPCB|ReportField=Title,Bill of Materials For Project [DCCRegulator.PrjPCB]|ReportField=TotalQuantity,22|ReportField=ReportTime,4:15:05 PM|ReportField=ReportDate,26/02/2005|ReportField=ReportDateTime,26/02/2005 4:15:05 PM|ReportField=OutputName,Bill of Materials|ReportField=OutputType,BOM_PartType|ReportField=GeneratorName,ReportComponents|ReportField=GeneratorDescription,Component Reports|ReportField=VariantName,None|ReportField=DataSourceFileName,DCCRegulator.PrjPCB|ReportField=DataSourceFullPath,D:\Projects\avr\Projects\DCC\Regulator\DCCRegulator.PrjPCB
+Capacitor|C1|RAD-0.2|Cap|1|200pF
+Typical INFRARED GaAs LED|DS1|LED5mm|LED0|1|
+Typical INFRARED GaAs LED|DS2|LED5mm|LED0|1|
+Plug|P1|PIN1|Plug|1|
+Plug|P2|PIN1|Plug|1|
+Plug|P3|PIN1|Plug|1|
+Plug|P4|PIN1|Plug|1|
+Amplifier Transistor PNP Silicon|Q1|29-04|BC327|1|
+Resistor|R1|AXIAL-1.0|Res2|1|0.1
+Resistor|R2|AXIAL-1.0|Res2|1|0.1
+Resistor|R3|AXIAL-1.0|Res2|1|0.1
+Resistor|R4|AXIAL-0.3|Res2|1|4K7
+Resistor|R5|AXIAL-0.3|Res2|1|100
+Resistor|R6|AXIAL-0.3|Res2|1|1K
+Resistor|R7|AXIAL-0.3|Res2|1|500
+Resistor|R8|AXIAL-0.3|Res2|1|100
+Resistor|R9|AXIAL-0.3|Res2|1|4K7
+Potentiometer|R10|Horizontal Trim Pot|RPot|1|2K
+3-Terminal Adjustable Positive Voltage Regulator|U1|1-03|LM350K|1|
+3-Terminal Adjustable Positive Voltage Regulator|U2|1-03|LM350K|1|
+3-Terminal Adjustable Positive Voltage Regulator|U3|1-03|LM350K|1|
+Precision Operational Amplifier|U4|626-05|LM308N|1|
