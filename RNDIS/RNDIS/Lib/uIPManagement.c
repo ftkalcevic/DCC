@@ -40,72 +40,19 @@
 /** Connection timer, to retain the time elapsed since the last time the uIP connections were managed. */
 static struct timer ConnectionTimer;
 
-/** ARP timer, to retain the time elapsed since the ARP cache was last updated. */
-static struct timer ARPTimer;
-
-/** MAC address of the RNDIS device, when enumerated. */
-struct uip_eth_addr MACAddress;
-
-
 /** Configures the uIP stack ready for network traffic processing. */
 void uIPManagement_Init(void)
 {
 	/* uIP Timing Initialization */
 	clock_init();
 	timer_set(&ConnectionTimer, CLOCK_SECOND / 2);
-	timer_set(&ARPTimer, CLOCK_SECOND * 10);
 
 	/* uIP Stack Initialization */
 	uip_init();
-	uip_arp_init();
-
-	/* DHCP/Server IP Settings Initialization */
-	if (USB_CurrentMode == USB_MODE_Device)
-	{
-		MACAddress.addr[0] = SERVER_MAC_ADDRESS[0];
-		MACAddress.addr[1] = SERVER_MAC_ADDRESS[1];
-		MACAddress.addr[2] = SERVER_MAC_ADDRESS[2];
-		MACAddress.addr[3] = SERVER_MAC_ADDRESS[3];
-		MACAddress.addr[4] = SERVER_MAC_ADDRESS[4];
-		MACAddress.addr[5] = SERVER_MAC_ADDRESS[5];
-
-		#if defined(ENABLE_DHCP_SERVER)
-		DHCPServerApp_Init();
-		#endif
-
-		uip_ipaddr_t IPAddress, Netmask, GatewayIPAddress;
-		uip_ipaddr(&IPAddress,        DEVICE_IP_ADDRESS[0], DEVICE_IP_ADDRESS[1], DEVICE_IP_ADDRESS[2], DEVICE_IP_ADDRESS[3]);
-		uip_ipaddr(&Netmask,          DEVICE_NETMASK[0],    DEVICE_NETMASK[1],    DEVICE_NETMASK[2],    DEVICE_NETMASK[3]);
-		uip_ipaddr(&GatewayIPAddress, DEVICE_GATEWAY[0],    DEVICE_GATEWAY[1],    DEVICE_GATEWAY[2],    DEVICE_GATEWAY[3]);
-		uip_sethostaddr(&IPAddress);
-		uip_setnetmask(&Netmask);
-		uip_setdraddr(&GatewayIPAddress);
-	}
-	else
-	{
-		#if defined(ENABLE_DHCP_CLIENT)
-		DHCPClientApp_Init();
-		#else
-		uip_ipaddr_t IPAddress, Netmask, GatewayIPAddress;
-		uip_ipaddr(&IPAddress,        DEVICE_IP_ADDRESS[0], DEVICE_IP_ADDRESS[1], DEVICE_IP_ADDRESS[2], DEVICE_IP_ADDRESS[3]);
-		uip_ipaddr(&Netmask,          DEVICE_NETMASK[0],    DEVICE_NETMASK[1],    DEVICE_NETMASK[2],    DEVICE_NETMASK[3]);
-		uip_ipaddr(&GatewayIPAddress, DEVICE_GATEWAY[0],    DEVICE_GATEWAY[1],    DEVICE_GATEWAY[2],    DEVICE_GATEWAY[3]);
-		uip_sethostaddr(&IPAddress);
-		uip_setnetmask(&Netmask);
-		uip_setdraddr(&GatewayIPAddress);
-		#endif
-	}
-
-	/* Virtual Webserver Ethernet Address Configuration */
-	uip_setethaddr(MACAddress);
+	//uip_arp_init();
 
 	/* HTTP Webserver Initialization */
 	HTTPServerApp_Init();
-
-	/* TELNET Server Initialization */
-	#if defined(ENABLE_TELNET_SERVER)
-	TELNETServerApp_Init();
-	#endif
 }
 
 /** uIP Management function. This function manages the uIP stack when called while an RNDIS device has been
@@ -113,11 +60,7 @@ void uIPManagement_Init(void)
  */
 void uIPManagement_ManageNetwork(void)
 {
-	if (
-#if !defined(USB_DEVICE_ONLY)
-	((USB_CurrentMode == USB_MODE_Host)   && (USB_HostState   == HOST_STATE_Configured)) ||
-#endif
-	    ((USB_CurrentMode == USB_MODE_Device) && (USB_DeviceState == DEVICE_STATE_Configured)))
+	if ( USB_DeviceState == DEVICE_STATE_Configured )
 	{
 		uIPManagement_ProcessIncomingPacket();
 		uIPManagement_ManageConnections();
@@ -143,26 +86,26 @@ void uIPManagement_TCPCallback(void)
 	}
 }
 
-/** uIP TCP/IP network stack callback function for the processing of a given UDP connection. This routine dispatches
- *  to the appropriate UDP protocol application based on the connection's listen port number.
- */
-void uIPManagement_UDPCallback(void)
-{
-	/* Call the correct UDP application based on the port number the connection is listening on */
-	switch (uip_udp_conn->lport)
-	{
-		#if defined(ENABLE_DHCP_CLIENT)
-		case HTONS(DHCP_CLIENT_PORT):
-			DHCPClientApp_Callback();
-			break;
-		#endif
-		#if defined(ENABLE_DHCP_SERVER)
-		case HTONS(DHCP_SERVER_PORT):
-			DHCPServerApp_Callback();
-			break;
-		#endif
-	}
-}
+///** uIP TCP/IP network stack callback function for the processing of a given UDP connection. This routine dispatches
+ //*  to the appropriate UDP protocol application based on the connection's listen port number.
+ //*/
+//void uIPManagement_UDPCallback(void)
+//{
+	///* Call the correct UDP application based on the port number the connection is listening on */
+	//switch (uip_udp_conn->lport)
+	//{
+		//#if defined(ENABLE_DHCP_CLIENT)
+		//case HTONS(DHCP_CLIENT_PORT):
+			//DHCPClientApp_Callback();
+			//break;
+		//#endif
+		//#if defined(ENABLE_DHCP_SERVER)
+		//case HTONS(DHCP_SERVER_PORT):
+			//DHCPServerApp_Callback();
+			//break;
+		//#endif
+	//}
+//}
 
 /** Processes Incoming packets to the server from the connected RNDIS device, creating responses as needed. */
 static void uIPManagement_ProcessIncomingPacket(void)
@@ -275,13 +218,6 @@ static void uIPManagement_ManageConnections(void)
 		#endif
 
 		LEDs_SetAllLEDs(LEDMASK_USB_READY);
-	}
-
-	/* Manage ARP cache refreshing */
-	if (timer_expired(&ARPTimer))
-	{
-		timer_reset(&ARPTimer);
-		uip_arp_timer();
 	}
 }
 

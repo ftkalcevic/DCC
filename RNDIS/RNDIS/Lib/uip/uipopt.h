@@ -98,7 +98,11 @@
  *
  * \hideinitializer
  */
+#ifdef UIP_CONF_FIXEDADDR
+#define UIP_FIXEDADDR    UIP_CONF_FIXEDADDR
+#else /* UIP_CONF_FIXEDADDR */
 #define UIP_FIXEDADDR    0
+#endif /* UIP_CONF_FIXEDADDR */
 
 /**
  * Ping IP address assignment.
@@ -128,7 +132,11 @@
  *
  * \hideinitializer
  */
-#define UIP_FIXEDETHADDR 0
+#ifdef UIP_CONF_FIXEDETHADDR
+#define UIP_FIXEDETHADDR    UIP_CONF_FIXEDETHADDR
+#else /* UIP_CONF_FIXEDETHADDR */
+#define UIP_FIXEDETHADDR    0
+#endif /* UIP_CONF_FIXEDETHADDR */
 
 /** @} */
 /*------------------------------------------------------------------------------*/
@@ -694,6 +702,7 @@ typedef union
 
 		const char * buffer;
 		uint16_t buffer_len;
+		uint8_t progmem;
 
 		uint32_t ACKedFilePos;
 		uint16_t SentChunkSize;

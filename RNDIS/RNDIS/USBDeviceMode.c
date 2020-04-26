@@ -67,7 +67,7 @@ USB_ClassInfo_RNDIS_Device_t Ethernet_RNDIS_Interface_Device =
 						.Banks                  = 1,
 					},
 				.AdapterVendorDescription       = "LUFA RNDIS Adapter",
-				.AdapterMACAddress              = {{0x02, 0x00, 0x02, 0x00, 0x02, 0x00}},
+				.AdapterMACAddress              = { ADAPTOR_MAC_ADDRESS },
 				.MessageBuffer                  = RNDIS_Message_Buffer,
 				.MessageBufferLength            = sizeof(RNDIS_Message_Buffer),
 			},

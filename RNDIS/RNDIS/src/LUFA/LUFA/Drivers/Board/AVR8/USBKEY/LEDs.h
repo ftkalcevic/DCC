@@ -133,6 +133,7 @@
 			static inline uint8_t LEDs_GetLEDs(void)
 			{
 				//return (PORTD & LEDS_ALL_LEDS);
+				return 0;
 			}
 		#endif
 

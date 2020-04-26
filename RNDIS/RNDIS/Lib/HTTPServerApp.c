@@ -37,6 +37,12 @@
 #define  INCLUDE_FROM_HTTPSERVERAPP_C
 #include "HTTPServerApp.h"
 
+const char PROGMEM HTTP404Header[] = "HTTP/1.1 404 Not Found\r\n"
+                                     "Server: LUFA " LUFA_VERSION_STRING "\r\n"
+                                     "Connection: close\r\n"
+                                     "MIME-version: 1.0\r\n"
+                                     "Content-Type: text/plain\r\n\r\n"
+                                     "Error 404: File Not Found";
 /** HTTP server response header, for transmission before the page contents. This indicates to the host that a page exists at the
  *  given location, and gives extra connection information.
  */
@@ -44,20 +50,18 @@ const char PROGMEM HTTP200Header[] = "HTTP/1.1 200 OK\r\n"
                                      "Server: LUFA " LUFA_VERSION_STRING "\r\n"
                                      "Connection: close\r\n"
                                      "MIME-version: 1.0\r\n"
-                                     "Content-Type: text/html"
-									 "\r\n\r\n";
+                                     "Content-Type: ";
+const char PROGMEM content_type_html[] = "text/html\r\nContent-Encoding: deflate\r\nContent-Length: ";
+const char PROGMEM content_type_json[] = "application/json";
 
-const char PROGMEM index_html[] = R"(<html>
-<title></title>
-<body>
-This is the DCC configuration page.
-</body>
-</html>)";
+const char PROGMEM index_html[] = {
+#include "../index.htm.z"
+};
 
-
+static char html_buffer[512];
 
 
-/** Initialization function for the simple HTTP webserver. */
+/** Initialization function for the simple HTTP webserver. */ 
 void HTTPServerApp_Init(void)
 {
 	/* Listen on port 80 for HTTP connections from hosts */
@@ -82,14 +86,16 @@ void HTTPServerApp_Callback(void)
 	if (uip_connected())
 	{
 		/* New connection - initialize connection state values */
-		AppState->HTTPServer.CurrentState  = WEBSERVER_STATE_OpenRequestedFile;
-		AppState->HTTPServer.NextState     = WEBSERVER_STATE_OpenRequestedFile;
+		AppState->HTTPServer.CurrentState  = WEBSERVER_STATE_ProcessRequest;
+		AppState->HTTPServer.NextState     = WEBSERVER_STATE_ProcessRequest;
+		AppState->HTTPServer.ACKedFilePos  = 0;
+		AppState->HTTPServer.SentChunkSize = 0;
 	}
 
 	if (uip_acked())
 	{
 		/* Add the amount of ACKed file data to the total sent file bytes counter */
-		AppState->HTTPServer.buffer_len -= AppState->HTTPServer.SentChunkSize;
+		AppState->HTTPServer.ACKedFilePos += AppState->HTTPServer.SentChunkSize;
 
 		/* Progress to the next state once the current state's data has been ACKed */
 		AppState->HTTPServer.CurrentState = AppState->HTTPServer.NextState;
@@ -99,8 +105,8 @@ void HTTPServerApp_Callback(void)
 	{
 		switch (AppState->HTTPServer.CurrentState)
 		{
-			case WEBSERVER_STATE_OpenRequestedFile:
-				HTTPServerApp_OpenRequestedFile();
+			case WEBSERVER_STATE_ProcessRequest:
+				HTTPServerApp_ProcessRequest();
 				break;
 			case WEBSERVER_STATE_SendResponseHeader:
 				HTTPServerApp_SendResponseHeader();
@@ -123,7 +129,7 @@ void HTTPServerApp_Callback(void)
 /** HTTP Server State handler for the Request Process state. This state manages the processing of incoming HTTP
  *  GET requests to the server from the receiving HTTP client.
  */
-static void HTTPServerApp_OpenRequestedFile(void)
+static void HTTPServerApp_ProcessRequest(void)
 {
 	uip_tcp_appstate_t* const AppState    = &uip_conn->appstate;
 	char*               const AppData     = (char*)uip_appdata;
@@ -133,17 +139,50 @@ static void HTTPServerApp_OpenRequestedFile(void)
 	  return;
 
 	char* RequestToken      = strtok(AppData, " ");
+	char* RequestedFileName = strtok(NULL, " ");
 
 	/* Must be a GET request, abort otherwise */
-	if (strcmp_P(RequestToken, PSTR("GET")) != 0)
+	if (strcmp_P(RequestToken, PSTR("GET")) == 0)
+	{
+		if ( *RequestedFileName == '/' && *(RequestedFileName+1) == 0 )
+		{
+			AppState->HTTPServer.progmem = 1;
+			AppState->HTTPServer.buffer = index_html;
+			AppState->HTTPServer.buffer_len = sizeof(index_html);
+		}
+		else if ( *RequestedFileName == '/' && *(RequestedFileName+1) == 'd' )
+		{
+			strcpy( html_buffer, "{\"I0\":0,\"I1\":1,\"I2\":");
+			clock_time_t t = clock_time();
+			itoa(t,html_buffer+strlen(html_buffer),10);
+			strcat(html_buffer,"}");
+			AppState->HTTPServer.progmem = 0;
+			AppState->HTTPServer.buffer = html_buffer;
+			AppState->HTTPServer.buffer_len = strlen(html_buffer);
+		}
+		else if ( *RequestedFileName == '/' && *(RequestedFileName+1) == 'c' )
+		{
+			strcpy( html_buffer, "{\"C0\":0,\"C1\":1,\"C2\":0}");
+			AppState->HTTPServer.progmem = 0;
+			AppState->HTTPServer.buffer = html_buffer;
+			AppState->HTTPServer.buffer_len = strlen(html_buffer);
+		}
+		else
+		{
+			/* Copy over the HTTP 404 response header and send it to the receiving client */
+			strcpy_P(AppData, HTTP404Header);
+			uip_send(AppData, strlen(AppData));
+
+			AppState->HTTPServer.NextState = WEBSERVER_STATE_Closing;
+			return;
+		}
+	}
+	else
 	{
 		uip_abort();
 		return;
 	}
-
-	/* Copy over the requested filename */
-	AppState->HTTPServer.buffer = index_html;
-	AppState->HTTPServer.buffer_len = sizeof(index_html)-1;
+	AppState->HTTPServer.SentChunkSize = 0;
 
 	/* Lock to the SendResponseHeader state until connection terminated */
 	AppState->HTTPServer.CurrentState = WEBSERVER_STATE_SendResponseHeader;
@@ -160,6 +199,16 @@ static void HTTPServerApp_SendResponseHeader(void)
 
 	/* Copy over the HTTP 200 response header and send it to the receiving client */
 	strcpy_P(AppData, HTTP200Header);
+	if ( AppState->HTTPServer.progmem )
+	{
+		strcat_P(AppData, content_type_html);
+		itoa(AppState->HTTPServer.buffer_len, AppData + strlen(AppData), 10 );
+	}
+	else
+	{
+		strcat_P(AppData, content_type_json);
+	}
+	strcat_P(AppData, PSTR("\r\n\r\n"));
 
 	/* Send the MIME header to the receiving client */
 	uip_send(AppData, strlen(AppData));
@@ -179,17 +228,23 @@ static void HTTPServerApp_SendData(void)
 	/* Get the maximum segment size for the current packet */
 	uint16_t MaxChunkSize = uip_mss();
 
-	if ( AppState->HTTPServer.buffer_len < MaxChunkSize )
-		MaxChunkSize = AppState->HTTPServer.buffer_len;
+#define MIN(a,b) ((a) < (b)? (a): (b))
+	AppState->HTTPServer.SentChunkSize = MIN(AppState->HTTPServer.buffer_len,MaxChunkSize);
 	
-	memcpy_P( AppData, AppState->HTTPServer.buffer,MaxChunkSize);
-	AppState->HTTPServer.SentChunkSize = MaxChunkSize;
+	if ( AppState->HTTPServer.progmem )
+	{
+		memcpy_P( AppData, AppState->HTTPServer.buffer + AppState->HTTPServer.ACKedFilePos, AppState->HTTPServer.SentChunkSize);
+	}
+	else
+	{
+		memcpy( AppData, AppState->HTTPServer.buffer + AppState->HTTPServer.ACKedFilePos, AppState->HTTPServer.SentChunkSize);
+	}
 
 	/* Send the next file chunk to the receiving client */
 	uip_send(AppData, AppState->HTTPServer.SentChunkSize);
 
 	/* Check if we are at the last chunk of the file, if so next ACK should close the connection */
-	if (AppState->HTTPServer.buffer_len == MaxChunkSize)
+	if (AppState->HTTPServer.SentChunkSize+AppState->HTTPServer.ACKedFilePos == AppState->HTTPServer.buffer_len)
 	  AppState->HTTPServer.NextState = WEBSERVER_STATE_Closing;
 }
 

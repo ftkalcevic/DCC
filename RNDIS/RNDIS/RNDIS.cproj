@@ -251,26 +251,50 @@
   <avrgcc.common.outputfiles.usersignatures>False</avrgcc.common.outputfiles.usersignatures>
   <avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>
   <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
-  <avrgcc.compiler.symbols.DefSymbols><ListValues>
-  <Value>F_CPU=16000000UL</Value>
-  <Value>F_USB=16000000UL</Value>
-  <Value>ARCH=ARCH_AVR8</Value>
-  <Value>USE_LUFA_CONFIG_HEADER</Value>
-  <Value>BOARD=BOARD_USBKEY</Value>
-  <Value>NDEBUG</Value>
-</ListValues></avrgcc.compiler.symbols.DefSymbols>
-  <avrgcc.compiler.directories.IncludePaths><ListValues><Value>../Lib/FATFs</Value><Value>../Lib/uip</Value><Value>../src/LUFA</Value><Value>../src</Value><Value>../src/config</Value><Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.2.150\include</Value></ListValues></avrgcc.compiler.directories.IncludePaths>
+  <avrgcc.compiler.symbols.DefSymbols>
+    <ListValues>
+      <Value>F_CPU=16000000UL</Value>
+      <Value>F_USB=16000000UL</Value>
+      <Value>ARCH=ARCH_AVR8</Value>
+      <Value>USE_LUFA_CONFIG_HEADER</Value>
+      <Value>BOARD=BOARD_USBKEY</Value>
+      <Value>NDEBUG</Value>
+    </ListValues>
+  </avrgcc.compiler.symbols.DefSymbols>
+  <avrgcc.compiler.directories.IncludePaths>
+    <ListValues>
+      <Value>../Lib/FATFs</Value>
+      <Value>../Lib/uip</Value>
+      <Value>../src/LUFA</Value>
+      <Value>../src</Value>
+      <Value>../src/config</Value>
+      <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.2.150\include</Value>
+    </ListValues>
+  </avrgcc.compiler.directories.IncludePaths>
+  <avrgcc.compiler.optimization.level>Optimize for size (-Os)</avrgcc.compiler.optimization.level>
   <avrgcc.compiler.optimization.OtherFlags>-fdata-sections</avrgcc.compiler.optimization.OtherFlags>
   <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
   <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
   <avrgcc.compiler.warnings.AllWarnings>True</avrgcc.compiler.warnings.AllWarnings>
-  <avrgcc.compiler.miscellaneous.OtherFlags>-mrelax -std=gnu99 -fno-strict-aliasing -fno-jump-tables</avrgcc.compiler.miscellaneous.OtherFlags>
+  <avrgcc.compiler.miscellaneous.OtherFlags>-mrelax -std=gnu99 -fno-strict-aliasing -fno-jump-tables -ffunction-sections -fdata-sections</avrgcc.compiler.miscellaneous.OtherFlags>
   <avrgcc.linker.general.OmitAllSymbolInformation>True</avrgcc.linker.general.OmitAllSymbolInformation>
-  <avrgcc.linker.libraries.Libraries><ListValues><Value>libm</Value></ListValues></avrgcc.linker.libraries.Libraries>
-  <avrgcc.linker.miscellaneous.LinkerFlags>-Wl,--relax</avrgcc.linker.miscellaneous.LinkerFlags>
+  <avrgcc.linker.libraries.Libraries>
+    <ListValues>
+      <Value>libm</Value>
+    </ListValues>
+  </avrgcc.linker.libraries.Libraries>
+  <avrgcc.linker.miscellaneous.LinkerFlags>-Wl,--relax -Wl,--gc-sections</avrgcc.linker.miscellaneous.LinkerFlags>
   <avrgcc.assembler.general.AssemblerFlags>-DARCH=ARCH_AVR8 -DBOARD=BOARD_USBKEY -DF_CPU=8000000UL -DF_USB=8000000UL -DUSE_LUFA_CONFIG_HEADER</avrgcc.assembler.general.AssemblerFlags>
-  <avrgcc.assembler.general.IncludePaths><ListValues><Value>../Lib/FATFs</Value><Value>../Lib/uip</Value><Value>../src/LUFA</Value><Value>../src</Value><Value>../src/config</Value><Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.2.150\include</Value></ListValues></avrgcc.assembler.general.IncludePaths>
-  <avrgcc.compiler.optimization.level>Optimize for size (-Os)</avrgcc.compiler.optimization.level>
+  <avrgcc.assembler.general.IncludePaths>
+    <ListValues>
+      <Value>../Lib/FATFs</Value>
+      <Value>../Lib/uip</Value>
+      <Value>../src/LUFA</Value>
+      <Value>../src</Value>
+      <Value>../src/config</Value>
+      <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.2.150\include</Value>
+    </ListValues>
+  </avrgcc.assembler.general.IncludePaths>
 </AvrGcc>
     </ToolchainSettings>
   </PropertyGroup>
@@ -286,27 +310,49 @@
   <avrgcc.common.outputfiles.usersignatures>False</avrgcc.common.outputfiles.usersignatures>
   <avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>
   <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
-  <avrgcc.compiler.symbols.DefSymbols><ListValues>
-  <Value>F_CPU=16000000UL</Value>
-  <Value>F_USB=16000000UL</Value>
-  <Value>ARCH=ARCH_AVR8</Value>
-  <Value>USE_LUFA_CONFIG_HEADER</Value>
-  <Value>BOARD=BOARD_USBKEY</Value>
-  <Value>DEBUG</Value>
-</ListValues></avrgcc.compiler.symbols.DefSymbols>
-  <avrgcc.compiler.directories.IncludePaths><ListValues><Value>../Lib/FATFs</Value><Value>../Lib/uip</Value><Value>../src/LUFA</Value><Value>../src</Value><Value>../src/config</Value><Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.2.150\include</Value></ListValues></avrgcc.compiler.directories.IncludePaths>
-  <avrgcc.compiler.optimization.OtherFlags>-fdata-sections</avrgcc.compiler.optimization.OtherFlags>
+  <avrgcc.compiler.symbols.DefSymbols>
+    <ListValues>
+      <Value>F_CPU=16000000UL</Value>
+      <Value>F_USB=16000000UL</Value>
+      <Value>ARCH=ARCH_AVR8</Value>
+      <Value>USE_LUFA_CONFIG_HEADER</Value>
+      <Value>BOARD=BOARD_USBKEY</Value>
+      <Value>DEBUG</Value>
+    </ListValues>
+  </avrgcc.compiler.symbols.DefSymbols>
+  <avrgcc.compiler.directories.IncludePaths>
+    <ListValues>
+      <Value>../Lib/FATFs</Value>
+      <Value>../Lib/uip</Value>
+      <Value>../src/LUFA</Value>
+      <Value>../src</Value>
+      <Value>../src/config</Value>
+      <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.2.150\include</Value>
+    </ListValues>
+  </avrgcc.compiler.directories.IncludePaths>
+  <avrgcc.compiler.optimization.OtherFlags>-fdata-sections  -ffunction-sections</avrgcc.compiler.optimization.OtherFlags>
   <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
   <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
+  <avrgcc.compiler.optimization.DebugLevel>Maximum (-g3)</avrgcc.compiler.optimization.DebugLevel>
   <avrgcc.compiler.warnings.AllWarnings>True</avrgcc.compiler.warnings.AllWarnings>
   <avrgcc.compiler.miscellaneous.OtherFlags>-mrelax -std=gnu99 -fno-strict-aliasing -fno-jump-tables</avrgcc.compiler.miscellaneous.OtherFlags>
-  <avrgcc.linker.general.OmitAllSymbolInformation>False</avrgcc.linker.general.OmitAllSymbolInformation>
-  <avrgcc.linker.libraries.Libraries><ListValues><Value>libm</Value></ListValues></avrgcc.linker.libraries.Libraries>
+  <avrgcc.linker.libraries.Libraries>
+    <ListValues>
+      <Value>libm</Value>
+    </ListValues>
+  </avrgcc.linker.libraries.Libraries>
   <avrgcc.linker.miscellaneous.LinkerFlags>-Wl,--relax</avrgcc.linker.miscellaneous.LinkerFlags>
   <avrgcc.assembler.general.AssemblerFlags>-DARCH=ARCH_AVR8 -DBOARD=BOARD_USBKEY -DF_CPU=8000000UL -DF_USB=8000000UL -DUSE_LUFA_CONFIG_HEADER</avrgcc.assembler.general.AssemblerFlags>
-  <avrgcc.assembler.general.IncludePaths><ListValues><Value>../Lib/FATFs</Value><Value>../Lib/uip</Value><Value>../src/LUFA</Value><Value>../src</Value><Value>../src/config</Value><Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.2.150\include</Value></ListValues></avrgcc.assembler.general.IncludePaths>
-  <avrgcc.compiler.optimization.level>Optimize debugging experience (-Og)</avrgcc.compiler.optimization.level>
-  <avrgcc.compiler.optimization.DebugLevel>Maximum (-g3)</avrgcc.compiler.optimization.DebugLevel>
+  <avrgcc.assembler.general.IncludePaths>
+    <ListValues>
+      <Value>../Lib/FATFs</Value>
+      <Value>../Lib/uip</Value>
+      <Value>../src/LUFA</Value>
+      <Value>../src</Value>
+      <Value>../src/config</Value>
+      <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.2.150\include</Value>
+    </ListValues>
+  </avrgcc.assembler.general.IncludePaths>
   <avrgcc.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcc.assembler.debugging.DebugLevel>
 </AvrGcc>
     </ToolchainSettings>

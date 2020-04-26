@@ -50,7 +50,7 @@
 		/** States for each HTTP connection to the webserver. */
 		enum Webserver_States_t
 		{
-			WEBSERVER_STATE_OpenRequestedFile, /**< Currently opening requested file */
+			WEBSERVER_STATE_ProcessRequest, /**< Currently opening requested file */
 			WEBSERVER_STATE_SendResponseHeader, /**< Currently sending HTTP response headers to the client */
 			WEBSERVER_STATE_SendData, /**< Currently sending HTTP page data to the client */
 			WEBSERVER_STATE_Closing, /**< Ready to close the connection to the client */
@@ -74,7 +74,7 @@
 		void HTTPServerApp_Callback(void);
 
 		#if defined(INCLUDE_FROM_HTTPSERVERAPP_C)
-			static void HTTPServerApp_OpenRequestedFile(void);
+			static void HTTPServerApp_ProcessRequest(void);
 			static void HTTPServerApp_SendResponseHeader(void);
 			static void HTTPServerApp_SendData(void);
 		#endif

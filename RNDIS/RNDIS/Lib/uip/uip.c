@@ -96,11 +96,11 @@
    here. Otherwise, the address */
 #if UIP_FIXEDADDR > 0
 const uip_ipaddr_t uip_hostaddr =
-  { UIP_IPADDR0, UIP_IPADDR1, UIP_IPADDR2, UIP_IPADDR3 };
+  {{ UIP_IPADDR0, UIP_IPADDR1, UIP_IPADDR2, UIP_IPADDR3 }};
 const uip_ipaddr_t uip_draddr =
-  { UIP_DRIPADDR0, UIP_DRIPADDR1, UIP_DRIPADDR2, UIP_DRIPADDR3 };
+  {{ UIP_DRIPADDR0, UIP_DRIPADDR1, UIP_DRIPADDR2, UIP_DRIPADDR3 }};
 const uip_ipaddr_t uip_netmask =
-  { UIP_NETMASK0, UIP_NETMASK1, UIP_NETMASK2, UIP_NETMASK3 };
+  {{ UIP_NETMASK0, UIP_NETMASK1, UIP_NETMASK2, UIP_NETMASK3 }};
 #else
 uip_ipaddr_t uip_hostaddr, uip_draddr, uip_netmask;
 #endif /* UIP_FIXEDADDR */
@@ -121,6 +121,12 @@ const struct uip_eth_addr uip_ethaddr = {{UIP_ETHADDR0,
 					  UIP_ETHADDR3,
 					  UIP_ETHADDR4,
 					  UIP_ETHADDR5}};
+const struct uip_eth_addr uip_drethaddr = {{ UIP_DRETHADDR0,
+											UIP_DRETHADDR1,
+											UIP_DRETHADDR2,
+											UIP_DRETHADDR3,
+											UIP_DRETHADDR4,
+											UIP_DRETHADDR5}};
 #else
 struct uip_eth_addr uip_ethaddr = {{0,0,0,0,0,0}};
 #endif
