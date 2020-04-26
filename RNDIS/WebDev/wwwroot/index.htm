@@ -1,0 +1,62 @@
+<html>
+<head>
+    <title>Block Detector Config</title>
+    <script>
+
+        function request(u,f) {
+            var x = new XMLHttpRequest();
+
+            x.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var d = JSON.parse(this.responseText);
+                    f(d);
+                }
+            };
+            x.open("GET", u, true);
+            x.send();
+        }
+
+        function requestData() {
+            request("d", processData);
+        }
+
+        function processData(d) {
+            for (f in d) {
+                document.getElementById(f).innerHTML = d[f] ? "&#9724" : "&#9723";
+            }
+            setTimeout(requestData, 1000);
+        }
+
+        function processConfig(d) {
+            for (f in d) {
+                var s = "<select><option value=0>None</option><option value=1>2 LEDS</option></select>";
+                document.getElementById(f).innerHTML = s.replace(new RegExp("(value=" + d[f] + ")", "gm"), `$1 selected=true`);
+            }
+        }
+
+        function updateConfig() {
+            var x = new XMLHttpRequest();
+            x.open("POST", "u", true);
+            x.setRequestHeader('Content-type', 'application/json');
+            var s = '{"C0": 7, "C1": 2}'
+            x.send(s);
+        }
+
+        requestData();
+        request("c", processConfig);
+    </script>
+</head>
+<body>
+    <table>
+        <tr><th>State</th><th>Name</th><th>Configuration</th></tr>
+        <tr><td id="I0" /><td>I0</td><td id="C0"/></tr>
+        <tr><td id="I1" /><td>I1</td><td id="C1"/></tr>
+        <tr><td id="I2" /><td>I2</td><td id="C2"/></tr>
+        <tr><td id="I3" /><td>I3</td><td id="C3" /></tr>
+    </table>
+
+    <button onclick="updateConfig()">Update Config</button>
+</body>
+</html>
+
+

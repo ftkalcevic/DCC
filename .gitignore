@@ -1,0 +1,59 @@
+RNDIS/.vs
+RNDIS/RNDIS/Debug
+RNDIS/RNDIS/Release
+AccDecoder/Backup/
+AccDecoder/__Previews/
+AccDecoder/*.LOG
+AutoReverse/*.LOG
+AutoReverse/Backup/
+AutoReverseAVR/*.LOG
+AutoReverseAVR/Backup/
+AutoReverseAVR/Project Outputs*
+BuildLog.htm
+*.ncb
+*.suo
+/Backup
+BlockDetector/Backup/
+BlockDetector/*.LOG
+BlockDetectorHall/__Previews
+BlockDetectorHall/History/
+Booster/*.LOG
+Booster/Backup/
+Controller/Backup/
+ServoDecoder.old
+Regulator/*.LOG
+Booster/Project Outputs*
+Decoder/Backup
+Controller/*.LOG
+Decoder/*.LOG
+Regulator/Backup
+RNDIS/CompressHTML/obj
+TestHBridge/*.LOG
+SwitchDecoder/Backup
+RNDIS/CompressHTML/bin
+Booster/__Previews
+Controller/__Previews
+.dtbcache.v2
+SwitchDecoder/*.LOG
+ServoDecoder/Hardware/History
+SwitchDecoder/Project Outputs*
+RNDIS/WebDev/obj
+ServoDecoder/Firmware/Release
+Controller/Project Outputs*
+RNDIS/WebDev/bin
+Regulator/Project Outputs*
+ServoDecoder/Firmware/Debug
+*.o
+*.cof
+*.d
+*.eep
+*.elf
+*.hex
+*.lss
+*.lst
+*.map
+*.sym
+Controller/GLC24064.pdf
+__Previews
+ServoDecoder/Hardware/*.LOG
+Status Report.Txt

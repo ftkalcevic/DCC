@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CompressHTML": {
+      "commandName": "Project",
+      "commandLineArgs": "D:\\Projects\\DCC\\RNDIS\\WebDev\\wwwroot\\index.htm D:\\Projects\\DCC\\RNDIS\\RNDIS\\index.htm.z"
+    }
+  }
+}
