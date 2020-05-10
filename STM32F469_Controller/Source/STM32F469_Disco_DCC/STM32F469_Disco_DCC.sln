@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29926.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "STM32F469_Disco_DCC", "STM32F469_Disco_DCC.vcxproj", "{9F062430-A503-4B0D-8757-76D6D830AB65}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|VisualGDB = Debug|VisualGDB
+		Release|VisualGDB = Release|VisualGDB
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9F062430-A503-4B0D-8757-76D6D830AB65}.Debug|VisualGDB.ActiveCfg = Debug|VisualGDB
+		{9F062430-A503-4B0D-8757-76D6D830AB65}.Debug|VisualGDB.Build.0 = Debug|VisualGDB
+		{9F062430-A503-4B0D-8757-76D6D830AB65}.Release|VisualGDB.ActiveCfg = Release|VisualGDB
+		{9F062430-A503-4B0D-8757-76D6D830AB65}.Release|VisualGDB.Build.0 = Release|VisualGDB
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E7CED417-42B4-44DD-BD4A-88AD412AB491}
+	EndGlobalSection
+EndGlobal
