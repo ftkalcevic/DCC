@@ -48,7 +48,7 @@
     <AllDependencies>
       <ProjectDependency>
         <RelativePath>..\TouchGFX\STM32CubeIDE\.cproject</RelativePath>
-        <Timestamp>132335451435961393</Timestamp>
+        <Timestamp>132335630642698826</Timestamp>
       </ProjectDependency>
     </AllDependencies>
     <RootDirectory>
@@ -252,6 +252,15 @@
                   <RelativePath>..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c</RelativePath>
                 </VirtualFileSnapshot>
                 <VirtualFileSnapshot>
+                  <RelativePath>..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_adc.c</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_adc_ex.c</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_can.c</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
                   <RelativePath>..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_cortex.c</RelativePath>
                 </VirtualFileSnapshot>
                 <VirtualFileSnapshot>
@@ -324,6 +333,9 @@
                   <RelativePath>..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_sdram.c</RelativePath>
                 </VirtualFileSnapshot>
                 <VirtualFileSnapshot>
+                  <RelativePath>..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_spi.c</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
                   <RelativePath>..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim.c</RelativePath>
                 </VirtualFileSnapshot>
                 <VirtualFileSnapshot>
@@ -340,6 +352,15 @@
                 </VirtualFileSnapshot>
                 <VirtualFileSnapshot>
                   <RelativePath>..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_adc.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_adc_ex.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_can.h</RelativePath>
                 </VirtualFileSnapshot>
                 <VirtualFileSnapshot>
                   <RelativePath>..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cortex.h</RelativePath>
@@ -418,6 +439,9 @@
                 </VirtualFileSnapshot>
                 <VirtualFileSnapshot>
                   <RelativePath>..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_sdram.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_spi.h</RelativePath>
                 </VirtualFileSnapshot>
                 <VirtualFileSnapshot>
                   <RelativePath>..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h</RelativePath>

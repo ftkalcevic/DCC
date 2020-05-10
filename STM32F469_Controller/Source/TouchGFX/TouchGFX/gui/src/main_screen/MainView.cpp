@@ -3,7 +3,7 @@
 
 MainView::MainView()
 {
-	count = 12;
+	count = 13;
     // Support of larger displays for this example
     // is handled by showing a black box in the
     // unused part of the display.

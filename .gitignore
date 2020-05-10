@@ -57,3 +57,15 @@ Controller/GLC24064.pdf
 __Previews
 ServoDecoder/Hardware/*.LOG
 Status Report.Txt
+STM32F469_Controller/Default Configuration
+LCCAtmegaXXM1/Default Configuration
+LCCAtmegaXXM1/History
+STM32F469_Controller/History
+LCCAtmegaXXM1/DCCController.LOG
+LCCAtmegaXXM1/Outputs
+LCCAtmegaXXM1/Logs
+*.~*
+STM32F469_Controller/Logs
+STM32F469_Controller/Outputs
+STM32F469_Controller/Source/.metadata
+BeagleBone

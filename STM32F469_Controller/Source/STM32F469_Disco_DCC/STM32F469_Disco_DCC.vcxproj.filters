@@ -510,5 +510,29 @@
     <None Include="stm32.xml">
       <Filter>VisualGDB settings</Filter>
     </None>
+    <ClCompile Include="..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_adc.c">
+      <Filter>Source files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_adc_ex.c">
+      <Filter>Source files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_can.c">
+      <Filter>Source files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_spi.c">
+      <Filter>Source files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClCompile>
+    <ClInclude Include="..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_adc.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_adc_ex.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_can.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_spi.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
