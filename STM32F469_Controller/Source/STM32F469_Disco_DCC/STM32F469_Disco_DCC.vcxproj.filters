@@ -118,6 +118,36 @@
     <Filter Include="VisualGDB settings">
       <UniqueIdentifier>{0022a5b1-5219-4ff4-8094-3b91fe1cd205}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source files\Application\User\FATFS">
+      <UniqueIdentifier>{41c5c123-5c0b-4c9c-a429-45c9145426bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\Application\User\FATFS\App">
+      <UniqueIdentifier>{d0ea4765-62d3-4737-b649-a5f5b09b043e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\Application\User\FATFS\Target">
+      <UniqueIdentifier>{9dda0623-259a-44c3-8193-4d53cb0561a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\Middlewares\FatFs">
+      <UniqueIdentifier>{a6630873-5981-4d57-9ca3-5fced329864f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\Application\User\FATFS">
+      <UniqueIdentifier>{27af12d3-ac94-488e-87e1-f1e03d04ebdf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\Application\User\FATFS\App">
+      <UniqueIdentifier>{1830fb57-373f-48d4-bee3-c4a40621c810}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\Application\User\FATFS\Target">
+      <UniqueIdentifier>{f8d7e68c-b56f-4a1a-ba7e-d38a17810737}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\Middlewares\FatFs">
+      <UniqueIdentifier>{992d70c2-0808-4b61-b1ad-a9134a24b811}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\Device-specific files\Semihosting/Profiler">
+      <UniqueIdentifier>{29c036a2-f6fa-4e46-b8f3-dbd553206ecf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\Device-specific files\Semihosting/Profiler">
+      <UniqueIdentifier>{5ee0f0bd-194a-4211-a8cc-bef66ac654b4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\TouchGFX\Core\Src\freertos.c">
@@ -534,5 +564,62 @@
     <ClInclude Include="..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_spi.h">
       <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
     </ClInclude>
+    <ClCompile Include="..\TouchGFX\FATFS\App\fatfs.c">
+      <Filter>Source files\Application\User\FATFS\App</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\FATFS\Target\bsp_driver_sd.c">
+      <Filter>Source files\Application\User\FATFS\Target</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\FATFS\Target\fatfs_platform.c">
+      <Filter>Source files\Application\User\FATFS\Target</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\FATFS\Target\sd_diskio.c">
+      <Filter>Source files\Application\User\FATFS\Target</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\Middlewares\Third_Party\FatFs\src\diskio.c">
+      <Filter>Source files\Middlewares\FatFs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\Middlewares\Third_Party\FatFs\src\ff.c">
+      <Filter>Source files\Middlewares\FatFs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\Middlewares\Third_Party\FatFs\src\ff_gen_drv.c">
+      <Filter>Source files\Middlewares\FatFs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\Middlewares\Third_Party\FatFs\src\option\syscall.c">
+      <Filter>Source files\Middlewares\FatFs</Filter>
+    </ClCompile>
+    <ClCompile Include="$(EFP_BASE)\Profiler\FastSemihosting.cpp">
+      <Filter>Source files\Device-specific files\Semihosting/Profiler</Filter>
+    </ClCompile>
+    <ClCompile Include="$(EFP_BASE)\Profiler\SamplingProfiler.cpp">
+      <Filter>Source files\Device-specific files\Semihosting/Profiler</Filter>
+    </ClCompile>
+    <ClCompile Include="$(EFP_BASE)\Profiler\InstrumentingProfiler.cpp">
+      <Filter>Source files\Device-specific files\Semihosting/Profiler</Filter>
+    </ClCompile>
+    <ClCompile Include="$(EFP_BASE)\Profiler\TestResourceManager.cpp">
+      <Filter>Source files\Device-specific files\Semihosting/Profiler</Filter>
+    </ClCompile>
+    <ClInclude Include="$(EFP_BASE)\Profiler\SysprogsProfiler.h">
+      <Filter>Header files\Device-specific files\Semihosting/Profiler</Filter>
+    </ClInclude>
+    <ClInclude Include="$(EFP_BASE)\Profiler\SmallNumberCoder.h">
+      <Filter>Header files\Device-specific files\Semihosting/Profiler</Filter>
+    </ClInclude>
+    <ClInclude Include="$(EFP_BASE)\Profiler\SysprogsProfilerInterface.h">
+      <Filter>Header files\Device-specific files\Semihosting/Profiler</Filter>
+    </ClInclude>
+    <ClInclude Include="$(EFP_BASE)\Profiler\ProfilerFreeRTOSHooks.h">
+      <Filter>Header files\Device-specific files\Semihosting/Profiler</Filter>
+    </ClInclude>
+    <ClInclude Include="$(EFP_BASE)\Profiler\CustomRealTimeWatches.h">
+      <Filter>Header files\Device-specific files\Semihosting/Profiler</Filter>
+    </ClInclude>
+    <ClInclude Include="$(EFP_BASE)\Profiler\DebuggerChecker.h">
+      <Filter>Header files\Device-specific files\Semihosting/Profiler</Filter>
+    </ClInclude>
+    <ClCompile Include="$(EFP_BASE)\Profiler\ProfilerRTOS_FreeRTOS.c">
+      <Filter>Source files\Device-specific files\Semihosting/Profiler</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

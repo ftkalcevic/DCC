@@ -24,7 +24,7 @@
 							<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.fpu.1692964530" name="Floating-point unit" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.fpu" value="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.fpu.value.fpv4-sp-d16" valueType="enumerated"/>
 							<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.floatabi.1789621614" name="Floating-point ABI" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.floatabi" value="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.floatabi.value.hard" valueType="enumerated"/>
 							<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.target_board.1691071603" name="Board" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.target_board" value="genericBoard" valueType="string"/>
-							<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.defaults.1008652457" name="Defaults" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.defaults" value="com.st.stm32cube.ide.common.services.build.inputs.revA.1.0.3 || Debug || true || Executable || com.st.stm32cube.ide.mcu.gnu.managedbuild.toolchain.base.gnu-tools-for-stm32 || STM32F469NIHx || 0 || 0 || arm-none-eabi- || ${gnu_tools_for_stm32_compiler_path} || ../../Core/Inc | ../../Drivers/CMSIS/Include | ../../TouchGFX/target | ../../Drivers/CMSIS/Device/ST/STM32F4xx/Include | ../../TouchGFX/App | ../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 | ../../TouchGFX/target/generated | ../../Drivers/BSP/Components/Common | ../../Middlewares/Third_Party/FreeRTOS/Source/include | ../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy | ../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F | ../../Drivers/BSP/STM32469I-Discovery | ../../Drivers/STM32F4xx_HAL_Driver/Inc ||  ||  || USE_HAL_DRIVER | STM32F469xx ||  ||  ||  ||  || ${workspace_loc:/${ProjName}/STM32F469NIHX_FLASH.ld} || true || NonSecure ||  || secure_nsclib.o || " valueType="string"/>
+							<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.defaults.1008652457" name="Defaults" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.defaults" value="com.st.stm32cube.ide.common.services.build.inputs.revA.1.0.3 || Debug || true || Executable || com.st.stm32cube.ide.mcu.gnu.managedbuild.toolchain.base.gnu-tools-for-stm32 || STM32F469NIHx || 0 || 0 || arm-none-eabi- || ${gnu_tools_for_stm32_compiler_path} || ../../Core/Inc | ../../Drivers/CMSIS/Include | ../../TouchGFX/target | ../../Drivers/CMSIS/Device/ST/STM32F4xx/Include | ../../FATFS/App | ../../TouchGFX/App | ../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 | ../../TouchGFX/target/generated | ../../Drivers/BSP/Components/Common | ../../FATFS/Target | ../../Middlewares/Third_Party/FreeRTOS/Source/include | ../../Middlewares/Third_Party/FatFs/src | ../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy | ../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F | ../../Drivers/BSP/STM32469I-Discovery | ../../Drivers/STM32F4xx_HAL_Driver/Inc ||  ||  || USE_HAL_DRIVER | STM32F469xx ||  ||  ||  ||  || ${workspace_loc:/${ProjName}/STM32F469NIHX_FLASH.ld} || true || NonSecure ||  || secure_nsclib.o || " valueType="string"/>
 							<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.converthex.771686342" name="Convert to Intel Hex file (-O ihex)" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.converthex" value="true" valueType="boolean"/>
 							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="com.st.stm32cube.ide.mcu.gnu.managedbuild.targetplatform.1369289449" isAbstract="false" osList="all" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.targetplatform"/>
 							<builder buildPath="${workspace_loc:/STM32F469I-DISCO}/Debug" id="com.st.stm32cube.ide.mcu.gnu.managedbuild.builder.1132458525" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" parallelBuildOn="true" parallelizationNumber="optimal" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.builder"/>
@@ -46,15 +46,18 @@
 									<listOptionValue builtIn="false" value="../../TouchGFX/generated/gui_generated/include"/>
 									<listOptionValue builtIn="false" value="../../TouchGFX/target"/>
 									<listOptionValue builtIn="false" value="../../Drivers/CMSIS/Device/ST/STM32F4xx/Include"/>
+									<listOptionValue builtIn="false" value="../../FATFS/App"/>
 									<listOptionValue builtIn="false" value="../../TouchGFX/App"/>
 									<listOptionValue builtIn="false" value="../../Middlewares/ST/touchgfx/framework/include"/>
 									<listOptionValue builtIn="false" value="../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2"/>
 									<listOptionValue builtIn="false" value="../../TouchGFX/target/generated"/>
 									<listOptionValue builtIn="false" value="../../Drivers/BSP/Components/Common"/>
 									<listOptionValue builtIn="false" value="../../TouchGFX/gui/include"/>
+									<listOptionValue builtIn="false" value="../../FATFS/Target"/>
 									<listOptionValue builtIn="false" value="../../TouchGFX/generated/texts/include"/>
 									<listOptionValue builtIn="false" value="../../TouchGFX/generated/images/include"/>
 									<listOptionValue builtIn="false" value="../../Middlewares/Third_Party/FreeRTOS/Source/include"/>
+									<listOptionValue builtIn="false" value="../../Middlewares/Third_Party/FatFs/src"/>
 									<listOptionValue builtIn="false" value="../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy"/>
 									<listOptionValue builtIn="false" value="../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F"/>
 									<listOptionValue builtIn="false" value="../../Drivers/BSP/STM32469I-Discovery"/>
@@ -77,15 +80,18 @@
 									<listOptionValue builtIn="false" value="../../TouchGFX/generated/gui_generated/include"/>
 									<listOptionValue builtIn="false" value="../../TouchGFX/target"/>
 									<listOptionValue builtIn="false" value="../../Drivers/CMSIS/Device/ST/STM32F4xx/Include"/>
+									<listOptionValue builtIn="false" value="../../FATFS/App"/>
 									<listOptionValue builtIn="false" value="../../TouchGFX/App"/>
 									<listOptionValue builtIn="false" value="../../Middlewares/ST/touchgfx/framework/include"/>
 									<listOptionValue builtIn="false" value="../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2"/>
 									<listOptionValue builtIn="false" value="../../TouchGFX/target/generated"/>
 									<listOptionValue builtIn="false" value="../../Drivers/BSP/Components/Common"/>
 									<listOptionValue builtIn="false" value="../../TouchGFX/gui/include"/>
+									<listOptionValue builtIn="false" value="../../FATFS/Target"/>
 									<listOptionValue builtIn="false" value="../../TouchGFX/generated/texts/include"/>
 									<listOptionValue builtIn="false" value="../../TouchGFX/generated/images/include"/>
 									<listOptionValue builtIn="false" value="../../Middlewares/Third_Party/FreeRTOS/Source/include"/>
+									<listOptionValue builtIn="false" value="../../Middlewares/Third_Party/FatFs/src"/>
 									<listOptionValue builtIn="false" value="../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy"/>
 									<listOptionValue builtIn="false" value="../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F"/>
 									<listOptionValue builtIn="false" value="../../Drivers/BSP/STM32469I-Discovery"/>

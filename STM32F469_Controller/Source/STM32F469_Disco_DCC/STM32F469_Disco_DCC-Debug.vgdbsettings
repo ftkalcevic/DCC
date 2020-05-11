@@ -20,7 +20,11 @@
       </Version>
     </ToolchainID>
     <ProjectFile>STM32F469_Disco_DCC.vcxproj</ProjectFile>
-    <ParallelJobCount>0</ParallelJobCount>
+    <RemoteBuildEnvironment>
+      <Records />
+      <EnvironmentSetupFiles />
+    </RemoteBuildEnvironment>
+    <ParallelJobCount>1</ParallelJobCount>
     <SuppressDirectoryChangeMessages>true</SuppressDirectoryChangeMessages>
   </Build>
   <CustomBuild>
@@ -100,7 +104,7 @@
           <ConnectUnderReset>false</ConnectUnderReset>
         </ExtraParameters>
         <LoadProgressGUIThreshold>131072</LoadProgressGUIThreshold>
-        <ProgramMode>Enabled</ProgramMode>
+        <ProgramMode>Auto</ProgramMode>
         <StartupCommands>
           <string>set remotetimeout 60</string>
           <string>target remote :$$SYS:GDB_PORT$$</string>
@@ -111,8 +115,8 @@
         <PreferredTelnetPort>0</PreferredTelnetPort>
       </Configuration>
     </DebugMethod>
-    <AutoDetectRTOS>true</AutoDetectRTOS>
-    <SemihostingSupport>Auto</SemihostingSupport>
+    <AutoDetectRTOS>false</AutoDetectRTOS>
+    <SemihostingSupport>Enabled</SemihostingSupport>
     <SemihostingPollingDelay>0</SemihostingPollingDelay>
     <StepIntoEntryPoint>false</StepIntoEntryPoint>
     <ReloadFirmwareOnReset>false</ReloadFirmwareOnReset>
@@ -122,7 +126,7 @@
     <DynamicAnalysisSettings />
     <EndOfStackSymbol>_estack</EndOfStackSymbol>
     <TimestampProviderTicksPerSecond>0</TimestampProviderTicksPerSecond>
-    <KeepConsoleAfterExit>false</KeepConsoleAfterExit>
+    <KeepConsoleAfterExit>true</KeepConsoleAfterExit>
     <UnusedStackFillPattern xsi:nil="true" />
     <CheckInterfaceDrivers>true</CheckInterfaceDrivers>
   </Debug>

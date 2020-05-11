@@ -21,10 +21,12 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "cmsis_os.h"
+#include "fatfs.h"
 #include "app_touchgfx.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <stdio.h>
 #include "../Components/otm8009a/otm8009a.h"
 #include "stm32469i_discovery_sdram.h"
 #include "stm32469i_discovery_qspi.h"
@@ -67,6 +69,8 @@ QSPI_HandleTypeDef hqspi;
 SAI_HandleTypeDef hsai_BlockA1;
 
 SD_HandleTypeDef hsd;
+DMA_HandleTypeDef hdma_sdio_rx;
+DMA_HandleTypeDef hdma_sdio_tx;
 
 SPI_HandleTypeDef hspi1;
 SPI_HandleTypeDef hspi2;
@@ -82,15 +86,22 @@ osThreadId_t TouchGFXTaskHandle;
 const osThreadAttr_t TouchGFXTask_attributes = {
   .name = "TouchGFXTask",
   .priority = (osPriority_t) osPriorityNormal,
-  .stack_size = 2048
+  .stack_size = 2048 * 4
+};
+/* Definitions for SelfTestTask */
+osThreadId_t SelfTestTaskHandle;
+const osThreadAttr_t SelfTestTask_attributes = {
+  .name = "SelfTestTask",
+  .priority = (osPriority_t) osPriorityAboveNormal,
+  .stack_size = 2048 * 4
 };
 /* USER CODE BEGIN PV */
-
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+static void MX_DMA_Init(void);
 static void MX_CRC_Init(void);
 static void MX_DMA2D_Init(void);
 static void MX_DSIHOST_DSI_Init(void);
@@ -108,9 +119,9 @@ static void MX_SPI2_Init(void);
 static void MX_TIM1_Init(void);
 static void MX_USART3_UART_Init(void);
 void TouchGFX_Task(void *argument);
+void SelfTest_Task(void *argument);
 
 /* USER CODE BEGIN PFP */
-
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -127,7 +138,6 @@ int main(void)
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
-  
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -147,6 +157,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_CRC_Init();
   MX_DMA2D_Init();
   MX_DSIHOST_DSI_Init();
@@ -155,6 +166,7 @@ int main(void)
   MX_QUADSPI_Init();
   MX_I2C1_Init();
   MX_SDIO_SD_Init();
+  MX_FATFS_Init();
   MX_SAI1_Init();
   MX_ADC1_Init();
   MX_CAN2_Init();
@@ -167,38 +179,43 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
+
   /* Init scheduler */
   osKernelInitialize();
 
   /* USER CODE BEGIN RTOS_MUTEX */
-  /* add mutexes, ... */
+	/* add mutexes, ... */
   /* USER CODE END RTOS_MUTEX */
 
   /* USER CODE BEGIN RTOS_SEMAPHORES */
-  /* add semaphores, ... */
+	/* add semaphores, ... */
   /* USER CODE END RTOS_SEMAPHORES */
 
   /* USER CODE BEGIN RTOS_TIMERS */
-  /* start timers, add new ones, ... */
+	/* start timers, add new ones, ... */
   /* USER CODE END RTOS_TIMERS */
 
   /* USER CODE BEGIN RTOS_QUEUES */
-  /* add queues, ... */
+	/* add queues, ... */
   /* USER CODE END RTOS_QUEUES */
 
   /* Create the thread(s) */
   /* creation of TouchGFXTask */
   TouchGFXTaskHandle = osThreadNew(TouchGFX_Task, NULL, &TouchGFXTask_attributes);
 
+  /* creation of SelfTestTask */
+  SelfTestTaskHandle = osThreadNew(SelfTest_Task, NULL, &SelfTestTask_attributes);
+
   /* USER CODE BEGIN RTOS_THREADS */
-  /* add threads, ... */
+	
+	
+	printf("RTOS Kernel Starting...\n");
   /* USER CODE END RTOS_THREADS */
 
   /* Start scheduler */
   osKernelStart();
  
   /* We should never get here as control is now taken by the scheduler */
-
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
@@ -808,16 +825,15 @@ static void MX_SDIO_SD_Init(void)
   hsd.Init.BusWide = SDIO_BUS_WIDE_1B;
   hsd.Init.HardwareFlowControl = SDIO_HARDWARE_FLOW_CONTROL_DISABLE;
   hsd.Init.ClockDiv = 0;
-  if (HAL_SD_Init(&hsd) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  if (HAL_SD_ConfigWideBusOperation(&hsd, SDIO_BUS_WIDE_4B) != HAL_OK)
-  {
-    Error_Handler();
-  }
   /* USER CODE BEGIN SDIO_Init 2 */
-
+//  if (HAL_SD_Init(&hsd) != HAL_OK)
+//  {
+//    Error_Handler();
+//  }
+//  if (HAL_SD_ConfigWideBusOperation(&hsd, SDIO_BUS_WIDE_4B) != HAL_OK)
+//  {
+//    Error_Handler();
+//  }
   /* USER CODE END SDIO_Init 2 */
 
 }
@@ -977,6 +993,25 @@ static void MX_USART3_UART_Init(void)
 
 }
 
+/** 
+  * Enable DMA controller clock
+  */
+static void MX_DMA_Init(void) 
+{
+
+  /* DMA controller clock enable */
+  __HAL_RCC_DMA2_CLK_ENABLE();
+
+  /* DMA interrupt init */
+  /* DMA2_Stream3_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA2_Stream3_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(DMA2_Stream3_IRQn);
+  /* DMA2_Stream6_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA2_Stream6_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(DMA2_Stream6_IRQn);
+
+}
+
 /* FMC initialization function */
 static void MX_FMC_Init(void)
 {
@@ -1097,10 +1132,8 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(OTG_FS1_OverCurrent_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : Fn4_Pin Fn1_Pin PrgTrk_Fault_Pin Boost_Fault_Pin 
-                           uSD_Detect_Pin */
-  GPIO_InitStruct.Pin = Fn4_Pin|Fn1_Pin|PrgTrk_Fault_Pin|Boost_Fault_Pin 
-                          |uSD_Detect_Pin;
+  /*Configure GPIO pins : Fn4_Pin Fn1_Pin PrgTrk_Fault_Pin Boost_Fault_Pin */
+  GPIO_InitStruct.Pin = Fn4_Pin|Fn1_Pin|PrgTrk_Fault_Pin|Boost_Fault_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
@@ -1154,6 +1187,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : uSD_Detect_Pin */
+  GPIO_InitStruct.Pin = uSD_Detect_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(uSD_Detect_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : LCD_INT_Pin */
   GPIO_InitStruct.Pin = LCD_INT_Pin;
@@ -1211,7 +1250,61 @@ __weak void TouchGFX_Task(void *argument)
   /* USER CODE END 5 */ 
 }
 
+/* USER CODE BEGIN Header_SelfTest_Task */
 /**
+* @brief Function implementing the SelfTestTask thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_SelfTest_Task */
+void SelfTest_Task(void *argument)
+{
+  /* USER CODE BEGIN SelfTest_Task */
+	if (HAL_GPIO_ReadPin(uSD_Detect_GPIO_Port, uSD_Detect_Pin) == GPIO_PIN_RESET) 
+	{
+		FRESULT res;
+        printf("uSD card is present.  Root directory contents...\n");
+
+        FATFS FatFs;
+		res = f_mount(&FatFs, "0:/", 1);
+		if ( res != FR_OK )
+		{
+			printf("Failed to mount volume - %d\n", res);
+		}
+		
+		DIR d;
+		res = f_opendir(&d, "0:/");
+		if (res != FR_OK)
+		{
+			printf("Failed to open directory - %d\n", res);
+		}
+		else
+		{
+		    for(;;)
+		    {
+			    FILINFO finfo;
+			    res = f_readdir(&d, &finfo);
+			    if (res != FR_OK)
+			    {
+				    printf("Error reading directory %d\n", res);
+				    break;
+			    }
+			    if (finfo.fname[0] == 0)
+				    break;
+			    printf("%s\n", finfo.fname);
+		    }
+		}
+	}
+	
+  /* Infinite loop */
+  for(;;)
+  {
+    osDelay(1);
+  }
+  /* USER CODE END SelfTest_Task */
+}
+
+ /**
   * @brief  Period elapsed callback in non blocking mode
   * @note   This function is called  when TIM6 interrupt took place, inside
   * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment

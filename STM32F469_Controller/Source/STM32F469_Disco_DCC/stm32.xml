@@ -35,9 +35,52 @@
   </MCUProperties>
   <BSPSourceFolderName>Device-specific files</BSPSourceFolderName>
   <MCUMakFile>stm32.mak</MCUMakFile>
-  <ReferencedFrameworks />
+  <ReferencedFrameworks>
+    <string>com.sysprogs.embedded.semihosting_and_profiler</string>
+  </ReferencedFrameworks>
   <FrameworkProperties>
-    <Entries />
+    <Entries>
+      <KeyValue>
+        <Key>com.sysprogs.efp.semihosting.buffer_size</Key>
+        <Value>4096</Value>
+      </KeyValue>
+      <KeyValue>
+        <Key>com.sysprogs.efp.semihosting.stdio</Key>
+        <Value>1</Value>
+      </KeyValue>
+      <KeyValue>
+        <Key>com.sysprogs.efp.semihosting.blocking_mode</Key>
+        <Value>0</Value>
+      </KeyValue>
+      <KeyValue>
+        <Key>com.sysprogs.efp.profiling.semihosting_driver</Key>
+        <Value>1</Value>
+      </KeyValue>
+      <KeyValue>
+        <Key>com.sysprogs.efp.profiling.counter</Key>
+        <Value />
+      </KeyValue>
+      <KeyValue>
+        <Key>com.sysprogs.efp.profiling.address_validators</Key>
+        <Value />
+      </KeyValue>
+      <KeyValue>
+        <Key>com.sysprogs.efp.profiling.nosampling</Key>
+        <Value>0</Value>
+      </KeyValue>
+      <KeyValue>
+        <Key>com.sysprogs.efp.profiling.debugger_check</Key>
+        <Value>SYSPROGS_PROFILER_DEBUGGER_CHECK_MODE=1</Value>
+      </KeyValue>
+      <KeyValue>
+        <Key>com.sysprogs.efp.profiling.rtos</Key>
+        <Value>USE_FREERTOS_IF_FOUND</Value>
+      </KeyValue>
+      <KeyValue>
+        <Key>com.sysprogs.efp.profiling.hold_interrupts</Key>
+        <Value />
+      </KeyValue>
+    </Entries>
   </FrameworkProperties>
   <TestFrameworkProperties>
     <Entries />
@@ -48,7 +91,7 @@
     <AllDependencies>
       <ProjectDependency>
         <RelativePath>..\TouchGFX\STM32CubeIDE\.cproject</RelativePath>
-        <Timestamp>132335630642698826</Timestamp>
+        <Timestamp>132336233892022157</Timestamp>
       </ProjectDependency>
     </AllDependencies>
     <RootDirectory>
@@ -143,6 +186,34 @@
                       <RelativePath>..\TouchGFX\TouchGFX\gui\src\model\Model.cpp</RelativePath>
                     </VirtualFileSnapshot>
                   </Files>
+                </VirtualDirectorySnapshot>
+                <VirtualDirectorySnapshot>
+                  <Name>FATFS</Name>
+                  <Subdirectories>
+                    <VirtualDirectorySnapshot>
+                      <Name>App</Name>
+                      <Files>
+                        <VirtualFileSnapshot>
+                          <RelativePath>..\TouchGFX\FATFS\App\fatfs.c</RelativePath>
+                        </VirtualFileSnapshot>
+                      </Files>
+                    </VirtualDirectorySnapshot>
+                    <VirtualDirectorySnapshot>
+                      <Name>Target</Name>
+                      <Files>
+                        <VirtualFileSnapshot>
+                          <RelativePath>..\TouchGFX\FATFS\Target\bsp_driver_sd.c</RelativePath>
+                        </VirtualFileSnapshot>
+                        <VirtualFileSnapshot>
+                          <RelativePath>..\TouchGFX\FATFS\Target\fatfs_platform.c</RelativePath>
+                        </VirtualFileSnapshot>
+                        <VirtualFileSnapshot>
+                          <RelativePath>..\TouchGFX\FATFS\Target\sd_diskio.c</RelativePath>
+                        </VirtualFileSnapshot>
+                      </Files>
+                    </VirtualDirectorySnapshot>
+                  </Subdirectories>
+                  <Files />
                 </VirtualDirectorySnapshot>
                 <VirtualDirectorySnapshot>
                   <Name>TouchGFX</Name>
@@ -501,6 +572,23 @@
           <Name>Middlewares</Name>
           <Subdirectories>
             <VirtualDirectorySnapshot>
+              <Name>FatFs</Name>
+              <Files>
+                <VirtualFileSnapshot>
+                  <RelativePath>..\TouchGFX\Middlewares\Third_Party\FatFs\src\diskio.c</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>..\TouchGFX\Middlewares\Third_Party\FatFs\src\ff.c</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>..\TouchGFX\Middlewares\Third_Party\FatFs\src\ff_gen_drv.c</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>..\TouchGFX\Middlewares\Third_Party\FatFs\src\option\syscall.c</RelativePath>
+                </VirtualFileSnapshot>
+              </Files>
+            </VirtualDirectorySnapshot>
+            <VirtualDirectorySnapshot>
               <Name>FreeRTOS</Name>
               <Files>
                 <VirtualFileSnapshot>
@@ -555,15 +643,18 @@
             <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\TouchGFX\generated\gui_generated\include</string>
             <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\TouchGFX\target</string>
             <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\Drivers\CMSIS\Device\ST\STM32F4xx\Include</string>
+            <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\FATFS\App</string>
             <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\TouchGFX\App</string>
             <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\Middlewares\ST\touchgfx\framework\include</string>
             <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS_V2</string>
             <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\TouchGFX\target\generated</string>
             <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\Drivers\BSP\Components\Common</string>
             <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\TouchGFX\gui\include</string>
+            <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\FATFS\Target</string>
             <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\TouchGFX\generated\texts\include</string>
             <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\TouchGFX\generated\images\include</string>
             <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\Middlewares\Third_Party\FreeRTOS\Source\include</string>
+            <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\Middlewares\Third_Party\FatFs\src</string>
             <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy</string>
             <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\Middlewares\Third_Party\FreeRTOS\Source\portable\GCC\ARM_CM4F</string>
             <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\Drivers\BSP\STM32469I-Discovery</string>

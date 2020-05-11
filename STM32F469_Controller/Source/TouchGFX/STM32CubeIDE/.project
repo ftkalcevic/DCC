@@ -239,6 +239,26 @@
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_sdmmc.c</locationURI>
 		</link>
 		<link>
+			<name>Middlewares/FatFs/diskio.c</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/Middlewares/Third_Party/FatFs/src/diskio.c</locationURI>
+		</link>
+		<link>
+			<name>Middlewares/FatFs/ff.c</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/Middlewares/Third_Party/FatFs/src/ff.c</locationURI>
+		</link>
+		<link>
+			<name>Middlewares/FatFs/ff_gen_drv.c</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/Middlewares/Third_Party/FatFs/src/ff_gen_drv.c</locationURI>
+		</link>
+		<link>
+			<name>Middlewares/FatFs/syscall.c</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/Middlewares/Third_Party/FatFs/src/option/syscall.c</locationURI>
+		</link>
+		<link>
 			<name>Middlewares/FreeRTOS/cmsis_os2.c</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.c</locationURI>
@@ -442,6 +462,26 @@
 			<name>Drivers/BSP/STM32469I-Discovery/stm32469i_discovery_ts.c</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/Drivers/BSP/STM32469I-Discovery/stm32469i_discovery_ts.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/FATFS/App/fatfs.c</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/FATFS/App/fatfs.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/FATFS/Target/bsp_driver_sd.c</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/FATFS/Target/bsp_driver_sd.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/FATFS/Target/fatfs_platform.c</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/FATFS/Target/fatfs_platform.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/FATFS/Target/sd_diskio.c</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/FATFS/Target/sd_diskio.c</locationURI>
 		</link>
 		<link>
 			<name>Application/User/TouchGFX/App/app_touchgfx.c</name>
