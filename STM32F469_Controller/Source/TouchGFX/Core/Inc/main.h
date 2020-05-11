@@ -50,11 +50,16 @@ extern "C" {
 
 /* USER CODE END EM */
 
+void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
+
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
-
+extern ADC_HandleTypeDef hadc1;
+extern SPI_HandleTypeDef hspi2;
+extern TIM_HandleTypeDef htim3;
+extern TIM_HandleTypeDef htim8;
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
@@ -130,8 +135,8 @@ void Error_Handler(void);
 #define Fn2_GPIO_Port GPIOA
 #define Fn3_Pin GPIO_PIN_6
 #define Fn3_GPIO_Port GPIOA
-#define PC5_Pin GPIO_PIN_5
-#define PC5_GPIO_Port GPIOC
+#define EStop_Pin GPIO_PIN_5
+#define EStop_GPIO_Port GPIOC
 #define STLK_RX_Pin GPIO_PIN_10
 #define STLK_RX_GPIO_Port GPIOB
 #define PrgTrk_Enable_Pin GPIO_PIN_6

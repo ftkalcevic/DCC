@@ -91,7 +91,7 @@
     <AllDependencies>
       <ProjectDependency>
         <RelativePath>..\TouchGFX\STM32CubeIDE\.cproject</RelativePath>
-        <Timestamp>132336233892022157</Timestamp>
+        <Timestamp>132336685832146260</Timestamp>
       </ProjectDependency>
     </AllDependencies>
     <RootDirectory>
@@ -574,6 +574,9 @@
             <VirtualDirectorySnapshot>
               <Name>FatFs</Name>
               <Files>
+                <VirtualFileSnapshot>
+                  <RelativePath>..\TouchGFX\Middlewares\Third_Party\FatFs\src\option\ccsbcs.c</RelativePath>
+                </VirtualFileSnapshot>
                 <VirtualFileSnapshot>
                   <RelativePath>..\TouchGFX\Middlewares\Third_Party\FatFs\src\diskio.c</RelativePath>
                 </VirtualFileSnapshot>

@@ -621,5 +621,22 @@
     <ClCompile Include="$(EFP_BASE)\Profiler\ProfilerRTOS_FreeRTOS.c">
       <Filter>Source files\Device-specific files\Semihosting/Profiler</Filter>
     </ClCompile>
+    <ClCompile Include="..\TouchGFX\Middlewares\Third_Party\FatFs\src\option\ccsbcs.c">
+      <Filter>Source files\Middlewares\FatFs</Filter>
+    </ClCompile>
+    <ClCompile Include="DCC.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="stm32f4xx_hal_tim_plus.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="dcc.h">
+      <Filter>Source files</Filter>
+    </ClInclude>
+    <ClInclude Include="stm32f4xx_hal_tim_plus.h">
+      <Filter>Source files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

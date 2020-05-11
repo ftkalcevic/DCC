@@ -27,12 +27,14 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
+#include <string.h>
 #include "../Components/otm8009a/otm8009a.h"
 #include "stm32469i_discovery_sdram.h"
 #include "stm32469i_discovery_qspi.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
+typedef StaticTask_t osStaticThreadDef_t;
 /* USER CODE BEGIN PTD */
 
 /* USER CODE END PTD */
@@ -76,6 +78,8 @@ SPI_HandleTypeDef hspi1;
 SPI_HandleTypeDef hspi2;
 
 TIM_HandleTypeDef htim1;
+TIM_HandleTypeDef htim3;
+TIM_HandleTypeDef htim8;
 
 UART_HandleTypeDef huart3;
 
@@ -95,6 +99,30 @@ const osThreadAttr_t SelfTestTask_attributes = {
   .priority = (osPriority_t) osPriorityAboveNormal,
   .stack_size = 2048 * 4
 };
+/* Definitions for DCCTask */
+osThreadId_t DCCTaskHandle;
+uint32_t DCCTaskBuffer[ 128 ];
+osStaticThreadDef_t DCCTaskControlBlock;
+const osThreadAttr_t DCCTask_attributes = {
+  .name = "DCCTask",
+  .stack_mem = &DCCTaskBuffer[0],
+  .stack_size = sizeof(DCCTaskBuffer),
+  .cb_mem = &DCCTaskControlBlock,
+  .cb_size = sizeof(DCCTaskControlBlock),
+  .priority = (osPriority_t) osPriorityHigh,
+};
+/* Definitions for DCCTask_PrgTrk */
+osThreadId_t DCCTask_PrgTrkHandle;
+uint32_t DCCTask_PrgTrkBuffer[ 128 ];
+osStaticThreadDef_t DCCTask_PrgTrkControlBlock;
+const osThreadAttr_t DCCTask_PrgTrk_attributes = {
+  .name = "DCCTask_PrgTrk",
+  .stack_mem = &DCCTask_PrgTrkBuffer[0],
+  .stack_size = sizeof(DCCTask_PrgTrkBuffer),
+  .cb_mem = &DCCTask_PrgTrkControlBlock,
+  .cb_size = sizeof(DCCTask_PrgTrkControlBlock),
+  .priority = (osPriority_t) osPriorityHigh,
+};
 /* USER CODE BEGIN PV */
 /* USER CODE END PV */
 
@@ -111,15 +139,18 @@ static void MX_QUADSPI_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_SDIO_SD_Init(void);
 static void MX_SAI1_Init(void);
-static void MX_ADC1_Init(void);
+void MX_ADC1_Init(void);
 static void MX_CAN2_Init(void);
 static void MX_I2C2_Init(void);
 static void MX_SPI1_Init(void);
-static void MX_SPI2_Init(void);
+void MX_SPI2_Init(void);
 static void MX_TIM1_Init(void);
 static void MX_USART3_UART_Init(void);
+static void MX_TIM3_Init(void);
+static void MX_TIM8_Init(void);
 void TouchGFX_Task(void *argument);
 void SelfTest_Task(void *argument);
+extern void DCCTask_Entry(void *argument);
 
 /* USER CODE BEGIN PFP */
 /* USER CODE END PFP */
@@ -175,6 +206,8 @@ int main(void)
   MX_SPI2_Init();
   MX_TIM1_Init();
   MX_USART3_UART_Init();
+  MX_TIM3_Init();
+  MX_TIM8_Init();
   MX_TouchGFX_Init();
   /* USER CODE BEGIN 2 */
 
@@ -205,6 +238,12 @@ int main(void)
 
   /* creation of SelfTestTask */
   SelfTestTaskHandle = osThreadNew(SelfTest_Task, NULL, &SelfTestTask_attributes);
+
+  /* creation of DCCTask */
+  DCCTaskHandle = osThreadNew(DCCTask_Entry, (void*) 0, &DCCTask_attributes);
+
+  /* creation of DCCTask_PrgTrk */
+  DCCTask_PrgTrkHandle = osThreadNew(DCCTask_Entry, (void*) 1, &DCCTask_PrgTrk_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
 	
@@ -296,7 +335,7 @@ void SystemClock_Config(void)
   * @param None
   * @retval None
   */
-static void MX_ADC1_Init(void)
+void MX_ADC1_Init(void)
 {
 
   /* USER CODE BEGIN ADC1_Init 0 */
@@ -881,7 +920,7 @@ static void MX_SPI1_Init(void)
   * @param None
   * @retval None
   */
-static void MX_SPI2_Init(void)
+void MX_SPI2_Init(void)
 {
 
   /* USER CODE BEGIN SPI2_Init 0 */
@@ -957,6 +996,140 @@ static void MX_TIM1_Init(void)
   /* USER CODE BEGIN TIM1_Init 2 */
 
   /* USER CODE END TIM1_Init 2 */
+
+}
+
+/**
+  * @brief TIM3 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM3_Init(void)
+{
+
+  /* USER CODE BEGIN TIM3_Init 0 */
+
+  /* USER CODE END TIM3_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+  TIM_OC_InitTypeDef sConfigOC = {0};
+
+  /* USER CODE BEGIN TIM3_Init 1 */
+
+  /* USER CODE END TIM3_Init 1 */
+  htim3.Instance = TIM3;
+  htim3.Init.Prescaler = 90;
+  htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim3.Init.Period = 0xFFFF;
+  htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
+  if (HAL_TIM_Base_Init(&htim3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim3, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_TIM_PWM_Init(&htim3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_UPDATE;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sConfigOC.OCMode = TIM_OCMODE_PWM1;
+  sConfigOC.Pulse = 0xFFF;
+  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+  if (HAL_TIM_PWM_ConfigChannel(&htim3, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM3_Init 2 */
+
+  /* USER CODE END TIM3_Init 2 */
+  HAL_TIM_MspPostInit(&htim3);
+
+}
+
+/**
+  * @brief TIM8 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM8_Init(void)
+{
+
+  /* USER CODE BEGIN TIM8_Init 0 */
+
+  /* USER CODE END TIM8_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+  TIM_OC_InitTypeDef sConfigOC = {0};
+  TIM_BreakDeadTimeConfigTypeDef sBreakDeadTimeConfig = {0};
+
+  /* USER CODE BEGIN TIM8_Init 1 */
+
+  /* USER CODE END TIM8_Init 1 */
+  htim8.Instance = TIM8;
+  htim8.Init.Prescaler = 90;
+  htim8.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim8.Init.Period = 0xFFFF;
+  htim8.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim8.Init.RepetitionCounter = 0;
+  htim8.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim8) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim8, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_TIM_PWM_Init(&htim8) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_UPDATE;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim8, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sConfigOC.OCMode = TIM_OCMODE_PWM1;
+  sConfigOC.Pulse = 0xFFF;
+  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+  sConfigOC.OCNPolarity = TIM_OCNPOLARITY_HIGH;
+  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+  sConfigOC.OCIdleState = TIM_OCIDLESTATE_RESET;
+  sConfigOC.OCNIdleState = TIM_OCNIDLESTATE_RESET;
+  if (HAL_TIM_PWM_ConfigChannel(&htim8, &sConfigOC, TIM_CHANNEL_2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sBreakDeadTimeConfig.OffStateRunMode = TIM_OSSR_DISABLE;
+  sBreakDeadTimeConfig.OffStateIDLEMode = TIM_OSSI_DISABLE;
+  sBreakDeadTimeConfig.LockLevel = TIM_LOCKLEVEL_OFF;
+  sBreakDeadTimeConfig.DeadTime = 0;
+  sBreakDeadTimeConfig.BreakState = TIM_BREAK_DISABLE;
+  sBreakDeadTimeConfig.BreakPolarity = TIM_BREAKPOLARITY_HIGH;
+  sBreakDeadTimeConfig.AutomaticOutput = TIM_AUTOMATICOUTPUT_DISABLE;
+  if (HAL_TIMEx_ConfigBreakDeadTime(&htim8, &sBreakDeadTimeConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM8_Init 2 */
+
+  /* USER CODE END TIM8_Init 2 */
+  HAL_TIM_MspPostInit(&htim8);
 
 }
 
@@ -1101,9 +1274,6 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOA, SPI1_CE_Pin|LCD_BL_CTRL_Pin|PrgTrk_CS_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOC, DCC_Signal_Pin|PrgTrk_DCC_Signal_Pin, GPIO_PIN_RESET);
-
-  /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
@@ -1132,8 +1302,14 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(OTG_FS1_OverCurrent_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : Fn4_Pin Fn1_Pin PrgTrk_Fault_Pin Boost_Fault_Pin */
-  GPIO_InitStruct.Pin = Fn4_Pin|Fn1_Pin|PrgTrk_Fault_Pin|Boost_Fault_Pin;
+  /*Configure GPIO pins : Fn4_Pin Fn1_Pin uSD_Detect_Pin */
+  GPIO_InitStruct.Pin = Fn4_Pin|Fn1_Pin|uSD_Detect_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PrgTrk_Fault_Pin Boost_Fault_Pin */
+  GPIO_InitStruct.Pin = PrgTrk_Fault_Pin|Boost_Fault_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
@@ -1145,13 +1321,11 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : SPI1_IRQ_Pin FWD_Pin Fn5_Pin EncoderB_Pin 
-                           REV_Pin PC5_Pin */
-  GPIO_InitStruct.Pin = SPI1_IRQ_Pin|FWD_Pin|Fn5_Pin|EncoderB_Pin 
-                          |REV_Pin|PC5_Pin;
+  /*Configure GPIO pin : SPI1_IRQ_Pin */
+  GPIO_InitStruct.Pin = SPI1_IRQ_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+  HAL_GPIO_Init(SPI1_IRQ_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : LED4_Pin */
   GPIO_InitStruct.Pin = LED4_Pin;
@@ -1167,19 +1341,20 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : DCC_Signal_Pin PrgTrk_DCC_Signal_Pin */
-  GPIO_InitStruct.Pin = DCC_Signal_Pin|PrgTrk_DCC_Signal_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-
   /*Configure GPIO pin : LED1_Pin */
   GPIO_InitStruct.Pin = LED1_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(LED1_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : FWD_Pin Fn5_Pin EncoderB_Pin REV_Pin 
+                           EStop_Pin */
+  GPIO_InitStruct.Pin = FWD_Pin|Fn5_Pin|EncoderB_Pin|REV_Pin 
+                          |EStop_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pins : OTG_FS1_PowerSwitchOn_Pin EXT_RESET_Pin */
   GPIO_InitStruct.Pin = OTG_FS1_PowerSwitchOn_Pin|EXT_RESET_Pin;
@@ -1188,23 +1363,17 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : uSD_Detect_Pin */
-  GPIO_InitStruct.Pin = uSD_Detect_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_PULLUP;
-  HAL_GPIO_Init(uSD_Detect_GPIO_Port, &GPIO_InitStruct);
-
   /*Configure GPIO pin : LCD_INT_Pin */
   GPIO_InitStruct.Pin = LCD_INT_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(LCD_INT_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PrgTrk_ACK_Pin Fn2_Pin Fn3_Pin */
-  GPIO_InitStruct.Pin = PrgTrk_ACK_Pin|Fn2_Pin|Fn3_Pin;
+  /*Configure GPIO pin : PrgTrk_ACK_Pin */
+  GPIO_InitStruct.Pin = PrgTrk_ACK_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+  HAL_GPIO_Init(PrgTrk_ACK_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PH7 */
   GPIO_InitStruct.Pin = GPIO_PIN_7;
@@ -1212,6 +1381,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
   HAL_GPIO_Init(GPIOH, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : Fn2_Pin Fn3_Pin */
+  GPIO_InitStruct.Pin = Fn2_Pin|Fn3_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PrgTrk_Enable_Pin */
   GPIO_InitStruct.Pin = PrgTrk_Enable_Pin;
@@ -1223,7 +1398,7 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin : EncoderA_Pin */
   GPIO_InitStruct.Pin = EncoderA_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(EncoderA_GPIO_Port, &GPIO_InitStruct);
 
 }
@@ -1280,9 +1455,10 @@ void SelfTest_Task(void *argument)
 		}
 		else
 		{
+			FILINFO finfo;
+			char filename[sizeof(finfo.fname)];
 		    for(;;)
 		    {
-			    FILINFO finfo;
 			    res = f_readdir(&d, &finfo);
 			    if (res != FR_OK)
 			    {
@@ -1292,15 +1468,39 @@ void SelfTest_Task(void *argument)
 			    if (finfo.fname[0] == 0)
 				    break;
 			    printf("%s\n", finfo.fname);
+			    strcpy(filename, finfo.fname);
 		    }
+			
+			FIL file;
+			res = f_open(&file, filename, FA_READ);
+			if (res != FR_OK)
+			{
+				printf("Error opening file '%s' %d\n", filename, res);
+			}
+			else
+			{
+				char buffer[256];
+				UINT bytesread;
+				while ((res = f_read(&file, buffer, sizeof(buffer) - 1, (UINT*)&bytesread)) == FR_OK)
+				{
+					if (bytesread == 0)
+						break;
+					buffer[bytesread] = 0;
+					printf(buffer);
+				}
+				if (res != FR_OK)
+				{
+					printf("Error reading file %d\n", res);
+					
+				}
+
+				f_close(&file);
+			}
 		}
 	}
 	
   /* Infinite loop */
-  for(;;)
-  {
-    osDelay(1);
-  }
+  vTaskSuspend(xTaskGetCurrentTaskHandle());
   /* USER CODE END SelfTest_Task */
 }
 
