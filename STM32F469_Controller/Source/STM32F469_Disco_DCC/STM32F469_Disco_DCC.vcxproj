@@ -227,17 +227,17 @@
     <ClCompile Include="..\TouchGFX\Middlewares\Third_Party\FatFs\src\ff.c" />
     <ClCompile Include="..\TouchGFX\Middlewares\Third_Party\FatFs\src\ff_gen_drv.c" />
     <ClCompile Include="..\TouchGFX\Middlewares\Third_Party\FatFs\src\option\syscall.c" />
+    <ClCompile Include="..\TouchGFX\Middlewares\Third_Party\FatFs\src\option\ccsbcs.c" />
     <ClCompile Include="$(EFP_BASE)\Profiler\FastSemihosting.cpp" />
     <ClCompile Include="$(EFP_BASE)\Profiler\SamplingProfiler.cpp" />
     <ClCompile Include="$(EFP_BASE)\Profiler\InstrumentingProfiler.cpp" />
     <ClCompile Include="$(EFP_BASE)\Profiler\TestResourceManager.cpp" />
+    <ClCompile Include="$(EFP_BASE)\Profiler\ProfilerRTOS_FreeRTOS.c" />
     <ClInclude Include="$(EFP_BASE)\Profiler\SysprogsProfiler.h" />
     <ClInclude Include="$(EFP_BASE)\Profiler\SmallNumberCoder.h" />
     <ClInclude Include="$(EFP_BASE)\Profiler\SysprogsProfilerInterface.h" />
     <ClInclude Include="$(EFP_BASE)\Profiler\ProfilerFreeRTOSHooks.h" />
     <ClInclude Include="$(EFP_BASE)\Profiler\CustomRealTimeWatches.h" />
     <ClInclude Include="$(EFP_BASE)\Profiler\DebuggerChecker.h" />
-    <ClCompile Include="$(EFP_BASE)\Profiler\ProfilerRTOS_FreeRTOS.c" />
-    <ClCompile Include="..\TouchGFX\Middlewares\Third_Party\FatFs\src\option\ccsbcs.c" />
   </ItemGroup>
 </Project>

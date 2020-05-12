@@ -143,10 +143,10 @@
       <UniqueIdentifier>{992d70c2-0808-4b61-b1ad-a9134a24b811}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source files\Device-specific files\Semihosting/Profiler">
-      <UniqueIdentifier>{29c036a2-f6fa-4e46-b8f3-dbd553206ecf}</UniqueIdentifier>
+      <UniqueIdentifier>{5cd99eb8-32e0-4692-bdf6-6374cd807485}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header files\Device-specific files\Semihosting/Profiler">
-      <UniqueIdentifier>{5ee0f0bd-194a-4211-a8cc-bef66ac654b4}</UniqueIdentifier>
+      <UniqueIdentifier>{1c915f03-0381-4943-a423-9deea2e0e520}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -588,6 +588,15 @@
     <ClCompile Include="..\TouchGFX\Middlewares\Third_Party\FatFs\src\option\syscall.c">
       <Filter>Source files\Middlewares\FatFs</Filter>
     </ClCompile>
+    <ClCompile Include="..\TouchGFX\Middlewares\Third_Party\FatFs\src\option\ccsbcs.c">
+      <Filter>Source files\Middlewares\FatFs</Filter>
+    </ClCompile>
+    <ClCompile Include="DCC.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="stm32f4xx_hal_tim_plus.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
     <ClCompile Include="$(EFP_BASE)\Profiler\FastSemihosting.cpp">
       <Filter>Source files\Device-specific files\Semihosting/Profiler</Filter>
     </ClCompile>
@@ -598,6 +607,9 @@
       <Filter>Source files\Device-specific files\Semihosting/Profiler</Filter>
     </ClCompile>
     <ClCompile Include="$(EFP_BASE)\Profiler\TestResourceManager.cpp">
+      <Filter>Source files\Device-specific files\Semihosting/Profiler</Filter>
+    </ClCompile>
+    <ClCompile Include="$(EFP_BASE)\Profiler\ProfilerRTOS_FreeRTOS.c">
       <Filter>Source files\Device-specific files\Semihosting/Profiler</Filter>
     </ClCompile>
     <ClInclude Include="$(EFP_BASE)\Profiler\SysprogsProfiler.h">
@@ -618,18 +630,6 @@
     <ClInclude Include="$(EFP_BASE)\Profiler\DebuggerChecker.h">
       <Filter>Header files\Device-specific files\Semihosting/Profiler</Filter>
     </ClInclude>
-    <ClCompile Include="$(EFP_BASE)\Profiler\ProfilerRTOS_FreeRTOS.c">
-      <Filter>Source files\Device-specific files\Semihosting/Profiler</Filter>
-    </ClCompile>
-    <ClCompile Include="..\TouchGFX\Middlewares\Third_Party\FatFs\src\option\ccsbcs.c">
-      <Filter>Source files\Middlewares\FatFs</Filter>
-    </ClCompile>
-    <ClCompile Include="DCC.cpp">
-      <Filter>Source files</Filter>
-    </ClCompile>
-    <ClCompile Include="stm32f4xx_hal_tim_plus.c">
-      <Filter>Source files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dcc.h">

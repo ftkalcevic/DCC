@@ -10,9 +10,12 @@ enum DCCType
 	ProgrammingTrack = 1
 };
 
+const int PREAMBLE_BITS = 14;
+const int DCC_ONE_TIME = 58-1;	// usec
+const int DCC_ZERO_TIME = 100-1;	// usec
 const int MAX_DCC_MESSAGE = 6;
 const int MAX_DCC_MESSAGES = 100;
-const int BIT_BUFFER_SIZE = (14 + MAX_DCC_MESSAGE*(8 + 1) + 1);	// max bit changes
+const int BIT_BUFFER_SIZE = (PREAMBLE_BITS + MAX_DCC_MESSAGE*(8 + 1) + 1);	// max bits
 
 struct DCCMessage
 {
@@ -28,7 +31,7 @@ class DCC
 	int messageCount;
 	bool trackEnabled;
 	uint32_t bitBuffer[BIT_BUFFER_SIZE*4];
-
+	volatile bool sent;
 
 	void SendDCCMessage(uint8_t *msg, uint8_t len);
 	void AddBit(int &index, bool bit);
@@ -52,6 +55,10 @@ public:
 
 	void Initialise();
 	void Run();
+	void DCCSent()
+	{ 
+		sent = true;
+	}
 };
 
 extern DCC mainTrack;
