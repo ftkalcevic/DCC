@@ -63,6 +63,8 @@ extern DSI_HandleTypeDef hdsi;
 extern LTDC_HandleTypeDef hltdc;
 extern DMA_HandleTypeDef hdma_sdio_rx;
 extern DMA_HandleTypeDef hdma_sdio_tx;
+extern DMA_HandleTypeDef hdma_tim3_ch4_up;
+extern DMA_HandleTypeDef hdma_tim8_up;
 extern TIM_HandleTypeDef htim3;
 extern TIM_HandleTypeDef htim8;
 extern TIM_HandleTypeDef htim6;
@@ -168,6 +170,20 @@ void DebugMon_Handler(void)
 /******************************************************************************/
 
 /**
+  * @brief This function handles DMA1 stream2 global interrupt.
+  */
+void DMA1_Stream2_IRQHandler(void)
+{
+  /* USER CODE BEGIN DMA1_Stream2_IRQn 0 */
+
+  /* USER CODE END DMA1_Stream2_IRQn 0 */
+  HAL_DMA_IRQHandler(&hdma_tim3_ch4_up);
+  /* USER CODE BEGIN DMA1_Stream2_IRQn 1 */
+
+  /* USER CODE END DMA1_Stream2_IRQn 1 */
+}
+
+/**
   * @brief This function handles TIM3 global interrupt.
   */
 void TIM3_IRQHandler(void)
@@ -187,7 +203,7 @@ void TIM3_IRQHandler(void)
 void TIM8_UP_TIM13_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM8_UP_TIM13_IRQn 0 */
-
+	return;
   /* USER CODE END TIM8_UP_TIM13_IRQn 0 */
   HAL_TIM_IRQHandler(&htim8);
   /* USER CODE BEGIN TIM8_UP_TIM13_IRQn 1 */
@@ -207,6 +223,22 @@ void TIM6_DAC_IRQHandler(void)
   /* USER CODE BEGIN TIM6_DAC_IRQn 1 */
 
   /* USER CODE END TIM6_DAC_IRQn 1 */
+}
+
+/**
+  * @brief This function handles DMA2 stream1 global interrupt.
+  */
+void DMA2_Stream1_IRQHandler(void)
+{
+  /* USER CODE BEGIN DMA2_Stream1_IRQn 0 */
+	extern void DCC_Handle_DMA_IRQ();
+	DCC_Handle_DMA_IRQ();
+	return;
+  /* USER CODE END DMA2_Stream1_IRQn 0 */
+  HAL_DMA_IRQHandler(&hdma_tim8_up);
+  /* USER CODE BEGIN DMA2_Stream1_IRQn 1 */
+
+  /* USER CODE END DMA2_Stream1_IRQn 1 */
 }
 
 /**

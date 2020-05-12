@@ -80,6 +80,8 @@ SPI_HandleTypeDef hspi2;
 TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim3;
 TIM_HandleTypeDef htim8;
+DMA_HandleTypeDef hdma_tim3_ch4_up;
+DMA_HandleTypeDef hdma_tim8_up;
 
 UART_HandleTypeDef huart3;
 
@@ -1067,7 +1069,7 @@ static void MX_TIM8_Init(void)
 {
 
   /* USER CODE BEGIN TIM8_Init 0 */
-
+	return;
   /* USER CODE END TIM8_Init 0 */
 
   TIM_ClockConfigTypeDef sClockSourceConfig = {0};
@@ -1084,7 +1086,7 @@ static void MX_TIM8_Init(void)
   htim8.Init.Period = 0xFFFF;
   htim8.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim8.Init.RepetitionCounter = 0;
-  htim8.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  htim8.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
   if (HAL_TIM_Base_Init(&htim8) != HAL_OK)
   {
     Error_Handler();
@@ -1174,8 +1176,15 @@ static void MX_DMA_Init(void)
 
   /* DMA controller clock enable */
   __HAL_RCC_DMA2_CLK_ENABLE();
+  __HAL_RCC_DMA1_CLK_ENABLE();
 
   /* DMA interrupt init */
+  /* DMA1_Stream2_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Stream2_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Stream2_IRQn);
+  /* DMA2_Stream1_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA2_Stream1_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(DMA2_Stream1_IRQn);
   /* DMA2_Stream3_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA2_Stream3_IRQn, 5, 0);
   HAL_NVIC_EnableIRQ(DMA2_Stream3_IRQn);
@@ -1435,6 +1444,7 @@ __weak void TouchGFX_Task(void *argument)
 void SelfTest_Task(void *argument)
 {
   /* USER CODE BEGIN SelfTest_Task */
+  vTaskDelete(NULL);
 	if (HAL_GPIO_ReadPin(uSD_Detect_GPIO_Port, uSD_Detect_Pin) == GPIO_PIN_RESET) 
 	{
 		FRESULT res;
@@ -1500,7 +1510,7 @@ void SelfTest_Task(void *argument)
 	}
 	
   /* Infinite loop */
-  vTaskSuspend(xTaskGetCurrentTaskHandle());
+  vTaskDelete(NULL);
   /* USER CODE END SelfTest_Task */
 }
 
@@ -1521,7 +1531,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     HAL_IncTick();
   }
   /* USER CODE BEGIN Callback 1 */
-
+	else if (htim->Instance == TIM8)
+	{
+	    HAL_TIM_PWM_Stop(&htim8, TIM_CHANNEL_2);
+	}
   /* USER CODE END Callback 1 */
 }
 

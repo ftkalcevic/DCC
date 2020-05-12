@@ -7,7 +7,7 @@
     <Revision>1</Revision>
   </ToolchainVersion>
   <BspID>com.sysprogs.arm.stm32</BspID>
-  <BspVersion>2019.06</BspVersion>
+  <BspVersion>2020.01</BspVersion>
   <McuID>STM32F469NI</McuID>
   <MCUDefinitionFile>STM32F4xxxx/DeviceDefinitions/stm32f469xx.xml</MCUDefinitionFile>
   <MCUProperties>
@@ -91,7 +91,7 @@
     <AllDependencies>
       <ProjectDependency>
         <RelativePath>..\TouchGFX\STM32CubeIDE\.cproject</RelativePath>
-        <Timestamp>132337099381165810</Timestamp>
+        <Timestamp>132337951635257794</Timestamp>
       </ProjectDependency>
     </AllDependencies>
     <RootDirectory>
