@@ -4,6 +4,7 @@
 #include "FreeRTOS.h"
 #include "cmsis_os.h"
 #include "task.h"
+#include "semphr.h"
 #include <string.h>
 
 extern "C" void DCCTask_Entry(void *argument);
@@ -39,7 +40,8 @@ class DCC
 	bool trackEnabled;
 	uint32_t bitBuffer[BIT_BUFFER_SIZE*BURST_SIZE];
 	volatile bool sent;
-
+	SemaphoreHandle_t sentSemaphoreHandle;
+	StaticSemaphore_t sentSemaphoreBuffer;
 
 public:
 	DCC( GPIO_TypeDef *CS_Port, uint16_t CS_Pin, 
@@ -64,6 +66,8 @@ public:
 	{
 		messageCount = 0;
 		trackEnabled = false;
+		sentSemaphoreHandle = xSemaphoreCreateBinaryStatic(&sentSemaphoreBuffer);
+		
 		// clear timer dma buffer.  Only those registers used will be set, others remain 0
 		memset(bitBuffer, 0, sizeof(bitBuffer));
 	
@@ -178,15 +182,14 @@ public:
 				// We can't find a message to send - either empty table, or 5ms gap issue.
 				static uint8_t idleMessage[3] = { 0xFF, 0, 0xFF };
 				SendDCCMessage(idleMessage, sizeof(idleMessage));
-				while (!sent)
-					continue;
+				xSemaphoreTake(sentSemaphoreHandle, portMAX_DELAY);	// Wait forever for the message to be sent. (or max 5ms?  Why wouldn't it go?)
 			}
 		
 			// need to handle a 5ms gap before sending a message to the same decoder.
 			// shortest message - 14 preamble + 3 bytes + 3 start bits + 1 end bit
 			//                    14 * 58 + 3 * 8 * 58 + 3*100 + 1 * 58 = 2562us
 
-		vTaskDelay(5);
+		vTaskDelay(pdMS_TO_TICKS(5));
 		}
 	}
 
@@ -250,6 +253,6 @@ public:
 
 	void DCCSent()
 	{ 
-		sent = true;
+		xSemaphoreGiveFromISR(sentSemaphoreHandle, NULL);
 	}
 };

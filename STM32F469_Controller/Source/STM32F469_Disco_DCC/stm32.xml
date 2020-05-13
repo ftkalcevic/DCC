@@ -78,7 +78,7 @@
       </KeyValue>
       <KeyValue>
         <Key>com.sysprogs.efp.profiling.hold_interrupts</Key>
-        <Value>FAST_SEMIHOSTING_HOLD_INTERRUPTS=0</Value>
+        <Value />
       </KeyValue>
     </Entries>
   </FrameworkProperties>

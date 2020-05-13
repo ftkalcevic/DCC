@@ -69,3 +69,5 @@ STM32F469_Controller/Logs
 STM32F469_Controller/Outputs
 STM32F469_Controller/Source/.metadata
 BeagleBone
+STM32F469_Controller/Source/STM32F469_Disco_DCC/VisualGDB/VisualGDBCache/STM32F469_Disco_DCC-Release/MemoryUtilizationReport.xml
+STM32F469_Controller/Source/test2/VisualGDB/VisualGDBCache/test2-Debug/MemoryUtilizationReport.xml
