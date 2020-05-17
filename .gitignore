@@ -74,3 +74,5 @@ STM32F469_Controller/Source/test2/VisualGDB/VisualGDBCache/test2-Debug/MemoryUti
 *.PrjPcbStructure
 DRV8873S_Breakout/Logs
 DRV8873S_Breakout/Outputs
+LCC_Terminator/Logs
+LCC_Terminator/Outputs
