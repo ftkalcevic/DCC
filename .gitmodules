@@ -1,0 +1,6 @@
+[submodule "LCCAtmegaXXM1/Source/LCCAtmegaXXM1/OpenLCB"]
+	path = LCCAtmegaXXM1/Source/LCCAtmegaXXM1/OpenLCB
+	url = https://github.com/ftkalcevic/OpenLCB_Single_Thread.git
+[submodule "STM32F469_Controller/Source/OpenLCB"]
+	path = STM32F469_Controller/Source/OpenLCB
+	url = https://github.com/ftkalcevic/OpenLCB_Single_Thread.git
