@@ -9,14 +9,15 @@
 #define PRGTRK_CCn_OFFSET 2
 #define PRGTRK_BURST_SIZE 3
 
+#define QUEUE_LEN	10
 
-DCC<DCCType::MainTrack, MAINTRK_ARR_OFFSET, MAINTRK_CCn_OFFSET, MAINTRK_BURST_SIZE> mainTrack(  
+DCC<DCCType::MainTrack, MAINTRK_ARR_OFFSET, MAINTRK_CCn_OFFSET, MAINTRK_BURST_SIZE, QUEUE_LEN> mainTrack(  
 		Boost_CS_GPIO_Port, Boost_CS_Pin,
 		Boost_Enable_GPIO_Port, Boost_Enable_Pin,
 		Boost_Fault_GPIO_Port, Boost_Fault_Pin,
 		&hadc1, 1,
 		DCC_Signal_GPIO_Port, DCC_Signal_Pin );					// tim8_2
-DCC<DCCType::ProgrammingTrack, PRGTRK_ARR_OFFSET, PRGTRK_CCn_OFFSET, PRGTRK_BURST_SIZE> programmingTrack(   
+DCC<DCCType::ProgrammingTrack, PRGTRK_ARR_OFFSET, PRGTRK_CCn_OFFSET, PRGTRK_BURST_SIZE, QUEUE_LEN> programmingTrack(   
 		PrgTrk_CS_GPIO_Port, PrgTrk_CS_Pin,
 		PrgTrk_Enable_GPIO_Port, PrgTrk_Enable_Pin,
 		PrgTrk_Fault_GPIO_Port, PrgTrk_Fault_Pin,
@@ -28,7 +29,7 @@ extern "C"
 	void DCCTask_Entry(void *argument)
 	{
 		DCCType type = static_cast<DCCType>(reinterpret_cast<int>(argument));
-		
+		vTaskDelete(NULL);
 		switch (type)
 		{
 			case DCCType::ProgrammingTrack:

@@ -16,23 +16,23 @@ enum DCCType
 };
 
 const int PREAMBLE_BITS = 14;
-const int DCC_ONE_TIME = 58-1;	// usec
-const int DCC_ZERO_TIME = 100-1;	// usec
-const int MAX_DCC_MESSAGE = 6;
+const int DCC_ONE_TIME = 58;	// usec
+const int DCC_ZERO_TIME = 100;	// usec
+const int MAX_DCC_MESSAGE_LEN = 6;
 const int MAX_DCC_MESSAGES = 100;
-const int BIT_BUFFER_SIZE = (PREAMBLE_BITS + MAX_DCC_MESSAGE*(8 + 1) + 1);	// max bits
+const int BIT_BUFFER_SIZE = (PREAMBLE_BITS + MAX_DCC_MESSAGE_LEN*(8 + 1) + 1);	// max bits
 
 struct DCCMessage
 {
 	uint16_t address;
 	uint8_t msgLen;
-	uint8_t msg[MAX_DCC_MESSAGE];
+	uint8_t msg[MAX_DCC_MESSAGE_LEN];
 	uint32_t lastSendTime;
 };
 
 
 	
-template<DCCType type, int ARR_OFFSET, int CCn_OFFSET, int BURST_SIZE >
+template<DCCType type, const int ARR_OFFSET, const int CCn_OFFSET, const int BURST_SIZE, const int MESSAGE_QUEUE_LEN >
 class DCC
 {
 	DCCMessage messageTable[MAX_DCC_MESSAGES];
@@ -42,7 +42,10 @@ class DCC
 	volatile bool sent;
 	SemaphoreHandle_t sentSemaphoreHandle;
 	StaticSemaphore_t sentSemaphoreBuffer;
-
+	uint8_t queueStorageBuffer[sizeof(DCCMessage)*MESSAGE_QUEUE_LEN];
+	StaticQueue_t queueBuffer;
+	QueueHandle_t queueHandle;
+	
 public:
 	DCC( GPIO_TypeDef *CS_Port, uint16_t CS_Pin, 
 		 GPIO_TypeDef *Enable_Port, uint16_t Enable_Pin, 
@@ -67,10 +70,12 @@ public:
 		messageCount = 0;
 		trackEnabled = false;
 		sentSemaphoreHandle = xSemaphoreCreateBinaryStatic(&sentSemaphoreBuffer);
+		queueHandle = xQueueCreateStatic(MESSAGE_QUEUE_LEN, sizeof(DCCMessage), queueStorageBuffer, &queueBuffer);
 		
 		// clear timer dma buffer.  Only those registers used will be set, others remain 0
 		memset(bitBuffer, 0, sizeof(bitBuffer));
 	
+		// Initialise timer and dma to be used.
 		if (type == DCCType::MainTrack)
 		{
 			// TIM8_CH2, DMA2_Stream1_Channel7 APB2
@@ -98,18 +103,12 @@ public:
 			TIM8->CCMR1 = (TIM_OCMODE_PWM1 << 8) | TIM_CCMR1_OC2PE;
 			TIM8->ARR = 1;
 			TIM8->CCR2 = 0;
-			TIM8->PSC = 180; 	// TIM8 on APB2 (180Mhz)
+			TIM8->PSC = (APB2_TIMER_CLOCK/1000000)-1; 	// TIM8 on APB2 (1Mhz)
 			TIM8->DIER = TIM_DMA_UPDATE;
-			//	TIM8->DCR = TIM_DMABase_ARR | TIM_DMABurstLength_4Transfers;
-				TIM8->DCR = TIM_DMABase_ARR | ((BURST_SIZE - 1) << TIM_DCR_DBL_Pos);
+			TIM8->DCR = TIM_DMABase_ARR | ((BURST_SIZE - 1) << TIM_DCR_DBL_Pos);
 			TIM8->CCER |= TIM_CCER_CC2P;
 			TIM8->BDTR |= TIM_BDTR_MOE;
-			/* Enable UEV by setting UG bit to Load buffer data into preload registers */
 			TIM8->EGR |= TIM_EGR_UG;
-			//	while ((TIM8->EGR & TIM_EGR_UG) == SET)
-			//		continue;
-			//	/* Enable UEV by setting UG bit to load data from preload to activeregisters */
-			//	TIM8->EGR |= TIM_EGR_UG;
 		}
 		else
 		{
@@ -139,18 +138,11 @@ public:
 			TIM3->CCMR1 = TIM_OCMODE_PWM1 | TIM_CCMR1_OC1PE;
 			TIM3->ARR = 1;
 			TIM3->CCR1 = 0;
-			TIM3->PSC = 90; 	// TIM3 on APB1 (90MHz)
+			TIM3->PSC = (APB1_TIMER_CLOCK/1000000)-1; 	// TIM3 on APB1 (1MHz)
 			TIM3->DIER = TIM_DMA_UPDATE;
-			//	TIM3->DCR = TIM_DMABase_ARR | TIM_DMABurstLength_4Transfers;
 			TIM3->DCR = TIM_DMABase_ARR | ((BURST_SIZE - 1) << TIM_DCR_DBL_Pos);
 			TIM3->CCER |= TIM_CCER_CC1P;
-			//TIM3->BDTR |= TIM_BDTR_MOE;
-			/* Enable UEV by setting UG bit to Load buffer data into preload registers */
 			TIM3->EGR |= TIM_EGR_UG;
-			//	while ((TIM8->EGR & TIM_EGR_UG) == SET)
-			//		continue;
-			//	/* Enable UEV by setting UG bit to load data from preload to activeregisters */
-			//	TIM8->EGR |= TIM_EGR_UG;			
 		}
 
 	}
@@ -163,18 +155,28 @@ public:
 		trackEnabled = true;
 	#endif
 
+		bool lastTrackEnabled = trackEnabled;
 		for (;;)
 		{
 			// if trackenabled changed
+			if(trackEnabled != lastTrackEnabled)
+			{
 				// if disabled, clear msg queue, reset msg repeat
+				lastTrackEnabled = trackEnabled;
+			}
 		
 			// If new message
-			if(false)
+			if ( uxQueueMessagesWaiting( queueHandle ) )
 			{
 				// Read message
-				// if trackEnabled, send message
-				// Update local table
-				//      loco commands need to be stored for playback later
+				DCCMessage msg;
+				if (xQueueReceive(queueHandle, &msg, 0) == pdPASS)
+				{
+					
+					// if trackEnabled, send message
+					// Update local table
+					//      loco commands need to be stored for playback later
+				}
 			}
 			// Else process message table
 			else 

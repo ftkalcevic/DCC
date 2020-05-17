@@ -41,7 +41,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\TouchGFX\Core\Inc;..\TouchGFX\Drivers\CMSIS\Include;..\TouchGFX\TouchGFX\generated\gui_generated\include;..\TouchGFX\TouchGFX\target;..\TouchGFX\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\TouchGFX\FATFS\App;..\TouchGFX\TouchGFX\App;..\TouchGFX\Middlewares\ST\touchgfx\framework\include;..\TouchGFX\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS_V2;..\TouchGFX\TouchGFX\target\generated;..\TouchGFX\Drivers\BSP\Components\Common;..\TouchGFX\TouchGFX\gui\include;..\TouchGFX\FATFS\Target;..\TouchGFX\TouchGFX\generated\texts\include;..\TouchGFX\TouchGFX\generated\images\include;..\TouchGFX\Middlewares\Third_Party\FreeRTOS\Source\include;..\TouchGFX\Middlewares\Third_Party\FatFs\src;..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy;..\TouchGFX\Middlewares\Third_Party\FreeRTOS\Source\portable\GCC\ARM_CM4F;..\TouchGFX\Drivers\BSP\STM32469I-Discovery;..\TouchGFX\TouchGFX\generated\fonts\include;..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Projects\DCC\STM32F469_Controller\Source\OpenLCB\src;..\TouchGFX\Core\Inc;..\TouchGFX\Drivers\CMSIS\Include;..\TouchGFX\TouchGFX\generated\gui_generated\include;..\TouchGFX\TouchGFX\target;..\TouchGFX\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\TouchGFX\FATFS\App;..\TouchGFX\TouchGFX\App;..\TouchGFX\Middlewares\ST\touchgfx\framework\include;..\TouchGFX\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS_V2;..\TouchGFX\TouchGFX\target\generated;..\TouchGFX\Drivers\BSP\Components\Common;..\TouchGFX\TouchGFX\gui\include;..\TouchGFX\FATFS\Target;..\TouchGFX\TouchGFX\generated\texts\include;..\TouchGFX\TouchGFX\generated\images\include;..\TouchGFX\Middlewares\Third_Party\FreeRTOS\Source\include;..\TouchGFX\Middlewares\Third_Party\FatFs\src;..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy;..\TouchGFX\Middlewares\Third_Party\FreeRTOS\Source\portable\GCC\ARM_CM4F;..\TouchGFX\Drivers\BSP\STM32469I-Discovery;..\TouchGFX\TouchGFX\generated\fonts\include;..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>DEBUG=1;USE_FREERTOS;USE_HAL_DRIVER;STM32F469xx;%(ClCompile.PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions />
       <CLanguageStandard />
@@ -77,6 +77,18 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ClCompile Include="..\OpenLCB\src\OlcbCommonCAN\Configuration.cpp" />
+    <ClCompile Include="..\OpenLCB\src\OlcbCommonCAN\Datagram.cpp" />
+    <ClCompile Include="..\OpenLCB\src\OlcbCommonCAN\Event.cpp" />
+    <ClCompile Include="..\OpenLCB\src\OlcbCommonCAN\EventID.cpp" />
+    <ClCompile Include="..\OpenLCB\src\OlcbCommonCAN\LinkControl.cpp" />
+    <ClCompile Include="..\OpenLCB\src\OlcbCommonCAN\NodeMemory.cpp" />
+    <ClCompile Include="..\OpenLCB\src\OlcbCommonCAN\OlcbCanInterface.cpp" />
+    <ClCompile Include="..\OpenLCB\src\OlcbCommonCAN\OlcbStream.cpp" />
+    <ClCompile Include="..\OpenLCB\src\OlcbCommonCAN\OpenLcbCore.cpp" />
+    <ClCompile Include="..\OpenLCB\src\OlcbCommonCAN\PIP.cpp" />
+    <ClCompile Include="..\OpenLCB\src\OlcbCommonCAN\SNII.cpp" />
+    <ClCompile Include="..\OpenLCB\src\STM32F469xx\can.cpp" />
     <ClCompile Include="..\TouchGFX\Core\Src\freertos.c" />
     <ClCompile Include="..\TouchGFX\Core\Src\main.c" />
     <ClCompile Include="..\TouchGFX\Core\Src\stm32f4xx_hal_msp.c" />
@@ -165,9 +177,37 @@
     <ClCompile Include="..\TouchGFX\Middlewares\Third_Party\FreeRTOS\Source\stream_buffer.c" />
     <ClCompile Include="..\TouchGFX\Middlewares\Third_Party\FreeRTOS\Source\tasks.c" />
     <ClCompile Include="..\TouchGFX\Middlewares\Third_Party\FreeRTOS\Source\timers.c" />
+    <ClCompile Include="AppMain.cpp" />
+    <ClCompile Include="Arduino.cpp" />
     <ClCompile Include="DCC.cpp" />
+    <ClCompile Include="DRV8873S.cpp" />
+    <ClCompile Include="LCCTask.cpp" />
     <ClCompile Include="stm32f4xx_hal_tim_plus.c" />
+    <ClInclude Include="..\OpenLCB\src\Configuration.h" />
+    <ClInclude Include="..\OpenLCB\src\Datagram.h" />
+    <ClInclude Include="..\OpenLCB\src\Event.h" />
+    <ClInclude Include="..\OpenLCB\src\EventID.h" />
+    <ClInclude Include="..\OpenLCB\src\LinkControl.h" />
+    <ClInclude Include="..\OpenLCB\src\NodeID.h" />
+    <ClInclude Include="..\OpenLCB\src\NodeMemory.h" />
+    <ClInclude Include="..\OpenLCB\src\OlcbCan.h" />
+    <ClInclude Include="..\OpenLCB\src\OlcbCanInterface.h" />
+    <ClInclude Include="..\OpenLCB\src\OlcbInterface.h" />
+    <ClInclude Include="..\OpenLCB\src\OlcbNet.h" />
+    <ClInclude Include="..\OpenLCB\src\OpenLcbCan.h" />
+    <ClInclude Include="..\OpenLCB\src\OpenLcbCanBuffer.h" />
+    <ClInclude Include="..\OpenLCB\src\OpenLcbCore.h" />
+    <ClInclude Include="..\OpenLCB\src\OpenLCBHeader.h" />
+    <ClInclude Include="..\OpenLCB\src\OpenLCBMid.h" />
+    <ClInclude Include="..\OpenLCB\src\PIP.h" />
+    <ClInclude Include="..\OpenLCB\src\processor.h" />
+    <ClInclude Include="..\OpenLCB\src\SNII.h" />
+    <ClInclude Include="..\OpenLCB\src\STM32F469xx\can.h" />
+    <ClInclude Include="AppMain.h" />
+    <ClInclude Include="Arduino.h" />
     <ClInclude Include="dcc.h" />
+    <ClInclude Include="DRV8873S.h" />
+    <ClInclude Include="LCCTask.h" />
     <ClInclude Include="stm32f4xx_hal_tim_plus.h" />
     <None Include="stm32.props" />
     <ClCompile Include="$(BSP_ROOT)\STM32F4xxxx\StartupFiles\startup_stm32f469xx.c" />
@@ -239,5 +279,9 @@
     <ClInclude Include="$(EFP_BASE)\Profiler\ProfilerFreeRTOSHooks.h" />
     <ClInclude Include="$(EFP_BASE)\Profiler\CustomRealTimeWatches.h" />
     <ClInclude Include="$(EFP_BASE)\Profiler\DebuggerChecker.h" />
+    <ClCompile Include="..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rtc.c" />
+    <ClCompile Include="..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rtc_ex.c" />
+    <ClInclude Include="..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rtc.h" />
+    <ClInclude Include="..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rtc_ex.h" />
   </ItemGroup>
 </Project>

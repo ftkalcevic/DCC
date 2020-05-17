@@ -60,6 +60,7 @@ extern ADC_HandleTypeDef hadc1;
 extern SPI_HandleTypeDef hspi2;
 extern TIM_HandleTypeDef htim3;
 extern TIM_HandleTypeDef htim8;
+extern CAN_HandleTypeDef hcan2;
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
@@ -87,6 +88,8 @@ extern TIM_HandleTypeDef htim8;
 #define PrgTrk_Fault_GPIO_Port GPIOG
 #define LED3_Pin GPIO_PIN_5
 #define LED3_GPIO_Port GPIOD
+#define BOOST_SCK_Pin GPIO_PIN_3
+#define BOOST_SCK_GPIO_Port GPIOD
 #define SPI1_IRQ_Pin GPIO_PIN_13
 #define SPI1_IRQ_GPIO_Port GPIOC
 #define LED4_Pin GPIO_PIN_3
@@ -109,8 +112,6 @@ extern TIM_HandleTypeDef htim8;
 #define SAI1_MCLKA_GPIO_Port GPIOG
 #define LED1_Pin GPIO_PIN_6
 #define LED1_GPIO_Port GPIOG
-#define CANTX_Pin GPIO_PIN_13
-#define CANTX_GPIO_Port GPIOB
 #define FWD_Pin GPIO_PIN_3
 #define FWD_GPIO_Port GPIOC
 #define CANRX_Pin GPIO_PIN_12
@@ -151,8 +152,13 @@ extern TIM_HandleTypeDef htim8;
 #define EXT_RESET_GPIO_Port GPIOB
 #define STLK_TX_Pin GPIO_PIN_11
 #define STLK_TX_GPIO_Port GPIOB
+#define BOOST_MISO_Pin GPIO_PIN_14
+#define BOOST_MISO_GPIO_Port GPIOB
+#define BOOST_MOSI_Pin GPIO_PIN_15
+#define BOOST_MOSI_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
-
+#define APB1_TIMER_CLOCK   90000000
+#define APB2_TIMER_CLOCK  180000000
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

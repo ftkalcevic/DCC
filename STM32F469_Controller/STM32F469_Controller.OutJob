@@ -54,9 +54,9 @@ Configuration1_Item3=OpenExported=False|AddToProject=False|ForceFit=False|NotFit
 Configuration1_Name4=GroupOrder
 Configuration1_Item4=Value=True|Comment=True|Footprint=True
 Configuration1_Name5=SortOrder
-Configuration1_Item5=Designator=Up|Comment=Up|Footprint=Up
+Configuration1_Item5=Designator=Up
 Configuration1_Name6=VisibleOrder
-Configuration1_Item6=Comment=100|Description=100|Designator=100|Footprint=100|LibRef=100|Quantity=100|Value=100
+Configuration1_Item6=Comment=113|Description=113|Footprint=113|LibRef=113|Quantity=113|Value=113|Designator=113
 OutputType2=Schematic Print
 OutputName2=Schematic Print
 OutputCategory2=Documentation
@@ -263,7 +263,7 @@ OutputFileNameSpecial3=
 OpenOutput3=1
 OutputFilePath4=
 ReleaseManaged4=0
-OutputBasePath4=
+OutputBasePath4=Outputs
 OutputPathMedia4=
 OutputPathMediaValue4=
 OutputPathOutputer4=[Output Type]

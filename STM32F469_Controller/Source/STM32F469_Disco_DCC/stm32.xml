@@ -91,7 +91,7 @@
     <AllDependencies>
       <ProjectDependency>
         <RelativePath>..\TouchGFX\STM32CubeIDE\.cproject</RelativePath>
-        <Timestamp>132337951635257794</Timestamp>
+        <Timestamp>132341793762974471</Timestamp>
       </ProjectDependency>
     </AllDependencies>
     <RootDirectory>
@@ -392,6 +392,12 @@
                   <RelativePath>..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc_ex.c</RelativePath>
                 </VirtualFileSnapshot>
                 <VirtualFileSnapshot>
+                  <RelativePath>..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rtc.c</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rtc_ex.c</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
                   <RelativePath>..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_sai.c</RelativePath>
                 </VirtualFileSnapshot>
                 <VirtualFileSnapshot>
@@ -498,6 +504,12 @@
                 </VirtualFileSnapshot>
                 <VirtualFileSnapshot>
                   <RelativePath>..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc_ex.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rtc.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rtc_ex.h</RelativePath>
                 </VirtualFileSnapshot>
                 <VirtualFileSnapshot>
                   <RelativePath>..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_sai.h</RelativePath>
