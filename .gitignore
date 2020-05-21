@@ -80,3 +80,4 @@ LCC_Terminator/Outputs
 LCCAtmegaXXM1/Source/LCCAtmegaXXM1/Debug
 LCCAtmegaXXM1/Source/LCCAtmegaXXM1/Release
 *.componentinfo.xml
+MemoryUtilizationReport.xml
