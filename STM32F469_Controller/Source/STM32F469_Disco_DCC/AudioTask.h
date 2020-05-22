@@ -44,8 +44,6 @@ const int PLAYSOUND_QUEUE_LENGTH = 5;
 const int PLAY_LIST_SIZE = 5;
 const int AUDIO_BUFFER_DURATION = 100;				// ms
 const int AUDIO_BUFFER_SIZE = 2 * AUDIO_FREQ * AUDIO_BUFFER_DURATION / 1000;		// samples needed for 2 buffers of 100ms storage (22khz, 16 bit, mono)
-//const int AUDIO_BUFFER_SIZE = 0x1000;		// samples needed for 2 buffers of 100ms storage (22khz, 16 bit, mono)
-const int16_t AUDIO_DATA_SILENCE = 0;
 	
 
 
@@ -92,14 +90,14 @@ struct PlayListRecord
 			uint16_t freq;		// Frequency in Hz
 			uint16_t len;		// Len in ms
 			uint16_t pause;		// pause between repeats in ms
-			uint8_t flags;		// flags for repeats/incr
-			int8_t freqIncr;	// incr value
+			uint8_t repeats;	// repeats
 			
 			// working variables
 			uint16_t currentFreq;
 			float step;
 			float idx;
 			uint16_t playedLen;
+			bool playing;		// playing or pausing
 		} tone;
 	};
 };
@@ -112,10 +110,12 @@ class AudioTask
 	StaticQueue_t QueueBuffer;
 	PlayListRecord playList[PLAY_LIST_SIZE];
 	bool playing;
+	bool mute;
 	int16_t AudioTransferBuffer[AUDIO_BUFFER_SIZE];
+	int16_t tempBuffer[AUDIO_BUFFER_SIZE];
 	static_assert(AUDIO_BITS == 16,"Wave file bits must be 16bit");
 	
-	void CreateTone(uint16_t freq, uint16_t len, uint16_t pause, uint8_t flags=0, int8_t freqIncr=0);
+	void CreateTone(uint16_t freq, uint16_t len, uint8_t repeats=0, uint16_t pause = 0);
 	void mix(int16_t *dest, int16_t *source, uint16_t len);
 	void ProcessEvent(EAudioSounds event);
 	void ProcessSample(EAudioSounds sample);
@@ -150,11 +150,13 @@ public:
 			playList[i].type = PlayListRecord::EPlayType::None;
 		}
 		playing = false;
+		mute = false;
 	}
 	
 	void Run();
 	void PlaySound(EAudioSounds sound, bool highPriority=false);
 	void SoundEvent(EAudioSounds sound);
+	void Mute(bool mute);
 };
 
 

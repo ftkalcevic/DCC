@@ -13,9 +13,11 @@ extern "C" void AppMainTask_Entry(void *argument)
 
 void AppMain::Run()
 {
+	// Play startup sound
+//	audioTask.PlaySound(EAudioSounds::Bell2);
+	
 	for(;;) vTaskDelay(pdMS_TO_TICKS(1000));
-	vTaskDelay(pdMS_TO_TICKS(500));
-	audioTask.PlaySound(EAudioSounds::Tone);
+	
 
 	
 	

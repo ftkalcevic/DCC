@@ -50,7 +50,7 @@
     <Link>
       <LibrarySearchDirectories>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\Middlewares\ST\touchgfx\lib\core\cortex_m4f\gcc;%(Link.LibrarySearchDirectories)</LibrarySearchDirectories>
       <AdditionalLibraryNames>touchgfx-float-abi-hard;%(Link.AdditionalLibraryNames)</AdditionalLibraryNames>
-      <AdditionalLinkerInputs>%(Link.AdditionalLinkerInputs)</AdditionalLinkerInputs>
+      <AdditionalLinkerInputs>;%(Link.AdditionalLinkerInputs)</AdditionalLinkerInputs>
       <AdditionalOptions />
       <LinkerScript>..\TouchGFX\gcc\STM32F469NIHx_FLASH.ld</LinkerScript>
     </Link>

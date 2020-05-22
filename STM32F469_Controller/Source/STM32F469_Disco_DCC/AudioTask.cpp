@@ -287,10 +287,10 @@ void AudioTask::ProcessSample(EAudioSounds sample)
 			if(info1->ChunkID == WAVE_CHUNKID &&
 				 info1->FileFormat == WAVE_FILE_FORMAT &&
 				 info2->SubChunk1ID == WAVE_SUB_CHUNKID_HEADER &&
-				 info2->AudioFormat == WAVE_AUDIO_FORMAT_PCM //&&
-				 //info2->NbrChannels == WAVE_CHANNELS_MONO &&
-				 //info2->BitPerSample == AUDIO_BITS &&
-				// info2->SampleRate == AUDIO_FREQ
+				 info2->AudioFormat == WAVE_AUDIO_FORMAT_PCM &&
+				 info2->NbrChannels == WAVE_CHANNELS_MONO &&
+				 info2->BitPerSample == AUDIO_BITS &&
+				 info2->SampleRate == AUDIO_FREQ
 				)
 			{
 				// Happy.  Add file to playlist.
@@ -318,7 +318,7 @@ void AudioTask::ProcessSample(EAudioSounds sample)
 		f_close(&soundFile);
 }
 
-void AudioTask::CreateTone(uint16_t freq, uint16_t len, uint16_t pause, uint8_t flags, int8_t freqIncr)
+void AudioTask::CreateTone(uint16_t freq, uint16_t len, uint8_t repeats, uint16_t pause)
 {
 	int index = FindFreeEntry();
 	if (index >= 0)
@@ -326,14 +326,14 @@ void AudioTask::CreateTone(uint16_t freq, uint16_t len, uint16_t pause, uint8_t 
 		playList[index].type = PlayListRecord::EPlayType::Tone;
 		playList[index].tone.freq = freq;
 		playList[index].tone.len = len;
+		playList[index].tone.repeats = repeats;
 		playList[index].tone.pause = pause;
-		playList[index].tone.flags = flags;
-		playList[index].tone.freqIncr = freqIncr;
 		
 		playList[index].tone.currentFreq = 0;
 		playList[index].tone.step = 0;
 		playList[index].tone.idx = 0;
 		playList[index].tone.playedLen = 0;
+		playList[index].tone.playing = true;
 		if (!playing)
 		{
 			// Kickstart player.
@@ -347,8 +347,7 @@ void AudioTask::ProcessTone(EAudioSounds tone)
 	switch (tone)
 	{
 		case KeyPressTone:	
-			//ProcessSample(Bell2); 
-			CreateTone(1600, 550, 0); //CreateTone(BEEP_DEFAULT_FREQ, 400, 0); 
+			CreateTone(BEEP_DEFAULT_FREQ, 40); 
 			break;
 		default:
 			break;
@@ -366,14 +365,14 @@ void AudioTask::mix(int16_t *dest, int16_t *source, uint16_t len)
 	}
 }
 
-		int16_t tempBuffer[AUDIO_BUFFER_SIZE];
 void AudioTask::ProcessBufferFill(EAudioSounds event)
 {
-	printf("%dms %d>", xTaskGetTickCount()*1000/configTICK_RATE_HZ, event);
 	int16_t sounds = 0;
+	//printf("%d E%d,%d\n", 1000*xTaskGetTickCount()/configTICK_RATE_HZ, event, GetEntryCount());
+
 	if (GetEntryCount() > 0)
 	{
-		int bufferDuration, bufferLen, bufferOffset;		// in samples (int16)
+		uint16_t bufferDuration, bufferLen, bufferOffset;		// in samples (int16)
 		if (!playing)
 		{
 			bufferLen = AUDIO_BUFFER_SIZE;  	// full buffer
@@ -395,12 +394,9 @@ void AudioTask::ProcessBufferFill(EAudioSounds event)
 				bufferDuration = AUDIO_BUFFER_DURATION;
 			}
 		}
-		printf(" %d:%d(%d) ", bufferOffset, bufferLen,DMA2_Stream3->NDTR);
 			
 		// Clear buffer
-		memset(AudioTransferBuffer + bufferOffset, 0, bufferLen);
-//		for(int i = bufferOffset; i < bufferOffset+bufferLen ; i++)
-//			AudioTransferBuffer[i] = AUDIO_DATA_SILENCE;
+		memset(AudioTransferBuffer + bufferOffset, 0, bufferLen*2);
 		
 		// Merge data.
 		for(int pl = 0 ; pl < PLAY_LIST_SIZE ; pl++)
@@ -428,7 +424,6 @@ void AudioTask::ProcessBufferFill(EAudioSounds event)
 								f_close(&(play.wave.fil));
 								play.type = PlayListRecord::EPlayType::None;
 							}
-							printf(" %d,%d", samples, play.wave.stillToPlay);
 						}
 						else
 						{
@@ -439,97 +434,116 @@ void AudioTask::ProcessBufferFill(EAudioSounds event)
 					}
 					break;
 				case PlayListRecord::EPlayType::Tone:
-{
-	int duration = 0;
-	int result = 0;
+				{
+					uint16_t outPtr = 0;
+					uint16_t outDuration = bufferDuration;
+					for (;;)					
+					{
+						int duration = 0;
+						int result = 0;
 
-	int remainingDuration = play.tone.len - play.tone.playedLen;
-	if (remainingDuration > 0) 
-	{
-		sounds++;
-		int points;
-		float toneIdx = play.tone.idx;
+						if (play.tone.playing)
+						{
+		
+							int remainingDuration = play.tone.len - play.tone.playedLen;
+							if (remainingDuration > 0) 
+							{
+								sounds++;
+								int points;
+								float toneIdx = play.tone.idx;
 
-//    if (fragment.tone.reset) {
-//      fragment.tone.reset = 0;
-//      state.duration = 0;
-//      state.pause = 0;
-//    }
+								if(play.tone.freq != play.tone.currentFreq) 
+								{
+									play.tone.currentFreq = play.tone.freq;
+									play.tone.step = limit<float>(1, float(play.tone.freq) * (float(countof(sineValues)) / float(AUDIO_FREQ)), countof(sineValues) / 2);
+								}
 
-		if (play.tone.freq != play.tone.currentFreq) 
-		{
-			play.tone.currentFreq = play.tone.freq;
-			play.tone.step = limit<float>(1, float(play.tone.freq) * (float(countof(sineValues))/float(AUDIO_FREQ)), countof(sineValues)/2);
-		}
-	  
-//    if (fragment.tone.freqIncr) {
-//      int freqChange = AUDIO_BUFFER_DURATION * fragment.tone.freqIncr;
-//      if (freqChange > 0) {
-//        fragment.tone.freq += freqChange;
-//        if (fragment.tone.freq > BEEP_MAX_FREQ) {
-//          fragment.tone.freq = BEEP_MAX_FREQ;
-//        }
-//      }
-//      else {
-//        if (fragment.tone.freq > BEEP_MIN_FREQ - freqChange) {
-//          fragment.tone.freq += freqChange;
-//        }
-//        else {
-//          fragment.tone.freq = BEEP_MIN_FREQ;
-//        }
-//      }
-//    }
+								if(remainingDuration > outDuration) 
+								{
+									duration = outDuration;
+									points = bufferLen;
+								}
+								else 
+								{
+									duration = remainingDuration;
+									points = (duration * bufferLen) / outDuration;
+									unsigned int end = toneIdx + (play.tone.step * points);
+									if (end > countof(sineValues))
+										end -= (end % countof(sineValues));
+									else
+										end = countof(sineValues);
+									points = (float(end) - toneIdx) / play.tone.step;
+								}
 
-		if (remainingDuration > bufferDuration) 
-			{
-			duration = bufferDuration;
-			points = bufferLen;
-		}
-		else 
-		{
-			duration = remainingDuration;
-			points = (duration * bufferLen) / bufferDuration;
-			unsigned int end = toneIdx + (play.tone.step * points);
-			if (end > countof(sineValues))
-				end -= (end % countof(sineValues));
-//			else
-//				end = countof(sineValues);
-			points = (float(end) - toneIdx) / play.tone.step;
-		}
-		printf("P%d ", points);
+								for (int i = 0; i < points; i++) 
+								{
+									int16_t sample = sineValues[int(toneIdx)];
+									tempBuffer[outPtr++] = sample;
+									toneIdx += play.tone.step;
+									if ((unsigned int)toneIdx >= countof(sineValues))
+										toneIdx -= countof(sineValues);
+								}
 
-		for (int i=0; i<points; i++) 
-		{
-			int16_t sample = sineValues[int(toneIdx)];
-			tempBuffer[i] = sample;
-			toneIdx += play.tone.step;
-			if ((unsigned int)toneIdx >= countof(sineValues))
-				toneIdx -= countof(sineValues);
-		}
-		mix(AudioTransferBuffer + bufferOffset, tempBuffer, points);
+								if (remainingDuration > outDuration) 
+								{
+									play.tone.playedLen += outDuration;
+									break;
+								}
+								else 
+								{
+									if (play.tone.repeats)
+									{
+										outDuration -= duration;
+										play.tone.playing = false;
+										play.tone.playedLen = 0;
+									}
+									else
+									{
+										play.type = PlayListRecord::EPlayType::None;
+										break;
+									}
+								}
+							}
+						}
+						else // pausing
+						{
+							int remainingDuration = play.tone.pause - play.tone.playedLen;
+							if (remainingDuration > 0) 
+							{
+								sounds++;
+								int points;
 
-		if (remainingDuration > bufferDuration) 
-		{
-			play.tone.playedLen += bufferDuration;
-		}
-		else 
-		{
-			play.type = PlayListRecord::EPlayType::None;
-		}
-	}
+								if(remainingDuration > outDuration) 
+								{
+									duration = outDuration;
+									points = bufferLen;
+								}
+								else 
+								{
+									duration = remainingDuration;
+									points = (duration * bufferLen) / outDuration;
+								}
 
-//	remainingDuration = fragment.tone.pause - state.pause;
-//	if (remainingDuration > 0) 
-//	{
-//		result = AUDIO_BUFFER_SIZE;
-//		state.pause += min<unsigned int>(AUDIO_BUFFER_DURATION-duration, fragment.tone.pause);
-//		if (fragment.tone.pause > state.pause)
-//		return result;
-//	}
-//
-//  clear();
-//  return result;
-}
+								for (int i = 0; i < points; i++) 
+									tempBuffer[outPtr++] = 0;
+
+								if (remainingDuration > outDuration) 
+								{
+									play.tone.playedLen += outDuration;
+									break;
+								}
+								else 
+								{
+									outDuration -= duration;
+									play.tone.repeats--;
+									play.tone.playing = true;
+									play.tone.playedLen = 0;
+								}
+							}
+						}
+					}
+					mix(AudioTransferBuffer + bufferOffset, tempBuffer, min(outPtr,bufferLen));
+				}
 					
 					break;
 				case PlayListRecord::EPlayType::None:
@@ -538,15 +552,11 @@ void AudioTask::ProcessBufferFill(EAudioSounds event)
 		}
 		if (sounds > 0 && !playing)
 		{
-			printf("P");
-
-			
+			//printf("%d Play\n", 1000*xTaskGetTickCount()/configTICK_RATE_HZ);
 			uint8_t uwVolume = 80;
 			BSP_AUDIO_OUT_Init(OUTPUT_DEVICE_SPEAKER, uwVolume, AUDIO_FREQ);
 			BSP_AUDIO_OUT_SetAudioFrameSlot(SAI_SLOTACTIVE_0);	
 			BSP_AUDIO_OUT_ChangeAudioConfig(BSP_AUDIO_OUT_MONOMODE | BSP_AUDIO_OUT_CIRCULARMODE);
-
-			
 			
 			BSP_AUDIO_OUT_Play((uint16_t*)AudioTransferBuffer, bufferLen*AUDIO_BYTES);	// len in bytes 
 			playing = true;
@@ -554,15 +564,16 @@ void AudioTask::ProcessBufferFill(EAudioSounds event)
 	}
 	if ( sounds == 0 )
 	{
-		printf("S");
+		//printf("%d Stop\n", 1000*xTaskGetTickCount()/configTICK_RATE_HZ);
         BSP_AUDIO_OUT_Stop(CODEC_PDWN_SW); 
 		playing = false;
 	}
-	printf(" %dms\n",xTaskGetTickCount()*1000/configTICK_RATE_HZ);
 }
 
 void AudioTask::ProcessEvent(EAudioSounds event)
 {
+	if (mute)
+		return;
 	switch (event)
 	{
 		case EAudioSounds::BUFFER_HALF_EMPTY:
@@ -582,6 +593,14 @@ void AudioTask::ProcessEvent(EAudioSounds event)
 	}
 }
 
+void AudioTask::Mute(bool mute)
+{
+	mute = true;
+	if (playing)
+	{
+        BSP_AUDIO_OUT_Stop(CODEC_PDWN_SW); 
+	}
+}
 
 /*****************************************************************/
 /*****************************************************************/
