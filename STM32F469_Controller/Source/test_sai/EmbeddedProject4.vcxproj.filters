@@ -537,10 +537,18 @@
     <ClCompile Include="Src\waverecorder.c">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="Support\F4\Drivers\BSP\STM32469I-Discovery\stm32469i_discovery_sd.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <LinkerScript Include="STM32F469NIHx_FLASH.ld">
       <Filter>Source files</Filter>
     </LinkerScript>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Support\F4\Drivers\BSP\STM32469I-Discovery\stm32469i_discovery_sd.h">
+      <Filter>Source files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

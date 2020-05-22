@@ -74,6 +74,7 @@
     <ClCompile Include="Src\usbh_diskio_dma.c" />
     <ClCompile Include="Src\waveplayer.c" />
     <ClCompile Include="Src\waverecorder.c" />
+    <ClCompile Include="Support\F4\Drivers\BSP\STM32469I-Discovery\stm32469i_discovery_sd.c" />
     <ClCompile Include="Support\F4\Utilities\Log\lcd_log.c" />
     <ClCompile Include="Support\F4\Middlewares\Third_Party\FatFs\src\diskio.c" />
     <ClCompile Include="Support\F4\Middlewares\Third_Party\FatFs\src\ff.c" />
@@ -86,6 +87,7 @@
     <ClCompile Include="Support\F4\Drivers\BSP\STM32469I-Discovery\stm32469i_discovery_lcd.c" />
     <ClCompile Include="Support\F4\Drivers\BSP\STM32469I-Discovery\stm32469i_discovery_sdram.c" />
     <ClCompile Include="Support\F4\Drivers\BSP\STM32469I-Discovery\stm32469i_discovery_ts.c" />
+    <ClInclude Include="Support\F4\Drivers\BSP\STM32469I-Discovery\stm32469i_discovery_sd.h" />
     <Library Include="Support\F4\Middlewares\ST\STM32_Audio\Addons\PDM\Lib\libPDMFilter_CM4_GCC_wc32.a" />
     <ClCompile Include="$(BSP_ROOT)\STM32F4xxxx\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c" />
     <ClCompile Include="$(BSP_ROOT)\STM32F4xxxx\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_cortex.c" />
