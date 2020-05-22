@@ -1,9 +1,10 @@
 #include "AppMain.h"
 #include "main.h"
 #include "DRV8873S.h"
+#include "AudioTask.h"
 
 
-extern "C" void AppMain_Task(void *argument)
+extern "C" void AppMainTask_Entry(void *argument)
 {
 	AppMain app;
 	app.Run();
@@ -12,6 +13,12 @@ extern "C" void AppMain_Task(void *argument)
 
 void AppMain::Run()
 {
+	for(;;) vTaskDelay(pdMS_TO_TICKS(1000));
+	vTaskDelay(pdMS_TO_TICKS(500));
+	audioTask.PlaySound(EAudioSounds::Tone);
+
+	
+	
 	HAL_GPIO_WritePin(Boost_Enable_GPIO_Port, Boost_Enable_Pin, GPIO_PIN_SET);
 	HAL_GPIO_WritePin(PrgTrk_Enable_GPIO_Port, PrgTrk_Enable_Pin, GPIO_PIN_SET); 
 

@@ -306,6 +306,7 @@ void userConfigWritten(unsigned int address, unsigned int length, unsigned int f
 
 extern "C" void LCCTask_Entry(void *argument)
 {
+	for(;;) vTaskDelay(pdMS_TO_TICKS(1000));
 #ifdef NEW_NODEID
   NodeID newNodeID(NEW_NODEID);
   nm.changeNodeID(&newNodeID);

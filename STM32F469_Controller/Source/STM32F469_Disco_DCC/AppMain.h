@@ -16,4 +16,4 @@ public:
 };
 
 
-extern "C" void AppMain_Task(void *argument);
+extern "C" void AppMainTask_Entry(void *argument);

@@ -64,7 +64,7 @@
   */
 
 /* Codec audio Standards */
-#define CODEC_STANDARD                0x04
+#define CODEC_STANDARD                (0x04 | 3)    // 16bit
 #define I2S_STANDARD                  I2S_STANDARD_PHILIPS
 
 /**

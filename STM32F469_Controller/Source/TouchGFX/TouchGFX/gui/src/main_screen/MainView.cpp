@@ -1,5 +1,6 @@
 #include <gui/main_screen/MainView.hpp>
 #include "BitmapDatabase.hpp"
+#include "AudioTask.h"
 
 MainView::MainView()
 {
@@ -25,6 +26,7 @@ void MainView::tearDownScreen()
 
 void MainView::increaseValue()
 {
+	audioTask.PlaySound(KeyPressTone);
     if (count < 42)
     {
         count++;
@@ -43,6 +45,7 @@ void MainView::increaseValue()
 
 void MainView::decreaseValue()
 {
+	audioTask.PlaySound(KeyPressTone);
     if (count > 0)
     {
         count--;

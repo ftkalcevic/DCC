@@ -41,8 +41,8 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\Projects\DCC\STM32F469_Controller\Source\OpenLCB\src;..\TouchGFX\Core\Inc;..\TouchGFX\Drivers\CMSIS\Include;..\TouchGFX\TouchGFX\generated\gui_generated\include;..\TouchGFX\TouchGFX\target;..\TouchGFX\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\TouchGFX\FATFS\App;..\TouchGFX\TouchGFX\App;..\TouchGFX\Middlewares\ST\touchgfx\framework\include;..\TouchGFX\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS_V2;..\TouchGFX\TouchGFX\target\generated;..\TouchGFX\Drivers\BSP\Components\Common;..\TouchGFX\TouchGFX\gui\include;..\TouchGFX\FATFS\Target;..\TouchGFX\TouchGFX\generated\texts\include;..\TouchGFX\TouchGFX\generated\images\include;..\TouchGFX\Middlewares\Third_Party\FreeRTOS\Source\include;..\TouchGFX\Middlewares\Third_Party\FatFs\src;..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy;..\TouchGFX\Middlewares\Third_Party\FreeRTOS\Source\portable\GCC\ARM_CM4F;..\TouchGFX\Drivers\BSP\STM32469I-Discovery;..\TouchGFX\TouchGFX\generated\fonts\include;..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>DEBUG=1;USE_FREERTOS;USE_HAL_DRIVER;STM32F469xx;%(ClCompile.PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Projects\DCC\STM32F469_Controller\Source\OpenLCB\src;..\TouchGFX\Core\Inc;..\TouchGFX\TouchGFX\generated\gui_generated\include;..\TouchGFX\TouchGFX\target;..\TouchGFX\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\TouchGFX\FATFS\App;..\TouchGFX\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS_V2;..\TouchGFX\Drivers\BSP\Components\Common;..\TouchGFX\FATFS\Target;..\TouchGFX\Middlewares\ST\STM32_USB_Device_Library\Class\MSC\Inc;..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy;..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc;..\TouchGFX\Drivers\CMSIS\Include;..\TouchGFX\TouchGFX\App;..\TouchGFX\Middlewares\ST\touchgfx\framework\include;..\TouchGFX\TouchGFX\target\generated;..\TouchGFX\TouchGFX\gui\include;..\TouchGFX\TouchGFX\generated\texts\include;..\TouchGFX\Middlewares\ST\STM32_USB_Device_Library\Core\Inc;..\TouchGFX\TouchGFX\generated\images\include;..\TouchGFX\Middlewares\Third_Party\FreeRTOS\Source\include;..\TouchGFX\Middlewares\Third_Party\FatFs\src;..\TouchGFX\Middlewares\Third_Party\FreeRTOS\Source\portable\GCC\ARM_CM4F;..\TouchGFX\Drivers\BSP\STM32469I-Discovery;..\TouchGFX\TouchGFX\generated\fonts\include;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>DEBUG=1;USE_FREERTOS;USE_USB_FS;USE_HAL_DRIVER;STM32F469xx;%(ClCompile.PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions />
       <CLanguageStandard />
       <CPPLanguageStandard />
@@ -57,7 +57,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\TouchGFX\Core\Inc;..\TouchGFX\Drivers\CMSIS\Include;..\TouchGFX\TouchGFX\generated\gui_generated\include;..\TouchGFX\TouchGFX\target;..\TouchGFX\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\TouchGFX\FATFS\App;..\TouchGFX\TouchGFX\App;..\TouchGFX\Middlewares\ST\touchgfx\framework\include;..\TouchGFX\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS_V2;..\TouchGFX\TouchGFX\target\generated;..\TouchGFX\Drivers\BSP\Components\Common;..\TouchGFX\TouchGFX\gui\include;..\TouchGFX\FATFS\Target;..\TouchGFX\TouchGFX\generated\texts\include;..\TouchGFX\TouchGFX\generated\images\include;..\TouchGFX\Middlewares\Third_Party\FreeRTOS\Source\include;..\TouchGFX\Middlewares\Third_Party\FatFs\src;..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy;..\TouchGFX\Middlewares\Third_Party\FreeRTOS\Source\portable\GCC\ARM_CM4F;..\TouchGFX\Drivers\BSP\STM32469I-Discovery;..\TouchGFX\TouchGFX\generated\fonts\include;..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Projects\DCC\STM32F469_Controller\Source\OpenLCB\src;..\TouchGFX\Core\Inc;..\TouchGFX\TouchGFX\generated\gui_generated\include;..\TouchGFX\TouchGFX\target;..\TouchGFX\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\TouchGFX\FATFS\App;..\TouchGFX\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS_V2;..\TouchGFX\Drivers\BSP\Components\Common;..\TouchGFX\FATFS\Target;..\TouchGFX\Middlewares\ST\STM32_USB_Device_Library\Class\MSC\Inc;..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy;..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc;..\TouchGFX\Drivers\CMSIS\Include;..\TouchGFX\TouchGFX\App;..\TouchGFX\Middlewares\ST\touchgfx\framework\include;..\TouchGFX\TouchGFX\target\generated;..\TouchGFX\TouchGFX\gui\include;..\TouchGFX\TouchGFX\generated\texts\include;..\TouchGFX\Middlewares\ST\STM32_USB_Device_Library\Core\Inc;..\TouchGFX\TouchGFX\generated\images\include;..\TouchGFX\Middlewares\Third_Party\FreeRTOS\Source\include;..\TouchGFX\Middlewares\Third_Party\FatFs\src;..\TouchGFX\Middlewares\Third_Party\FreeRTOS\Source\portable\GCC\ARM_CM4F;..\TouchGFX\Drivers\BSP\STM32469I-Discovery;..\TouchGFX\TouchGFX\generated\fonts\include;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG=1;RELEASE=1;USE_FREERTOS;USE_HAL_DRIVER;STM32F469xx;%(ClCompile.PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions />
       <CLanguageStandard />
@@ -69,6 +69,8 @@
       <AdditionalLinkerInputs>%(Link.AdditionalLinkerInputs)</AdditionalLinkerInputs>
       <AdditionalOptions />
       <LinkerScript />
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(TargetPath).map</MapFileName>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -94,6 +96,8 @@
     <ClCompile Include="..\TouchGFX\Core\Src\stm32f4xx_hal_msp.c" />
     <ClCompile Include="..\TouchGFX\Core\Src\stm32f4xx_hal_timebase_tim.c" />
     <ClCompile Include="..\TouchGFX\Core\Src\stm32f4xx_it.c" />
+    <ClCompile Include="..\TouchGFX\Drivers\BSP\Components\cs43l22\cs43l22.c" />
+    <ClCompile Include="..\TouchGFX\Drivers\BSP\STM32469I-Discovery\stm32469i_discovery_audio.c" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\fonts\src\ApplicationFontProvider.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\BitmapDatabase.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\fonts\src\CachedFont.cpp" />
@@ -179,6 +183,7 @@
     <ClCompile Include="..\TouchGFX\Middlewares\Third_Party\FreeRTOS\Source\timers.c" />
     <ClCompile Include="AppMain.cpp" />
     <ClCompile Include="Arduino.cpp" />
+    <ClCompile Include="AudioTask.cpp" />
     <ClCompile Include="DCC.cpp" />
     <ClCompile Include="DRV8873S.cpp" />
     <ClCompile Include="LCCTask.cpp" />
@@ -203,8 +208,11 @@
     <ClInclude Include="..\OpenLCB\src\processor.h" />
     <ClInclude Include="..\OpenLCB\src\SNII.h" />
     <ClInclude Include="..\OpenLCB\src\STM32F469xx\can.h" />
+    <ClInclude Include="..\TouchGFX\Drivers\BSP\Components\cs43l22\cs43l22.h" />
+    <ClInclude Include="..\TouchGFX\Drivers\BSP\STM32469I-Discovery\stm32469i_discovery_audio.h" />
     <ClInclude Include="AppMain.h" />
     <ClInclude Include="Arduino.h" />
+    <ClInclude Include="AudioTask.h" />
     <ClInclude Include="dcc.h" />
     <ClInclude Include="DRV8873S.h" />
     <ClInclude Include="LCCTask.h" />
@@ -268,6 +276,10 @@
     <ClCompile Include="..\TouchGFX\Middlewares\Third_Party\FatFs\src\ff_gen_drv.c" />
     <ClCompile Include="..\TouchGFX\Middlewares\Third_Party\FatFs\src\option\syscall.c" />
     <ClCompile Include="..\TouchGFX\Middlewares\Third_Party\FatFs\src\option\ccsbcs.c" />
+    <ClCompile Include="..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rtc.c" />
+    <ClCompile Include="..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rtc_ex.c" />
+    <ClInclude Include="..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rtc.h" />
+    <ClInclude Include="..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rtc_ex.h" />
     <ClCompile Include="$(EFP_BASE)\Profiler\FastSemihosting.cpp" />
     <ClCompile Include="$(EFP_BASE)\Profiler\SamplingProfiler.cpp" />
     <ClCompile Include="$(EFP_BASE)\Profiler\InstrumentingProfiler.cpp" />
@@ -279,9 +291,5 @@
     <ClInclude Include="$(EFP_BASE)\Profiler\ProfilerFreeRTOSHooks.h" />
     <ClInclude Include="$(EFP_BASE)\Profiler\CustomRealTimeWatches.h" />
     <ClInclude Include="$(EFP_BASE)\Profiler\DebuggerChecker.h" />
-    <ClCompile Include="..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rtc.c" />
-    <ClCompile Include="..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rtc_ex.c" />
-    <ClInclude Include="..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rtc.h" />
-    <ClInclude Include="..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rtc_ex.h" />
   </ItemGroup>
 </Project>

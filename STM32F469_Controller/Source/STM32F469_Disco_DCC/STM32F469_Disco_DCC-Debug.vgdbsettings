@@ -22,6 +22,7 @@
     <ProjectFile>STM32F469_Disco_DCC.vcxproj</ProjectFile>
     <RemoteBuildEnvironment>
       <Records />
+      <EnvironmentSetupFiles />
     </RemoteBuildEnvironment>
     <ParallelJobCount>1</ParallelJobCount>
     <SuppressDirectoryChangeMessages>true</SuppressDirectoryChangeMessages>
@@ -61,7 +62,11 @@
   <Configurations />
   <ProgramArgumentsSuggestions />
   <Debug xsi:type="com.visualgdb.debug.embedded">
-    <AdditionalStartupCommands />
+    <AdditionalStartupCommands>
+      <GDBPreStartupCommands />
+      <GDBStartupCommands />
+      <GDBFinalizationCommands />
+    </AdditionalStartupCommands>
     <AdditionalGDBSettings>
       <Features>
         <DisableAutoDetection>false</DisableAutoDetection>
@@ -78,16 +83,16 @@
       <FilterSpuriousStoppedNotifications>false</FilterSpuriousStoppedNotifications>
       <ForceSingleThreadedMode>false</ForceSingleThreadedMode>
       <UseAppleExtensions>false</UseAppleExtensions>
-      <CanAcceptCommandsWhileRunning>false</CanAcceptCommandsWhileRunning>
+      <CanAcceptCommandsWhileRunning>true</CanAcceptCommandsWhileRunning>
       <MakeLogFile>false</MakeLogFile>
       <IgnoreModuleEventsWhileStepping>true</IgnoreModuleEventsWhileStepping>
       <UseRelativePathsOnly>false</UseRelativePathsOnly>
-      <ExitAction>None</ExitAction>
+      <ExitAction>Disconnect</ExitAction>
       <DisableDisassembly>false</DisableDisassembly>
       <ExamineMemoryWithXCommand>false</ExamineMemoryWithXCommand>
       <StepIntoNewInstanceEntry>main</StepIntoNewInstanceEntry>
       <ExamineRegistersInRawFormat>true</ExamineRegistersInRawFormat>
-      <DisableSignals>false</DisableSignals>
+      <DisableSignals>true</DisableSignals>
       <EnableAsyncExecutionMode>false</EnableAsyncExecutionMode>
       <EnableNonStopMode>false</EnableNonStopMode>
       <MaxBreakpointLimit>0</MaxBreakpointLimit>
@@ -96,7 +101,7 @@
     <DebugMethod>
       <ID>com.sysprogs.arm.openocd</ID>
       <Configuration xsi:type="com.visualgdb.edp.openocd.settings">
-        <CommandLine>-f interface/stlink-v2-1.cfg -c "transport select hla_swd" -f target/stm32f4x.cfg -c "flash bank qspi plugin 0x90000000 0 0 0 0 D:/Projects/DCC/STM32F469_Controller/Source/QSPIDriver/VisualGDB/Release/QSPIDriver.elf" -c init -c "reset init"</CommandLine>
+        <CommandLine>-f interface/stlink-v2-1.cfg -c "transport select hla_swd" -f target/stm32f4x.cfg -c "flash bank qspi plugin 0x90000000 0 0 0 0 D:/Projects/DCC/STM32F469_Controller/Source/QSPIDriver/VisualGDB/Release/QSPIDriver.elf" -c init -c "reset halt"</CommandLine>
         <ExtraParameters>
           <Frequency xsi:nil="true" />
           <BoostedFrequency xsi:nil="true" />
@@ -117,7 +122,7 @@
         <SelectedCoreIndex xsi:nil="true" />
       </Configuration>
     </DebugMethod>
-    <AutoDetectRTOS>false</AutoDetectRTOS>
+    <AutoDetectRTOS>true</AutoDetectRTOS>
     <SemihostingSupport>Enabled</SemihostingSupport>
     <SemihostingPollingDelay>0</SemihostingPollingDelay>
     <StepIntoEntryPoint>false</StepIntoEntryPoint>

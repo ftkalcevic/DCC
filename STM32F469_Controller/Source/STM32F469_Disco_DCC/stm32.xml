@@ -78,7 +78,7 @@
       </KeyValue>
       <KeyValue>
         <Key>com.sysprogs.efp.profiling.hold_interrupts</Key>
-        <Value />
+        <Value>FAST_SEMIHOSTING_HOLD_INTERRUPTS=1</Value>
       </KeyValue>
     </Entries>
   </FrameworkProperties>
@@ -91,7 +91,7 @@
     <AllDependencies>
       <ProjectDependency>
         <RelativePath>..\TouchGFX\STM32CubeIDE\.cproject</RelativePath>
-        <Timestamp>132341793762974471</Timestamp>
+        <Timestamp>132346210917653437</Timestamp>
       </ProjectDependency>
     </AllDependencies>
     <RootDirectory>
@@ -654,27 +654,29 @@
         <Settings>
           <IncludeDirectories>
             <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\Core\Inc</string>
-            <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\Drivers\CMSIS\Include</string>
             <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\TouchGFX\generated\gui_generated\include</string>
             <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\TouchGFX\target</string>
             <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\Drivers\CMSIS\Device\ST\STM32F4xx\Include</string>
             <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\FATFS\App</string>
+            <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS_V2</string>
+            <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\Drivers\BSP\Components\Common</string>
+            <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\FATFS\Target</string>
+            <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\Middlewares\ST\STM32_USB_Device_Library\Class\MSC\Inc</string>
+            <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy</string>
+            <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc</string>
+            <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\Drivers\CMSIS\Include</string>
             <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\TouchGFX\App</string>
             <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\Middlewares\ST\touchgfx\framework\include</string>
-            <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS_V2</string>
             <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\TouchGFX\target\generated</string>
-            <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\Drivers\BSP\Components\Common</string>
             <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\TouchGFX\gui\include</string>
-            <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\FATFS\Target</string>
             <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\TouchGFX\generated\texts\include</string>
+            <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\Middlewares\ST\STM32_USB_Device_Library\Core\Inc</string>
             <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\TouchGFX\generated\images\include</string>
             <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\Middlewares\Third_Party\FreeRTOS\Source\include</string>
             <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\Middlewares\Third_Party\FatFs\src</string>
-            <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy</string>
             <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\Middlewares\Third_Party\FreeRTOS\Source\portable\GCC\ARM_CM4F</string>
             <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\Drivers\BSP\STM32469I-Discovery</string>
             <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\TouchGFX\generated\fonts\include</string>
-            <string>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc</string>
           </IncludeDirectories>
           <PreprocessorMacros>
             <string>USE_HAL_DRIVER</string>

@@ -46,7 +46,7 @@ extern "C" uint32_t         BSP_PB_GetState(Button_TypeDef Button);
 
 void Buttons::init()
 {
-    BSP_PB_Init(BUTTON_WAKEUP, BUTTON_MODE_GPIO);
+    //BSP_PB_Init(BUTTON_WAKEUP, BUTTON_MODE_GPIO);
 }
 
 unsigned int Buttons::sample()

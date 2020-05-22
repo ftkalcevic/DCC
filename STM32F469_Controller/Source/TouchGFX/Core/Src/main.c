@@ -71,10 +71,10 @@ QSPI_HandleTypeDef hqspi;
 RTC_HandleTypeDef hrtc;
 
 SAI_HandleTypeDef hsai_BlockA1;
+DMA_HandleTypeDef hdma_sai1_a;
 
 SD_HandleTypeDef hsd;
 DMA_HandleTypeDef hdma_sdio_rx;
-DMA_HandleTypeDef hdma_sdio_tx;
 
 SPI_HandleTypeDef hspi1;
 SPI_HandleTypeDef hspi2;
@@ -101,17 +101,17 @@ const osThreadAttr_t TouchGFXTask_attributes = {
   .cb_size = sizeof(TouchGFXTaskControlBlock),
   .priority = (osPriority_t) osPriorityNormal,
 };
-/* Definitions for SelfTestTask */
-osThreadId_t SelfTestTaskHandle;
-uint32_t SelfTestTaskBuffer[ 2048 ];
-osStaticThreadDef_t SelfTestTaskControlBlock;
-const osThreadAttr_t SelfTestTask_attributes = {
-  .name = "SelfTestTask",
-  .stack_mem = &SelfTestTaskBuffer[0],
-  .stack_size = sizeof(SelfTestTaskBuffer),
-  .cb_mem = &SelfTestTaskControlBlock,
-  .cb_size = sizeof(SelfTestTaskControlBlock),
-  .priority = (osPriority_t) osPriorityAboveNormal,
+/* Definitions for InitialiseTask */
+osThreadId_t InitialiseTaskHandle;
+uint32_t InitialiseTaskBuffer[ 2048 ];
+osStaticThreadDef_t InitialiseTaskControlBlock;
+const osThreadAttr_t InitialiseTask_attributes = {
+  .name = "InitialiseTask",
+  .stack_mem = &InitialiseTaskBuffer[0],
+  .stack_size = sizeof(InitialiseTaskBuffer),
+  .cb_mem = &InitialiseTaskControlBlock,
+  .cb_size = sizeof(InitialiseTaskControlBlock),
+  .priority = (osPriority_t) osPriorityHigh,
 };
 /* Definitions for DCCTask */
 osThreadId_t DCCTaskHandle;
@@ -161,7 +161,20 @@ const osThreadAttr_t LCCTask_attributes = {
   .cb_size = sizeof(LCCTaskControlBlock),
   .priority = (osPriority_t) osPriorityNormal,
 };
+/* Definitions for AudioTask */
+osThreadId_t AudioTaskHandle;
+uint32_t AudioTaskBuffer[ 1024 ];
+osStaticThreadDef_t AudioTaskControlBlock;
+const osThreadAttr_t AudioTask_attributes = {
+  .name = "AudioTask",
+  .stack_mem = &AudioTaskBuffer[0],
+  .stack_size = sizeof(AudioTaskBuffer),
+  .cb_mem = &AudioTaskControlBlock,
+  .cb_size = sizeof(AudioTaskControlBlock),
+  .priority = (osPriority_t) osPriorityHigh,
+};
 /* USER CODE BEGIN PV */
+FATFS FatFs;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -187,11 +200,13 @@ static void MX_USART3_UART_Init(void);
 static void MX_TIM3_Init(void);
 static void MX_TIM8_Init(void);
 static void MX_RTC_Init(void);
+static void MX_USB_OTG_FS_USB_Init(void);
 void TouchGFX_Task(void *argument);
-void SelfTest_Task(void *argument);
+void InitialiseTask_Entry(void *argument);
 extern void DCCTask_Entry(void *argument);
-extern void AppMain_Task(void *argument);
+extern void AppMainTask_Entry(void *argument);
 extern void LCCTask_Entry(void *argument);
+extern void AudioTask_Entry(void *argument);
 
 /* USER CODE BEGIN PFP */
 /* USER CODE END PFP */
@@ -273,6 +288,7 @@ int main(void)
   MX_TIM3_Init();
   MX_TIM8_Init();
   MX_RTC_Init();
+  MX_USB_OTG_FS_USB_Init();
   MX_TouchGFX_Init();
   /* USER CODE BEGIN 2 */
   /* USER CODE END 2 */
@@ -300,8 +316,8 @@ int main(void)
   /* creation of TouchGFXTask */
   TouchGFXTaskHandle = osThreadNew(TouchGFX_Task, NULL, &TouchGFXTask_attributes);
 
-  /* creation of SelfTestTask */
-  SelfTestTaskHandle = osThreadNew(SelfTest_Task, NULL, &SelfTestTask_attributes);
+  /* creation of InitialiseTask */
+  InitialiseTaskHandle = osThreadNew(InitialiseTask_Entry, NULL, &InitialiseTask_attributes);
 
   /* creation of DCCTask */
   DCCTaskHandle = osThreadNew(DCCTask_Entry, (void*) 0, &DCCTask_attributes);
@@ -310,10 +326,13 @@ int main(void)
   DCCTask_PrgTrkHandle = osThreadNew(DCCTask_Entry, (void*) 1, &DCCTask_PrgTrk_attributes);
 
   /* creation of AppMainTask */
-  AppMainTaskHandle = osThreadNew(AppMain_Task, NULL, &AppMainTask_attributes);
+  AppMainTaskHandle = osThreadNew(AppMainTask_Entry, NULL, &AppMainTask_attributes);
 
   /* creation of LCCTask */
   LCCTaskHandle = osThreadNew(LCCTask_Entry, NULL, &LCCTask_attributes);
+
+  /* creation of AudioTask */
+  AudioTaskHandle = osThreadNew(AudioTask_Entry, NULL, &AudioTask_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
 	
@@ -357,8 +376,8 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.LSEState = RCC_LSE_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
-  RCC_OscInitStruct.PLL.PLLM = 4;
-  RCC_OscInitStruct.PLL.PLLN = 180;
+  RCC_OscInitStruct.PLL.PLLM = 8;
+  RCC_OscInitStruct.PLL.PLLN = 360;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 6;
   RCC_OscInitStruct.PLL.PLLR = 6;
@@ -385,14 +404,15 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_SAI_PLLSAI|RCC_PERIPHCLK_RTC
+  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_SAI_PLLI2S|RCC_PERIPHCLK_RTC
                               |RCC_PERIPHCLK_SDIO|RCC_PERIPHCLK_CLK48
                               |RCC_PERIPHCLK_LTDC;
-  PeriphClkInitStruct.PLLSAI.PLLSAIN = 144;
+  PeriphClkInitStruct.PLLI2S.PLLI2SN = 429;
+  PeriphClkInitStruct.PLLI2S.PLLI2SQ = 2;
+  PeriphClkInitStruct.PLLSAI.PLLSAIN = 288;
   PeriphClkInitStruct.PLLSAI.PLLSAIR = 2;
-  PeriphClkInitStruct.PLLSAI.PLLSAIQ = 2;
   PeriphClkInitStruct.PLLSAI.PLLSAIP = RCC_PLLSAIP_DIV6;
-  PeriphClkInitStruct.PLLSAIDivQ = 1;
+  PeriphClkInitStruct.PLLI2SDivQ = 19;
   PeriphClkInitStruct.PLLSAIDivR = RCC_PLLSAIDIVR_4;
   PeriphClkInitStruct.RTCClockSelection = RCC_RTCCLKSOURCE_LSE;
   PeriphClkInitStruct.Clk48ClockSelection = RCC_CLK48CLKSOURCE_PLLSAIP;
@@ -936,7 +956,7 @@ static void MX_SAI1_Init(void)
 {
 
   /* USER CODE BEGIN SAI1_Init 0 */
-
+	return; // let BSP_AUDIO_OUT_MspInit initialise SAI
   /* USER CODE END SAI1_Init 0 */
 
   /* USER CODE BEGIN SAI1_Init 1 */
@@ -949,24 +969,24 @@ static void MX_SAI1_Init(void)
   hsai_BlockA1.Init.FirstBit = SAI_FIRSTBIT_MSB;
   hsai_BlockA1.Init.ClockStrobing = SAI_CLOCKSTROBING_FALLINGEDGE;
   hsai_BlockA1.Init.Synchro = SAI_ASYNCHRONOUS;
-  hsai_BlockA1.Init.OutputDrive = SAI_OUTPUTDRIVE_DISABLE;
+  hsai_BlockA1.Init.OutputDrive = SAI_OUTPUTDRIVE_ENABLE;
   hsai_BlockA1.Init.NoDivider = SAI_MASTERDIVIDER_ENABLE;
-  hsai_BlockA1.Init.FIFOThreshold = SAI_FIFOTHRESHOLD_EMPTY;
+  hsai_BlockA1.Init.FIFOThreshold = SAI_FIFOTHRESHOLD_1QF;
   hsai_BlockA1.Init.ClockSource = SAI_CLKSOURCE_PLLSAI;
-  hsai_BlockA1.Init.AudioFrequency = SAI_AUDIO_FREQUENCY_192K;
+  hsai_BlockA1.Init.AudioFrequency = SAI_AUDIO_FREQUENCY_11K;
   hsai_BlockA1.Init.SynchroExt = SAI_SYNCEXT_DISABLE;
   hsai_BlockA1.Init.MonoStereoMode = SAI_STEREOMODE;
   hsai_BlockA1.Init.CompandingMode = SAI_NOCOMPANDING;
   hsai_BlockA1.Init.TriState = SAI_OUTPUT_NOTRELEASED;
-  hsai_BlockA1.FrameInit.FrameLength = 8;
+  hsai_BlockA1.FrameInit.FrameLength = 64;
   hsai_BlockA1.FrameInit.ActiveFrameLength = 1;
   hsai_BlockA1.FrameInit.FSDefinition = SAI_FS_STARTFRAME;
   hsai_BlockA1.FrameInit.FSPolarity = SAI_FS_ACTIVE_LOW;
   hsai_BlockA1.FrameInit.FSOffset = SAI_FS_FIRSTBIT;
   hsai_BlockA1.SlotInit.FirstBitOffset = 0;
   hsai_BlockA1.SlotInit.SlotSize = SAI_SLOTSIZE_DATASIZE;
-  hsai_BlockA1.SlotInit.SlotNumber = 1;
-  hsai_BlockA1.SlotInit.SlotActive = 0x00000000;
+  hsai_BlockA1.SlotInit.SlotNumber = 4;
+  hsai_BlockA1.SlotInit.SlotActive = 0x0000000F;
   if (HAL_SAI_Init(&hsai_BlockA1) != HAL_OK)
   {
     Error_Handler();
@@ -1301,6 +1321,27 @@ static void MX_USART3_UART_Init(void)
 
 }
 
+/**
+  * @brief USB_OTG_FS Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_USB_OTG_FS_USB_Init(void)
+{
+
+  /* USER CODE BEGIN USB_OTG_FS_Init 0 */
+
+  /* USER CODE END USB_OTG_FS_Init 0 */
+
+  /* USER CODE BEGIN USB_OTG_FS_Init 1 */
+
+  /* USER CODE END USB_OTG_FS_Init 1 */
+  /* USER CODE BEGIN USB_OTG_FS_Init 2 */
+
+  /* USER CODE END USB_OTG_FS_Init 2 */
+
+}
+
 /** 
   * Enable DMA controller clock
   */
@@ -1453,6 +1494,14 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
 
+  /*Configure GPIO pins : PA12 PA11 PA10 */
+  GPIO_InitStruct.Pin = GPIO_PIN_12|GPIO_PIN_11|GPIO_PIN_10;
+  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+  GPIO_InitStruct.Alternate = GPIO_AF10_OTG_FS;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
   /*Configure GPIO pins : PrgTrk_Fault_Pin Boost_Fault_Pin */
   GPIO_InitStruct.Pin = PrgTrk_Fault_Pin|Boost_Fault_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
@@ -1478,6 +1527,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(LED4_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PA9 */
+  GPIO_InitStruct.Pin = GPIO_PIN_9;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pins : SPI1_CE_Pin LCD_BL_CTRL_Pin PrgTrk_CS_Pin */
   GPIO_InitStruct.Pin = SPI1_CE_Pin|LCD_BL_CTRL_Pin|PrgTrk_CS_Pin;
@@ -1570,31 +1625,34 @@ __weak void TouchGFX_Task(void *argument)
   /* USER CODE END 5 */ 
 }
 
-/* USER CODE BEGIN Header_SelfTest_Task */
+/* USER CODE BEGIN Header_InitialiseTask_Entry */
 /**
-* @brief Function implementing the SelfTestTask thread.
+* @brief Function implementing the InitialiseTask thread.
 * @param argument: Not used
 * @retval None
 */
-/* USER CODE END Header_SelfTest_Task */
-void SelfTest_Task(void *argument)
+/* USER CODE END Header_InitialiseTask_Entry */
+void InitialiseTask_Entry(void *argument)
 {
-  /* USER CODE BEGIN SelfTest_Task */
-  vTaskDelete(NULL);
+  /* USER CODE BEGIN InitialiseTask_Entry */
+	FRESULT res;
+	res = f_mount(&FatFs, "/", 1);
+	if ( res != FR_OK )
+	{
+		printf("Failed to mount volume - %d\n", res);
+	}
+	
+	for (;;) osDelay(pdMS_TO_TICKS(1000));
+    //MX_USB_DEVICE_Init();
+
+    vTaskDelete(NULL);
 	if (HAL_GPIO_ReadPin(uSD_Detect_GPIO_Port, uSD_Detect_Pin) == GPIO_PIN_RESET) 
 	{
-		FRESULT res;
         printf("uSD card is present.  Root directory contents...\n");
 
-        FATFS FatFs;
-		res = f_mount(&FatFs, "0:/", 1);
-		if ( res != FR_OK )
-		{
-			printf("Failed to mount volume - %d\n", res);
-		}
 		
 		DIR d;
-		res = f_opendir(&d, "0:/");
+		res = f_opendir(&d, "/Audio");
 		if (res != FR_OK)
 		{
 			printf("Failed to open directory - %d\n", res);
@@ -1616,32 +1674,34 @@ void SelfTest_Task(void *argument)
 			    printf("%s\n", finfo.fname);
 			    strcpy(filename, finfo.fname);
 		    }
-			
-			FIL file;
-			res = f_open(&file, filename, FA_READ);
-			if (res != FR_OK)
-			{
-				printf("Error opening file '%s' %d\n", filename, res);
-			}
-			else
-			{
-				char buffer[256];
-				UINT bytesread;
-				while ((res = f_read(&file, buffer, sizeof(buffer) - 1, (UINT*)&bytesread)) == FR_OK)
-				{
-					if (bytesread == 0)
-						break;
-					buffer[bytesread] = 0;
-					printf(buffer);
-				}
-				if (res != FR_OK)
-				{
-					printf("Error reading file %d\n", res);
-					
-				}
 
-				f_close(&file);
-			}
+			#ifdef LIST_LAST_FILE
+			    FIL file;
+			    res = f_open(&file, filename, FA_READ);
+			    if (res != FR_OK)
+			    {
+				    printf("Error opening file '%s' %d\n", filename, res);
+			    }
+			    else
+			    {
+				    char buffer[256];
+				    UINT bytesread;
+				    while ((res = f_read(&file, buffer, sizeof(buffer) - 1, (UINT*)&bytesread)) == FR_OK)
+				    {
+					    if (bytesread == 0)
+						    break;
+					    buffer[bytesread] = 0;
+					    printf(buffer);
+				    }
+				    if (res != FR_OK)
+				    {
+					    printf("Error reading file %d\n", res);
+					
+				    }
+
+				    f_close(&file);
+			    }
+			#endif
 		}
 	}
 	
@@ -1659,7 +1719,8 @@ void SelfTest_Task(void *argument)
 	
   /* Infinite loop */
   vTaskDelete(NULL);
-  /* USER CODE END SelfTest_Task */
+
+  /* USER CODE END InitialiseTask_Entry */
 }
 
  /**

@@ -29,7 +29,7 @@ extern "C"
 	void DCCTask_Entry(void *argument)
 	{
 		DCCType type = static_cast<DCCType>(reinterpret_cast<int>(argument));
-		vTaskDelete(NULL);
+for(;;) vTaskDelay(pdMS_TO_TICKS(1000));
 		switch (type)
 		{
 			case DCCType::ProgrammingTrack:

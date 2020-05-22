@@ -142,17 +142,20 @@
     <Filter Include="Header files\Middlewares\FatFs">
       <UniqueIdentifier>{992d70c2-0808-4b61-b1ad-a9134a24b811}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source files\Device-specific files\Semihosting/Profiler">
-      <UniqueIdentifier>{5cd99eb8-32e0-4692-bdf6-6374cd807485}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header files\Device-specific files\Semihosting/Profiler">
-      <UniqueIdentifier>{1c915f03-0381-4943-a423-9deea2e0e520}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source files\OpenLCB">
+    <Filter Include="Source files\Middlewares\OpenLCB">
       <UniqueIdentifier>{0989b24e-8f1f-42b1-a64c-ebc2a71ccbe7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source files\OpenLCB\STM32F469xx">
+    <Filter Include="Source files\Middlewares\OpenLCB\STM32F469xx">
       <UniqueIdentifier>{19da1170-ba66-47ee-8caf-96f308ad03ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\Application\User\Audio">
+      <UniqueIdentifier>{37ad516c-809c-4cbf-9c0d-d11882f447dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\Device-specific files\Semihosting/Profiler">
+      <UniqueIdentifier>{b9c43995-17a6-414d-9c83-26fe50dac645}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\Device-specific files\Semihosting/Profiler">
+      <UniqueIdentifier>{e3201366-7403-4007-9432-f968e62acf23}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -603,6 +606,75 @@
     <ClCompile Include="stm32f4xx_hal_tim_plus.c">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rtc.c">
+      <Filter>Source files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rtc_ex.c">
+      <Filter>Source files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClCompile>
+    <ClInclude Include="..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rtc.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rtc_ex.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClCompile Include="DRV8873S.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="AppMain.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="LCCTask.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\OpenLCB\src\OlcbCommonCAN\Configuration.cpp">
+      <Filter>Source files\Middlewares\OpenLCB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\OpenLCB\src\OlcbCommonCAN\Datagram.cpp">
+      <Filter>Source files\Middlewares\OpenLCB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\OpenLCB\src\OlcbCommonCAN\Event.cpp">
+      <Filter>Source files\Middlewares\OpenLCB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\OpenLCB\src\OlcbCommonCAN\EventID.cpp">
+      <Filter>Source files\Middlewares\OpenLCB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\OpenLCB\src\OlcbCommonCAN\LinkControl.cpp">
+      <Filter>Source files\Middlewares\OpenLCB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\OpenLCB\src\OlcbCommonCAN\OlcbCanInterface.cpp">
+      <Filter>Source files\Middlewares\OpenLCB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\OpenLCB\src\OlcbCommonCAN\OlcbStream.cpp">
+      <Filter>Source files\Middlewares\OpenLCB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\OpenLCB\src\OlcbCommonCAN\OpenLcbCore.cpp">
+      <Filter>Source files\Middlewares\OpenLCB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\OpenLCB\src\OlcbCommonCAN\PIP.cpp">
+      <Filter>Source files\Middlewares\OpenLCB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\OpenLCB\src\OlcbCommonCAN\SNII.cpp">
+      <Filter>Source files\Middlewares\OpenLCB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\OpenLCB\src\OlcbCommonCAN\NodeMemory.cpp">
+      <Filter>Source files\Middlewares\OpenLCB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\OpenLCB\src\STM32F469xx\can.cpp">
+      <Filter>Source files\Middlewares\OpenLCB\STM32F469xx</Filter>
+    </ClCompile>
+    <ClCompile Include="Arduino.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\Drivers\BSP\Components\cs43l22\cs43l22.c">
+      <Filter>Source files\Drivers\BSP\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\Drivers\BSP\STM32469I-Discovery\stm32469i_discovery_audio.c">
+      <Filter>Source files\Drivers\BSP\STM32469I-Discovery</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioTask.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
     <ClCompile Include="$(EFP_BASE)\Profiler\FastSemihosting.cpp">
       <Filter>Source files\Device-specific files\Semihosting/Profiler</Filter>
     </ClCompile>
@@ -636,66 +708,6 @@
     <ClInclude Include="$(EFP_BASE)\Profiler\DebuggerChecker.h">
       <Filter>Header files\Device-specific files\Semihosting/Profiler</Filter>
     </ClInclude>
-    <ClCompile Include="..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rtc.c">
-      <Filter>Source files\Drivers\STM32F4xx_HAL_Driver</Filter>
-    </ClCompile>
-    <ClCompile Include="..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rtc_ex.c">
-      <Filter>Source files\Drivers\STM32F4xx_HAL_Driver</Filter>
-    </ClCompile>
-    <ClInclude Include="..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rtc.h">
-      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
-    </ClInclude>
-    <ClInclude Include="..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rtc_ex.h">
-      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
-    </ClInclude>
-    <ClCompile Include="DRV8873S.cpp">
-      <Filter>Source files</Filter>
-    </ClCompile>
-    <ClCompile Include="AppMain.cpp">
-      <Filter>Source files</Filter>
-    </ClCompile>
-    <ClCompile Include="LCCTask.cpp">
-      <Filter>Source files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\OpenLCB\src\OlcbCommonCAN\Configuration.cpp">
-      <Filter>Source files\OpenLCB</Filter>
-    </ClCompile>
-    <ClCompile Include="..\OpenLCB\src\OlcbCommonCAN\Datagram.cpp">
-      <Filter>Source files\OpenLCB</Filter>
-    </ClCompile>
-    <ClCompile Include="..\OpenLCB\src\OlcbCommonCAN\Event.cpp">
-      <Filter>Source files\OpenLCB</Filter>
-    </ClCompile>
-    <ClCompile Include="..\OpenLCB\src\OlcbCommonCAN\EventID.cpp">
-      <Filter>Source files\OpenLCB</Filter>
-    </ClCompile>
-    <ClCompile Include="..\OpenLCB\src\OlcbCommonCAN\LinkControl.cpp">
-      <Filter>Source files\OpenLCB</Filter>
-    </ClCompile>
-    <ClCompile Include="..\OpenLCB\src\OlcbCommonCAN\OlcbCanInterface.cpp">
-      <Filter>Source files\OpenLCB</Filter>
-    </ClCompile>
-    <ClCompile Include="..\OpenLCB\src\OlcbCommonCAN\OlcbStream.cpp">
-      <Filter>Source files\OpenLCB</Filter>
-    </ClCompile>
-    <ClCompile Include="..\OpenLCB\src\OlcbCommonCAN\OpenLcbCore.cpp">
-      <Filter>Source files\OpenLCB</Filter>
-    </ClCompile>
-    <ClCompile Include="..\OpenLCB\src\OlcbCommonCAN\PIP.cpp">
-      <Filter>Source files\OpenLCB</Filter>
-    </ClCompile>
-    <ClCompile Include="..\OpenLCB\src\OlcbCommonCAN\SNII.cpp">
-      <Filter>Source files\OpenLCB</Filter>
-    </ClCompile>
-    <ClCompile Include="..\OpenLCB\src\OlcbCommonCAN\NodeMemory.cpp">
-      <Filter>Source files\OpenLCB</Filter>
-    </ClCompile>
-    <ClCompile Include="..\OpenLCB\src\STM32F469xx\can.cpp">
-      <Filter>Source files\OpenLCB\STM32F469xx</Filter>
-    </ClCompile>
-    <ClCompile Include="Arduino.cpp">
-      <Filter>Source files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dcc.h">
@@ -714,67 +726,76 @@
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="..\OpenLCB\src\Configuration.h">
-      <Filter>Source files\OpenLCB</Filter>
+      <Filter>Source files\Middlewares\OpenLCB</Filter>
     </ClInclude>
     <ClInclude Include="..\OpenLCB\src\Datagram.h">
-      <Filter>Source files\OpenLCB</Filter>
+      <Filter>Source files\Middlewares\OpenLCB</Filter>
     </ClInclude>
     <ClInclude Include="..\OpenLCB\src\Event.h">
-      <Filter>Source files\OpenLCB</Filter>
+      <Filter>Source files\Middlewares\OpenLCB</Filter>
     </ClInclude>
     <ClInclude Include="..\OpenLCB\src\EventID.h">
-      <Filter>Source files\OpenLCB</Filter>
+      <Filter>Source files\Middlewares\OpenLCB</Filter>
     </ClInclude>
     <ClInclude Include="..\OpenLCB\src\LinkControl.h">
-      <Filter>Source files\OpenLCB</Filter>
+      <Filter>Source files\Middlewares\OpenLCB</Filter>
     </ClInclude>
     <ClInclude Include="..\OpenLCB\src\NodeID.h">
-      <Filter>Source files\OpenLCB</Filter>
+      <Filter>Source files\Middlewares\OpenLCB</Filter>
     </ClInclude>
     <ClInclude Include="..\OpenLCB\src\NodeMemory.h">
-      <Filter>Source files\OpenLCB</Filter>
+      <Filter>Source files\Middlewares\OpenLCB</Filter>
     </ClInclude>
     <ClInclude Include="..\OpenLCB\src\OlcbCan.h">
-      <Filter>Source files\OpenLCB</Filter>
+      <Filter>Source files\Middlewares\OpenLCB</Filter>
     </ClInclude>
     <ClInclude Include="..\OpenLCB\src\OlcbCanInterface.h">
-      <Filter>Source files\OpenLCB</Filter>
+      <Filter>Source files\Middlewares\OpenLCB</Filter>
     </ClInclude>
     <ClInclude Include="..\OpenLCB\src\OlcbInterface.h">
-      <Filter>Source files\OpenLCB</Filter>
+      <Filter>Source files\Middlewares\OpenLCB</Filter>
     </ClInclude>
     <ClInclude Include="..\OpenLCB\src\OlcbNet.h">
-      <Filter>Source files\OpenLCB</Filter>
+      <Filter>Source files\Middlewares\OpenLCB</Filter>
     </ClInclude>
     <ClInclude Include="..\OpenLCB\src\OpenLcbCan.h">
-      <Filter>Source files\OpenLCB</Filter>
+      <Filter>Source files\Middlewares\OpenLCB</Filter>
     </ClInclude>
     <ClInclude Include="..\OpenLCB\src\OpenLcbCanBuffer.h">
-      <Filter>Source files\OpenLCB</Filter>
+      <Filter>Source files\Middlewares\OpenLCB</Filter>
     </ClInclude>
     <ClInclude Include="..\OpenLCB\src\OpenLcbCore.h">
-      <Filter>Source files\OpenLCB</Filter>
+      <Filter>Source files\Middlewares\OpenLCB</Filter>
     </ClInclude>
     <ClInclude Include="..\OpenLCB\src\OpenLCBHeader.h">
-      <Filter>Source files\OpenLCB</Filter>
+      <Filter>Source files\Middlewares\OpenLCB</Filter>
     </ClInclude>
     <ClInclude Include="..\OpenLCB\src\OpenLCBMid.h">
-      <Filter>Source files\OpenLCB</Filter>
+      <Filter>Source files\Middlewares\OpenLCB</Filter>
     </ClInclude>
     <ClInclude Include="..\OpenLCB\src\PIP.h">
-      <Filter>Source files\OpenLCB</Filter>
+      <Filter>Source files\Middlewares\OpenLCB</Filter>
     </ClInclude>
     <ClInclude Include="..\OpenLCB\src\processor.h">
-      <Filter>Source files\OpenLCB</Filter>
+      <Filter>Source files\Middlewares\OpenLCB</Filter>
     </ClInclude>
     <ClInclude Include="..\OpenLCB\src\SNII.h">
-      <Filter>Source files\OpenLCB</Filter>
+      <Filter>Source files\Middlewares\OpenLCB</Filter>
     </ClInclude>
     <ClInclude Include="Arduino.h">
       <Filter>Source files</Filter>
     </ClInclude>
     <ClInclude Include="..\OpenLCB\src\STM32F469xx\can.h">
-      <Filter>Source files\OpenLCB\STM32F469xx</Filter>
+      <Filter>Source files\Middlewares\OpenLCB\STM32F469xx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TouchGFX\Drivers\BSP\Components\cs43l22\cs43l22.h">
+      <Filter>Source files\Drivers\BSP\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TouchGFX\Drivers\BSP\STM32469I-Discovery\stm32469i_discovery_audio.h">
+      <Filter>Source files\Drivers\BSP\STM32469I-Discovery</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioTask.h">
+      <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
