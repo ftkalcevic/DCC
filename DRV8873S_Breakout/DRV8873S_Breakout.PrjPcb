@@ -29,7 +29,7 @@ PushECOToAnnotationFile=1
 DItemRevisionGUID=
 ReportSuppressedErrorsInMessages=0
 ForceUpdateCount=0
-OutputPath=
+OutputPath=Outputs
 LogFolderPath=
 ManagedProjectGUID=
 LinkedManagedProjectGUID=
@@ -73,55 +73,128 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=TJBKESXG
 
+[Document3]
+DocumentPath=DRV8873S_Breakout.OutJob
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotationIndexControlEnabled=0
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=-1
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=1
+ClassGenNCAutoScope=None
+DItemRevisionGUID=
+GenerateClassCluster=0
+DocumentUniqueId=
+
 [GeneratedDocument1]
-DocumentPath=Outputs\DRV8873S_Breakout.DRR
+DocumentPath=Default Configuration\Outputs\BOM\BOM_PartType-DRV8873S_Breakout.xlsx
 DItemRevisionGUID=
 
 [GeneratedDocument2]
-DocumentPath=Outputs\DRV8873S_Breakout.EXTREP
+DocumentPath=Default Configuration\Outputs\NC Drill\DRV8873S_Breakout.DRR
 DItemRevisionGUID=
 
 [GeneratedDocument3]
-DocumentPath=Outputs\DRV8873S_Breakout.GBL
+DocumentPath=Outputs\DRV8873S_Breakout.DRR
 DItemRevisionGUID=
 
 [GeneratedDocument4]
-DocumentPath=Outputs\DRV8873S_Breakout.GBO
+DocumentPath=Default Configuration\Outputs\Gerber\DRV8873S_Breakout.EXTREP
 DItemRevisionGUID=
 
 [GeneratedDocument5]
-DocumentPath=Outputs\DRV8873S_Breakout.GBS
+DocumentPath=Outputs\DRV8873S_Breakout.EXTREP
 DItemRevisionGUID=
 
 [GeneratedDocument6]
-DocumentPath=Outputs\DRV8873S_Breakout.GTL
+DocumentPath=Default Configuration\Outputs\Gerber\DRV8873S_Breakout.GBL
 DItemRevisionGUID=
 
 [GeneratedDocument7]
-DocumentPath=Outputs\DRV8873S_Breakout.GTO
+DocumentPath=Outputs\DRV8873S_Breakout.GBL
 DItemRevisionGUID=
 
 [GeneratedDocument8]
-DocumentPath=Outputs\DRV8873S_Breakout.GTS
+DocumentPath=Default Configuration\Outputs\Gerber\DRV8873S_Breakout.GBO
 DItemRevisionGUID=
 
 [GeneratedDocument9]
-DocumentPath=Outputs\DRV8873S_Breakout.LDP
+DocumentPath=Outputs\DRV8873S_Breakout.GBO
 DItemRevisionGUID=
 
 [GeneratedDocument10]
-DocumentPath=Outputs\DRV8873S_Breakout.Outline
+DocumentPath=Default Configuration\Outputs\Gerber\DRV8873S_Breakout.GBS
 DItemRevisionGUID=
 
 [GeneratedDocument11]
-DocumentPath=Outputs\DRV8873S_Breakout.REP
+DocumentPath=Outputs\DRV8873S_Breakout.GBS
 DItemRevisionGUID=
 
 [GeneratedDocument12]
-DocumentPath=Outputs\DRV8873S_Breakout.RUL
+DocumentPath=Default Configuration\Outputs\Gerber\DRV8873S_Breakout.GTL
 DItemRevisionGUID=
 
 [GeneratedDocument13]
+DocumentPath=Outputs\DRV8873S_Breakout.GTL
+DItemRevisionGUID=
+
+[GeneratedDocument14]
+DocumentPath=Default Configuration\Outputs\Gerber\DRV8873S_Breakout.GTO
+DItemRevisionGUID=
+
+[GeneratedDocument15]
+DocumentPath=Outputs\DRV8873S_Breakout.GTO
+DItemRevisionGUID=
+
+[GeneratedDocument16]
+DocumentPath=Default Configuration\Outputs\Gerber\DRV8873S_Breakout.GTS
+DItemRevisionGUID=
+
+[GeneratedDocument17]
+DocumentPath=Outputs\DRV8873S_Breakout.GTS
+DItemRevisionGUID=
+
+[GeneratedDocument18]
+DocumentPath=Default Configuration\Outputs\NC Drill\DRV8873S_Breakout.LDP
+DItemRevisionGUID=
+
+[GeneratedDocument19]
+DocumentPath=Outputs\DRV8873S_Breakout.LDP
+DItemRevisionGUID=
+
+[GeneratedDocument20]
+DocumentPath=Default Configuration\Outputs\Gerber\DRV8873S_Breakout.Outline
+DItemRevisionGUID=
+
+[GeneratedDocument21]
+DocumentPath=Outputs\DRV8873S_Breakout.Outline
+DItemRevisionGUID=
+
+[GeneratedDocument22]
+DocumentPath=Default Configuration\Outputs\Gerber\DRV8873S_Breakout.REP
+DItemRevisionGUID=
+
+[GeneratedDocument23]
+DocumentPath=Outputs\DRV8873S_Breakout.REP
+DItemRevisionGUID=
+
+[GeneratedDocument24]
+DocumentPath=Default Configuration\Outputs\Gerber\DRV8873S_Breakout.RUL
+DItemRevisionGUID=
+
+[GeneratedDocument25]
+DocumentPath=Outputs\DRV8873S_Breakout.RUL
+DItemRevisionGUID=
+
+[GeneratedDocument26]
+DocumentPath=Default Configuration\Outputs\NC Drill\DRV8873S_Breakout.TXT
+DItemRevisionGUID=
+
+[GeneratedDocument27]
 DocumentPath=Outputs\DRV8873S_Breakout.TXT
 DItemRevisionGUID=
 
@@ -133,7 +206,12 @@ ReleaseItemId=
 CurrentRevision=
 Variant=[No Variations]
 GenerateBOM=0
-OutputJobsCount=0
+OutputJobsCount=1
+DocumentReferenceClass1=DocumentReference
+OutputJobFileName1=DRV8873S_Breakout.OutJob
+
+[Generic_EDE]
+OutputDir=Outputs
 
 [OutputGroup1]
 Name=Netlist Outputs
@@ -165,7 +243,7 @@ OutputDefault1=0
 [OutputGroup3]
 Name=Documentation Outputs
 Description=
-TargetPrinter=FX DP 240A PCL
+TargetPrinter=Virtual Printer
 PrinterOptions=Record=PrinterOptions|Copies=1|Duplex=1|TrueTypeOptions=3|Collate=1|PrintWhat=1
 OutputType1=Composite
 OutputName1=Composite Drawing
@@ -874,4 +952,7 @@ ComparisonOptions2=Kind=Component Class|MinPercent=75|MinMatch=3|ShowMatch=-1|Co
 ComparisonOptions3=Kind=Rule|MinPercent=75|MinMatch=3|ShowMatch=-1|Confirm=-1|UseName=-1|InclAllRules=0
 ComparisonOptions4=Kind=Differential Pair|MinPercent=50|MinMatch=1|ShowMatch=0|Confirm=0|UseName=0|InclAllRules=0
 ComparisonOptions5=Kind=Code Memory|MinPercent=75|MinMatch=3|ShowMatch=-1|Confirm=-1|UseName=-1|InclAllRules=0
+
+[SmartPDF]
+PageOptions=Record=PageOptions|CenterHorizontal=True|CenterVertical=True|PrintScale=1.00|XCorrection=1.00|YCorrection=1.00|PrintKind=1|BorderSize=5000000|LeftOffset=0|BottomOffset=0|Orientation=2|PaperLength=1000|PaperWidth=1000|Scale=100|PaperSource=7|PrintQuality=-3|MediaType=1|DitherType=10|PrintScaleMode=1|PaperKind=A4|PaperIndex=9
 
