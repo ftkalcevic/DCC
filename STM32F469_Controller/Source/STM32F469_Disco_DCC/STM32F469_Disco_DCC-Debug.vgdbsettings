@@ -114,6 +114,7 @@
           <string>target remote :$$SYS:GDB_PORT$$</string>
           <string>mon halt</string>
           <string>load</string>
+          <string>mon reset init</string>
         </StartupCommands>
         <ProgramFLASHUsingExternalTool>false</ProgramFLASHUsingExternalTool>
         <PreferredGDBPort>0</PreferredGDBPort>

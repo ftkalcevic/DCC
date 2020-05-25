@@ -30,28 +30,16 @@ public:
 	}
 };
 
-enum MemoryMap: uint8_t
-{
-	FaultRegister = 0,
-	DiagRegister = 1,
-	IC1ControlRegister = 2,
-	IC2ControlRegister = 3,
-	IC3ControlRegister = 4,
-	IC4ControlRegister = 5
-};
-
 const uint8_t MSG_READ = 0x40;
 const uint8_t MSG_WRITE = 0;
 
-bool DRV8873S::ReadFaultStatus(GPIO_TypeDef* CS_GPIO, uint16_t CS_Pin)
+bool DRV8873S::DoRXTX(GPIO_TypeDef* CS_GPIO, uint16_t CS_Pin, uint16_t tx, uint16_t &rx)
 {
 	MutexLock m(busySemaphoreHandle);
 	if (m.Aquired())
 	{
 		HAL_StatusTypeDef res;
 		
-		uint16_t tx, rx;
-		tx = (MSG_READ | (IC1ControlRegister << 1)) << 8;
 		HAL_GPIO_WritePin(CS_GPIO, CS_Pin, GPIO_PIN_RESET);
 		res = HAL_SPI_TransmitReceive(hspi, (uint8_t *)&tx, (uint8_t *)&rx, 1,5);
 		HAL_GPIO_WritePin(CS_GPIO, CS_Pin, GPIO_PIN_SET);
@@ -62,27 +50,31 @@ bool DRV8873S::ReadFaultStatus(GPIO_TypeDef* CS_GPIO, uint16_t CS_Pin)
 	return false;
 }
 
-bool DRV8873S::ReadDiagStatus(GPIO_TypeDef* CS_GPIO, uint16_t CS_Pin)
+bool DRV8873S::Read(GPIO_TypeDef* CS_GPIO, uint16_t CS_Pin, MemoryMap reg, uint16_t &rx)
 {
+	return DoRXTX(CS_GPIO, CS_Pin, (MSG_READ | (reg << 1)) << 8, rx);
+}
+
+bool DRV8873S::Write(GPIO_TypeDef* CS_GPIO, uint16_t CS_Pin, MemoryMap reg, uint8_t data )
+{
+	uint16_t tx;
+	return DoRXTX(CS_GPIO, CS_Pin, ((MSG_WRITE | (reg << 1)) << 8) | data, tx);
+}
+
+bool DRV8873S::ReadRegister(GPIO_TypeDef* CS_GPIO, uint16_t CS_Pin, MemoryMap reg, uint8_t &status, uint8_t &data)
+{
+	uint16_t rx;
+	if (Read(CS_GPIO, CS_Pin, reg, rx))
+	{
+		status = rx >> 8;
+		data = rx & 0xFF;
+		return true;
+	}
 	return false;
 }
 
-bool DRV8873S::WriteIC1(GPIO_TypeDef* CS_GPIO, uint16_t CS_Pin)
+bool DRV8873S::WriteRegister(GPIO_TypeDef* CS_GPIO, uint16_t CS_Pin, MemoryMap reg, uint8_t data)
 {
-	return false;
-}
-
-bool DRV8873S::WriteIC2(GPIO_TypeDef* CS_GPIO, uint16_t CS_Pin)
-{
-	return false;
-}
-
-bool DRV8873S::WriteIC3(GPIO_TypeDef* CS_GPIO, uint16_t CS_Pin)
-{
-	return false;
-}
-
-bool DRV8873S::WriteIC4(GPIO_TypeDef* CS_GPIO, uint16_t CS_Pin)
-{
-	return false;
+	uint16_t rx;
+	return Write(CS_GPIO, CS_Pin, reg, data);
 }

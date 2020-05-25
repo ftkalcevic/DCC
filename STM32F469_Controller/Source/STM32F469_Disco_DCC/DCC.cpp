@@ -13,13 +13,13 @@
 
 DCC<DCCType::MainTrack, MAINTRK_ARR_OFFSET, MAINTRK_CCn_OFFSET, MAINTRK_BURST_SIZE, QUEUE_LEN> mainTrack(  
 		Boost_CS_GPIO_Port, Boost_CS_Pin,
-		Boost_Enable_GPIO_Port, Boost_Enable_Pin,
+		Boost_Disable_GPIO_Port, Boost_Disable_Pin,
 		Boost_Fault_GPIO_Port, Boost_Fault_Pin,
 		&hadc1, 1,
 		DCC_Signal_GPIO_Port, DCC_Signal_Pin );					// tim8_2
 DCC<DCCType::ProgrammingTrack, PRGTRK_ARR_OFFSET, PRGTRK_CCn_OFFSET, PRGTRK_BURST_SIZE, QUEUE_LEN> programmingTrack(   
 		PrgTrk_CS_GPIO_Port, PrgTrk_CS_Pin,
-		PrgTrk_Enable_GPIO_Port, PrgTrk_Enable_Pin,
+		PrgTrk_Disable_GPIO_Port, PrgTrk_Disable_Pin,
 		PrgTrk_Fault_GPIO_Port, PrgTrk_Fault_Pin,
 		PrgTrk_ACK_GPIO_Port, PrgTrk_ACK_Pin,
 		PrgTrk_DCC_Signal_GPIO_Port, PrgTrk_DCC_Signal_Pin );	// tim3_1 

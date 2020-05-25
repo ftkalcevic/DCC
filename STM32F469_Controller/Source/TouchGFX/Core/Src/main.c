@@ -285,8 +285,8 @@ int main(void)
   MX_SPI2_Init();
   MX_TIM1_Init();
   MX_USART3_UART_Init();
-  MX_TIM3_Init();
-  MX_TIM8_Init();
+  //MX_TIM3_Init();
+  //MX_TIM8_Init();
   MX_RTC_Init();
   MX_USB_OTG_FS_USB_Init();
   MX_TouchGFX_Init();
@@ -1093,7 +1093,7 @@ void MX_SPI2_Init(void)
   hspi2.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi2.Init.CLKPhase = SPI_PHASE_2EDGE;
   hspi2.Init.NSS = SPI_NSS_SOFT;
-  hspi2.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_8;
+  hspi2.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_64;
   hspi2.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi2.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi2.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
@@ -1445,10 +1445,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOE, SPKR_HP_Pin|AUDIO_RST_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOG, Boost_CS_Pin|LED1_Pin, GPIO_PIN_SET);
-
-  /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(Boost_Enable_GPIO_Port, Boost_Enable_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOG, Boost_CS_Pin|Boost_Disable_Pin|LED1_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOD, LED3_Pin|LED2_Pin, GPIO_PIN_SET);
@@ -1463,7 +1460,10 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOB, OTG_FS1_PowerSwitchOn_Pin|EXT_RESET_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOH, GPIO_PIN_7|PrgTrk_Enable_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOH, GPIO_PIN_7, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(PrgTrk_Disable_GPIO_Port, PrgTrk_Disable_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(PrgTrk_CS_GPIO_Port, PrgTrk_CS_Pin, GPIO_PIN_SET);
@@ -1475,8 +1475,8 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : Boost_CS_Pin Boost_Enable_Pin */
-  GPIO_InitStruct.Pin = Boost_CS_Pin|Boost_Enable_Pin;
+  /*Configure GPIO pins : Boost_CS_Pin Boost_Disable_Pin */
+  GPIO_InitStruct.Pin = Boost_CS_Pin|Boost_Disable_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -1488,8 +1488,10 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(OTG_FS1_OverCurrent_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : Fn4_Pin Fn1_Pin uSD_Detect_Pin */
-  GPIO_InitStruct.Pin = Fn4_Pin|Fn1_Pin|uSD_Detect_Pin;
+  /*Configure GPIO pins : Fn4_Pin Fn1_Pin PrgTrk_Fault_Pin Boost_Fault_Pin 
+                           uSD_Detect_Pin */
+  GPIO_InitStruct.Pin = Fn4_Pin|Fn1_Pin|PrgTrk_Fault_Pin|Boost_Fault_Pin 
+                          |uSD_Detect_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
@@ -1501,12 +1503,6 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
   GPIO_InitStruct.Alternate = GPIO_AF10_OTG_FS;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : PrgTrk_Fault_Pin Boost_Fault_Pin */
-  GPIO_InitStruct.Pin = PrgTrk_Fault_Pin|Boost_Fault_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
 
   /*Configure GPIO pins : LED3_Pin LED2_Pin */
   GPIO_InitStruct.Pin = LED3_Pin|LED2_Pin;
@@ -1588,12 +1584,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : PrgTrk_Enable_Pin */
-  GPIO_InitStruct.Pin = PrgTrk_Enable_Pin;
+  /*Configure GPIO pin : PrgTrk_Disable_Pin */
+  GPIO_InitStruct.Pin = PrgTrk_Disable_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(PrgTrk_Enable_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(PrgTrk_Disable_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : EncoderA_Pin */
   GPIO_InitStruct.Pin = EncoderA_Pin;

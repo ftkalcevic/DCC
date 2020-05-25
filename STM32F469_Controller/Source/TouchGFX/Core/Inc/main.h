@@ -74,8 +74,8 @@ extern CAN_HandleTypeDef hcan2;
 #define Boost_CS_GPIO_Port GPIOG
 #define SAI1_SCKA_Pin GPIO_PIN_5
 #define SAI1_SCKA_GPIO_Port GPIOE
-#define Boost_Enable_Pin GPIO_PIN_13
-#define Boost_Enable_GPIO_Port GPIOG
+#define Boost_Disable_Pin GPIO_PIN_13
+#define Boost_Disable_GPIO_Port GPIOG
 #define OTG_FS1_OverCurrent_Pin GPIO_PIN_7
 #define OTG_FS1_OverCurrent_GPIO_Port GPIOB
 #define Fn4_Pin GPIO_PIN_11
@@ -140,8 +140,8 @@ extern CAN_HandleTypeDef hcan2;
 #define EStop_GPIO_Port GPIOC
 #define STLK_RX_Pin GPIO_PIN_10
 #define STLK_RX_GPIO_Port GPIOB
-#define PrgTrk_Enable_Pin GPIO_PIN_6
-#define PrgTrk_Enable_GPIO_Port GPIOH
+#define PrgTrk_Disable_Pin GPIO_PIN_6
+#define PrgTrk_Disable_GPIO_Port GPIOH
 #define LCD_BL_CTRL_Pin GPIO_PIN_3
 #define LCD_BL_CTRL_GPIO_Port GPIOA
 #define PrgTrk_CS_Pin GPIO_PIN_7
