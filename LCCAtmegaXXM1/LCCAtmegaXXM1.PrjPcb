@@ -99,54 +99,106 @@ DocumentPath=DCCController.LOG
 DItemRevisionGUID=
 
 [GeneratedDocument3]
-DocumentPath=Outputs\LCCAtmegaXXM1.DRR
+DocumentPath=Default Configuration\Outputs\NC Drill\LCCAtmegaXXM1.DRR
 DItemRevisionGUID=
 
 [GeneratedDocument4]
-DocumentPath=Outputs\LCCAtmegaXXM1.EXTREP
+DocumentPath=Outputs\LCCAtmegaXXM1.DRR
 DItemRevisionGUID=
 
 [GeneratedDocument5]
-DocumentPath=Outputs\LCCAtmegaXXM1.GBL
+DocumentPath=Default Configuration\Outputs\Gerber\LCCAtmegaXXM1.EXTREP
 DItemRevisionGUID=
 
 [GeneratedDocument6]
-DocumentPath=Outputs\LCCAtmegaXXM1.GBO
+DocumentPath=Outputs\LCCAtmegaXXM1.EXTREP
 DItemRevisionGUID=
 
 [GeneratedDocument7]
-DocumentPath=Outputs\LCCAtmegaXXM1.GBS
+DocumentPath=Default Configuration\Outputs\Gerber\LCCAtmegaXXM1.GBL
 DItemRevisionGUID=
 
 [GeneratedDocument8]
-DocumentPath=Outputs\LCCAtmegaXXM1.GTL
+DocumentPath=Outputs\LCCAtmegaXXM1.GBL
 DItemRevisionGUID=
 
 [GeneratedDocument9]
-DocumentPath=Outputs\LCCAtmegaXXM1.GTO
+DocumentPath=Default Configuration\Outputs\Gerber\LCCAtmegaXXM1.GBO
 DItemRevisionGUID=
 
 [GeneratedDocument10]
-DocumentPath=Outputs\LCCAtmegaXXM1.GTS
+DocumentPath=Outputs\LCCAtmegaXXM1.GBO
 DItemRevisionGUID=
 
 [GeneratedDocument11]
-DocumentPath=Outputs\LCCAtmegaXXM1.LDP
+DocumentPath=Default Configuration\Outputs\Gerber\LCCAtmegaXXM1.GBS
 DItemRevisionGUID=
 
 [GeneratedDocument12]
-DocumentPath=Outputs\LCCAtmegaXXM1.Outline
+DocumentPath=Outputs\LCCAtmegaXXM1.GBS
 DItemRevisionGUID=
 
 [GeneratedDocument13]
-DocumentPath=Outputs\LCCAtmegaXXM1.REP
+DocumentPath=Default Configuration\Outputs\Gerber\LCCAtmegaXXM1.GTL
 DItemRevisionGUID=
 
 [GeneratedDocument14]
-DocumentPath=Outputs\LCCAtmegaXXM1.RUL
+DocumentPath=Outputs\LCCAtmegaXXM1.GTL
 DItemRevisionGUID=
 
 [GeneratedDocument15]
+DocumentPath=Default Configuration\Outputs\Gerber\LCCAtmegaXXM1.GTO
+DItemRevisionGUID=
+
+[GeneratedDocument16]
+DocumentPath=Outputs\LCCAtmegaXXM1.GTO
+DItemRevisionGUID=
+
+[GeneratedDocument17]
+DocumentPath=Default Configuration\Outputs\Gerber\LCCAtmegaXXM1.GTS
+DItemRevisionGUID=
+
+[GeneratedDocument18]
+DocumentPath=Outputs\LCCAtmegaXXM1.GTS
+DItemRevisionGUID=
+
+[GeneratedDocument19]
+DocumentPath=Default Configuration\Outputs\NC Drill\LCCAtmegaXXM1.LDP
+DItemRevisionGUID=
+
+[GeneratedDocument20]
+DocumentPath=Outputs\LCCAtmegaXXM1.LDP
+DItemRevisionGUID=
+
+[GeneratedDocument21]
+DocumentPath=Default Configuration\Outputs\Gerber\LCCAtmegaXXM1.Outline
+DItemRevisionGUID=
+
+[GeneratedDocument22]
+DocumentPath=Outputs\LCCAtmegaXXM1.Outline
+DItemRevisionGUID=
+
+[GeneratedDocument23]
+DocumentPath=Default Configuration\Outputs\Gerber\LCCAtmegaXXM1.REP
+DItemRevisionGUID=
+
+[GeneratedDocument24]
+DocumentPath=Outputs\LCCAtmegaXXM1.REP
+DItemRevisionGUID=
+
+[GeneratedDocument25]
+DocumentPath=Default Configuration\Outputs\Gerber\LCCAtmegaXXM1.RUL
+DItemRevisionGUID=
+
+[GeneratedDocument26]
+DocumentPath=Outputs\LCCAtmegaXXM1.RUL
+DItemRevisionGUID=
+
+[GeneratedDocument27]
+DocumentPath=Default Configuration\Outputs\NC Drill\LCCAtmegaXXM1.TXT
+DItemRevisionGUID=
+
+[GeneratedDocument28]
 DocumentPath=Outputs\LCCAtmegaXXM1.TXT
 DItemRevisionGUID=
 
