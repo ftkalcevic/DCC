@@ -80,6 +80,7 @@
     <ClCompile Include="Middlewares\ST\BSP\stm32469i_discovery_sd.c" />
     <ClCompile Include="Middlewares\ST\components\cs43l22\cs43l22.c" />
     <ClCompile Include="Middlewares\Third_Party\FreeRTOS\Source\portable\MemMang\heap_4.c" />
+    <ClCompile Include="Src\ccsbcs.c" />
     <ClCompile Include="Src\sd_diskio.c" />
     <ClCompile Include="Src\fatfs.c" />
     <ClCompile Include="Src\fatfs_platform.c" />
@@ -243,5 +244,6 @@
     <ClInclude Include="$(EFP_BASE)\Profiler\CustomRealTimeWatches.h" />
     <ClInclude Include="$(EFP_BASE)\Profiler\DebuggerChecker.h" />
     <ClCompile Include="$(EFP_BASE)\Profiler\ProfilerRTOS_FreeRTOS.c" />
+    <ClCompile Include="Middlewares\Third_Party\FatFs\src\option\ccsbcs.c" />
   </ItemGroup>
 </Project>

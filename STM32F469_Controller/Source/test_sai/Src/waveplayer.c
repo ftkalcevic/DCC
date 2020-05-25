@@ -534,4 +534,183 @@ static void AUDIO_AcquireTouchButtons(void)
 }
 
 
+
+
+
+
+#include <math.h>
+
+
+
+
+/**
+  * @brief  Starts Audio streaming.    
+  * @param  idx: File index
+  * @retval Audio error
+  */ 
+AUDIO_ErrorTypeDef SINE_PLAYER_Start(uint8_t idx)
+{
+    PlayerInit(22050); 
+	  if (0)
+	  {
+		  BSP_AUDIO_OUT_ChangeAudioConfig(BSP_AUDIO_OUT_STEREOMODE | BSP_AUDIO_OUT_CIRCULARMODE);
+		  BSP_AUDIO_OUT_SetAudioFrameSlot(SAI_SLOTACTIVE_0 | SAI_SLOTACTIVE_2);
+	  }
+	  else
+	  {
+		    BSP_AUDIO_OUT_ChangeAudioConfig(BSP_AUDIO_OUT_MONOMODE | BSP_AUDIO_OUT_CIRCULARMODE);
+            BSP_AUDIO_OUT_SetAudioFrameSlot(SAI_SLOTACTIVE_0);
+	  }
+    
+    BufferCtl.state = BUFFER_OFFSET_NONE;
+
+	const int BUFFER_SIZE = AUDIO_OUT_BUFFER_SIZE/2;
+	int16_t *ptr = &(BufferCtl.buff[0]);
+	for (int i = 0; i < BUFFER_SIZE; i++, ptr++)
+		*ptr = 8000 * sin(100*2 * M_PI * (double)i / (double)(BUFFER_SIZE / 2));
+    {
+      AudioState = AUDIO_STATE_PLAY;
+      //AUDIO_PlaybackDisplayButtons();
+      //BSP_LCD_DisplayStringAt(250, LINE(9), (uint8_t *)"  [PLAY ]", LEFT_MODE);
+      { 
+        {
+          BSP_AUDIO_OUT_Play((uint16_t*)&BufferCtl.buff[0], AUDIO_OUT_BUFFER_SIZE); 
+          return AUDIO_ERROR_NONE;
+        }
+      }
+    }
+  
+  return AUDIO_ERROR_IO;
+}
+
+
+AUDIO_ErrorTypeDef SINE_PLAYER_Process(void)
+{
+  uint32_t bytesread, elapsed_time;
+  AUDIO_ErrorTypeDef audio_error = AUDIO_ERROR_NONE;
+  static uint32_t prev_elapsed_time = 0xFFFFFFFF;
+  uint8_t str[16];
+	static int count = 0;
+  
+  switch(AudioState)
+  {
+  case AUDIO_STATE_PLAY:
+    if(count > 50)
+    {
+      BSP_AUDIO_OUT_Stop(CODEC_PDWN_SW);
+      AudioState = AUDIO_STATE_STOP;
+	    count = 0;
+    }
+    
+    if(BufferCtl.state == BUFFER_OFFSET_HALF)
+    {
+	    count++;
+
+      BufferCtl.state = BUFFER_OFFSET_NONE;
+      BufferCtl.fptr += bytesread; 
+    }
+    
+    if(BufferCtl.state == BUFFER_OFFSET_FULL)
+    {
+	    count++;
+ 
+      BufferCtl.state = BUFFER_OFFSET_NONE;
+      BufferCtl.fptr += bytesread; 
+    }
+    
+    break;
+    
+  case AUDIO_STATE_STOP:
+    //BSP_LCD_SetTextColor(LCD_COLOR_RED);
+//    BSP_LCD_FillRect(TOUCH_STOP_XMIN, TOUCH_STOP_YMIN , /* Stop rectangle */
+//                     TOUCH_STOP_XMAX - TOUCH_STOP_XMIN,
+//                     TOUCH_STOP_YMAX - TOUCH_STOP_YMIN);
+    BSP_AUDIO_OUT_Stop(CODEC_PDWN_SW);
+    AudioState = AUDIO_STATE_IDLE; 
+    audio_error = AUDIO_ERROR_IO;
+    break;
+    
+  case AUDIO_STATE_NEXT:
+
+    BSP_AUDIO_OUT_Stop(CODEC_PDWN_SW);
+    SINE_PLAYER_Start(FilePos);
+    break;    
+    
+  case AUDIO_STATE_PREVIOUS:
+    if(--FilePos < 0)
+    {
+      FilePos = AUDIO_GetWavObjectNumber() - 1; 
+    }
+    BSP_AUDIO_OUT_Stop(CODEC_PDWN_SW);
+    AUDIO_PLAYER_Start(FilePos);
+    break;   
+    
+  case AUDIO_STATE_PAUSE:
+//    BSP_LCD_SetTextColor(LCD_COLOR_CYAN);
+//    BSP_LCD_DisplayStringAt(250, LINE(9), (uint8_t *)"  [PAUSE]", LEFT_MODE);
+//    BSP_LCD_SetTextColor(LCD_COLOR_RED);    /* Display red pause rectangles */
+//    BSP_LCD_FillRect(TOUCH_PAUSE_XMIN, TOUCH_PAUSE_YMIN , 15, TOUCH_PAUSE_YMAX - TOUCH_PAUSE_YMIN);
+//    BSP_LCD_FillRect(TOUCH_PAUSE_XMIN + 20, TOUCH_PAUSE_YMIN, 15, TOUCH_PAUSE_YMAX - TOUCH_PAUSE_YMIN);
+//    BSP_AUDIO_OUT_Pause();
+    AudioState = AUDIO_STATE_WAIT;
+    break;
+    
+  case AUDIO_STATE_RESUME:
+//    BSP_LCD_SetTextColor(LCD_COLOR_CYAN);
+//    BSP_LCD_DisplayStringAt(250, LINE(9), (uint8_t *)"  [PLAY ]", LEFT_MODE);
+//                                            /* Display blue cyan pause rectangles */
+//    BSP_LCD_FillRect(TOUCH_PAUSE_XMIN, TOUCH_PAUSE_YMIN , 15, TOUCH_PAUSE_YMAX - TOUCH_PAUSE_YMIN);
+//    BSP_LCD_FillRect(TOUCH_PAUSE_XMIN + 20, TOUCH_PAUSE_YMIN, 15, TOUCH_PAUSE_YMAX - TOUCH_PAUSE_YMIN);
+//    BSP_AUDIO_OUT_Resume();
+    AudioState = AUDIO_STATE_PLAY;
+    break;
+    
+  case AUDIO_STATE_VOLUME_UP: 
+    if( uwVolume <= 90)
+    {
+      uwVolume += 10;
+    }
+    BSP_AUDIO_OUT_SetVolume(uwVolume);
+//    BSP_LCD_SetTextColor(LCD_COLOR_WHITE); 
+    sprintf((char *)str,  "Volume : %lu ", uwVolume);
+//    BSP_LCD_DisplayStringAtLine(9, str);
+    AudioState = AUDIO_STATE_PLAY;
+    break;
+    
+  case AUDIO_STATE_VOLUME_DOWN:    
+    if( uwVolume >= 10)
+    {
+      uwVolume -= 10;
+    }
+    BSP_AUDIO_OUT_SetVolume(uwVolume);
+//    BSP_LCD_SetTextColor(LCD_COLOR_WHITE); 
+//    sprintf((char *)str,  "Volume : %lu ", uwVolume);
+//    BSP_LCD_DisplayStringAtLine(9, str);
+    AudioState = AUDIO_STATE_PLAY;
+    break;
+    
+  case AUDIO_STATE_WAIT:
+  case AUDIO_STATE_IDLE:
+  case AUDIO_STATE_INIT:    
+  default:
+    /* Update audio state machine according to touch acquisition */
+    AUDIO_AcquireTouchButtons();
+    break;
+  }
+  return audio_error;
+}
+
+
+void SINE_DoSine(void)
+{
+	BSP_AUDIO_OUT_Init(OUTPUT_DEVICE_SPEAKER, uwVolume, I2S_AUDIOFREQ_48K);
+
+	AudioState = AUDIO_STATE_NEXT;
+    for(;;)
+    {
+	    SINE_PLAYER_Process();
+    }
+	
+}
+	
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

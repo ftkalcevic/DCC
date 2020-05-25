@@ -705,6 +705,12 @@
     <ClCompile Include="$(EFP_BASE)\Profiler\ProfilerRTOS_FreeRTOS.c">
       <Filter>Source files\Device-specific files\Semihosting/Profiler</Filter>
     </ClCompile>
+    <ClCompile Include="Src\ccsbcs.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="Middlewares\Third_Party\FatFs\src\option\ccsbcs.c">
+      <Filter>Source files\STM32Cube HAL\FATFS</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Middlewares\ST\BSP\stm32469i_discovery_sd.h">

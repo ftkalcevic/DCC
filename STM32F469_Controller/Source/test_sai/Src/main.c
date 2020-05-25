@@ -94,7 +94,12 @@ int main(void)
 //  HAL_GPIO_Init(GPIOE, &gpio_init_structure);
 //  HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, GPIO_PIN_SET);
 
-	
+#ifdef PLAY_SINE
+    /* AUDIO Menu Process */
+    extern void SINE_DoSine(void);
+    SINE_DoSine();
+#else
+
   /* Init Host Library */
   USBH_Init(&hUSBHost, USBH_UserProcess, 0);
 
@@ -115,6 +120,7 @@ int main(void)
 
     BSP_LED_Toggle(LED1);
   }
+#endif
 }
 
 /**
@@ -182,7 +188,7 @@ static void AUDIO_InitApplication(void)
 
   /*##-2- Touch screen initialization ########################################*/
   BSP_TS_ResetTouchData(&TS_State);
-
+#ifndef PLAY_SINE
   /* If calibration is not yet done, proceed with calibration */
   if (TouchScreen_IsCalibrationDone() == 0)
   {
@@ -192,7 +198,7 @@ static void AUDIO_InitApplication(void)
       BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize() - 65, (uint8_t *)"Touchscreen calibration success.", CENTER_MODE);
     }
   } /* of if (TouchScreen_IsCalibrationDone() == 0) */
-
+#endif
   /*##-3- LCD Log module initialization ########################################*/
   
   /* Init the LCD Log module */

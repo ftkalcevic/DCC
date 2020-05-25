@@ -304,7 +304,7 @@ AUDIO_ErrorTypeDef SINE_PLAYER_Start(uint8_t idx)
 	const int BUFFER_SIZE = AUDIO_OUT_BUFFER_SIZE/2;
 	int16_t *ptr = &(BufferCtl.buff[0]);
 	for (int i = 0; i < BUFFER_SIZE; i++, ptr++)
-		*ptr = 8000 * sin(M_PI * (double)i / (double)(BUFFER_SIZE / 4));
+		*ptr = 8000 * sin(100*2 * M_PI * (double)i / (double)(BUFFER_SIZE / 2));
     {
       AudioState = AUDIO_STATE_PLAY;
       AUDIO_PlaybackDisplayButtons();
@@ -674,7 +674,7 @@ static AUDIO_ErrorTypeDef GetFileInfo(uint16_t file_idx, WAVE_FormatTypeDef *inf
 //      BSP_LCD_DisplayStringAt(263, LINE(8), (uint8_t *)"[00:00]", LEFT_MODE);
 // 
 //      BSP_LCD_SetTextColor(LCD_COLOR_WHITE); 
-      printf("Volume : %lu", uwVolume);
+      printf("Volume : %lu\n", uwVolume);
 //      BSP_LCD_ClearStringLine(9);      
 //      BSP_LCD_DisplayStringAtLine(9, str);
       return AUDIO_ERROR_NONE;
@@ -803,6 +803,7 @@ static void AUDIO_AcquireTouchButtons(void)
 //  }
 }
 
+
 void DoSDCard()
 {
 	AUDIO_ShowWavFiles();
@@ -830,8 +831,11 @@ void DoSine()
 
 void DoWave()
 {
-	//DoSDCard();
-	DoSine();
+	#ifdef DO_SINE
+	    DoSine();
+	#else
+	    DoSDCard();
+	#endif
 
 	
 }

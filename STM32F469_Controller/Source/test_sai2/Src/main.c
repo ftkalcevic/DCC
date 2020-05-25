@@ -140,12 +140,12 @@ int main(void)
   MX_I2C2_Init();
   MX_LTDC_Init();
   MX_QUADSPI_Init();
-  //MX_SAI1_Init();
-  //MX_SDIO_SD_Init();
+  MX_SAI1_Init();
+  MX_SDIO_SD_Init();
   MX_TIM1_Init();
-  //MX_USART3_UART_Init();
-  //MX_USART6_UART_Init();
-  //MX_FATFS_Init();
+  MX_USART3_UART_Init();
+  MX_USART6_UART_Init();
+  MX_FATFS_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -793,11 +793,11 @@ static void MX_DMA_Init(void)
 
   /* DMA interrupt init */
   /* DMA2_Stream3_IRQn interrupt configuration */
-//  HAL_NVIC_SetPriority(DMA2_Stream3_IRQn, 0, 0);
-//  HAL_NVIC_EnableIRQ(DMA2_Stream3_IRQn);
-//  /* DMA2_Stream6_IRQn interrupt configuration */
-//  HAL_NVIC_SetPriority(DMA2_Stream6_IRQn, 5, 0);
-//  HAL_NVIC_EnableIRQ(DMA2_Stream6_IRQn);
+  HAL_NVIC_SetPriority(DMA2_Stream3_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA2_Stream3_IRQn);
+  /* DMA2_Stream6_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA2_Stream6_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(DMA2_Stream6_IRQn);
 
 }
 
@@ -993,7 +993,7 @@ void StartDefaultTask(void const * argument)
   MX_USB_HOST_Init();
   /* USER CODE BEGIN 5 */
 	FRESULT res;
-	//res = f_mount(&FatFs, "/", 1);
+	res = f_mount(&FatFs, "/", 1);
 	if ( res != FR_OK )
 	{
 		printf("Failed to mount volume - %d\n", res);

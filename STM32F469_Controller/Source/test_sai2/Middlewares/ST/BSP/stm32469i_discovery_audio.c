@@ -248,7 +248,7 @@ uint8_t BSP_AUDIO_OUT_Init(uint16_t OutputDevice,
   SAIx_DeInit();
   
   /* PLL clock is set depending by the AudioFreq (44.1khz vs 48khz groups) */ 
-  BSP_AUDIO_OUT_ClockConfig(&haudio_out_sai, AudioFreq, NULL);
+  //BSP_AUDIO_OUT_ClockConfig(&haudio_out_sai, AudioFreq, NULL);
 
   /* SAI data transfer preparation:
   Prepare the Media to be used for the audio transfer from memory to SAI peripheral */
@@ -500,7 +500,7 @@ uint8_t BSP_AUDIO_OUT_SetOutputMode(uint8_t Output)
 void BSP_AUDIO_OUT_SetFrequency(uint32_t AudioFreq)
 { 
   /* PLL clock is set depending by the AudioFreq (44.1khz vs 48khz groups) */ 
-  BSP_AUDIO_OUT_ClockConfig(&haudio_out_sai, AudioFreq, NULL);
+  //BSP_AUDIO_OUT_ClockConfig(&haudio_out_sai, AudioFreq, NULL);
 
   /* Disable SAI peripheral to allow access to SAI internal registers */
   __HAL_SAI_DISABLE(&haudio_out_sai);

@@ -91,7 +91,7 @@
     <AllDependencies>
       <ProjectDependency>
         <RelativePath>test_sai2.gpdsc</RelativePath>
-        <Timestamp>132346012792766394</Timestamp>
+        <Timestamp>132346201949379905</Timestamp>
       </ProjectDependency>
     </AllDependencies>
     <RootDirectory>
@@ -647,6 +647,9 @@
                 </VirtualFileSnapshot>
                 <VirtualFileSnapshot>
                   <RelativePath>Middlewares\Third_Party\FatFs\src\option\syscall.c</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>Middlewares\Third_Party\FatFs\src\option\ccsbcs.c</RelativePath>
                 </VirtualFileSnapshot>
               </Files>
             </VirtualDirectorySnapshot>
