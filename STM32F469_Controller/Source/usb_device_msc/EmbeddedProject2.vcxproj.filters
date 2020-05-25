@@ -1,0 +1,588 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source files">
+      <UniqueIdentifier>{dd383940-fa3a-406f-a051-a6bddc9629bb}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header files">
+      <UniqueIdentifier>{7fb2f994-b182-430f-bb0d-8f1a2fd066e2}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource files">
+      <UniqueIdentifier>{2f62f0c7-b428-45eb-9a0a-0f185f3d5157}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Source files\Drivers">
+      <UniqueIdentifier>{baf09917-6c82-4ee5-bc3a-d6dac20175e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\Drivers\STM32F4xx_HAL_Driver">
+      <UniqueIdentifier>{afe364fb-6ebf-4eca-9606-e431c490c3cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\Drivers\BSP">
+      <UniqueIdentifier>{54419344-fa3e-44f3-87ce-4f7e51490bcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\Drivers\BSP\STM32469I_Discovery">
+      <UniqueIdentifier>{e65be7ca-78c7-472e-9000-6024e262ce8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\Drivers\CMSIS">
+      <UniqueIdentifier>{a8e7964f-93aa-498b-96e9-f65811ec06e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\Middlewares">
+      <UniqueIdentifier>{2647736a-2ace-4930-beb4-525cedb960cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\Middlewares\STM32_USBD_Library">
+      <UniqueIdentifier>{8a9a6d16-4168-4467-a0ff-335f0910f35a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\Middlewares\STM32_USBD_Library\Class">
+      <UniqueIdentifier>{af436c4c-a679-4676-96f8-807aadd2a049}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\Middlewares\STM32_USBD_Library\Class\MSC">
+      <UniqueIdentifier>{79a54892-5584-451c-ab17-116b84e550ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\Middlewares\STM32_USBD_Library\Core">
+      <UniqueIdentifier>{644b48ba-6a09-4ebb-9db9-e98d4acdbb32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\Application">
+      <UniqueIdentifier>{c1a59f83-2705-4d30-b15b-efe4626043b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\Application\User">
+      <UniqueIdentifier>{b8a02339-db57-4258-a193-d75be0c728d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\Doc">
+      <UniqueIdentifier>{4dade174-9034-429e-839e-932cb6c43ef7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\Device-specific files">
+      <UniqueIdentifier>{4514c123-e1f9-4a04-a7cf-5112719c2cdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\Drivers">
+      <UniqueIdentifier>{04f4adcf-8326-4a7a-ab08-404468e7e543}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\Drivers\STM32F4xx_HAL_Driver">
+      <UniqueIdentifier>{33d66962-be31-481d-9116-e67fdce5c843}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\Drivers\BSP">
+      <UniqueIdentifier>{e1f863de-9b0a-4ee3-93c6-ff20dcb2c86e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\Drivers\BSP\STM32469I_Discovery">
+      <UniqueIdentifier>{6aae379d-c7fa-4c32-bf3b-16903b311c9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\Drivers\CMSIS">
+      <UniqueIdentifier>{7b43b674-86d5-4e58-af4d-3b8504821bb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\Middlewares">
+      <UniqueIdentifier>{d6cafd41-c76a-45ab-a825-9ddc610add29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\Middlewares\STM32_USBD_Library">
+      <UniqueIdentifier>{1192feee-25ec-4b13-ba0e-3f1ddbe58a33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\Middlewares\STM32_USBD_Library\Class">
+      <UniqueIdentifier>{eb29d524-8638-4045-9190-609de502dfb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\Middlewares\STM32_USBD_Library\Class\MSC">
+      <UniqueIdentifier>{7651e986-4e7e-4b78-a5f9-aaf61ee8ae4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\Middlewares\STM32_USBD_Library\Core">
+      <UniqueIdentifier>{56645006-66f6-444f-85a4-04dc808c655b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\Application">
+      <UniqueIdentifier>{6728bde9-493d-42b5-becc-2688b646187c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\Application\User">
+      <UniqueIdentifier>{0e00bf7a-30e6-4580-9543-72bd4fb4fbb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\Doc">
+      <UniqueIdentifier>{87f822cd-11fe-4829-8315-62980e6c82b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\Device-specific files">
+      <UniqueIdentifier>{c4b04422-b9ae-412f-aa04-a23363fe59e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VisualGDB settings">
+      <UniqueIdentifier>{f6844a11-71a0-4d34-a9cd-130bbe575291}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_i2c.c">
+      <Filter>Source files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_gpio.c">
+      <Filter>Source files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma.c">
+      <Filter>Source files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_sd.c">
+      <Filter>Source files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash_ex.c">
+      <Filter>Source files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_i2c_ex.c">
+      <Filter>Source files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pcd_ex.c">
+      <Filter>Source files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash.c">
+      <Filter>Source files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc_ex.c">
+      <Filter>Source files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_fsmc.c">
+      <Filter>Source files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_sdmmc.c">
+      <Filter>Source files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_fmc.c">
+      <Filter>Source files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr_ex.c">
+      <Filter>Source files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_sram.c">
+      <Filter>Source files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma_ex.c">
+      <Filter>Source files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc.c">
+      <Filter>Source files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_uart.c">
+      <Filter>Source files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">
+      <Filter>Source files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_cortex.c">
+      <Filter>Source files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pcd.c">
+      <Filter>Source files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_usb.c">
+      <Filter>Source files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr.c">
+      <Filter>Source files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\BSP\STM32469I-Discovery\stm32469i_discovery.c">
+      <Filter>Source files\Drivers\BSP\STM32469I_Discovery</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\BSP\STM32469I-Discovery\stm32469i_discovery_sd.c">
+      <Filter>Source files\Drivers\BSP\STM32469I_Discovery</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Projects\STM32469I-Discovery\Applications\USB_Device\MSC_Standalone\Src\system_stm32f4xx.c">
+      <Filter>Source files\Drivers\CMSIS</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Middlewares\ST\STM32_USB_Device_Library\Class\MSC\Src\usbd_msc_bot.c">
+      <Filter>Source files\Middlewares\STM32_USBD_Library\Class\MSC</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Middlewares\ST\STM32_USB_Device_Library\Class\MSC\Src\usbd_msc.c">
+      <Filter>Source files\Middlewares\STM32_USBD_Library\Class\MSC</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Middlewares\ST\STM32_USB_Device_Library\Class\MSC\Src\usbd_msc_data.c">
+      <Filter>Source files\Middlewares\STM32_USBD_Library\Class\MSC</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Middlewares\ST\STM32_USB_Device_Library\Class\MSC\Src\usbd_msc_scsi.c">
+      <Filter>Source files\Middlewares\STM32_USBD_Library\Class\MSC</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ioreq.c">
+      <Filter>Source files\Middlewares\STM32_USBD_Library\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_core.c">
+      <Filter>Source files\Middlewares\STM32_USBD_Library\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ctlreq.c">
+      <Filter>Source files\Middlewares\STM32_USBD_Library\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Projects\STM32469I-Discovery\Applications\USB_Device\MSC_Standalone\Src\usbd_desc.c">
+      <Filter>Source files\Application\User</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Projects\STM32469I-Discovery\Applications\USB_Device\MSC_Standalone\Src\main.c">
+      <Filter>Source files\Application\User</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Projects\STM32469I-Discovery\Applications\USB_Device\MSC_Standalone\Src\usbd_conf.c">
+      <Filter>Source files\Application\User</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Projects\STM32469I-Discovery\Applications\USB_Device\MSC_Standalone\Src\usbd_storage.c">
+      <Filter>Source files\Application\User</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Projects\STM32469I-Discovery\Applications\USB_Device\MSC_Standalone\Src\stm32f4xx_it.c">
+      <Filter>Source files\Application\User</Filter>
+    </ClCompile>
+    <None Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Projects\STM32469I-Discovery\Applications\USB_Device\MSC_Standalone\readme.txt">
+      <Filter>Source files\Doc</Filter>
+    </None>
+    <None Include="stm32.props">
+      <Filter>Source files\Device-specific files</Filter>
+    </None>
+    <ClCompile Include="$(BSP_ROOT)\STM32F4xxxx\StartupFiles\startup_stm32f469xx.c">
+      <Filter>Source files\Device-specific files</Filter>
+    </ClCompile>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy\stm32f4xx_hal_can_legacy.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_adc.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_adc_ex.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_can.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cec.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_conf_template.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cortex.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_crc.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cryp.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cryp_ex.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dac.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dac_ex.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dcmi.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dcmi_ex.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dfsdm.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma2d.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma_ex.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dsi.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_eth.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_exti.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ex.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ramfunc.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_fmpi2c.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_fmpi2c_ex.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_fmpsmbus.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio_ex.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hash.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hash_ex.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2c.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2c_ex.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2s.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2s_ex.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_irda.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_iwdg.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_lptim.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_ltdc.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_ltdc_ex.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_mmc.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_nand.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_nor.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pccard.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pcd.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pcd_ex.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_qspi.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc_ex.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rng.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rtc.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rtc_ex.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_sai.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_sai_ex.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_sd.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_sdram.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_smartcard.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_smbus.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_spdifrx.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_spi.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_sram.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_usart.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_wwdg.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_adc.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_bus.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_cortex.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_crc.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_dac.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_dma.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_dma2d.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_exti.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_fmc.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_fmpi2c.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_fsmc.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_gpio.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_i2c.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_iwdg.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_lptim.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_pwr.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_rcc.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_rng.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_rtc.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_sdmmc.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_spi.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_system.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_tim.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_usart.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_usb.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_utils.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_wwdg.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32_assert_template.h">
+      <Filter>Header files\Drivers\STM32F4xx_HAL_Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Projects\STM32469I-Discovery\Applications\USB_Device\MSC_Standalone\Inc\main.h">
+      <Filter>Header files\Drivers\CMSIS</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Projects\STM32469I-Discovery\Applications\USB_Device\MSC_Standalone\Inc\stm32f4xx_hal_conf.h">
+      <Filter>Header files\Drivers\CMSIS</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Projects\STM32469I-Discovery\Applications\USB_Device\MSC_Standalone\Inc\stm32f4xx_it.h">
+      <Filter>Header files\Drivers\CMSIS</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Projects\STM32469I-Discovery\Applications\USB_Device\MSC_Standalone\Inc\usbd_conf.h">
+      <Filter>Header files\Drivers\CMSIS</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Projects\STM32469I-Discovery\Applications\USB_Device\MSC_Standalone\Inc\usbd_desc.h">
+      <Filter>Header files\Drivers\CMSIS</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Projects\STM32469I-Discovery\Applications\USB_Device\MSC_Standalone\Inc\usbd_storage.h">
+      <Filter>Header files\Drivers\CMSIS</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Middlewares\ST\STM32_USB_Device_Library\Class\MSC\Inc\usbd_msc.h">
+      <Filter>Header files\Middlewares\STM32_USBD_Library\Class\MSC</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Middlewares\ST\STM32_USB_Device_Library\Class\MSC\Inc\usbd_msc_bot.h">
+      <Filter>Header files\Middlewares\STM32_USBD_Library\Class\MSC</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Middlewares\ST\STM32_USB_Device_Library\Class\MSC\Inc\usbd_msc_data.h">
+      <Filter>Header files\Middlewares\STM32_USBD_Library\Class\MSC</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Middlewares\ST\STM32_USB_Device_Library\Class\MSC\Inc\usbd_msc_scsi.h">
+      <Filter>Header files\Middlewares\STM32_USBD_Library\Class\MSC</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Middlewares\ST\STM32_USB_Device_Library\Class\MSC\Inc\usbd_msc_storage_template.h">
+      <Filter>Header files\Middlewares\STM32_USBD_Library\Class\MSC</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_conf_template.h">
+      <Filter>Header files\Middlewares\STM32_USBD_Library\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_core.h">
+      <Filter>Header files\Middlewares\STM32_USBD_Library\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ctlreq.h">
+      <Filter>Header files\Middlewares\STM32_USBD_Library\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_def.h">
+      <Filter>Header files\Middlewares\STM32_USBD_Library\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_desc_template.h">
+      <Filter>Header files\Middlewares\STM32_USBD_Library\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ioreq.h">
+      <Filter>Header files\Middlewares\STM32_USBD_Library\Core</Filter>
+    </ClInclude>
+    <None Include="stm32.xml">
+      <Filter>VisualGDB settings</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="usb_device_msc-Debug.vgdbsettings">
+      <Filter>VisualGDB settings</Filter>
+    </None>
+    <None Include="usb_device_msc-Release.vgdbsettings">
+      <Filter>VisualGDB settings</Filter>
+    </None>
+  </ItemGroup>
+</Project>

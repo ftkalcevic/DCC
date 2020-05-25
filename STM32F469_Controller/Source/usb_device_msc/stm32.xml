@@ -1,0 +1,620 @@
+<?xml version="1.0"?>
+<EmbeddedProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ToolchainID>com.visualgdb.arm-eabi</ToolchainID>
+  <ToolchainVersion>
+    <GCC>9.2.1</GCC>
+    <GDB>8.3.0</GDB>
+    <Revision>1</Revision>
+  </ToolchainVersion>
+  <BspID>com.sysprogs.arm.stm32</BspID>
+  <BspVersion>2020.01</BspVersion>
+  <McuID>STM32F469NI</McuID>
+  <MCUDefinitionFile>STM32F4xxxx/DeviceDefinitions/stm32f469xx.xml</MCUDefinitionFile>
+  <MCUProperties>
+    <Entries>
+      <KeyValue>
+        <Key>com.sysprogs.bspoptions.primary_memory</Key>
+        <Value>flash</Value>
+      </KeyValue>
+      <KeyValue>
+        <Key>com.sysprogs.bspoptions.arm.floatmode</Key>
+        <Value>-mfloat-abi=hard</Value>
+      </KeyValue>
+      <KeyValue>
+        <Key>com.sysprogs.mcuoptions.ignore_startup_file</Key>
+      </KeyValue>
+      <KeyValue>
+        <Key>com.sysprogs.toolchainoptions.arm.libctype</Key>
+        <Value>--specs=nano.specs</Value>
+      </KeyValue>
+      <KeyValue>
+        <Key>com.sysprogs.toolchainoptions.arm.syscallspecs</Key>
+        <Value>--specs=nosys.specs</Value>
+      </KeyValue>
+    </Entries>
+  </MCUProperties>
+  <BSPSourceFolderName>Device-specific files</BSPSourceFolderName>
+  <MCUMakFile>stm32.mak</MCUMakFile>
+  <ReferencedFrameworks />
+  <FrameworkProperties>
+    <Entries />
+  </FrameworkProperties>
+  <TestFrameworkProperties>
+    <Entries />
+  </TestFrameworkProperties>
+  <ImportedProject>
+    <ImporterID>com.sysprogs.project_importers.stm32.ide</ImporterID>
+    <RelativeProjectPath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Projects\STM32469I-Discovery\Applications\USB_Device\MSC_Standalone\SW4STM32\STM32469I-DISCOVERY_USBD-FS\.cproject</RelativeProjectPath>
+    <AllDependencies>
+      <ProjectDependency>
+        <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Projects\STM32469I-Discovery\Applications\USB_Device\MSC_Standalone\SW4STM32\STM32469I-DISCOVERY_USBD-FS\.cproject</RelativePath>
+        <Timestamp>132333062959994891</Timestamp>
+      </ProjectDependency>
+    </AllDependencies>
+    <RootDirectory>
+      <Subdirectories>
+        <VirtualDirectorySnapshot>
+          <Name>Drivers</Name>
+          <Subdirectories>
+            <VirtualDirectorySnapshot>
+              <Name>STM32F4xx_HAL_Driver</Name>
+              <Files>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_i2c.c</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_gpio.c</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma.c</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_sd.c</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash_ex.c</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_i2c_ex.c</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pcd_ex.c</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash.c</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc_ex.c</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_fsmc.c</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_sdmmc.c</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_fmc.c</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr_ex.c</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_sram.c</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma_ex.c</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc.c</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_uart.c</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_cortex.c</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pcd.c</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_usb.c</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr.c</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_adc.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_adc_ex.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_can.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cec.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_conf_template.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cortex.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_crc.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cryp.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cryp_ex.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dac.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dac_ex.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dcmi.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dcmi_ex.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dfsdm.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma2d.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma_ex.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dsi.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_eth.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_exti.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ex.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ramfunc.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_fmpi2c.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_fmpi2c_ex.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_fmpsmbus.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio_ex.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hash.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hash_ex.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2c.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2c_ex.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2s.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2s_ex.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_irda.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_iwdg.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_lptim.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_ltdc.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_ltdc_ex.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_mmc.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_nand.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_nor.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pccard.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pcd.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pcd_ex.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_qspi.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc_ex.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rng.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rtc.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rtc_ex.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_sai.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_sai_ex.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_sd.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_sdram.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_smartcard.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_smbus.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_spdifrx.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_spi.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_sram.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_usart.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_wwdg.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_adc.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_bus.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_cortex.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_crc.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_dac.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_dma.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_dma2d.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_exti.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_fmc.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_fmpi2c.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_fsmc.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_gpio.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_i2c.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_iwdg.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_lptim.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_pwr.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_rcc.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_rng.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_rtc.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_sdmmc.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_spi.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_system.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_tim.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_usart.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_usb.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_utils.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_wwdg.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32_assert_template.h</RelativePath>
+                </VirtualFileSnapshot>
+              </Files>
+            </VirtualDirectorySnapshot>
+            <VirtualDirectorySnapshot>
+              <Name>BSP</Name>
+              <Subdirectories>
+                <VirtualDirectorySnapshot>
+                  <Name>STM32469I_Discovery</Name>
+                  <Files>
+                    <VirtualFileSnapshot>
+                      <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\BSP\STM32469I-Discovery\stm32469i_discovery.c</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\BSP\STM32469I-Discovery\stm32469i_discovery_sd.c</RelativePath>
+                    </VirtualFileSnapshot>
+                  </Files>
+                </VirtualDirectorySnapshot>
+              </Subdirectories>
+              <Files />
+            </VirtualDirectorySnapshot>
+            <VirtualDirectorySnapshot>
+              <Name>CMSIS</Name>
+              <Files>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Projects\STM32469I-Discovery\Applications\USB_Device\MSC_Standalone\Src\system_stm32f4xx.c</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Projects\STM32469I-Discovery\Applications\USB_Device\MSC_Standalone\Inc\main.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Projects\STM32469I-Discovery\Applications\USB_Device\MSC_Standalone\Inc\stm32f4xx_hal_conf.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Projects\STM32469I-Discovery\Applications\USB_Device\MSC_Standalone\Inc\stm32f4xx_it.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Projects\STM32469I-Discovery\Applications\USB_Device\MSC_Standalone\Inc\usbd_conf.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Projects\STM32469I-Discovery\Applications\USB_Device\MSC_Standalone\Inc\usbd_desc.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Projects\STM32469I-Discovery\Applications\USB_Device\MSC_Standalone\Inc\usbd_storage.h</RelativePath>
+                </VirtualFileSnapshot>
+              </Files>
+            </VirtualDirectorySnapshot>
+          </Subdirectories>
+          <Files />
+        </VirtualDirectorySnapshot>
+        <VirtualDirectorySnapshot>
+          <Name>Middlewares</Name>
+          <Subdirectories>
+            <VirtualDirectorySnapshot>
+              <Name>STM32_USBD_Library</Name>
+              <Subdirectories>
+                <VirtualDirectorySnapshot>
+                  <Name>Class</Name>
+                  <Subdirectories>
+                    <VirtualDirectorySnapshot>
+                      <Name>MSC</Name>
+                      <Files>
+                        <VirtualFileSnapshot>
+                          <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Middlewares\ST\STM32_USB_Device_Library\Class\MSC\Src\usbd_msc_bot.c</RelativePath>
+                        </VirtualFileSnapshot>
+                        <VirtualFileSnapshot>
+                          <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Middlewares\ST\STM32_USB_Device_Library\Class\MSC\Src\usbd_msc.c</RelativePath>
+                        </VirtualFileSnapshot>
+                        <VirtualFileSnapshot>
+                          <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Middlewares\ST\STM32_USB_Device_Library\Class\MSC\Src\usbd_msc_data.c</RelativePath>
+                        </VirtualFileSnapshot>
+                        <VirtualFileSnapshot>
+                          <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Middlewares\ST\STM32_USB_Device_Library\Class\MSC\Src\usbd_msc_scsi.c</RelativePath>
+                        </VirtualFileSnapshot>
+                        <VirtualFileSnapshot>
+                          <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Middlewares\ST\STM32_USB_Device_Library\Class\MSC\Inc\usbd_msc.h</RelativePath>
+                        </VirtualFileSnapshot>
+                        <VirtualFileSnapshot>
+                          <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Middlewares\ST\STM32_USB_Device_Library\Class\MSC\Inc\usbd_msc_bot.h</RelativePath>
+                        </VirtualFileSnapshot>
+                        <VirtualFileSnapshot>
+                          <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Middlewares\ST\STM32_USB_Device_Library\Class\MSC\Inc\usbd_msc_data.h</RelativePath>
+                        </VirtualFileSnapshot>
+                        <VirtualFileSnapshot>
+                          <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Middlewares\ST\STM32_USB_Device_Library\Class\MSC\Inc\usbd_msc_scsi.h</RelativePath>
+                        </VirtualFileSnapshot>
+                        <VirtualFileSnapshot>
+                          <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Middlewares\ST\STM32_USB_Device_Library\Class\MSC\Inc\usbd_msc_storage_template.h</RelativePath>
+                        </VirtualFileSnapshot>
+                      </Files>
+                    </VirtualDirectorySnapshot>
+                  </Subdirectories>
+                  <Files />
+                </VirtualDirectorySnapshot>
+                <VirtualDirectorySnapshot>
+                  <Name>Core</Name>
+                  <Files>
+                    <VirtualFileSnapshot>
+                      <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ioreq.c</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_core.c</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ctlreq.c</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_conf_template.h</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_core.h</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ctlreq.h</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_def.h</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_desc_template.h</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ioreq.h</RelativePath>
+                    </VirtualFileSnapshot>
+                  </Files>
+                </VirtualDirectorySnapshot>
+              </Subdirectories>
+              <Files />
+            </VirtualDirectorySnapshot>
+          </Subdirectories>
+          <Files />
+        </VirtualDirectorySnapshot>
+        <VirtualDirectorySnapshot>
+          <Name>Application</Name>
+          <Subdirectories>
+            <VirtualDirectorySnapshot>
+              <Name>User</Name>
+              <Files>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Projects\STM32469I-Discovery\Applications\USB_Device\MSC_Standalone\Src\usbd_desc.c</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Projects\STM32469I-Discovery\Applications\USB_Device\MSC_Standalone\Src\main.c</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Projects\STM32469I-Discovery\Applications\USB_Device\MSC_Standalone\Src\usbd_conf.c</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Projects\STM32469I-Discovery\Applications\USB_Device\MSC_Standalone\Src\usbd_storage.c</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Projects\STM32469I-Discovery\Applications\USB_Device\MSC_Standalone\Src\stm32f4xx_it.c</RelativePath>
+                </VirtualFileSnapshot>
+              </Files>
+            </VirtualDirectorySnapshot>
+          </Subdirectories>
+          <Files />
+        </VirtualDirectorySnapshot>
+        <VirtualDirectorySnapshot>
+          <Name>Doc</Name>
+          <Files>
+            <VirtualFileSnapshot>
+              <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Projects\STM32469I-Discovery\Applications\USB_Device\MSC_Standalone\readme.txt</RelativePath>
+            </VirtualFileSnapshot>
+          </Files>
+        </VirtualDirectorySnapshot>
+      </Subdirectories>
+      <Files>
+        <VirtualFileSnapshot>
+          <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy\stm32f4xx_hal_can_legacy.h</RelativePath>
+        </VirtualFileSnapshot>
+        <VirtualFileSnapshot>
+          <RelativePath>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h</RelativePath>
+        </VirtualFileSnapshot>
+      </Files>
+    </RootDirectory>
+    <Configurations>
+      <ImportedConfiguration>
+        <IsStaticLibrary>false</IsStaticLibrary>
+        <Settings>
+          <IncludeDirectories>
+            <string>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Projects\STM32469I-Discovery\Applications\USB_Device\MSC_Standalone\Inc</string>
+            <string>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include</string>
+            <string>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\STM32F4xx_HAL_Driver\Inc</string>
+            <string>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\BSP\STM32469I-Discovery</string>
+            <string>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Middlewares\ST\STM32_USB_Device_Library\Core\Inc</string>
+            <string>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Middlewares\ST\STM32_USB_Device_Library\Class\MSC\Inc</string>
+            <string>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Projects\STM32469I-Discovery\Applications\USB_Device\MSC_Standalone\SW4STM32\STM32469I-DISCOVERY_USBD-FS</string>
+            <string>C:\Users\Frank Tkalcevic\STM32Cube\Repository\STM32Cube_FW_F4_V1.25.0\Drivers\CMSIS\Include</string>
+          </IncludeDirectories>
+          <PreprocessorMacros>
+            <string>USE_HAL_DRIVER</string>
+            <string>STM32F469xx</string>
+          </PreprocessorMacros>
+          <GeneratePreprocessorOutput>false</GeneratePreprocessorOutput>
+          <IsDebugConfiguration>false</IsDebugConfiguration>
+        </Settings>
+      </ImportedConfiguration>
+    </Configurations>
+  </ImportedProject>
+</EmbeddedProfile>
