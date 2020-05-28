@@ -17,14 +17,15 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <io.h>
+#include <assert.h>
 #include "../STM32F469_Disco_DCC/upng.h"
 
 // CAboutDlg dialog used for App About
 
 //#define INPUTFILE "..\\Images\\simple.png"
 //#define INPUTFILE "..\\Images\\Lines.png"
-//#define INPUTFILE "..\\Images\\Splash.png"
-#define INPUTFILE "..\\Images\\background.png"
+#define INPUTFILE "..\\Images\\Splash.png"
+//#define INPUTFILE "..\\Images\\background.png"
 
 
 class CAboutDlg : public CDialogEx
