@@ -5,18 +5,11 @@
 #include <touchgfx/Unicode.hpp>
 
 extern const uint32_t indicesGb[];
-extern const touchgfx::Unicode::UnicodeChar textsGb[];
-
-TEXT_LOCATION_FLASH_PRAGMA
-KEEP extern const touchgfx::Unicode::UnicodeChar textsGb[] TEXT_LOCATION_FLASH_ATTRIBUTE =
-{
-    2,0, // T_TextId1
-    48,0  // T_SingleUseId1
-};
 
 TEXT_LOCATION_FLASH_PRAGMA
 KEEP extern const uint32_t indicesGb[] TEXT_LOCATION_FLASH_ATTRIBUTE =
 {
-    0, // T_TextId1
-    2  // T_SingleUseId1
+    14, // T_TextId1
+    16, // T_SingleUseId1
+    0  // T_SingleUseId2
 };

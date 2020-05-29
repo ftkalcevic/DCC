@@ -10,7 +10,7 @@
     <MainSourceDirectory>$(ProjectDir)</MainSourceDirectory>
     <ExportAdvancedBuildVariables>false</ExportAdvancedBuildVariables>
     <EmbeddedProfileFile>stm32.xml</EmbeddedProfileFile>
-    <MemoryListSource>DeviceDefinition</MemoryListSource>
+    <MemoryListSource>LinkerScript</MemoryListSource>
   </Project>
   <Build xsi:type="com.visualgdb.build.msbuild">
     <BuildLogMode xsi:nil="true" />
@@ -22,6 +22,7 @@
     <ProjectFile>STM32F469_Disco_DCC.vcxproj</ProjectFile>
     <RemoteBuildEnvironment>
       <Records />
+      <EnvironmentSetupFiles />
     </RemoteBuildEnvironment>
     <ParallelJobCount>1</ParallelJobCount>
     <SuppressDirectoryChangeMessages>true</SuppressDirectoryChangeMessages>

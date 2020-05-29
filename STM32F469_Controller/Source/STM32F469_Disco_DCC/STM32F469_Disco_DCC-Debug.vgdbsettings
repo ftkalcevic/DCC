@@ -83,7 +83,7 @@
       <FilterSpuriousStoppedNotifications>false</FilterSpuriousStoppedNotifications>
       <ForceSingleThreadedMode>false</ForceSingleThreadedMode>
       <UseAppleExtensions>false</UseAppleExtensions>
-      <CanAcceptCommandsWhileRunning>true</CanAcceptCommandsWhileRunning>
+      <CanAcceptCommandsWhileRunning>false</CanAcceptCommandsWhileRunning>
       <MakeLogFile>false</MakeLogFile>
       <IgnoreModuleEventsWhileStepping>true</IgnoreModuleEventsWhileStepping>
       <UseRelativePathsOnly>false</UseRelativePathsOnly>
@@ -101,7 +101,7 @@
     <DebugMethod>
       <ID>com.sysprogs.arm.openocd</ID>
       <Configuration xsi:type="com.visualgdb.edp.openocd.settings">
-        <CommandLine>-f interface/stlink-v2-1.cfg -c "transport select hla_swd" -f target/stm32f4x.cfg -c "flash bank qspi plugin 0x90000000 0 0 0 0 D:/Projects/DCC/STM32F469_Controller/Source/QSPIDriver/VisualGDB/Release/QSPIDriver.elf" -c init -c "reset halt"</CommandLine>
+        <CommandLine>-f interface/stlink-v2-1.cfg -c "transport select hla_swd" -f target/stm32f4x.cfg -c "flash bank qspi plugin 0x90000000 0 0 0 0 D:/Projects/DCC/STM32F469_Controller/Source/QSPIDriver/VisualGDB/Release/QSPIDriver.elf" -c init -c "reset init"</CommandLine>
         <ExtraParameters>
           <Frequency xsi:nil="true" />
           <BoostedFrequency xsi:nil="true" />
@@ -113,13 +113,14 @@
           <string>set remotetimeout 60</string>
           <string>target remote :$$SYS:GDB_PORT$$</string>
           <string>mon halt</string>
+          <string>mon reset init</string>
           <string>load</string>
           <string>mon reset init</string>
         </StartupCommands>
         <ProgramFLASHUsingExternalTool>false</ProgramFLASHUsingExternalTool>
         <PreferredGDBPort>0</PreferredGDBPort>
         <PreferredTelnetPort>0</PreferredTelnetPort>
-        <AlwaysPassSerialNumber>false</AlwaysPassSerialNumber>
+        <AlwaysPassSerialNumber>true</AlwaysPassSerialNumber>
         <SelectedCoreIndex xsi:nil="true" />
       </Configuration>
     </DebugMethod>

@@ -152,10 +152,10 @@
       <UniqueIdentifier>{37ad516c-809c-4cbf-9c0d-d11882f447dc}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source files\Device-specific files\Semihosting/Profiler">
-      <UniqueIdentifier>{b9c43995-17a6-414d-9c83-26fe50dac645}</UniqueIdentifier>
+      <UniqueIdentifier>{297c5d74-6e01-41ba-9bca-c32bbe4b36a0}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header files\Device-specific files\Semihosting/Profiler">
-      <UniqueIdentifier>{e3201366-7403-4007-9432-f968e62acf23}</UniqueIdentifier>
+      <UniqueIdentifier>{05e9e9f2-cda3-4394-9ad0-2b31f7addf94}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -211,9 +211,6 @@
       <Filter>Source files\Application\User\generated</Filter>
     </ClCompile>
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\texts\src\TypedTextDatabase.cpp">
-      <Filter>Source files\Application\User\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\bg.cpp">
       <Filter>Source files\Application\User\generated</Filter>
     </ClCompile>
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\counter_box.cpp">
@@ -675,6 +672,30 @@
     <ClCompile Include="AudioTask.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\startupscreen_screen\StartupScreenViewBase.cpp">
+      <Filter>Source files\Application\User\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_PageIndicator_dot_indicator_small_highlight.cpp">
+      <Filter>Source files\Application\User\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_PageIndicator_dot_indicator_small_normal.cpp">
+      <Filter>Source files\Application\User\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\startupscreen_screen\StartupScreenPresenter.cpp">
+      <Filter>Source files\Application\User\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\startupscreen_screen\StartupScreenView.cpp">
+      <Filter>Source files\Application\User\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\background.cpp">
+      <Filter>Source files\Application\User\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Dark_Textures_carbon_fibre.cpp">
+      <Filter>Source files\Application\User\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="upng.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
     <ClCompile Include="$(EFP_BASE)\Profiler\FastSemihosting.cpp">
       <Filter>Source files\Device-specific files\Semihosting/Profiler</Filter>
     </ClCompile>
@@ -795,6 +816,9 @@
       <Filter>Source files\Drivers\BSP\STM32469I-Discovery</Filter>
     </ClInclude>
     <ClInclude Include="AudioTask.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="upng.h">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>

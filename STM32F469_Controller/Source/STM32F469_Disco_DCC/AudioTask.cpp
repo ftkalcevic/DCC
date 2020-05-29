@@ -205,6 +205,7 @@ extern "C" void AudioTask_Entry(void *argument)
 
 void AudioTask::Run()
 {
+//	for(;;) vTaskDelay(pdMS_TO_TICKS(1000));
 //	vTaskDelay(pdMS_TO_TICKS(500));
 //	audioTask.PlaySound(EAudioSounds::KeyPressTone);
 

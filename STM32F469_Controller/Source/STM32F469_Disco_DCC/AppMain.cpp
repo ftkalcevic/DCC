@@ -16,7 +16,7 @@ void AppMain::Run()
 	// Play startup sound
 //	audioTask.PlaySound(EAudioSounds::Bell2);
 	
-//	for(;;) vTaskDelay(pdMS_TO_TICKS(1000));
+	for(;;) vTaskDelay(pdMS_TO_TICKS(1000));
 	
 			GPIO_InitTypeDef GPIO_InitStruct = { 0 };
 			GPIO_InitStruct.Pin = PrgTrk_DCC_Signal_Pin;

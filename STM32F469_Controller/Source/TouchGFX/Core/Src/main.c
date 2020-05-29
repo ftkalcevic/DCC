@@ -233,14 +233,14 @@ extern void AudioTask_Entry(void *argument);
 //		HAL_GPIO_Init(BOOST_MOSI_GPIO_Port, &GPIO_InitStruct);		
 //		
 //		GPIO_InitStruct.Pin = BOOST_MISO_Pin;
-//		HAL_GPIO_Init(BOOST_MISO_GPIO_Port, &GPIO_InitStruct);		
+//		HAL_GPIO_Init(BOOST_MISO_GPIO_Port, &GPIO_InitStruct);	 
 //	}
 //}
 
 /* USER CODE END 0 */
 
 /**
-  * @brief  The application entry point.
+  * @brief  The application entry point. 
   * @retval int
   */
 int main(void)
@@ -251,7 +251,7 @@ int main(void)
 
   /* MCU Configuration--------------------------------------------------------*/
 
-  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */ 
   HAL_Init();
 
   /* USER CODE BEGIN Init */
@@ -285,8 +285,8 @@ int main(void)
   MX_SPI2_Init();
   MX_TIM1_Init();
   MX_USART3_UART_Init();
-  //MX_TIM3_Init();
-  //MX_TIM8_Init();
+  MX_TIM3_Init();
+  MX_TIM8_Init();
   MX_RTC_Init();
   MX_USB_OTG_FS_USB_Init();
   MX_TouchGFX_Init();
@@ -337,7 +337,7 @@ int main(void)
   /* USER CODE BEGIN RTOS_THREADS */
 	
 	
-	printf("RTOS Kernel Starting...\n");
+	//printf("RTOS Kernel Starting...\n");
   /* USER CODE END RTOS_THREADS */
 
   /* Start scheduler */
@@ -1630,6 +1630,8 @@ __weak void TouchGFX_Task(void *argument)
 /* USER CODE END Header_InitialiseTask_Entry */
 void InitialiseTask_Entry(void *argument)
 {
+	for (;;) osDelay(pdMS_TO_TICKS(1000));
+	return;
   /* USER CODE BEGIN InitialiseTask_Entry */
 	FRESULT res;
 	res = f_mount(&FatFs, "/", 1);
@@ -1638,7 +1640,6 @@ void InitialiseTask_Entry(void *argument)
 		printf("Failed to mount volume - %d\n", res);
 	}
 	
-	for (;;) osDelay(pdMS_TO_TICKS(1000));
     //MX_USB_DEVICE_Init();
 
     vTaskDelete(NULL);
@@ -1773,3 +1774,12 @@ void assert_failed(uint8_t *file, uint32_t line)
 #endif /* USE_FULL_ASSERT */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+/*
+ 
+ /Images/backgnd.png
+ /Images/splash.png
+ 
+ - Main screen should go straight to train driving
+ 
+ 
+ **/

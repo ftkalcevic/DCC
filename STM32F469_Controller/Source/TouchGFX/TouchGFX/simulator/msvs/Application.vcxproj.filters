@@ -172,6 +172,18 @@
     <Filter Include="Header Files\generated\gui_generated\common">
       <UniqueIdentifier>FB10352F-EC2B-AEFE-88E0-5B89D1B1994F</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\gui\startupscreen_screen">
+      <UniqueIdentifier>EE72CAE6-3F7E-3E14-ECB0-EA1CE9281D22</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gui\startupscreen_screen">
+      <UniqueIdentifier>B69AD87D-C01C-8A6A-491F-CAA6117A3FF8</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\generated\gui_generated\startupscreen_screen">
+      <UniqueIdentifier>EE89456E-24A7-FAE8-9A17-82F9CEF44FC6</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\generated\gui_generated\startupscreen_screen">
+      <UniqueIdentifier>74A4CD3C-D5B6-089A-E441-0963AAECFDFA</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(TouchGFXReleasePath)\framework\source\platform\driver\touch\SDL2TouchController.cpp">
@@ -209,6 +221,15 @@
     </ClCompile>
     <ClCompile Include="..\..\gui\src\model\Model.cpp">
       <Filter>Source Files\gui\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\startupscreen_screen\StartupScreenPresenter.cpp">
+      <Filter>Source Files\gui\startupscreen_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\startupscreen_screen\StartupScreenView.cpp">
+      <Filter>Source Files\gui\startupscreen_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\startupscreen_screen\StartupScreenViewBase.cpp">
+      <Filter>Source Files\generated\gui_generated\startupscreen_screen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -651,6 +672,15 @@
     </ClInclude>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\common\SimConstants.hpp">
       <Filter>Header Files\generated\gui_generated\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\startupscreen_screen\StartupScreenPresenter.hpp">
+      <Filter>Header Files\gui\startupscreen_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\startupscreen_screen\StartupScreenView.hpp">
+      <Filter>Header Files\gui\startupscreen_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\startupscreen_screen\StartupScreenViewBase.hpp">
+      <Filter>Header Files\generated\gui_generated\startupscreen_screen</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

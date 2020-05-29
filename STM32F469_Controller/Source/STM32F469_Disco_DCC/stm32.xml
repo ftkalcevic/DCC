@@ -91,7 +91,7 @@
     <AllDependencies>
       <ProjectDependency>
         <RelativePath>..\TouchGFX\STM32CubeIDE\.cproject</RelativePath>
-        <Timestamp>132346210917653437</Timestamp>
+        <Timestamp>132351304970858223</Timestamp>
       </ProjectDependency>
     </AllDependencies>
     <RootDirectory>
@@ -145,9 +145,6 @@
                       <RelativePath>..\TouchGFX\TouchGFX\generated\texts\src\TypedTextDatabase.cpp</RelativePath>
                     </VirtualFileSnapshot>
                     <VirtualFileSnapshot>
-                      <RelativePath>..\TouchGFX\TouchGFX\generated\images\src\bg.cpp</RelativePath>
-                    </VirtualFileSnapshot>
-                    <VirtualFileSnapshot>
                       <RelativePath>..\TouchGFX\TouchGFX\generated\images\src\counter_box.cpp</RelativePath>
                     </VirtualFileSnapshot>
                     <VirtualFileSnapshot>
@@ -168,6 +165,21 @@
                     <VirtualFileSnapshot>
                       <RelativePath>..\TouchGFX\TouchGFX\generated\images\src\up_btn_pressed.cpp</RelativePath>
                     </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\generated\gui_generated\src\startupscreen_screen\StartupScreenViewBase.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\generated\images\src\background.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_PageIndicator_dot_indicator_small_highlight.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_PageIndicator_dot_indicator_small_normal.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\generated\images\src\__designer\Dark_Textures_carbon_fibre.cpp</RelativePath>
+                    </VirtualFileSnapshot>
                   </Files>
                 </VirtualDirectorySnapshot>
                 <VirtualDirectorySnapshot>
@@ -184,6 +196,12 @@
                     </VirtualFileSnapshot>
                     <VirtualFileSnapshot>
                       <RelativePath>..\TouchGFX\TouchGFX\gui\src\model\Model.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\gui\src\startupscreen_screen\StartupScreenPresenter.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\gui\src\startupscreen_screen\StartupScreenView.cpp</RelativePath>
                     </VirtualFileSnapshot>
                   </Files>
                 </VirtualDirectorySnapshot>

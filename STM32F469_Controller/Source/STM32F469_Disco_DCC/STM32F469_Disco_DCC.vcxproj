@@ -33,11 +33,13 @@
     <ToolchainVersion>9.2.1/8.3.0/r1</ToolchainVersion>
     <MCUPropertyListFile>$(ProjectDir)stm32.props</MCUPropertyListFile>
     <TargetExt>.elf</TargetExt>
+    <GenerateHexFile>true</GenerateHexFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">
     <ToolchainID>com.visualgdb.arm-eabi</ToolchainID>
     <ToolchainVersion>9.2.1/8.3.0/r1</ToolchainVersion>
     <MCUPropertyListFile>$(ProjectDir)stm32.props</MCUPropertyListFile>
+    <GenerateHexFile>true</GenerateHexFile>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">
     <ClCompile>
@@ -50,9 +52,9 @@
     <Link>
       <LibrarySearchDirectories>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\Middlewares\ST\touchgfx\lib\core\cortex_m4f\gcc;%(Link.LibrarySearchDirectories)</LibrarySearchDirectories>
       <AdditionalLibraryNames>touchgfx-float-abi-hard;%(Link.AdditionalLibraryNames)</AdditionalLibraryNames>
-      <AdditionalLinkerInputs>;%(Link.AdditionalLinkerInputs)</AdditionalLinkerInputs>
+      <AdditionalLinkerInputs>%(Link.AdditionalLinkerInputs)</AdditionalLinkerInputs>
       <AdditionalOptions />
-      <LinkerScript>..\TouchGFX\gcc\STM32F469NIHx_FLASH.ld</LinkerScript>
+      <LinkerScript>..\TouchGFX\STM32CubeIDE\STM32F469NIHX_FLASH.ld</LinkerScript>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">
@@ -72,9 +74,10 @@
       <GenerateMapFile>true</GenerateMapFile>
       <MapFileName>$(TargetPath).map</MapFileName>
     </Link>
+    <ToolchainSettingsContainer>
+      <FloatABI>hard</FloatABI>
+    </ToolchainSettingsContainer>
   </ItemDefinitionGroup>
-  <ItemGroup>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
@@ -111,7 +114,6 @@
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\fonts\src\Table_Asap_Regular_80_4bpp.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\texts\src\Texts.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\texts\src\TypedTextDatabase.cpp" />
-    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\bg.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\counter_box.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\down_btn.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\down_btn_disabled.cpp" />
@@ -188,6 +190,7 @@
     <ClCompile Include="DRV8873S.cpp" />
     <ClCompile Include="LCCTask.cpp" />
     <ClCompile Include="stm32f4xx_hal_tim_plus.c" />
+    <ClCompile Include="upng.cpp" />
     <ClInclude Include="..\OpenLCB\src\Configuration.h" />
     <ClInclude Include="..\OpenLCB\src\Datagram.h" />
     <ClInclude Include="..\OpenLCB\src\Event.h" />
@@ -217,6 +220,7 @@
     <ClInclude Include="DRV8873S.h" />
     <ClInclude Include="LCCTask.h" />
     <ClInclude Include="stm32f4xx_hal_tim_plus.h" />
+    <ClInclude Include="upng.h" />
     <None Include="stm32.props" />
     <ClCompile Include="$(BSP_ROOT)\STM32F4xxxx\StartupFiles\startup_stm32f469xx.c" />
     <ClInclude Include="..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h" />
@@ -280,6 +284,13 @@
     <ClCompile Include="..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rtc_ex.c" />
     <ClInclude Include="..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rtc.h" />
     <ClInclude Include="..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rtc_ex.h" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\startupscreen_screen\StartupScreenViewBase.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_PageIndicator_dot_indicator_small_highlight.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_PageIndicator_dot_indicator_small_normal.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\startupscreen_screen\StartupScreenPresenter.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\startupscreen_screen\StartupScreenView.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\background.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Dark_Textures_carbon_fibre.cpp" />
     <ClCompile Include="$(EFP_BASE)\Profiler\FastSemihosting.cpp" />
     <ClCompile Include="$(EFP_BASE)\Profiler\SamplingProfiler.cpp" />
     <ClCompile Include="$(EFP_BASE)\Profiler\InstrumentingProfiler.cpp" />

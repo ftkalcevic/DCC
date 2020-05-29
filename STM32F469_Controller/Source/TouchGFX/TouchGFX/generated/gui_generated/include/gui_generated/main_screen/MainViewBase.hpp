@@ -7,11 +7,13 @@
 #include <gui/common/FrontendApplication.hpp>
 #include <mvp/View.hpp>
 #include <gui/main_screen/MainPresenter.hpp>
+#include <touchgfx/containers/SwipeContainer.hpp>
+#include <touchgfx/containers/Container.hpp>
 #include <touchgfx/widgets/Box.hpp>
-#include <touchgfx/widgets/ScalableImage.hpp>
+#include <touchgfx/widgets/TiledImage.hpp>
 #include <touchgfx/widgets/Image.hpp>
-#include <touchgfx/widgets/TextAreaWithWildcard.hpp>
 #include <touchgfx/widgets/Button.hpp>
+#include <touchgfx/widgets/TextAreaWithWildcard.hpp>
 
 class MainViewBase : public touchgfx::View<MainPresenter>
 {
@@ -41,12 +43,16 @@ protected:
     /*
      * Member Declarations
      */
+    touchgfx::SwipeContainer swipeContainer1;
+    touchgfx::Container swipeContainer1Page1;
     touchgfx::Box backgroundBox;
-    touchgfx::ScalableImage backgroundImage;
+    touchgfx::TiledImage tiledImage1;
     touchgfx::Image counterBackgroundImage;
-    touchgfx::TextAreaWithOneWildcard countTxt;
-    touchgfx::Button buttonUp;
     touchgfx::Button buttonDown;
+    touchgfx::Button buttonUp;
+    touchgfx::TextAreaWithOneWildcard countTxt;
+    touchgfx::Container swipeContainer1Page2;
+    touchgfx::Image image1;
 
     /*
      * Wildcard Buffers

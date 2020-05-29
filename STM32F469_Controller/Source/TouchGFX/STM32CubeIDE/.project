@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
 	<name>STM32F469I-DISCO</name>
-	<comment></comment>
+	<comment/>
 	<projects>
 	</projects>
 	<buildSpec>
@@ -552,6 +552,51 @@
 			<name>Application/User/TouchGFX/target/generated/TouchGFXGeneratedHAL.cpp</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/target/generated/TouchGFXGeneratedHAL.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/StartupScreenPresenter.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/startupscreen_screen/StartupScreenPresenter.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/StartupScreenView.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/startupscreen_screen/StartupScreenView.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/StartupScreenViewBase.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/startupscreen_screen/StartupScreenViewBase.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/background.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/background.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/Blue_PageIndicator_dot_indicator_small_highlight.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/__designer/Blue_PageIndicator_dot_indicator_small_highlight.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/Blue_PageIndicator_dot_indicator_small_normal.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/__designer/Blue_PageIndicator_dot_indicator_small_normal.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/Blue_Backgrounds_Main_bg_texture_800x480px.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/__designer/Blue_Backgrounds_Main_bg_texture_800x480px.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/Blue_Backgrounds_Main_bg_320x240px.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/__designer/Blue_Backgrounds_Main_bg_320x240px.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/Dark_Textures_carbon_fibre.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/__designer/Dark_Textures_carbon_fibre.cpp</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

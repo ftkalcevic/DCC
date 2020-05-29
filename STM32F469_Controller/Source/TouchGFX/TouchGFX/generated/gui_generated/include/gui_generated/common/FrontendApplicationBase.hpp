@@ -16,7 +16,10 @@ public:
     virtual ~FrontendApplicationBase() { }
 
     // Main
-    void gotoMainScreenNoTransition();
+    void gotoMainScreenSlideTransitionEast();
+
+    // StartupScreen
+    void gotoStartupScreenScreenNoTransition();
 
 protected:
     touchgfx::Callback<FrontendApplicationBase> transitionCallback;
@@ -24,7 +27,10 @@ protected:
     Model& model;
 
     // Main
-    void gotoMainScreenNoTransitionImpl();
+    void gotoMainScreenSlideTransitionEastImpl();
+
+    // StartupScreen
+    void gotoStartupScreenScreenNoTransitionImpl();
 };
 
 #endif // FRONTENDAPPLICATIONBASE_HPP

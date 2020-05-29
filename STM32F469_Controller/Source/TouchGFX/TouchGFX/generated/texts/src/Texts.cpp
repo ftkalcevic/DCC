@@ -17,8 +17,14 @@ touchgfx::TextProvider::UnicodeConverterFunctionPointer touchgfx::TextProvider::
 //Default typed text database
 extern const touchgfx::TypedText::TypedTextData* const typedTextDatabaseArray[];
 
+TEXT_LOCATION_FLASH_PRAGMA
+KEEP extern const touchgfx::Unicode::UnicodeChar texts_all_languages[] TEXT_LOCATION_FLASH_ATTRIBUTE =
+{
+    0x44, 0x69, 0x73, 0x63, 0x6f, 0x20, 0x44, 0x43, 0x43, 0x20, 0x4c, 0x43, 0x43, 0x0, // @0 "Disco DCC LCC"
+    0x2, 0x0, // @14 "<>"
+    0x30, 0x0 // @16 "0"
+};
 extern uint32_t const indicesGb[];
-extern const touchgfx::Unicode::UnicodeChar textsGb[];
 
 //array holding dynamically installed languages
 struct TranslationHeader
@@ -33,9 +39,6 @@ static const TranslationHeader* languagesArray[1] = { 0 };
 static const uint32_t* const staticLanguageIndices[] =
 {
     indicesGb
-};
-static const touchgfx::Unicode::UnicodeChar* const staticLanguageTexts[] = {
-    textsGb
 };
 
 touchgfx::LanguageId touchgfx::Texts::currentLanguage = static_cast<touchgfx::LanguageId>(0);
@@ -58,7 +61,7 @@ void touchgfx::Texts::setLanguage(touchgfx::LanguageId id)
         else
         {
             //compiled and linked in languages
-            currentLanguagePtr = staticLanguageTexts[id];
+            currentLanguagePtr = texts_all_languages;
             currentLanguageIndices = staticLanguageIndices[id];
             currentLanguageTypedText = typedTextDatabaseArray[id];
         }
