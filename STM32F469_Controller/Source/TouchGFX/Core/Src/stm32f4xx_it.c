@@ -64,6 +64,7 @@ extern LTDC_HandleTypeDef hltdc;
 extern DMA_HandleTypeDef hdma_sai1_a;
 extern SAI_HandleTypeDef hsai_BlockA1;
 extern DMA_HandleTypeDef hdma_sdio_rx;
+extern SD_HandleTypeDef hsd;
 extern DMA_HandleTypeDef hdma_tim3_ch4_up;
 extern DMA_HandleTypeDef hdma_tim8_up;
 extern TIM_HandleTypeDef htim3;
@@ -217,6 +218,20 @@ void TIM8_UP_TIM13_IRQHandler(void)
 }
 
 /**
+  * @brief This function handles SDIO global interrupt.
+  */
+void SDIO_IRQHandler(void)
+{
+  /* USER CODE BEGIN SDIO_IRQn 0 */
+
+  /* USER CODE END SDIO_IRQn 0 */
+  HAL_SD_IRQHandler(&hsd);
+  /* USER CODE BEGIN SDIO_IRQn 1 */
+
+  /* USER CODE END SDIO_IRQn 1 */
+}
+
+/**
   * @brief This function handles TIM6 global interrupt, DAC1 and DAC2 underrun error interrupts.
   */
 void TIM6_DAC_IRQHandler(void)
@@ -338,11 +353,5 @@ void DSI_IRQHandler(void)
 }
 
 /* USER CODE BEGIN 1 */
-
-void SDIO_IRQHandler(void)
-{
-	HAL_SD_IRQHandler(&hsd);
-}
-
 /* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

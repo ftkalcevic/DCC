@@ -235,8 +235,6 @@ uint8_t BSP_SD_ReadBlocks_DMA(uint32_t *pData, uint32_t ReadAddr, uint32_t NumOf
 		// Switch DMA to read
 		HAL_DMA_Init(&hdma_sdio_rx);
 		lastSDIOState = Read;
-		HAL_NVIC_SetPriority(SDIO_IRQn, 5, 0);
-		HAL_NVIC_EnableIRQ(SDIO_IRQn);
 	}
 	
 	/* Read block(s) in DMA transfer mode */
@@ -258,8 +256,6 @@ uint8_t BSP_SD_WriteBlocks_DMA(uint32_t *pData, uint32_t WriteAddr, uint32_t Num
 		// Switch DMA to read
 		HAL_DMA_Init(&hdma_sdio_tx);
 		lastSDIOState = Write;
-		HAL_NVIC_SetPriority(SDIO_IRQn, 5, 0);
-		HAL_NVIC_EnableIRQ(SDIO_IRQn);
 	}
 	
 	/* Write block(s) in DMA transfer mode */
