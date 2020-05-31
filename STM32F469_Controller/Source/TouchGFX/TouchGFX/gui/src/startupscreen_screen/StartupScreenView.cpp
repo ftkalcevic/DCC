@@ -2,9 +2,6 @@
 #include <touchgfx/Color.hpp>
 #include <texts/TextKeysAndLanguages.hpp>
 #include <gui/common/BinFileLoader.h>
-#include "fatfs.h"
-
-extern FATFS FatFs;
 
 StartupScreenView::StartupScreenView()
 {

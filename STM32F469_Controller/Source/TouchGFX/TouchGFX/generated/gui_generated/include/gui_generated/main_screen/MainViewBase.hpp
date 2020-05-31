@@ -9,7 +9,6 @@
 #include <gui/main_screen/MainPresenter.hpp>
 #include <touchgfx/containers/SwipeContainer.hpp>
 #include <touchgfx/containers/Container.hpp>
-#include <touchgfx/widgets/Box.hpp>
 #include <touchgfx/widgets/TiledImage.hpp>
 #include <touchgfx/widgets/Image.hpp>
 #include <touchgfx/widgets/Button.hpp>
@@ -45,14 +44,13 @@ protected:
      */
     touchgfx::SwipeContainer swipeContainer1;
     touchgfx::Container swipeContainer1Page1;
-    touchgfx::Box backgroundBox;
-    touchgfx::TiledImage tiledImage1;
+    touchgfx::TiledImage backgroundImage1;
     touchgfx::Image counterBackgroundImage;
     touchgfx::Button buttonDown;
     touchgfx::Button buttonUp;
     touchgfx::TextAreaWithOneWildcard countTxt;
     touchgfx::Container swipeContainer1Page2;
-    touchgfx::Image image1;
+    touchgfx::TiledImage backgroundImage2;
 
     /*
      * Wildcard Buffers

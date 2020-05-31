@@ -8,30 +8,11 @@
               {
                 "Components": [
                   {
-                    "Color": {
-                      "Red": 0,
-                      "Green": 0,
-                      "Blue": 0
-                    },
-                    "Alpha": 255,
-                    "Name": "backgroundBox",
-                    "X": 0,
-                    "Y": 0,
-                    "Width": 800,
-                    "Height": 480,
-                    "Type": "Box",
-                    "Visible": false,
-                    "Draggable": false,
-                    "Clickable": false,
-                    "Fadeable": false,
-                    "Moveable": false
-                  },
-                  {
                     "FileName": "__designer\\Dark_Textures_carbon_fibre.png",
                     "Alpha": 255,
                     "OffsetX": 0,
                     "OffsetY": 0,
-                    "Name": "tiledImage1",
+                    "Name": "backgroundImage1",
                     "X": 0,
                     "Y": 0,
                     "Width": 800,
@@ -135,14 +116,16 @@
               {
                 "Components": [
                   {
-                    "RelativeFilename": "background.png",
+                    "FileName": "__designer\\Dark_Textures_carbon_fibre.png",
                     "Alpha": 255,
-                    "Name": "image1",
+                    "OffsetX": 0,
+                    "OffsetY": 0,
+                    "Name": "backgroundImage2",
                     "X": 0,
                     "Y": 0,
                     "Width": 800,
                     "Height": 480,
-                    "Type": "Image",
+                    "Type": "TiledImage",
                     "Visible": true,
                     "Draggable": false,
                     "Clickable": false,

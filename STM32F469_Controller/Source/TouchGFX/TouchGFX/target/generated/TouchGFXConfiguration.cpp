@@ -36,9 +36,9 @@ static TouchGFXHAL hal(dma, display, tc, 800, 480);
 
 void touchgfx_init()
 {
-    uint16_t* const bitmapCache = (uint16_t*)0xC0400000;
-    const uint32_t bitmapCacheSize = 0x400000;
-	const uint32_t numberOfDynamicBitmaps = 10;
+  uint16_t* const bitmapCache = (uint16_t*)0xC0400000;
+  const uint32_t bitmapCacheSize = 0x400000;
+  const uint32_t numberOfDynamicBitmaps = 10;
   Bitmap::registerBitmapDatabase(BitmapDatabase::getInstance(), BitmapDatabase::getInstanceSize(), bitmapCache, bitmapCacheSize, numberOfDynamicBitmaps); 
   TypedText::registerTexts(&texts);
   Texts::setLanguage(0);

@@ -687,9 +687,6 @@
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\startupscreen_screen\StartupScreenView.cpp">
       <Filter>Source files\Application\User\gui</Filter>
     </ClCompile>
-    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\background.cpp">
-      <Filter>Source files\Application\User\generated</Filter>
-    </ClCompile>
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Dark_Textures_carbon_fibre.cpp">
       <Filter>Source files\Application\User\generated</Filter>
     </ClCompile>

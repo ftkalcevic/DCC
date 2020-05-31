@@ -1,6 +1,7 @@
 #include <gui/main_screen/MainView.hpp>
 #include "BitmapDatabase.hpp"
 #include "AudioTask.h"
+#include <gui/common/BinFileLoader.h>
 
 MainView::MainView()
 {
@@ -11,17 +12,32 @@ MainView::MainView()
 //    if (HAL::DISPLAY_WIDTH > backgroundImage.getWidth() ||
 //            HAL::DISPLAY_HEIGHT > backgroundImage.getHeight())
     {
-        backgroundBox.setVisible(true);
+        //backgroundBox.setVisible(true);
     }
+}
+
+MainView::~MainView()
+{
 }
 
 void MainView::setupScreen()
 {
     setCount(count);
+	bmpId = BinFileLoader::makeBitmap("/Images/background"); 
+	if (bmpId != BITMAP_INVALID)
+	{
+		backgroundImage1.setBitmap(Bitmap(bmpId));
+		backgroundImage2.setBitmap(Bitmap(bmpId));
+	}
 }
 
 void MainView::tearDownScreen()
 {
+	if (bmpId != BITMAP_INVALID)
+	{
+		Bitmap::dynamicBitmapDelete(bmpId);
+	}
+    MainView::tearDownScreen();
 }
 
 void MainView::increaseValue()

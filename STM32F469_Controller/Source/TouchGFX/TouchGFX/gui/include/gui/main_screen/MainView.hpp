@@ -8,7 +8,7 @@ class MainView : public MainViewBase
 {
 public:
     MainView();
-    virtual ~MainView() {}
+	virtual ~MainView();
     virtual void setupScreen();
     virtual void tearDownScreen();
 
@@ -22,6 +22,7 @@ protected:
 
 private:
     uint8_t count;
+	BitmapId bmpId;
 };
 
 #endif // MAIN_VIEW_HPP

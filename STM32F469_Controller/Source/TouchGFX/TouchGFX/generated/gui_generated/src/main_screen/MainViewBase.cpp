@@ -3,8 +3,8 @@
 /*********************************************************************************/
 #include <gui_generated/main_screen/MainViewBase.hpp>
 #include "BitmapDatabase.hpp"
-#include <touchgfx/Color.hpp>
 #include <texts/TextKeysAndLanguages.hpp>
+#include <touchgfx/Color.hpp>
 
 MainViewBase::MainViewBase() :
     buttonCallback(this, &MainViewBase::buttonCallbackHandler)
@@ -19,15 +19,10 @@ MainViewBase::MainViewBase() :
     swipeContainer1Page1.setWidth(800);
     swipeContainer1Page1.setHeight(480);
 
-    backgroundBox.setPosition(0, 0, 800, 480);
-    backgroundBox.setVisible(false);
-    backgroundBox.setColor(touchgfx::Color::getColorFrom24BitRGB(0, 0, 0));
-    swipeContainer1Page1.add(backgroundBox);
-
-    tiledImage1.setBitmap(touchgfx::Bitmap(BITMAP_DARK_TEXTURES_CARBON_FIBRE_ID));
-    tiledImage1.setPosition(0, 0, 800, 480);
-    tiledImage1.setOffset(0, 0);
-    swipeContainer1Page1.add(tiledImage1);
+    backgroundImage1.setBitmap(touchgfx::Bitmap(BITMAP_DARK_TEXTURES_CARBON_FIBRE_ID));
+    backgroundImage1.setPosition(0, 0, 800, 480);
+    backgroundImage1.setOffset(0, 0);
+    swipeContainer1Page1.add(backgroundImage1);
 
     counterBackgroundImage.setXY(464, 157);
     counterBackgroundImage.setBitmap(touchgfx::Bitmap(BITMAP_COUNTER_BOX_ID));
@@ -55,9 +50,10 @@ MainViewBase::MainViewBase() :
     swipeContainer1Page2.setWidth(800);
     swipeContainer1Page2.setHeight(480);
 
-    image1.setXY(0, 0);
-    image1.setBitmap(touchgfx::Bitmap(BITMAP_BACKGROUND_ID));
-    swipeContainer1Page2.add(image1);
+    backgroundImage2.setBitmap(touchgfx::Bitmap(BITMAP_DARK_TEXTURES_CARBON_FIBRE_ID));
+    backgroundImage2.setPosition(0, 0, 800, 480);
+    backgroundImage2.setOffset(0, 0);
+    swipeContainer1Page2.add(backgroundImage2);
     swipeContainer1.add(swipeContainer1Page2);
     swipeContainer1.setSelectedPage(0);
 

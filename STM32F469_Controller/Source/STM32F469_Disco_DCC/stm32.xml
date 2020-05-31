@@ -89,7 +89,7 @@
     <AllDependencies>
       <ProjectDependency>
         <RelativePath>..\TouchGFX\STM32CubeIDE\.cproject</RelativePath>
-        <Timestamp>132353765990731820</Timestamp>
+        <Timestamp>132353783190977039</Timestamp>
       </ProjectDependency>
     </AllDependencies>
     <RootDirectory>
@@ -153,9 +153,6 @@
                     </VirtualFileSnapshot>
                     <VirtualFileSnapshot>
                       <RelativePath>..\TouchGFX\TouchGFX\generated\texts\src\TypedTextDatabase.cpp</RelativePath>
-                    </VirtualFileSnapshot>
-                    <VirtualFileSnapshot>
-                      <RelativePath>..\TouchGFX\TouchGFX\generated\images\src\background.cpp</RelativePath>
                     </VirtualFileSnapshot>
                     <VirtualFileSnapshot>
                       <RelativePath>..\TouchGFX\TouchGFX\generated\images\src\counter_box.cpp</RelativePath>
