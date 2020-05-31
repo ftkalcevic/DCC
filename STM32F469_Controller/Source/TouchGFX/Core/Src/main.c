@@ -229,7 +229,7 @@ uint8_t BSP_SD_ReadBlocks_DMA(uint32_t *pData, uint32_t ReadAddr, uint32_t NumOf
 {
 	uint8_t sd_state = MSD_OK;
   
-	HAL_GPIO_TogglePin(LED1_GPIO_Port,LED1_Pin);
+	HAL_GPIO_WritePin(LED1_GPIO_Port,LED1_Pin,GPIO_PIN_RESET);
 	if (lastSDIOState != Read)
 	{
 		// Switch DMA to read
@@ -244,6 +244,7 @@ uint8_t BSP_SD_ReadBlocks_DMA(uint32_t *pData, uint32_t ReadAddr, uint32_t NumOf
 	{
 		sd_state = MSD_ERROR;
 	}
+	HAL_GPIO_WritePin(LED1_GPIO_Port,LED1_Pin,GPIO_PIN_SET);
 	return sd_state; 
 }
 
@@ -251,7 +252,7 @@ uint8_t BSP_SD_WriteBlocks_DMA(uint32_t *pData, uint32_t WriteAddr, uint32_t Num
 {
 	uint8_t sd_state = MSD_OK;
   
-	HAL_GPIO_TogglePin(LED1_GPIO_Port,LED1_Pin);
+	HAL_GPIO_WritePin(LED1_GPIO_Port,LED1_Pin,GPIO_PIN_RESET);
 	if (lastSDIOState != Write)
 	{
 		// Switch DMA to read
@@ -266,6 +267,7 @@ uint8_t BSP_SD_WriteBlocks_DMA(uint32_t *pData, uint32_t WriteAddr, uint32_t Num
 	{
 		sd_state = MSD_ERROR;
 	}
+	HAL_GPIO_WritePin(LED1_GPIO_Port,LED1_Pin,GPIO_PIN_SET);
   
 	return sd_state; 
 }
