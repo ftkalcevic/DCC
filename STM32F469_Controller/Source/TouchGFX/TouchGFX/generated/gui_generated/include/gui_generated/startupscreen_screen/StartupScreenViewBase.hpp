@@ -7,8 +7,6 @@
 #include <gui/common/FrontendApplication.hpp>
 #include <mvp/View.hpp>
 #include <gui/startupscreen_screen/StartupScreenPresenter.hpp>
-#include <touchgfx/widgets/Box.hpp>
-#include <touchgfx/widgets/TextArea.hpp>
 
 class StartupScreenViewBase : public touchgfx::View<StartupScreenPresenter>
 {
@@ -23,12 +21,6 @@ protected:
     FrontendApplication& application() {
         return *static_cast<FrontendApplication*>(touchgfx::Application::getInstance());
     }
-
-    /*
-     * Member Declarations
-     */
-    touchgfx::Box box1;
-    touchgfx::TextArea textArea1;
 
 private:
 

@@ -70,7 +70,7 @@
       <AdditionalLibraryNames>touchgfx-float-abi-hard;%(Link.AdditionalLibraryNames)</AdditionalLibraryNames>
       <AdditionalLinkerInputs>%(Link.AdditionalLinkerInputs)</AdditionalLinkerInputs>
       <AdditionalOptions />
-      <LinkerScript />
+      <LinkerScript>..\TouchGFX\STM32CubeIDE\STM32F469NIHX_FLASH.ld</LinkerScript>
       <GenerateMapFile>true</GenerateMapFile>
       <MapFileName>$(TargetPath).map</MapFileName>
     </Link>
@@ -121,7 +121,10 @@
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\up_btn.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\up_btn_disabled.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\up_btn_pressed.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\common\BinFileLoader.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\common\BMPFileLoader.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\common\FrontendApplication.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\common\TGAFileLoader.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\main_screen\MainPresenter.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\main_screen\MainView.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\model\Model.cpp" />
@@ -213,6 +216,10 @@
     <ClInclude Include="..\OpenLCB\src\STM32F469xx\can.h" />
     <ClInclude Include="..\TouchGFX\Drivers\BSP\Components\cs43l22\cs43l22.h" />
     <ClInclude Include="..\TouchGFX\Drivers\BSP\STM32469I-Discovery\stm32469i_discovery_audio.h" />
+    <ClInclude Include="..\TouchGFX\TouchGFX\gui\include\gui\common\BinFileLoader.h" />
+    <ClInclude Include="..\TouchGFX\TouchGFX\gui\include\gui\common\BMPFileLoader.h" />
+    <ClInclude Include="..\TouchGFX\TouchGFX\gui\include\gui\common\PNGFileLoader.h" />
+    <ClInclude Include="..\TouchGFX\TouchGFX\gui\include\gui\common\TGAFileLoader.h" />
     <ClInclude Include="AppMain.h" />
     <ClInclude Include="Arduino.h" />
     <ClInclude Include="AudioTask.h" />
@@ -291,7 +298,6 @@
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\startupscreen_screen\StartupScreenView.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\background.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Dark_Textures_carbon_fibre.cpp" />
-    <ClCompile Include="$(EFP_BASE)\Profiler\FastSemihosting.cpp" />
     <ClCompile Include="$(EFP_BASE)\Profiler\SamplingProfiler.cpp" />
     <ClCompile Include="$(EFP_BASE)\Profiler\InstrumentingProfiler.cpp" />
     <ClCompile Include="$(EFP_BASE)\Profiler\TestResourceManager.cpp" />

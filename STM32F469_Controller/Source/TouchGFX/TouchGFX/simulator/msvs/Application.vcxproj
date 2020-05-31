@@ -26,6 +26,10 @@
     <ClCompile Include="..\..\gui\src\startupscreen_screen\StartupScreenPresenter.cpp"/>
     <ClCompile Include="..\..\gui\src\startupscreen_screen\StartupScreenView.cpp"/>
     <ClCompile Include="..\..\generated\gui_generated\src\startupscreen_screen\StartupScreenViewBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\common\BMPFileLoader.cpp"/>
+    <ClCompile Include="..\..\gui\src\common\PNGFileLoader.cpp"/>
+    <ClCompile Include="..\..\gui\src\common\TGAFileLoader.cpp"/>
+    <ClCompile Include="..\..\gui\src\common\BinFileLoader.cpp"/>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(ApplicationRoot)\assets\texts\texts.xlsx"/>
@@ -179,6 +183,10 @@
     <ClInclude Include="..\..\gui\include\gui\startupscreen_screen\StartupScreenPresenter.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\startupscreen_screen\StartupScreenView.hpp"/>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\startupscreen_screen\StartupScreenViewBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\common\BMPFileLoader.h"/>
+    <ClInclude Include="..\..\gui\include\gui\common\PNGFileLoader.h"/>
+    <ClInclude Include="..\..\gui\include\gui\common\TGAFileLoader.h"/>
+    <ClInclude Include="..\..\gui\include\gui\common\BinFileLoader.h"/>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="$(ApplicationRoot)\generated\simulator\touchgfx.rc"/>

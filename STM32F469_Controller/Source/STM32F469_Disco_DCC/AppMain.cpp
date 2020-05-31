@@ -71,3 +71,30 @@ void AppMain::Run()
 	for (;;)
 		osDelay(pdMS_TO_TICKS(1000));
 }
+
+
+
+
+
+/*
+	- App will always start in the "drive" screen.
+		- swipe to next loco/accessory
+	- Go back to the main screen
+		- boxes of options 
+			- select trains, accessories, config
+	- config
+		- app settings
+		- dcc track programming
+		- lcc config
+		- 
+	- dcc track programming (do we want to be able to programm anywhere? Eg tweak an accessory?)
+		- search to find existing 
+		- read CVs
+		- define each loco/accessory in a config file. (like lcc)
+	- lcc
+		- search
+		- map events.
+	- Do we want to show a map?
+		- with all accessories, so we can select, or zoom then select?
+	
+*/

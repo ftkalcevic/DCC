@@ -26,6 +26,7 @@
 #include <touchgfx/hal/GPIO.hpp>
 #include "../Components/otm8009a/otm8009a.h"
 #include <CortexMMCUInstrumentation.hpp>
+#include <BitmapDatabase.hpp>
 #include <KeySampler.hpp>
 #include "FreeRTOS.h"
 #include "task.h"
@@ -115,6 +116,17 @@ void TouchGFXHAL::initialize()
     TouchGFXGeneratedHAL::initialize();
 
 /* USER CODE BEGIN initialize step 2 */
+//    uint16_t* const bitmapCache = (uint16_t*)0xC0400000; 
+//    const uint32_t bitmapCacheSize = 0x400000;
+//	const uint32_t numberOfDynamicBitmaps = 10;
+//    
+//    Bitmap::registerBitmapDatabase(BitmapDatabase::getInstance(),
+//                                   BitmapDatabase::getInstanceSize(),
+//                                   bitmapCache,
+//                                   bitmapCacheSize,
+//                                   numberOfDynamicBitmaps);
+	
+	
     lockDMAToFrontPorch(false);
 
     mcuInstr.init();

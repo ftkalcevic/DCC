@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
 	<name>STM32F469I-DISCO</name>
-	<comment/>
+	<comment></comment>
 	<projects>
 	</projects>
 	<buildSpec>
@@ -334,9 +334,24 @@
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/BitmapDatabase.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/generated/Blue_PageIndicator_dot_indicator_small_highlight.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/__designer/Blue_PageIndicator_dot_indicator_small_highlight.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/Blue_PageIndicator_dot_indicator_small_normal.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/__designer/Blue_PageIndicator_dot_indicator_small_normal.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/generated/CachedFont.cpp</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/fonts/src/CachedFont.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/Dark_Textures_carbon_fibre.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/__designer/Dark_Textures_carbon_fibre.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/FontCache.cpp</name>
@@ -374,6 +389,11 @@
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/main_screen/MainViewBase.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/generated/StartupScreenViewBase.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/startupscreen_screen/StartupScreenViewBase.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/generated/Table_Asap_Regular_80_4bpp.cpp</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/fonts/src/Table_Asap_Regular_80_4bpp.cpp</locationURI>
@@ -389,9 +409,9 @@
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/texts/src/TypedTextDatabase.cpp</locationURI>
 		</link>
 		<link>
-			<name>Application/User/generated/bg.cpp</name>
+			<name>Application/User/generated/background.cpp</name>
 			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/bg.cpp</locationURI>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/background.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/counter_box.cpp</name>
@@ -429,6 +449,16 @@
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/up_btn_pressed.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/gui/BMPFileLoader.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/common/BMPFileLoader.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/BinFileLoader.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/common/BinFileLoader.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/gui/FrontendApplication.cpp</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/common/FrontendApplication.cpp</locationURI>
@@ -447,6 +477,26 @@
 			<name>Application/User/gui/Model.cpp</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/model/Model.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/PNGFileLoader.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/common/PNGFileLoader.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/StartupScreenPresenter.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/startupscreen_screen/StartupScreenPresenter.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/StartupScreenView.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/startupscreen_screen/StartupScreenView.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/TGAFileLoader.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/common/TGAFileLoader.cpp</locationURI>
 		</link>
 		<link>
 			<name>Drivers/BSP/Components/ft6x06.c</name>
@@ -552,51 +602,6 @@
 			<name>Application/User/TouchGFX/target/generated/TouchGFXGeneratedHAL.cpp</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/target/generated/TouchGFXGeneratedHAL.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/gui/StartupScreenPresenter.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/startupscreen_screen/StartupScreenPresenter.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/gui/StartupScreenView.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/startupscreen_screen/StartupScreenView.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/StartupScreenViewBase.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/startupscreen_screen/StartupScreenViewBase.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/background.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/background.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/Blue_PageIndicator_dot_indicator_small_highlight.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/__designer/Blue_PageIndicator_dot_indicator_small_highlight.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/Blue_PageIndicator_dot_indicator_small_normal.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/__designer/Blue_PageIndicator_dot_indicator_small_normal.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/Blue_Backgrounds_Main_bg_texture_800x480px.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/__designer/Blue_Backgrounds_Main_bg_texture_800x480px.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/Blue_Backgrounds_Main_bg_320x240px.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/__designer/Blue_Backgrounds_Main_bg_320x240px.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/Dark_Textures_carbon_fibre.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/__designer/Dark_Textures_carbon_fibre.cpp</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

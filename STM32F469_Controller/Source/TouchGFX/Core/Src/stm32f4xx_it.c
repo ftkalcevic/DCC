@@ -71,6 +71,8 @@ extern TIM_HandleTypeDef htim8;
 extern TIM_HandleTypeDef htim6;
 
 /* USER CODE BEGIN EV */
+extern DMA_HandleTypeDef hdma_sdio_tx;
+extern SD_HandleTypeDef hsd;
 
 /* USER CODE END EV */
 
@@ -266,7 +268,12 @@ extern SAI_HandleTypeDef         haudio_out_sai;
 void DMA2_Stream6_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA2_Stream6_IRQn 0 */
-
+  // Shared IRQ6 for SDIO TX and RX.  Need to determine what we were doing.
+  if ( (DMA2_Stream6->CR & DMA_SxCR_DIR_Msk) == DMA_MEMORY_TO_PERIPH )
+	HAL_DMA_IRQHandler(&hdma_sdio_tx);
+  else
+    HAL_DMA_IRQHandler(&hdma_sdio_rx);
+  return;
   /* USER CODE END DMA2_Stream6_IRQn 0 */
   HAL_DMA_IRQHandler(&hdma_sdio_rx);
   /* USER CODE BEGIN DMA2_Stream6_IRQn 1 */
@@ -331,6 +338,11 @@ void DSI_IRQHandler(void)
 }
 
 /* USER CODE BEGIN 1 */
+
+void SDIO_IRQHandler(void)
+{
+	HAL_SD_IRQHandler(&hsd);
+}
 
 /* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -23,8 +23,9 @@
 // CAboutDlg dialog used for App About
 
 //#define INPUTFILE "..\\Images\\simple.png"
+#define INPUTFILE "..\\Images\\test.png"
 //#define INPUTFILE "..\\Images\\Lines.png"
-#define INPUTFILE "..\\Images\\Splash.png"
+//#define INPUTFILE "..\\Images\\Splash.png"
 //#define INPUTFILE "..\\Images\\background.png"
 
 
@@ -235,12 +236,6 @@ public:
 	}
 
 	// Inherited via Stream
-	virtual uint8_t ReadByte() override
-	{
-		uint8_t b;
-		_read(fd, &b, sizeof(b));
-		return b;
-	}
 	virtual uint16_t ReadBytes(uint8_t* buffer, uint16_t len, uint16_t& bytesread) override
 	{
 		bytesread = _read(fd, buffer, len);

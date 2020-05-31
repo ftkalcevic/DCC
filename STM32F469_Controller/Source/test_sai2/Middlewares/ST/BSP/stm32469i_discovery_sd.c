@@ -423,24 +423,24 @@ __weak void BSP_SD_MspInit(SD_HandleTypeDef *hsd, void *Params)
   dma_tx_handle.Init.MemBurst            = DMA_MBURST_INC4;
   dma_tx_handle.Init.PeriphBurst         = DMA_PBURST_INC4;
 
-//  dma_tx_handle.Instance = SD_DMAx_Tx_STREAM;
-//
-//  /* Associate the DMA handle */
-//  __HAL_LINKDMA(hsd, hdmatx, dma_tx_handle);
-//
-//  /* Deinitialize the stream for new transfer */
-//  HAL_DMA_DeInit(&dma_tx_handle);
-//
-//  /* Configure the DMA stream */
-//  HAL_DMA_Init(&dma_tx_handle);
+  dma_tx_handle.Instance = SD_DMAx_Tx_STREAM;
+
+  /* Associate the DMA handle */
+  __HAL_LINKDMA(hsd, hdmatx, dma_tx_handle);
+
+  /* Deinitialize the stream for new transfer */
+  HAL_DMA_DeInit(&dma_tx_handle);
+
+  /* Configure the DMA stream */
+  HAL_DMA_Init(&dma_tx_handle);
 
   /* NVIC configuration for DMA transfer complete interrupt */
   HAL_NVIC_SetPriority(SD_DMAx_Rx_IRQn, 0x0F, 0);
   HAL_NVIC_EnableIRQ(SD_DMAx_Rx_IRQn);
 
   /* NVIC configuration for DMA transfer complete interrupt */
-//  HAL_NVIC_SetPriority(SD_DMAx_Tx_IRQn, 0x0F, 0);
-//  HAL_NVIC_EnableIRQ(SD_DMAx_Tx_IRQn);
+  HAL_NVIC_SetPriority(SD_DMAx_Tx_IRQn, 0x0F, 0);
+  HAL_NVIC_EnableIRQ(SD_DMAx_Tx_IRQn);
 }
 
 /**

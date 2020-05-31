@@ -219,50 +219,7 @@
         "CanvasBufferSize": 0
       },
       {
-        "Components": [
-          {
-            "Color": {
-              "Red": 255,
-              "Green": 255,
-              "Blue": 255
-            },
-            "Alpha": 255,
-            "Name": "box1",
-            "X": 0,
-            "Y": 0,
-            "Width": 800,
-            "Height": 480,
-            "Type": "Box",
-            "Visible": true,
-            "Draggable": false,
-            "Clickable": false,
-            "Fadeable": false,
-            "Moveable": false
-          },
-          {
-            "TextId": "SingleUseId2",
-            "TextRotation": "0",
-            "Color": {
-              "Red": 0,
-              "Green": 0,
-              "Blue": 0
-            },
-            "Alpha": 255,
-            "AutoSize": true,
-            "LineSpacing": 0,
-            "Name": "textArea1",
-            "X": 130,
-            "Y": 194,
-            "Width": 525,
-            "Height": 92,
-            "Type": "TextArea",
-            "Visible": true,
-            "Draggable": false,
-            "Clickable": false,
-            "Fadeable": false,
-            "Moveable": false
-          }
-        ],
+        "Components": [],
         "Interactions": [
           {
             "InteractionName": "SplashScreen",
@@ -306,8 +263,8 @@
         "IsResource": false
       },
       {
-        "TextEntryId": "SingleUseId2",
-        "IsResource": false
+        "TextEntryId": "ResourceId1",
+        "IsResource": true
       }
     ],
     "Name": "STM32F469I-DISCO",

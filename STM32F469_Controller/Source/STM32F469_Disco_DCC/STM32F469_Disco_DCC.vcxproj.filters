@@ -693,12 +693,6 @@
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Dark_Textures_carbon_fibre.cpp">
       <Filter>Source files\Application\User\generated</Filter>
     </ClCompile>
-    <ClCompile Include="upng.cpp">
-      <Filter>Source files</Filter>
-    </ClCompile>
-    <ClCompile Include="$(EFP_BASE)\Profiler\FastSemihosting.cpp">
-      <Filter>Source files\Device-specific files\Semihosting/Profiler</Filter>
-    </ClCompile>
     <ClCompile Include="$(EFP_BASE)\Profiler\SamplingProfiler.cpp">
       <Filter>Source files\Device-specific files\Semihosting/Profiler</Filter>
     </ClCompile>
@@ -729,6 +723,18 @@
     <ClInclude Include="$(EFP_BASE)\Profiler\DebuggerChecker.h">
       <Filter>Header files\Device-specific files\Semihosting/Profiler</Filter>
     </ClInclude>
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\common\BMPFileLoader.cpp">
+      <Filter>Source files\Application\User\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\common\TGAFileLoader.cpp">
+      <Filter>Source files\Application\User\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="upng.cpp">
+      <Filter>Source files\Application\User\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\common\BinFileLoader.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dcc.h">
@@ -819,6 +825,18 @@
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="upng.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TouchGFX\TouchGFX\gui\include\gui\common\BMPFileLoader.h">
+      <Filter>Source files\Application\User\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TouchGFX\TouchGFX\gui\include\gui\common\TGAFileLoader.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TouchGFX\TouchGFX\gui\include\gui\common\PNGFileLoader.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TouchGFX\TouchGFX\gui\include\gui\common\BinFileLoader.h">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>

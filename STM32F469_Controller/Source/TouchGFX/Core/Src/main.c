@@ -175,6 +175,8 @@ const osThreadAttr_t AudioTask_attributes = {
 };
 /* USER CODE BEGIN PV */
 FATFS FatFs;
+DMA_HandleTypeDef hdma_sdio_tx;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -214,6 +216,59 @@ extern void AudioTask_Entry(void *argument);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
+enum ESDIOState
+{
+	None = 0,
+	Read,
+	Write
+};
+
+static enum ESDIOState lastSDIOState = None;
+
+uint8_t BSP_SD_ReadBlocks_DMA(uint32_t *pData, uint32_t ReadAddr, uint32_t NumOfBlocks)
+{
+	uint8_t sd_state = MSD_OK;
+  
+	HAL_GPIO_TogglePin(LED1_GPIO_Port,LED1_Pin);
+	if (lastSDIOState != Read)
+	{
+		// Switch DMA to read
+		HAL_DMA_Init(&hdma_sdio_rx);
+		lastSDIOState = Read;
+		HAL_NVIC_SetPriority(SDIO_IRQn, 5, 0);
+		HAL_NVIC_EnableIRQ(SDIO_IRQn);
+	}
+	
+	/* Read block(s) in DMA transfer mode */
+	if (HAL_SD_ReadBlocks_DMA(&hsd, (uint8_t *)pData, ReadAddr, NumOfBlocks) != HAL_OK)
+	{
+		sd_state = MSD_ERROR;
+	}
+	return sd_state; 
+}
+
+uint8_t BSP_SD_WriteBlocks_DMA(uint32_t *pData, uint32_t WriteAddr, uint32_t NumOfBlocks)
+{
+	uint8_t sd_state = MSD_OK;
+  
+	HAL_GPIO_TogglePin(LED1_GPIO_Port,LED1_Pin);
+	if (lastSDIOState != Write)
+	{
+		// Switch DMA to read
+		HAL_DMA_Init(&hdma_sdio_tx);
+		lastSDIOState = Write;
+		HAL_NVIC_SetPriority(SDIO_IRQn, 5, 0);
+		HAL_NVIC_EnableIRQ(SDIO_IRQn);
+	}
+	
+	/* Write block(s) in DMA transfer mode */
+	if (HAL_SD_WriteBlocks_DMA(&hsd, (uint8_t *)pData, WriteAddr, NumOfBlocks) != HAL_OK)
+	{
+		sd_state = MSD_ERROR;
+	}
+  
+	return sd_state; 
+}
 
 //void HAL_SPI_MspInit(SPI_HandleTypeDef *hspi)
 //{
@@ -240,7 +295,7 @@ extern void AudioTask_Entry(void *argument);
 /* USER CODE END 0 */
 
 /**
-  * @brief  The application entry point. 
+  * @brief  The application entry point.
   * @retval int
   */
 int main(void)
@@ -251,7 +306,7 @@ int main(void)
 
   /* MCU Configuration--------------------------------------------------------*/
 
-  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */ 
+  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
 
   /* USER CODE BEGIN Init */
@@ -1017,7 +1072,7 @@ static void MX_SDIO_SD_Init(void)
   hsd.Init.ClockBypass = SDIO_CLOCK_BYPASS_DISABLE;
   hsd.Init.ClockPowerSave = SDIO_CLOCK_POWER_SAVE_DISABLE;
   hsd.Init.BusWide = SDIO_BUS_WIDE_1B;
-  hsd.Init.HardwareFlowControl = SDIO_HARDWARE_FLOW_CONTROL_DISABLE;
+  hsd.Init.HardwareFlowControl = SDIO_HARDWARE_FLOW_CONTROL_ENABLE;
   hsd.Init.ClockDiv = 0;
   /* USER CODE BEGIN SDIO_Init 2 */
 //  if (HAL_SD_Init(&hsd) != HAL_OK)
@@ -1630,8 +1685,6 @@ __weak void TouchGFX_Task(void *argument)
 /* USER CODE END Header_InitialiseTask_Entry */
 void InitialiseTask_Entry(void *argument)
 {
-	for (;;) osDelay(pdMS_TO_TICKS(1000));
-	return;
   /* USER CODE BEGIN InitialiseTask_Entry */
 	FRESULT res;
 	res = f_mount(&FatFs, "/", 1);
@@ -1643,6 +1696,8 @@ void InitialiseTask_Entry(void *argument)
     //MX_USB_DEVICE_Init();
 
     vTaskDelete(NULL);
+	for (;;) osDelay(pdMS_TO_TICKS(1000));
+	return;
 	if (HAL_GPIO_ReadPin(uSD_Detect_GPIO_Port, uSD_Detect_Pin) == GPIO_PIN_RESET) 
 	{
         printf("uSD card is present.  Root directory contents...\n");
@@ -1774,12 +1829,3 @@ void assert_failed(uint8_t *file, uint32_t line)
 #endif /* USE_FULL_ASSERT */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
-/*
- 
- /Images/backgnd.png
- /Images/splash.png
- 
- - Main screen should go straight to train driving
- 
- 
- **/
