@@ -184,6 +184,30 @@
     <Filter Include="Header Files\generated\gui_generated\startupscreen_screen">
       <UniqueIdentifier>74A4CD3C-D5B6-089A-E441-0963AAECFDFA</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\gui\preferences_screen">
+      <UniqueIdentifier>EAB3C9D9-7BD2-D8E0-913A-1B20490FC742</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gui\preferences_screen">
+      <UniqueIdentifier>9E231F47-C565-77D8-ADC3-99FCD0F850A2</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gui\containers">
+      <UniqueIdentifier>F54C9B13-3E00-B20F-CD76-277B5AAF5EB8</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gui\containers">
+      <UniqueIdentifier>4A379DFE-892E-9439-FC66-FD3B87295C47</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\generated\gui_generated\preferences_screen">
+      <UniqueIdentifier>DECD2B40-27F4-EF31-7627-A23E425F432C</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\generated\gui_generated\containers">
+      <UniqueIdentifier>409424CB-0E3F-4028-01FB-61EBB74D0B6E</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\generated\gui_generated\preferences_screen">
+      <UniqueIdentifier>20A746AC-EA6F-3D61-EEAE-48D503D236D1</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\generated\gui_generated\containers">
+      <UniqueIdentifier>90A74CA6-CF11-5A9A-0DFA-27EF69026F14</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(TouchGFXReleasePath)\framework\source\platform\driver\touch\SDL2TouchController.cpp">
@@ -242,6 +266,36 @@
     </ClCompile>
     <ClCompile Include="..\..\gui\src\common\BinFileLoader.cpp">
       <Filter>Source Files\gui\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\common\CustomButton.cpp">
+      <Filter>Source Files\gui\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\containers\ListItem.cpp">
+      <Filter>Source Files\gui\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\ListItemBase.cpp">
+      <Filter>Source Files\generated\gui_generated\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\preferences_screen\PreferencesPresenter.cpp">
+      <Filter>Source Files\gui\preferences_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\preferences_screen\PreferencesView.cpp">
+      <Filter>Source Files\gui\preferences_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\preferences_screen\PreferencesViewBase.cpp">
+      <Filter>Source Files\generated\gui_generated\preferences_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\containers\FunctionButtons.cpp">
+      <Filter>Source Files\gui\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\FunctionButtonsBase.cpp">
+      <Filter>Source Files\generated\gui_generated\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\containers\StatusBar.cpp">
+      <Filter>Source Files\gui\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\StatusBarBase.cpp">
+      <Filter>Source Files\generated\gui_generated\containers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -705,6 +759,36 @@
     </ClInclude>
     <ClInclude Include="..\..\gui\include\gui\common\BinFileLoader.h">
       <Filter>Source Files\gui\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\common\CustomButton.hpp">
+      <Filter>Header Files\gui\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\containers\ListItem.hpp">
+      <Filter>Header Files\gui\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\ListItemBase.hpp">
+      <Filter>Header Files\generated\gui_generated\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\preferences_screen\PreferencesPresenter.hpp">
+      <Filter>Header Files\gui\preferences_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\preferences_screen\PreferencesView.hpp">
+      <Filter>Header Files\gui\preferences_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\preferences_screen\PreferencesViewBase.hpp">
+      <Filter>Header Files\generated\gui_generated\preferences_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\containers\FunctionButtons.hpp">
+      <Filter>Header Files\gui\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\FunctionButtonsBase.hpp">
+      <Filter>Header Files\generated\gui_generated\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\containers\StatusBar.hpp">
+      <Filter>Header Files\gui\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\StatusBarBase.hpp">
+      <Filter>Header Files\generated\gui_generated\containers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -4,108 +4,32 @@
       {
         "Components": [
           {
+            "FileName": "__designer\\Dark_Textures_carbon_fibre.png",
+            "Alpha": 255,
+            "OffsetX": 0,
+            "OffsetY": 0,
+            "Name": "backgroundImage1",
+            "X": 0,
+            "Y": 0,
+            "Width": 800,
+            "Height": 480,
+            "Type": "TiledImage",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
             "Components": [
               {
-                "Components": [
-                  {
-                    "FileName": "__designer\\Dark_Textures_carbon_fibre.png",
-                    "Alpha": 255,
-                    "OffsetX": 0,
-                    "OffsetY": 0,
-                    "Name": "backgroundImage1",
-                    "X": 0,
-                    "Y": 0,
-                    "Width": 800,
-                    "Height": 480,
-                    "Type": "TiledImage",
-                    "Visible": true,
-                    "Draggable": false,
-                    "Clickable": false,
-                    "Fadeable": false,
-                    "Moveable": false
-                  },
-                  {
-                    "RelativeFilename": "counter_box.png",
-                    "Alpha": 255,
-                    "Name": "counterBackgroundImage",
-                    "X": 464,
-                    "Y": 157,
-                    "Width": 152,
-                    "Height": 154,
-                    "Type": "Image",
-                    "Visible": true,
-                    "Draggable": false,
-                    "Clickable": false,
-                    "Fadeable": false,
-                    "Moveable": false
-                  },
-                  {
-                    "Pressed": "down_btn_pressed.png",
-                    "Released": "down_btn.png",
-                    "Alpha": 255,
-                    "Name": "buttonDown",
-                    "X": 215,
-                    "Y": 290,
-                    "Width": 130,
-                    "Height": 56,
-                    "Type": "Button",
-                    "Visible": true,
-                    "Draggable": false,
-                    "Clickable": false,
-                    "Fadeable": false,
-                    "Moveable": false
-                  },
-                  {
-                    "Pressed": "up_btn_pressed.png",
-                    "Released": "up_btn.png",
-                    "Alpha": 255,
-                    "Name": "buttonUp",
-                    "X": 215,
-                    "Y": 157,
-                    "Width": 130,
-                    "Height": 56,
-                    "Type": "Button",
-                    "Visible": true,
-                    "Draggable": false,
-                    "Clickable": false,
-                    "Fadeable": false,
-                    "Moveable": false
-                  },
-                  {
-                    "TextId": "TextId1",
-                    "TextRotation": "0",
-                    "Color": {
-                      "Red": 255,
-                      "Green": 255,
-                      "Blue": 255
-                    },
-                    "Alpha": 255,
-                    "AutoSize": false,
-                    "LineSpacing": 0,
-                    "Wildcard1": {
-                      "TextId": "SingleUseId1",
-                      "UseBuffer": true,
-                      "BufferSize": 3
-                    },
-                    "Name": "countTxt",
-                    "X": 464,
-                    "Y": 185,
-                    "Width": 152,
-                    "Height": 89,
-                    "Type": "TextArea",
-                    "Visible": true,
-                    "Draggable": false,
-                    "Clickable": false,
-                    "Fadeable": false,
-                    "Moveable": false
-                  }
-                ],
+                "Components": [],
                 "IsCacheableContainer": false,
                 "Name": "swipeContainer1Page1",
                 "X": 0,
                 "Y": 0,
                 "Width": 800,
-                "Height": 480,
+                "Height": 430,
                 "Type": "Container",
                 "Visible": true,
                 "Draggable": false,
@@ -114,31 +38,13 @@
                 "Moveable": false
               },
               {
-                "Components": [
-                  {
-                    "FileName": "__designer\\Dark_Textures_carbon_fibre.png",
-                    "Alpha": 255,
-                    "OffsetX": 0,
-                    "OffsetY": 0,
-                    "Name": "backgroundImage2",
-                    "X": 0,
-                    "Y": 0,
-                    "Width": 800,
-                    "Height": 480,
-                    "Type": "TiledImage",
-                    "Visible": true,
-                    "Draggable": false,
-                    "Clickable": false,
-                    "Fadeable": false,
-                    "Moveable": false
-                  }
-                ],
+                "Components": [],
                 "IsCacheableContainer": false,
                 "Name": "swipeContainer1Page2",
                 "X": 0,
                 "Y": 0,
                 "Width": 800,
-                "Height": 480,
+                "Height": 430,
                 "Type": "Container",
                 "Visible": true,
                 "Draggable": false,
@@ -150,7 +56,7 @@
             "SwipeCutoff": 50,
             "ShowPageIndicator": true,
             "PageIndicatorX": 385,
-            "PageIndicatorY": 462,
+            "PageIndicatorY": 404,
             "CenteredX": true,
             "IndicatorImageNormal": "__designer\\Blue_PageIndicator_dot_indicator_small_normal.png",
             "IndicatorImageHighlight": "__designer\\Blue_PageIndicator_dot_indicator_small_highlight.png",
@@ -160,10 +66,38 @@
             "IsCacheableContainer": false,
             "Name": "swipeContainer1",
             "X": 0,
+            "Y": 25,
+            "Width": 800,
+            "Height": 430,
+            "Type": "SwipeContainer",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "CustomContainerDefinitionName": "FunctionButtons",
+            "Name": "functionButtons1",
+            "X": 0,
+            "Y": 455,
+            "Width": 800,
+            "Height": 25,
+            "Type": "CustomContainerInstance",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "CustomContainerDefinitionName": "StatusBar",
+            "Name": "statusBar1",
+            "X": 0,
             "Y": 0,
             "Width": 800,
-            "Height": 480,
-            "Type": "SwipeContainer",
+            "Height": 25,
+            "Type": "CustomContainerInstance",
             "Visible": true,
             "Draggable": false,
             "Clickable": false,
@@ -171,32 +105,7 @@
             "Moveable": false
           }
         ],
-        "Interactions": [
-          {
-            "InteractionName": "IncreaseValue",
-            "HasCompletedTrigger": false,
-            "Trigger": {
-              "TriggerComponent": "buttonUp",
-              "Type": "TriggerClicked"
-            },
-            "Action": {
-              "FunctionName": "increaseValue",
-              "Type": "ActionCustom"
-            }
-          },
-          {
-            "InteractionName": "DecreaseValue",
-            "HasCompletedTrigger": false,
-            "Trigger": {
-              "TriggerComponent": "buttonDown",
-              "Type": "TriggerClicked"
-            },
-            "Action": {
-              "FunctionName": "decreaseValue",
-              "Type": "ActionCustom"
-            }
-          }
-        ],
+        "Interactions": [],
         "Name": "Main",
         "OverrideDefaultBufferSize": false,
         "CanvasBufferSize": 0
@@ -223,7 +132,7 @@
               "Type": "TriggerInteractionCompleted"
             },
             "Action": {
-              "ScreenTransitionType": "ScreenTransitionSlide",
+              "ScreenTransitionType": "ScreenTransitionCover",
               "ScreenTransitionDirection": "East",
               "ActionComponent": "Main",
               "Type": "ActionGotoScreen"
@@ -233,21 +142,457 @@
         "Name": "StartupScreen",
         "OverrideDefaultBufferSize": false,
         "CanvasBufferSize": 0
+      },
+      {
+        "Components": [
+          {
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Alpha": 255,
+            "Name": "box1",
+            "X": 0,
+            "Y": 0,
+            "Width": 800,
+            "Height": 480,
+            "Type": "Box",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "PaddingBefore": 0,
+            "PaddingAfter": 0,
+            "Snapping": false,
+            "IsHorizontal": false,
+            "IsCircular": false,
+            "ItemTemplateName": "ListItem",
+            "NumberofItems": 2,
+            "InitialElement": 0,
+            "ItemMargin": 0,
+            "Easing": "Back",
+            "EasingOption": "Out",
+            "SwipeAcceleration": 1.0,
+            "DragAcceleration": 1.0,
+            "Name": "scrollList1",
+            "X": 0,
+            "Y": 0,
+            "Width": 250,
+            "Height": 480,
+            "Type": "ScrollList",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          }
+        ],
+        "Interactions": [],
+        "Name": "Preferences",
+        "OverrideDefaultBufferSize": false,
+        "CanvasBufferSize": 12000
       }
     ],
-    "CustomContainerDefinitions": [],
+    "CustomContainerDefinitions": [
+      {
+        "Components": [
+          {
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Alpha": 255,
+            "Name": "box1",
+            "X": 0,
+            "Y": 0,
+            "Width": 250,
+            "Height": 59,
+            "Type": "Box",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "TextId": "SingleUseId7",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 0,
+              "Green": 0,
+              "Blue": 0
+            },
+            "Alpha": 255,
+            "AutoSize": true,
+            "LineSpacing": 0,
+            "Wildcard1": {
+              "UseBuffer": false,
+              "BufferSize": 0
+            },
+            "Name": "textArea1",
+            "X": 0,
+            "Y": 9,
+            "Width": 0,
+            "Height": 23,
+            "Type": "TextArea",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "Color": {
+              "Red": 242,
+              "Green": 0,
+              "Blue": 0
+            },
+            "CenterX": 14,
+            "CenterY": 14,
+            "Radius": 13,
+            "LineWidth": 0,
+            "StartAngle": 0,
+            "EndAngle": 360,
+            "CapPrecision": "Butt",
+            "Alpha": 255,
+            "Name": "circle1",
+            "X": 220,
+            "Y": 14,
+            "Width": 30,
+            "Height": 30,
+            "Type": "Circle",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          }
+        ],
+        "Interactions": [],
+        "Name": "ListItem",
+        "X": 0,
+        "Y": 0,
+        "Width": 250,
+        "Height": 59
+      },
+      {
+        "Components": [
+          {
+            "RelativeFilename": "fnBackground.png",
+            "Alpha": 255,
+            "Name": "image1",
+            "X": 0,
+            "Y": 0,
+            "Width": 160,
+            "Height": 25,
+            "Type": "Image",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "RelativeFilename": "fnBackground.png",
+            "Alpha": 255,
+            "Name": "image2",
+            "X": 160,
+            "Y": 0,
+            "Width": 160,
+            "Height": 25,
+            "Type": "Image",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "RelativeFilename": "fnBackground.png",
+            "Alpha": 255,
+            "Name": "image3",
+            "X": 320,
+            "Y": 0,
+            "Width": 160,
+            "Height": 25,
+            "Type": "Image",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "RelativeFilename": "fnBackground.png",
+            "Alpha": 255,
+            "Name": "image4",
+            "X": 480,
+            "Y": 0,
+            "Width": 160,
+            "Height": 25,
+            "Type": "Image",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "RelativeFilename": "fnBackground.png",
+            "Alpha": 255,
+            "Name": "image5",
+            "X": 640,
+            "Y": 0,
+            "Width": 160,
+            "Height": 25,
+            "Type": "Image",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "TextId": "SingleUseId8",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Alpha": 255,
+            "AutoSize": false,
+            "LineSpacing": 0,
+            "Wildcard1": {
+              "UseBuffer": false,
+              "BufferSize": 0
+            },
+            "Name": "textArea1",
+            "X": 0,
+            "Y": 0,
+            "Width": 160,
+            "Height": 25,
+            "Type": "TextArea",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "TextId": "SingleUseId9",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Alpha": 255,
+            "AutoSize": false,
+            "LineSpacing": 0,
+            "Wildcard1": {
+              "UseBuffer": false,
+              "BufferSize": 0
+            },
+            "Name": "textArea2",
+            "X": 160,
+            "Y": 0,
+            "Width": 160,
+            "Height": 25,
+            "Type": "TextArea",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "TextId": "SingleUseId10",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Alpha": 255,
+            "AutoSize": false,
+            "LineSpacing": 0,
+            "Wildcard1": {
+              "UseBuffer": false,
+              "BufferSize": 0
+            },
+            "Name": "textArea3",
+            "X": 320,
+            "Y": 0,
+            "Width": 160,
+            "Height": 25,
+            "Type": "TextArea",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "TextId": "SingleUseId11",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Alpha": 255,
+            "AutoSize": false,
+            "LineSpacing": 0,
+            "Wildcard1": {
+              "UseBuffer": false,
+              "BufferSize": 0
+            },
+            "Name": "textArea4",
+            "X": 480,
+            "Y": 0,
+            "Width": 160,
+            "Height": 25,
+            "Type": "TextArea",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "TextId": "SingleUseId12",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Alpha": 255,
+            "AutoSize": false,
+            "LineSpacing": 0,
+            "Wildcard1": {
+              "UseBuffer": false,
+              "BufferSize": 0
+            },
+            "Name": "textArea5",
+            "X": 640,
+            "Y": 0,
+            "Width": 160,
+            "Height": 25,
+            "Type": "TextArea",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          }
+        ],
+        "Interactions": [],
+        "Name": "FunctionButtons",
+        "X": 0,
+        "Y": 0,
+        "Width": 800,
+        "Height": 25
+      },
+      {
+        "Components": [
+          {
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Alpha": 255,
+            "Name": "box1",
+            "X": 0,
+            "Y": 0,
+            "Width": 800,
+            "Height": 25,
+            "Type": "Box",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "TextId": "SingleUseId13",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 0,
+              "Green": 0,
+              "Blue": 0
+            },
+            "Alpha": 255,
+            "AutoSize": true,
+            "LineSpacing": 0,
+            "Wildcard1": {
+              "UseBuffer": false,
+              "BufferSize": 0
+            },
+            "Name": "textAreaStatusBar",
+            "X": 0,
+            "Y": 2,
+            "Width": 0,
+            "Height": 23,
+            "Type": "TextArea",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          }
+        ],
+        "Interactions": [],
+        "Name": "StatusBar",
+        "X": 0,
+        "Y": 0,
+        "Width": 800,
+        "Height": 25
+      }
+    ],
     "TextEntries": [
-      {
-        "TextEntryId": "TextId1",
-        "IsResource": true
-      },
-      {
-        "TextEntryId": "SingleUseId1",
-        "IsResource": false
-      },
       {
         "TextEntryId": "ResourceId1",
         "IsResource": true
+      },
+      {
+        "TextEntryId": "wildcardTextId",
+        "IsResource": true
+      },
+      {
+        "TextEntryId": "SingleUseId7",
+        "IsResource": false
+      },
+      {
+        "TextEntryId": "SingleUseId8",
+        "IsResource": false
+      },
+      {
+        "TextEntryId": "SingleUseId9",
+        "IsResource": false
+      },
+      {
+        "TextEntryId": "SingleUseId10",
+        "IsResource": false
+      },
+      {
+        "TextEntryId": "SingleUseId11",
+        "IsResource": false
+      },
+      {
+        "TextEntryId": "SingleUseId12",
+        "IsResource": false
+      },
+      {
+        "TextEntryId": "SingleUseId13",
+        "IsResource": false
       }
     ],
     "Name": "STM32F469I-DISCO",

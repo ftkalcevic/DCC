@@ -2,112 +2,110 @@
 #include "BitmapDatabase.hpp"
 #include "AudioTask.h"
 #include <gui/common/BinFileLoader.h>
+#include <texts/TextKeysAndLanguages.hpp>
+#include <touchgfx/Color.hpp>
+#include <gui/common/CustomButton.hpp>
+#include <stdio.h>
 
-MainView::MainView()
-{
-	count = 13;
-    // Support of larger displays for this example
-    // is handled by showing a black box in the
-    // unused part of the display.
-//    if (HAL::DISPLAY_WIDTH > backgroundImage.getWidth() ||
-//            HAL::DISPLAY_HEIGHT > backgroundImage.getHeight())
-    {
-        //backgroundBox.setVisible(true);
-    }
-}
 
-MainView::~MainView()
+enum EConfigPages
 {
-}
+	Preferences=1,
+	Loco
+};
 
-void MainView::setupScreen()
+MainView::MainView():
+    buttonClickCallback(this, &MainView::buttonClickHandler)
 {
-    setCount(count);
 	bmpId = BinFileLoader::makeBitmap("/Images/background"); 
 	if (bmpId != BITMAP_INVALID)
 	{
 		backgroundImage1.setBitmap(Bitmap(bmpId));
-		backgroundImage2.setBitmap(Bitmap(bmpId));
 	}
+	
+	// Add buttons (15, 15) 200x200 spacing
+	touchgfx::CustomButton *button = new touchgfx::CustomButton();
+	button->setXY(15, 15);
+    button->setBitmaps(touchgfx::Bitmap(BITMAP_BUTTONUP_ID), touchgfx::Bitmap(BITMAP_BUTTONDOWN_ID), touchgfx::Bitmap(BITMAP_PREFERENCESICON_ID), touchgfx::Bitmap(BITMAP_PREFERENCESICON_ID));
+	//button->setIconXY(4, 4);
+    button->setLabelText(touchgfx::TypedText(T_WILDCARDTEXTID));
+    button->setLabelText("Preferences");
+	button->setId(Preferences);
+    button->setLabelColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+    button->setLabelColorPressed(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+    button->setAction(buttonClickCallback);
+    swipeContainer1Page1.add(*button);
+	
+	
+	button = new touchgfx::CustomButton();
+	button->setXY(215, 15);
+    button->setBitmaps(touchgfx::Bitmap(BITMAP_BUTTONUP_ID), touchgfx::Bitmap(BITMAP_BUTTONDOWN_ID), touchgfx::Bitmap(BITMAP_LOCOICON_ID), touchgfx::Bitmap(BITMAP_LOCOICON_ID));
+	//button->setIconXY(15, 6);
+    button->setLabelText(touchgfx::TypedText(T_WILDCARDTEXTID));
+    button->setLabelText("Loco #3456");
+	button->setId(Loco);
+    button->setLabelColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+    button->setLabelColorPressed(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+    button->setAction(buttonClickCallback);
+    swipeContainer1Page1.add(*button);
+	
+	
+	
 }
 
-void MainView::tearDownScreen()
+MainView::~MainView()
 {
 	if (bmpId != BITMAP_INVALID)
 	{
 		Bitmap::dynamicBitmapDelete(bmpId);
+		bmpId = BITMAP_INVALID;
 	}
-    MainView::tearDownScreen();
 }
 
-void MainView::increaseValue()
+void MainView::setupScreen() 
 {
-	audioTask.PlaySound(KeyPressTone);
-    if (count < 42)
-    {
-        count++;
-        setCount(count);
 
-        if (count == 42)
-        {
-            setLimitEffects(false, true);
-        }
-        else if (count == 1)
-        {
-            setLimitEffects(true, true);
-        }
-    }
 }
 
-void MainView::decreaseValue()
+void MainView::tearDownScreen()
 {
-	audioTask.PlaySound(KeyPressTone);
-    if (count > 0)
-    {
-        count--;
-        setCount(count);
-
-        if (0 == count)
-        {
-            setLimitEffects(true, false);
-        }
-        else if (41 == count)
-        {
-            setLimitEffects(true, true);
-        }
-    }
 }
 
-void MainView::setCount(uint8_t countValue)
+
+void MainView::buttonClickHandler(const touchgfx::AbstractButton& src)
 {
-    Unicode::snprintf(countTxtBuffer, 3, "%d", countValue);
-    // Invalidate text area, which will result in it being redrawn in next tick.
-    countTxt.invalidate();
+	const touchgfx::CustomButton &button = (const touchgfx::CustomButton &)src;
+
+    if (button.getId() == Preferences)
+    {
+        //Interaction1
+        //When button1 clicked change screen to Preferences
+        //Go to Preferences with screen transition towards East
+        application().gotoPreferencesScreenSlideTransitionEast();
+    }
 }
 
-void MainView::setLimitEffects(bool belowUpper, bool aboveLower)
+
+
+	static int count = 0;
+
+void MainView::handleClickEvent(const ClickEvent & evt)
 {
-    buttonUp.setTouchable(belowUpper);
-    buttonDown.setTouchable(aboveLower);
-
-    if (belowUpper)
-    {
-        buttonUp.setBitmaps(Bitmap(BITMAP_UP_BTN_ID), Bitmap(BITMAP_UP_BTN_PRESSED_ID));
-    }
-    else
-    {
-        buttonUp.setBitmaps(Bitmap(BITMAP_UP_BTN_DISABLED_ID), Bitmap(BITMAP_UP_BTN_DISABLED_ID));
-    }
-
-    if (aboveLower)
-    {
-        buttonDown.setBitmaps(Bitmap(BITMAP_DOWN_BTN_ID), Bitmap(BITMAP_DOWN_BTN_PRESSED_ID));
-    }
-    else
-    {
-        buttonDown.setBitmaps(Bitmap(BITMAP_DOWN_BTN_DISABLED_ID), Bitmap(BITMAP_DOWN_BTN_DISABLED_ID));
-    }
-
-    buttonUp.invalidate();
-    buttonDown.invalidate();
+	printf("%d click\n", count++);
+	MainViewBase::handleClickEvent(evt);
 }
+void MainView::handleDragEvent(const DragEvent & evt)
+{
+	printf("%d drag\n", count++);
+	MainViewBase::handleDragEvent(evt);
+}
+void MainView::handleGestureEvent(const GestureEvent & evt)
+{
+	printf("%d gesture %d %d\n", count++, evt.getType(), evt.getVelocity());
+	MainViewBase::handleGestureEvent(evt);
+}
+void MainView::handleKeyEvent(uint8_t key)
+{
+	MainViewBase::handleKeyEvent(key);
+}
+

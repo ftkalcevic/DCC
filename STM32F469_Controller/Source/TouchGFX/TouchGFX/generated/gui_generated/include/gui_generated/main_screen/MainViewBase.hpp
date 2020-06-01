@@ -7,12 +7,11 @@
 #include <gui/common/FrontendApplication.hpp>
 #include <mvp/View.hpp>
 #include <gui/main_screen/MainPresenter.hpp>
+#include <touchgfx/widgets/TiledImage.hpp>
 #include <touchgfx/containers/SwipeContainer.hpp>
 #include <touchgfx/containers/Container.hpp>
-#include <touchgfx/widgets/TiledImage.hpp>
-#include <touchgfx/widgets/Image.hpp>
-#include <touchgfx/widgets/Button.hpp>
-#include <touchgfx/widgets/TextAreaWithWildcard.hpp>
+#include <gui/containers/FunctionButtons.hpp>
+#include <gui/containers/StatusBar.hpp>
 
 class MainViewBase : public touchgfx::View<MainPresenter>
 {
@@ -20,19 +19,6 @@ public:
     MainViewBase();
     virtual ~MainViewBase() {}
     virtual void setupScreen();
-
-    /*
-     * Virtual Action Handlers
-     */
-    virtual void increaseValue()
-    {
-        // Override and implement this function in Main
-    }
-
-    virtual void decreaseValue()
-    {
-        // Override and implement this function in Main
-    }
 
 protected:
     FrontendApplication& application() {
@@ -42,33 +28,14 @@ protected:
     /*
      * Member Declarations
      */
+    touchgfx::TiledImage backgroundImage1;
     touchgfx::SwipeContainer swipeContainer1;
     touchgfx::Container swipeContainer1Page1;
-    touchgfx::TiledImage backgroundImage1;
-    touchgfx::Image counterBackgroundImage;
-    touchgfx::Button buttonDown;
-    touchgfx::Button buttonUp;
-    touchgfx::TextAreaWithOneWildcard countTxt;
     touchgfx::Container swipeContainer1Page2;
-    touchgfx::TiledImage backgroundImage2;
-
-    /*
-     * Wildcard Buffers
-     */
-    static const uint16_t COUNTTXT_SIZE = 3;
-    touchgfx::Unicode::UnicodeChar countTxtBuffer[COUNTTXT_SIZE];
+    FunctionButtons functionButtons1;
+    StatusBar statusBar1;
 
 private:
-
-    /*
-     * Callback Declarations
-     */
-    touchgfx::Callback<MainViewBase, const touchgfx::AbstractButton&> buttonCallback;
-
-    /*
-     * Callback Handler Declarations
-     */
-    void buttonCallbackHandler(const touchgfx::AbstractButton& src);
 
 };
 

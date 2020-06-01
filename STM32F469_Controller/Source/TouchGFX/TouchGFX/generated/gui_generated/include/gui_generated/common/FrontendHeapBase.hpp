@@ -8,7 +8,7 @@
 #include <common/Partition.hpp>
 #include <mvp/MVPHeap.hpp>
 #include <touchgfx/transitions/NoTransition.hpp>
-#include <touchgfx/transitions/SlideTransition.hpp>
+#include <touchgfx/transitions/CoverTransition.hpp>
 
 #include <gui/common/FrontendApplication.hpp>
 #include <gui/model/Model.hpp>
@@ -17,6 +17,8 @@
 #include <gui/main_screen/MainPresenter.hpp>
 #include <gui/startupscreen_screen/StartupScreenView.hpp>
 #include <gui/startupscreen_screen/StartupScreenPresenter.hpp>
+#include <gui/preferences_screen/PreferencesView.hpp>
+#include <gui/preferences_screen/PreferencesPresenter.hpp>
 
 
 /**
@@ -41,7 +43,8 @@ public:
      */
     typedef touchgfx::meta::TypeList< MainView,
             touchgfx::meta::TypeList< StartupScreenView,
-            touchgfx::meta::Nil >
+            touchgfx::meta::TypeList< PreferencesView,
+            touchgfx::meta::Nil > >
             > GeneratedViewTypes;
 
     /**
@@ -55,7 +58,8 @@ public:
      */
     typedef touchgfx::meta::TypeList< MainPresenter,
             touchgfx::meta::TypeList< StartupScreenPresenter,
-            touchgfx::meta::Nil >
+            touchgfx::meta::TypeList< PreferencesPresenter,
+            touchgfx::meta::Nil > >
             > GeneratedPresenterTypes;
 
     /**
@@ -68,7 +72,7 @@ public:
      * @note All transition types used in the application MUST be added to this list!
      */
     typedef touchgfx::meta::TypeList< touchgfx::NoTransition,
-            touchgfx::meta::TypeList< SlideTransition<EAST>,
+            touchgfx::meta::TypeList< CoverTransition<EAST>,
             touchgfx::meta::Nil >
             > GeneratedTransitionTypes;
 

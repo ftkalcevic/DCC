@@ -18,7 +18,11 @@ public:
         model.tick();
         FrontendApplicationBase::handleTickEvent();
     }
+	void gotoPreferencesScreenSlideTransitionEast();
+	
 private:
+	void gotoPreferencesScreenSlideTransitionEastImpl();
+    touchgfx::Callback<FrontendApplication> transitionCallback;
 };
 
 #endif // FRONTENDAPPLICATION_HPP

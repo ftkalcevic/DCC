@@ -80,17 +80,29 @@ void AppMain::Run()
 	- App will always start in the "drive" screen.
 		- swipe to next loco/accessory
 	- Go back to the main screen
-		- boxes of options 
-			- select trains, accessories, config
+		- 4x2 buttons per page
+			- can swipe for more
+			- one button will be the config menu (default to last button)
+			- the others will be to select a trains, or accessories
+			- buttons will be image + text.  user configurable image/text for train/acc
+			- buttons can be ordered.
+		- buttons will zoom to full screen config (flip over and zoom)
 	- config
 		- app settings
+		- configure dcc/lcc devices - that is define the objects in the list
 		- dcc track programming
 		- lcc config
-		- 
-	- dcc track programming (do we want to be able to programm anywhere? Eg tweak an accessory?)
-		- search to find existing 
-		- read CVs
-		- define each loco/accessory in a config file. (like lcc)
+		- switch to usb_msc mode
+		- usb on the go
+			- usb hid device input
+		
+	- dcc programming 
+		- track 
+			- search to find existing 
+			- read CVs
+			- define each loco/accessory in a config file. (like lcc)
+		- global (terminology)
+			- send commands without ACK (can't query CVs, values, etc)
 	- lcc
 		- search
 		- map events.

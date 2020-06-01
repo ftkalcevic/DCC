@@ -123,6 +123,7 @@
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\up_btn_pressed.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\common\BinFileLoader.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\common\BMPFileLoader.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\common\CustomButton.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\common\FrontendApplication.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\common\TGAFileLoader.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\main_screen\MainPresenter.cpp" />
@@ -220,6 +221,7 @@
     <ClInclude Include="..\TouchGFX\TouchGFX\gui\include\gui\common\BMPFileLoader.h" />
     <ClInclude Include="..\TouchGFX\TouchGFX\gui\include\gui\common\PNGFileLoader.h" />
     <ClInclude Include="..\TouchGFX\TouchGFX\gui\include\gui\common\TGAFileLoader.h" />
+    <ClInclude Include="..\TouchGFX\TouchGFX\gui\src\common\CustomButton.hpp" />
     <ClInclude Include="AppMain.h" />
     <ClInclude Include="Arduino.h" />
     <ClInclude Include="AudioTask.h" />
@@ -307,5 +309,23 @@
     <ClInclude Include="$(EFP_BASE)\Profiler\ProfilerFreeRTOSHooks.h" />
     <ClInclude Include="$(EFP_BASE)\Profiler\CustomRealTimeWatches.h" />
     <ClInclude Include="$(EFP_BASE)\Profiler\DebuggerChecker.h" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\fonts\src\Font_Asap_Regular_20_4bpp_0.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\fonts\src\Kerning_Asap_Regular_20_4bpp.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\fonts\src\Table_Asap_Regular_20_4bpp.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\buttonDown.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\buttonUp.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\preferencesIcon.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\containers\ListItemBase.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\preferences_screen\PreferencesViewBase.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\containers\ListItem.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\preferences_screen\PreferencesPresenter.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\preferences_screen\PreferencesView.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\containers\FunctionButtonsBase.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\containers\StatusBarBase.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\fnBackground.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\containers\FunctionButtons.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\containers\StatusBar.cpp" />
+    <ClCompile Include="$(EFP_BASE)\Profiler\FastSemihosting.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\LocoIcon.cpp" />
   </ItemGroup>
 </Project>

@@ -13,6 +13,8 @@
 #include <gui/main_screen/MainPresenter.hpp>
 #include <gui/startupscreen_screen/StartupScreenView.hpp>
 #include <gui/startupscreen_screen/StartupScreenPresenter.hpp>
+#include <gui/preferences_screen/PreferencesView.hpp>
+#include <gui/preferences_screen/PreferencesPresenter.hpp>
 
 using namespace touchgfx;
 
@@ -33,15 +35,15 @@ FrontendApplicationBase::FrontendApplicationBase(Model& m, FrontendHeap& heap)
 
 // Main
 
-void FrontendApplicationBase::gotoMainScreenSlideTransitionEast()
+void FrontendApplicationBase::gotoMainScreenCoverTransitionEast()
 {
-    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplication::gotoMainScreenSlideTransitionEastImpl);
+    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplication::gotoMainScreenCoverTransitionEastImpl);
     pendingScreenTransitionCallback = &transitionCallback;
 }
 
-void FrontendApplicationBase::gotoMainScreenSlideTransitionEastImpl()
+void FrontendApplicationBase::gotoMainScreenCoverTransitionEastImpl()
 {
-    touchgfx::makeTransition<MainView, MainPresenter, touchgfx::SlideTransition<EAST>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+    touchgfx::makeTransition<MainView, MainPresenter, touchgfx::CoverTransition<EAST>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }
 
 // StartupScreen

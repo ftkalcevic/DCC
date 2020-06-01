@@ -3,6 +3,7 @@
 
 #include <gui_generated/main_screen/MainViewBase.hpp>
 #include <gui/main_screen/MainPresenter.hpp>
+#include <touchgfx/widgets/AbstractButton.hpp>
 
 class MainView : public MainViewBase
 {
@@ -12,17 +13,16 @@ public:
     virtual void setupScreen();
     virtual void tearDownScreen();
 
-    virtual void increaseValue();
-    virtual void decreaseValue();
-
-    void setCount(uint8_t countValue);
-    void setLimitEffects(bool belowUpper, bool aboveLower);
 
 protected:
-
+	virtual void	handleClickEvent(const ClickEvent & evt);
+	virtual void	handleDragEvent(const DragEvent & evt);
+	virtual void	handleGestureEvent(const GestureEvent & evt);
+	virtual void	handleKeyEvent(uint8_t key);
 private:
-    uint8_t count;
 	BitmapId bmpId;
+    touchgfx::Callback<MainView, const touchgfx::AbstractButton&> buttonClickCallback;
+    void buttonClickHandler(const touchgfx::AbstractButton& src);
 };
 
 #endif // MAIN_VIEW_HPP

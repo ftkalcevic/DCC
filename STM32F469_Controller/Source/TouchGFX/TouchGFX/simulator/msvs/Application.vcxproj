@@ -30,6 +30,16 @@
     <ClCompile Include="..\..\gui\src\common\PNGFileLoader.cpp"/>
     <ClCompile Include="..\..\gui\src\common\TGAFileLoader.cpp"/>
     <ClCompile Include="..\..\gui\src\common\BinFileLoader.cpp"/>
+    <ClCompile Include="..\..\gui\src\common\CustomButton.cpp"/>
+    <ClCompile Include="..\..\gui\src\containers\ListItem.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\ListItemBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\preferences_screen\PreferencesPresenter.cpp"/>
+    <ClCompile Include="..\..\gui\src\preferences_screen\PreferencesView.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\preferences_screen\PreferencesViewBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\containers\FunctionButtons.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\FunctionButtonsBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\containers\StatusBar.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\StatusBarBase.cpp"/>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(ApplicationRoot)\assets\texts\texts.xlsx"/>
@@ -187,6 +197,16 @@
     <ClInclude Include="..\..\gui\include\gui\common\PNGFileLoader.h"/>
     <ClInclude Include="..\..\gui\include\gui\common\TGAFileLoader.h"/>
     <ClInclude Include="..\..\gui\include\gui\common\BinFileLoader.h"/>
+    <ClInclude Include="..\..\gui\include\gui\common\CustomButton.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\containers\ListItem.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\ListItemBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\preferences_screen\PreferencesPresenter.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\preferences_screen\PreferencesView.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\preferences_screen\PreferencesViewBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\containers\FunctionButtons.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\FunctionButtonsBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\containers\StatusBar.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\StatusBarBase.hpp"/>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="$(ApplicationRoot)\generated\simulator\touchgfx.rc"/>
