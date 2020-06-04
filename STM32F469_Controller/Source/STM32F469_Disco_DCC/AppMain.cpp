@@ -97,7 +97,22 @@ static void ReadInputs()
 				k.debounce = DEBOUNCE_TIMER;
 		}
 	}
-		
+
+	uint16_t sum1 = 0, sum2 = 0;
+	for (int i = 0; i < countof(ADC_Joysticks); i += 2)
+	{
+		sum1 += ADC_Joysticks[i + 0];
+		sum2 += ADC_Joysticks[i + 1];
+	}
+	uint16_t avg1 = sum1 / (countof(ADC_Joysticks) / 2);
+	uint16_t avg2 = sum2 / (countof(ADC_Joysticks) / 2);
+	
+	static int count = 0;
+	if (count % 1000 == 0)
+	{
+		printf("%d,%d\n", avg1, avg2);
+	}
+	count++;
 }
 
 

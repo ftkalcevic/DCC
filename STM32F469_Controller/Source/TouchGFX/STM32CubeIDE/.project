@@ -344,9 +344,34 @@
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/__designer/Blue_PageIndicator_dot_indicator_small_normal.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/generated/Blue_Slider_Horizontal_Medium_Indicators_Slider_Round_nob.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/__designer/Blue_Slider_Horizontal_Medium_Indicators_Slider_Round_nob.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/Blue_Slider_Horizontal_Medium_Slider_Round_back.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/__designer/Blue_Slider_Horizontal_Medium_Slider_Round_back.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/Blue_Slider_Horizontal_Medium_Slider_Round_fill.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/__designer/Blue_Slider_Horizontal_Medium_Slider_Round_fill.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/generated/CachedFont.cpp</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/fonts/src/CachedFont.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/CurrentDisplayBase.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/containers/CurrentDisplayBase.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/DCCSettingsViewBase.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/dccsettings_screen/DCCSettingsViewBase.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/Dark_Textures_carbon_fibre.cpp</name>
@@ -359,6 +384,11 @@
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/fonts/src/FontCache.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/generated/Font_Asap_Regular_20_4bpp_0.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/fonts/src/Font_Asap_Regular_20_4bpp_0.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/generated/Font_Asap_Regular_80_4bpp_0.cpp</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/fonts/src/Font_Asap_Regular_80_4bpp_0.cpp</locationURI>
@@ -369,9 +399,19 @@
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/common/FrontendApplicationBase.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/generated/FunctionButtonsBase.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/containers/FunctionButtonsBase.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/generated/GeneratedFont.cpp</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/fonts/src/GeneratedFont.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/Kerning_Asap_Regular_20_4bpp.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/fonts/src/Kerning_Asap_Regular_20_4bpp.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/Kerning_Asap_Regular_80_4bpp.cpp</name>
@@ -384,14 +424,44 @@
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/texts/src/LanguageGb.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/generated/ListItemBase.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/containers/ListItemBase.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/LocoIcon.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/LocoIcon.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/generated/MainViewBase.cpp</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/main_screen/MainViewBase.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/generated/PreferencesViewBase.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/preferences_screen/PreferencesViewBase.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/SettingsViewBase.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/settings_screen/SettingsViewBase.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/generated/StartupScreenViewBase.cpp</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/startupscreen_screen/StartupScreenViewBase.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/StatusBarBase.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/containers/StatusBarBase.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/Table_Asap_Regular_20_4bpp.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/fonts/src/Table_Asap_Regular_20_4bpp.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/Table_Asap_Regular_80_4bpp.cpp</name>
@@ -409,9 +479,14 @@
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/texts/src/TypedTextDatabase.cpp</locationURI>
 		</link>
 		<link>
-			<name>Application/User/generated/background.cpp</name>
+			<name>Application/User/generated/buttonDown.cpp</name>
 			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/background.cpp</locationURI>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/buttonDown.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/buttonUp.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/buttonUp.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/counter_box.cpp</name>
@@ -432,6 +507,21 @@
 			<name>Application/User/generated/down_btn_pressed.cpp</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/down_btn_pressed.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/fnBackground.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/fnBackground.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/preferencesIcon.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/preferencesIcon.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/scrollItemBase.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/containers/scrollItemBase.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/up_btn.cpp</name>
@@ -459,9 +549,39 @@
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/common/BinFileLoader.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/gui/CurrentDisplay.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/containers/CurrentDisplay.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/CustomButton.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/common/CustomButton.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/DCCSettingsPresenter.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/dccsettings_screen/DCCSettingsPresenter.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/DCCSettingsView.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/dccsettings_screen/DCCSettingsView.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/gui/FrontendApplication.cpp</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/common/FrontendApplication.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/FunctionButtons.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/containers/FunctionButtons.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/ListItem.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/containers/ListItem.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/gui/MainPresenter.cpp</name>
@@ -484,6 +604,26 @@
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/common/PNGFileLoader.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/gui/PreferencesPresenter.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/preferences_screen/PreferencesPresenter.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/PreferencesView.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/preferences_screen/PreferencesView.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/SettingsPresenter.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/settings_screen/SettingsPresenter.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/SettingsView.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/settings_screen/SettingsView.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/gui/StartupScreenPresenter.cpp</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/startupscreen_screen/StartupScreenPresenter.cpp</locationURI>
@@ -494,9 +634,19 @@
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/startupscreen_screen/StartupScreenView.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/gui/StatusBar.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/containers/StatusBar.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/gui/TGAFileLoader.cpp</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/common/TGAFileLoader.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/scrollItem.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/containers/scrollItem.cpp</locationURI>
 		</link>
 		<link>
 			<name>Drivers/BSP/Components/ft6x06.c</name>
@@ -602,176 +752,6 @@
 			<name>Application/User/TouchGFX/target/generated/TouchGFXGeneratedHAL.cpp</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/target/generated/TouchGFXGeneratedHAL.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/Font_Asap_Regular_20_4bpp_0.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/fonts/src/Font_Asap_Regular_20_4bpp_0.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/Kerning_Asap_Regular_20_4bpp.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/fonts/src/Kerning_Asap_Regular_20_4bpp.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/Table_Asap_Regular_20_4bpp.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/fonts/src/Table_Asap_Regular_20_4bpp.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/Blue_Buttons_Round_Edge_small.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/__designer/Blue_Buttons_Round_Edge_small.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/Blue_Buttons_Round_Edge_small_pressed.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/__designer/Blue_Buttons_Round_Edge_small_pressed.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/Blue_Icons_Add_new_32.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/__designer/Blue_Icons_Add_new_32.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/buttonDown.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/buttonDown.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/buttonUp.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/buttonUp.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/gui/CustomButton.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/common/CustomButton.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/preferencesIcon.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/preferencesIcon.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/gui/ListItem.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/containers/ListItem.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/gui/PreferencesPresenter.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/preferences_screen/PreferencesPresenter.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/gui/PreferencesView.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/preferences_screen/PreferencesView.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/ListItemBase.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/containers/ListItemBase.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/PreferencesViewBase.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/preferences_screen/PreferencesViewBase.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/gui/FunctionButtons.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/containers/FunctionButtons.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/gui/StatusBar.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/containers/StatusBar.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/FunctionButtonsBase.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/containers/FunctionButtonsBase.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/StatusBarBase.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/containers/StatusBarBase.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/fnBackground.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/fnBackground.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/LocoIcon.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/LocoIcon.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/gui/scrollItem.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/containers/scrollItem.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/gui/DCCSettingsPresenter.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/dccsettings_screen/DCCSettingsPresenter.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/gui/DCCSettingsView.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/dccsettings_screen/DCCSettingsView.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/gui/SettingsPresenter.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/settings_screen/SettingsPresenter.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/gui/SettingsView.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/settings_screen/SettingsView.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/scrollItemBase.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/containers/scrollItemBase.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/DCCSettingsViewBase.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/dccsettings_screen/DCCSettingsViewBase.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/SettingsViewBase.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/settings_screen/SettingsViewBase.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/gui/CurrentDisplay.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/containers/CurrentDisplay.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/CurrentDisplayBase.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/containers/CurrentDisplayBase.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/Blue_Slider_Horizontal_Medium_Indicators_Slider_Round_nob.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/__designer/Blue_Slider_Horizontal_Medium_Indicators_Slider_Round_nob.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/Blue_Slider_Horizontal_Medium_Slider_Round_back.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/__designer/Blue_Slider_Horizontal_Medium_Slider_Round_back.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/Blue_Slider_Horizontal_Medium_Slider_Round_fill.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/__designer/Blue_Slider_Horizontal_Medium_Slider_Round_fill.cpp</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

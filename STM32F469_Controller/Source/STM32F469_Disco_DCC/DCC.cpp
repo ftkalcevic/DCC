@@ -21,7 +21,7 @@ DCC<DCCType::ProgrammingTrack, PRGTRK_ARR_OFFSET, PRGTRK_CCn_OFFSET, PRGTRK_BURS
 		PrgTrk_CS_GPIO_Port, PrgTrk_CS_Pin,
 		PrgTrk_Disable_GPIO_Port, PrgTrk_Disable_Pin,
 		PrgTrk_Fault_GPIO_Port, PrgTrk_Fault_Pin,
-		PrgTrk_ACK_GPIO_Port, PrgTrk_ACK_Pin,
+		&hadc1, 4,
 		PrgTrk_DCC_Signal_GPIO_Port, PrgTrk_DCC_Signal_Pin );	// tim3_1 
 
 extern "C"

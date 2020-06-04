@@ -61,6 +61,9 @@ extern SPI_HandleTypeDef hspi2;
 extern TIM_HandleTypeDef htim3;
 extern TIM_HandleTypeDef htim8;
 extern CAN_HandleTypeDef hcan2;
+extern uint16_t ADC_Joysticks[16];
+extern uint16_t ADC_Current[16];
+
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
@@ -118,18 +121,12 @@ extern CAN_HandleTypeDef hcan2;
 #define CANRX_GPIO_Port GPIOB
 #define Fn5_Pin GPIO_PIN_1
 #define Fn5_GPIO_Port GPIOC
-#define EncoderB_Pin GPIO_PIN_2
-#define EncoderB_GPIO_Port GPIOC
 #define OTG_FS1_PowerSwitchOn_Pin GPIO_PIN_2
 #define OTG_FS1_PowerSwitchOn_GPIO_Port GPIOB
 #define uSD_Detect_Pin GPIO_PIN_2
 #define uSD_Detect_GPIO_Port GPIOG
 #define LCD_INT_Pin GPIO_PIN_5
 #define LCD_INT_GPIO_Port GPIOJ
-#define Boost_Sense_Pin GPIO_PIN_1
-#define Boost_Sense_GPIO_Port GPIOA
-#define PrgTrk_ACK_Pin GPIO_PIN_4
-#define PrgTrk_ACK_GPIO_Port GPIOA
 #define REV_Pin GPIO_PIN_4
 #define REV_GPIO_Port GPIOC
 #define Fn2_Pin GPIO_PIN_2
@@ -146,8 +143,6 @@ extern CAN_HandleTypeDef hcan2;
 #define LCD_BL_CTRL_GPIO_Port GPIOA
 #define PrgTrk_CS_Pin GPIO_PIN_7
 #define PrgTrk_CS_GPIO_Port GPIOA
-#define EncoderA_Pin GPIO_PIN_1
-#define EncoderA_GPIO_Port GPIOB
 #define EXT_RESET_Pin GPIO_PIN_0
 #define EXT_RESET_GPIO_Port GPIOB
 #define STLK_TX_Pin GPIO_PIN_11
