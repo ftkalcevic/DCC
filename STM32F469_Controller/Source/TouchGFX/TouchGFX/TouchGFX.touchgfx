@@ -8,7 +8,7 @@
             "Alpha": 255,
             "OffsetX": 0,
             "OffsetY": 0,
-            "Name": "backgroundImage1",
+            "Name": "backgroundImage",
             "X": 0,
             "Y": 0,
             "Width": 800,
@@ -21,50 +21,18 @@
             "Moveable": false
           },
           {
-            "Components": [
-              {
-                "Components": [],
-                "IsCacheableContainer": false,
-                "Name": "swipeContainer1Page1",
-                "X": 0,
-                "Y": 0,
-                "Width": 800,
-                "Height": 430,
-                "Type": "Container",
-                "Visible": true,
-                "Draggable": false,
-                "Clickable": false,
-                "Fadeable": false,
-                "Moveable": false
-              },
-              {
-                "Components": [],
-                "IsCacheableContainer": false,
-                "Name": "swipeContainer1Page2",
-                "X": 0,
-                "Y": 0,
-                "Width": 800,
-                "Height": 430,
-                "Type": "Container",
-                "Visible": true,
-                "Draggable": false,
-                "Clickable": false,
-                "Fadeable": false,
-                "Moveable": false
-              }
-            ],
+            "Components": [],
             "SwipeCutoff": 50,
             "ShowPageIndicator": true,
-            "PageIndicatorX": 385,
+            "PageIndicatorX": 400,
             "PageIndicatorY": 404,
             "CenteredX": true,
             "IndicatorImageNormal": "__designer\\Blue_PageIndicator_dot_indicator_small_normal.png",
             "IndicatorImageHighlight": "__designer\\Blue_PageIndicator_dot_indicator_small_highlight.png",
             "EndSwipeElasticWidth": 50,
-            "SelectedPage": "swipeContainer1Page1",
             "Style": "Style1",
             "IsCacheableContainer": false,
-            "Name": "swipeContainer1",
+            "Name": "swipeContainer",
             "X": 0,
             "Y": 25,
             "Width": 800,
@@ -78,7 +46,7 @@
           },
           {
             "CustomContainerDefinitionName": "FunctionButtons",
-            "Name": "functionButtons1",
+            "Name": "functionButtons",
             "X": 0,
             "Y": 455,
             "Width": 800,
@@ -92,7 +60,7 @@
           },
           {
             "CustomContainerDefinitionName": "StatusBar",
-            "Name": "statusBar1",
+            "Name": "statusBar",
             "X": 0,
             "Y": 0,
             "Width": 800,
@@ -133,7 +101,7 @@
             },
             "Action": {
               "ScreenTransitionType": "ScreenTransitionCover",
-              "ScreenTransitionDirection": "East",
+              "ScreenTransitionDirection": "South",
               "ActionComponent": "Main",
               "Type": "ActionGotoScreen"
             }
@@ -146,18 +114,16 @@
       {
         "Components": [
           {
-            "Color": {
-              "Red": 255,
-              "Green": 255,
-              "Blue": 255
-            },
+            "FileName": "__designer\\Dark_Textures_carbon_fibre.png",
             "Alpha": 255,
-            "Name": "box1",
+            "OffsetX": 0,
+            "OffsetY": 0,
+            "Name": "backgroundImage",
             "X": 0,
             "Y": 0,
             "Width": 800,
             "Height": 480,
-            "Type": "Box",
+            "Type": "TiledImage",
             "Visible": true,
             "Draggable": false,
             "Clickable": false,
@@ -165,25 +131,68 @@
             "Moveable": false
           },
           {
-            "PaddingBefore": 0,
-            "PaddingAfter": 0,
-            "Snapping": false,
-            "IsHorizontal": false,
-            "IsCircular": false,
-            "ItemTemplateName": "ListItem",
-            "NumberofItems": 2,
-            "InitialElement": 0,
-            "ItemMargin": 0,
-            "Easing": "Back",
-            "EasingOption": "Out",
-            "SwipeAcceleration": 1.0,
-            "DragAcceleration": 1.0,
-            "Name": "scrollList1",
+            "Components": [
+              {
+                "Components": [],
+                "IsCacheableContainer": false,
+                "Name": "swipeContainerPage1",
+                "X": 0,
+                "Y": 0,
+                "Width": 800,
+                "Height": 430,
+                "Type": "Container",
+                "Visible": true,
+                "Draggable": false,
+                "Clickable": false,
+                "Fadeable": false,
+                "Moveable": false
+              }
+            ],
+            "SwipeCutoff": 50,
+            "ShowPageIndicator": true,
+            "PageIndicatorX": 393,
+            "PageIndicatorY": 404,
+            "CenteredX": true,
+            "IndicatorImageNormal": "__designer\\Blue_PageIndicator_dot_indicator_small_normal.png",
+            "IndicatorImageHighlight": "__designer\\Blue_PageIndicator_dot_indicator_small_highlight.png",
+            "EndSwipeElasticWidth": 50,
+            "SelectedPage": "swipeContainerPage1",
+            "Style": "Style1",
+            "IsCacheableContainer": false,
+            "Name": "swipeContainer",
+            "X": 0,
+            "Y": 25,
+            "Width": 800,
+            "Height": 430,
+            "Type": "SwipeContainer",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "CustomContainerDefinitionName": "FunctionButtons",
+            "Name": "functionButtons",
+            "X": 0,
+            "Y": 455,
+            "Width": 800,
+            "Height": 25,
+            "Type": "CustomContainerInstance",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "CustomContainerDefinitionName": "StatusBar",
+            "Name": "statusBar",
             "X": 0,
             "Y": 0,
-            "Width": 250,
-            "Height": 480,
-            "Type": "ScrollList",
+            "Width": 800,
+            "Height": 25,
+            "Type": "CustomContainerInstance",
             "Visible": true,
             "Draggable": false,
             "Clickable": false,
@@ -193,8 +202,767 @@
         ],
         "Interactions": [],
         "Name": "Preferences",
+        "OverrideDefaultBufferSize": true,
+        "CanvasBufferSize": 32767
+      },
+      {
+        "Components": [
+          {
+            "CustomContainerDefinitionName": "FunctionButtons",
+            "Name": "functionButtons",
+            "X": 0,
+            "Y": 455,
+            "Width": 800,
+            "Height": 25,
+            "Type": "CustomContainerInstance",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "CustomContainerDefinitionName": "StatusBar",
+            "Name": "statusBar",
+            "X": 0,
+            "Y": 0,
+            "Width": 800,
+            "Height": 25,
+            "Type": "CustomContainerInstance",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "Components": [
+              {
+                "FileName": "__designer\\Dark_Textures_carbon_fibre.png",
+                "Alpha": 255,
+                "OffsetX": 0,
+                "OffsetY": 0,
+                "Name": "backgroundImage",
+                "X": 0,
+                "Y": 0,
+                "Width": 800,
+                "Height": 591,
+                "Type": "TiledImage",
+                "Visible": true,
+                "Draggable": false,
+                "Clickable": false,
+                "Fadeable": false,
+                "Moveable": false
+              },
+              {
+                "IsHorizontalSlider": true,
+                "BackgroundUnselected": "__designer\\Blue_Slider_Horizontal_Medium_Slider_Round_back.png",
+                "BackgroundSelected": "__designer\\Blue_Slider_Horizontal_Medium_Slider_Round_fill.png",
+                "Indicator": "__designer\\Blue_Slider_Horizontal_Medium_Indicators_Slider_Round_nob.png",
+                "BackgroundX": 2,
+                "BackgroundY": 19,
+                "IndicatorPos": 2,
+                "IndicatorMax": 310,
+                "IndicatorMin": 0,
+                "ValueMax": 100,
+                "ValueMin": 0,
+                "InitValue": 0,
+                "Style": "Style7",
+                "Name": "sliderBacklight",
+                "X": 378,
+                "Y": 44,
+                "Width": 358,
+                "Height": 52,
+                "Type": "Slider",
+                "Visible": true,
+                "Draggable": false,
+                "Clickable": false,
+                "Fadeable": false,
+                "Moveable": false
+              },
+              {
+                "TextId": "SingleUseId30",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 255,
+                  "Green": 255,
+                  "Blue": 255
+                },
+                "Alpha": 255,
+                "AutoSize": true,
+                "LineSpacing": 0,
+                "Name": "textArea1",
+                "X": 140,
+                "Y": 59,
+                "Width": 83,
+                "Height": 23,
+                "Type": "TextArea",
+                "Visible": true,
+                "Draggable": false,
+                "Clickable": false,
+                "Fadeable": false,
+                "Moveable": false
+              }
+            ],
+            "HorizontalScrollEnabled": false,
+            "VerticalScrollEnabled": true,
+            "ScrollbarsVisible": true,
+            "ScrollbarsVisibleOnPressed": false,
+            "ScrollbarsColor": {
+              "Red": 0,
+              "Green": 0,
+              "Blue": 0
+            },
+            "ScrollbarsAlpha": 255,
+            "Name": "scrollableContainer1",
+            "X": 0,
+            "Y": 25,
+            "Width": 800,
+            "Height": 430,
+            "Type": "ScrollableContainer",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          }
+        ],
+        "Interactions": [],
+        "Name": "Settings",
         "OverrideDefaultBufferSize": false,
-        "CanvasBufferSize": 12000
+        "CanvasBufferSize": 0
+      },
+      {
+        "Components": [
+          {
+            "FileName": "__designer\\Dark_Textures_carbon_fibre.png",
+            "Alpha": 255,
+            "OffsetX": 0,
+            "OffsetY": 0,
+            "Name": "backgroundImage",
+            "X": 0,
+            "Y": 0,
+            "Width": 800,
+            "Height": 480,
+            "Type": "TiledImage",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "CustomContainerDefinitionName": "FunctionButtons",
+            "Name": "functionButtons",
+            "X": 0,
+            "Y": 455,
+            "Width": 800,
+            "Height": 25,
+            "Type": "CustomContainerInstance",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "CustomContainerDefinitionName": "StatusBar",
+            "Name": "statusBar",
+            "X": 0,
+            "Y": 0,
+            "Width": 800,
+            "Height": 25,
+            "Type": "CustomContainerInstance",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "TextId": "SingleUseId17",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Alpha": 255,
+            "AutoSize": true,
+            "LineSpacing": 0,
+            "Name": "textArea2",
+            "X": 554,
+            "Y": 50,
+            "Width": 54,
+            "Height": 23,
+            "Type": "TextArea",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "TextId": "SingleUseId18",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Alpha": 255,
+            "AutoSize": true,
+            "LineSpacing": 0,
+            "Name": "textArea3",
+            "X": 731,
+            "Y": 81,
+            "Width": 45,
+            "Height": 23,
+            "Type": "TextArea",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "TextId": "SingleUseId19",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Alpha": 255,
+            "AutoSize": true,
+            "LineSpacing": 0,
+            "Name": "textArea4",
+            "X": 664,
+            "Y": 81,
+            "Width": 49,
+            "Height": 23,
+            "Type": "TextArea",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "TextId": "SingleUseId22",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Alpha": 255,
+            "AutoSize": true,
+            "LineSpacing": 0,
+            "Name": "textArea2_1_2",
+            "X": 497,
+            "Y": 189,
+            "Width": 114,
+            "Height": 23,
+            "Type": "TextArea",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "Components": [
+              {
+                "SelectedItemOffset": 17,
+                "UseSelectedStyle": false,
+                "ExtraSizeBefore": 0,
+                "ExtraSizeAfter": 0,
+                "MarginBefore": 0,
+                "MarginAfter": 0,
+                "IsHorizontal": true,
+                "IsCircular": false,
+                "ItemTemplateName": "scrollItem",
+                "NumberofItems": 1,
+                "InitialElement": 0,
+                "ItemMargin": 1,
+                "Easing": "Back",
+                "EasingOption": "Out",
+                "SwipeAcceleration": 1.0,
+                "DragAcceleration": 1.0,
+                "Name": "tripCurrentWheel",
+                "X": 160,
+                "Y": 25,
+                "Width": 250,
+                "Height": 100,
+                "Type": "ScrollWheel",
+                "Visible": true,
+                "Draggable": false,
+                "Clickable": false,
+                "Fadeable": false,
+                "Moveable": false
+              },
+              {
+                "TextId": "SingleUseId14",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 255,
+                  "Green": 255,
+                  "Blue": 255
+                },
+                "Alpha": 255,
+                "AutoSize": true,
+                "LineSpacing": 0,
+                "Name": "textArea1",
+                "X": 26,
+                "Y": 187,
+                "Width": 46,
+                "Height": 23,
+                "Type": "TextArea",
+                "Visible": true,
+                "Draggable": false,
+                "Clickable": false,
+                "Fadeable": false,
+                "Moveable": false
+              },
+              {
+                "TextId": "SingleUseId15",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 255,
+                  "Green": 255,
+                  "Blue": 255
+                },
+                "Alpha": 255,
+                "AutoSize": true,
+                "LineSpacing": 0,
+                "Name": "textArea1_1",
+                "X": 26,
+                "Y": 67,
+                "Width": 107,
+                "Height": 23,
+                "Type": "TextArea",
+                "Visible": true,
+                "Draggable": false,
+                "Clickable": false,
+                "Fadeable": false,
+                "Moveable": false
+              },
+              {
+                "TextId": "SingleUseId16",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 255,
+                  "Green": 255,
+                  "Blue": 255
+                },
+                "Alpha": 255,
+                "AutoSize": true,
+                "LineSpacing": 0,
+                "Name": "textArea1_2",
+                "X": 26,
+                "Y": 317,
+                "Width": 87,
+                "Height": 23,
+                "Type": "TextArea",
+                "Visible": true,
+                "Draggable": false,
+                "Clickable": false,
+                "Fadeable": false,
+                "Moveable": false
+              },
+              {
+                "SelectedItemOffset": 17,
+                "UseSelectedStyle": false,
+                "ExtraSizeBefore": 0,
+                "ExtraSizeAfter": 0,
+                "MarginBefore": 0,
+                "MarginAfter": 0,
+                "IsHorizontal": true,
+                "IsCircular": false,
+                "ItemTemplateName": "scrollItem",
+                "NumberofItems": 1,
+                "InitialElement": 0,
+                "ItemMargin": 1,
+                "Easing": "Back",
+                "EasingOption": "Out",
+                "SwipeAcceleration": 1.0,
+                "DragAcceleration": 1.0,
+                "Name": "toffWheel",
+                "X": 160,
+                "Y": 150,
+                "Width": 250,
+                "Height": 100,
+                "Type": "ScrollWheel",
+                "Visible": true,
+                "Draggable": false,
+                "Clickable": false,
+                "Fadeable": false,
+                "Moveable": false
+              },
+              {
+                "SelectedItemOffset": 17,
+                "UseSelectedStyle": false,
+                "ExtraSizeBefore": 0,
+                "ExtraSizeAfter": 0,
+                "MarginBefore": 0,
+                "MarginAfter": 0,
+                "IsHorizontal": true,
+                "IsCircular": false,
+                "ItemTemplateName": "scrollItem",
+                "NumberofItems": 1,
+                "InitialElement": 0,
+                "ItemMargin": 1,
+                "Easing": "Back",
+                "EasingOption": "Out",
+                "SwipeAcceleration": 1.0,
+                "DragAcceleration": 1.0,
+                "Name": "slewRateWheel",
+                "X": 160,
+                "Y": 275,
+                "Width": 250,
+                "Height": 100,
+                "Type": "ScrollWheel",
+                "Visible": true,
+                "Draggable": false,
+                "Clickable": false,
+                "Fadeable": false,
+                "Moveable": false
+              },
+              {
+                "TextId": "SingleUseId20",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 255,
+                  "Green": 255,
+                  "Blue": 255
+                },
+                "Alpha": 255,
+                "AutoSize": true,
+                "LineSpacing": 0,
+                "Name": "textArea2_1",
+                "X": 497,
+                "Y": 90,
+                "Width": 45,
+                "Height": 23,
+                "Type": "TextArea",
+                "Visible": true,
+                "Draggable": false,
+                "Clickable": false,
+                "Fadeable": false,
+                "Moveable": false
+              },
+              {
+                "TextId": "SingleUseId21",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 255,
+                  "Green": 255,
+                  "Blue": 255
+                },
+                "Alpha": 255,
+                "AutoSize": true,
+                "LineSpacing": 0,
+                "Name": "textArea2_1_1",
+                "X": 497,
+                "Y": 127,
+                "Width": 97,
+                "Height": 23,
+                "Type": "TextArea",
+                "Visible": true,
+                "Draggable": false,
+                "Clickable": false,
+                "Fadeable": false,
+                "Moveable": false
+              },
+              {
+                "TextId": "SingleUseId23",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 255,
+                  "Green": 255,
+                  "Blue": 255
+                },
+                "Alpha": 255,
+                "AutoSize": true,
+                "LineSpacing": 0,
+                "Name": "textArea2_1_3",
+                "X": 497,
+                "Y": 201,
+                "Width": 96,
+                "Height": 23,
+                "Type": "TextArea",
+                "Visible": true,
+                "Draggable": false,
+                "Clickable": false,
+                "Fadeable": false,
+                "Moveable": false
+              },
+              {
+                "TextId": "SingleUseId28",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 255,
+                  "Green": 255,
+                  "Blue": 255
+                },
+                "Alpha": 255,
+                "AutoSize": true,
+                "LineSpacing": 0,
+                "Name": "textArea2_1_2_1",
+                "X": 497,
+                "Y": 238,
+                "Width": 67,
+                "Height": 23,
+                "Type": "TextArea",
+                "Visible": true,
+                "Draggable": false,
+                "Clickable": false,
+                "Fadeable": false,
+                "Moveable": false
+              },
+              {
+                "Color": {
+                  "Red": 99,
+                  "Green": 99,
+                  "Blue": 99
+                },
+                "BorderColor": {
+                  "Red": 0,
+                  "Green": 0,
+                  "Blue": 0
+                },
+                "BorderSize": 5,
+                "Alpha": 255,
+                "Name": "trackFaultBox",
+                "X": 673,
+                "Y": 90,
+                "Width": 30,
+                "Height": 29,
+                "Type": "BoxWithBorder",
+                "Visible": true,
+                "Draggable": false,
+                "Clickable": false,
+                "Fadeable": false,
+                "Moveable": false
+              },
+              {
+                "Color": {
+                  "Red": 99,
+                  "Green": 99,
+                  "Blue": 99
+                },
+                "BorderColor": {
+                  "Red": 0,
+                  "Green": 0,
+                  "Blue": 0
+                },
+                "BorderSize": 5,
+                "Alpha": 255,
+                "Name": "progFaultBox",
+                "X": 738,
+                "Y": 90,
+                "Width": 30,
+                "Height": 29,
+                "Type": "BoxWithBorder",
+                "Visible": true,
+                "Draggable": false,
+                "Clickable": false,
+                "Fadeable": false,
+                "Moveable": false
+              },
+              {
+                "Color": {
+                  "Red": 99,
+                  "Green": 99,
+                  "Blue": 99
+                },
+                "BorderColor": {
+                  "Red": 0,
+                  "Green": 0,
+                  "Blue": 0
+                },
+                "BorderSize": 5,
+                "Alpha": 255,
+                "Name": "trackOpenLoadBox",
+                "X": 673,
+                "Y": 201,
+                "Width": 30,
+                "Height": 29,
+                "Type": "BoxWithBorder",
+                "Visible": true,
+                "Draggable": false,
+                "Clickable": false,
+                "Fadeable": false,
+                "Moveable": false
+              },
+              {
+                "Color": {
+                  "Red": 99,
+                  "Green": 99,
+                  "Blue": 99
+                },
+                "BorderColor": {
+                  "Red": 0,
+                  "Green": 0,
+                  "Blue": 0
+                },
+                "BorderSize": 5,
+                "Alpha": 255,
+                "Name": "progOpenLoadBox",
+                "X": 738,
+                "Y": 201,
+                "Width": 30,
+                "Height": 29,
+                "Type": "BoxWithBorder",
+                "Visible": true,
+                "Draggable": false,
+                "Clickable": false,
+                "Fadeable": false,
+                "Moveable": false
+              },
+              {
+                "Color": {
+                  "Red": 99,
+                  "Green": 99,
+                  "Blue": 99
+                },
+                "BorderColor": {
+                  "Red": 0,
+                  "Green": 0,
+                  "Blue": 0
+                },
+                "BorderSize": 5,
+                "Alpha": 255,
+                "Name": "progOverCurrentBox",
+                "X": 738,
+                "Y": 164,
+                "Width": 30,
+                "Height": 29,
+                "Type": "BoxWithBorder",
+                "Visible": true,
+                "Draggable": false,
+                "Clickable": false,
+                "Fadeable": false,
+                "Moveable": false
+              },
+              {
+                "Color": {
+                  "Red": 99,
+                  "Green": 99,
+                  "Blue": 99
+                },
+                "BorderColor": {
+                  "Red": 0,
+                  "Green": 0,
+                  "Blue": 0
+                },
+                "BorderSize": 5,
+                "Alpha": 255,
+                "Name": "trackOverCurrentBox",
+                "X": 673,
+                "Y": 164,
+                "Width": 30,
+                "Height": 29,
+                "Type": "BoxWithBorder",
+                "Visible": true,
+                "Draggable": false,
+                "Clickable": false,
+                "Fadeable": false,
+                "Moveable": false
+              },
+              {
+                "Color": {
+                  "Red": 99,
+                  "Green": 99,
+                  "Blue": 99
+                },
+                "BorderColor": {
+                  "Red": 0,
+                  "Green": 0,
+                  "Blue": 0
+                },
+                "BorderSize": 5,
+                "Alpha": 255,
+                "Name": "progOverTempBox",
+                "X": 738,
+                "Y": 127,
+                "Width": 30,
+                "Height": 29,
+                "Type": "BoxWithBorder",
+                "Visible": true,
+                "Draggable": false,
+                "Clickable": false,
+                "Fadeable": false,
+                "Moveable": false
+              },
+              {
+                "Color": {
+                  "Red": 99,
+                  "Green": 99,
+                  "Blue": 99
+                },
+                "BorderColor": {
+                  "Red": 0,
+                  "Green": 0,
+                  "Blue": 0
+                },
+                "BorderSize": 5,
+                "Alpha": 255,
+                "Name": "trackOverTempBox",
+                "X": 673,
+                "Y": 127,
+                "Width": 30,
+                "Height": 29,
+                "Type": "BoxWithBorder",
+                "Visible": true,
+                "Draggable": false,
+                "Clickable": false,
+                "Fadeable": false,
+                "Moveable": false
+              },
+              {
+                "CustomContainerDefinitionName": "CurrentDisplay",
+                "Name": "currentDisplay",
+                "X": 456,
+                "Y": 274,
+                "Width": 320,
+                "Height": 109,
+                "Type": "CustomContainerInstance",
+                "Visible": true,
+                "Draggable": false,
+                "Clickable": false,
+                "Fadeable": false,
+                "Moveable": false
+              }
+            ],
+            "HorizontalScrollEnabled": false,
+            "VerticalScrollEnabled": false,
+            "ScrollbarsVisible": false,
+            "ScrollbarsVisibleOnPressed": false,
+            "ScrollbarsColor": {
+              "Red": 0,
+              "Green": 0,
+              "Blue": 0
+            },
+            "ScrollbarsAlpha": 255,
+            "Name": "scrollableContainer1",
+            "X": 0,
+            "Y": 25,
+            "Width": 800,
+            "Height": 430,
+            "Type": "ScrollableContainer",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          }
+        ],
+        "Interactions": [],
+        "Name": "DCCSettings",
+        "OverrideDefaultBufferSize": false,
+        "CanvasBufferSize": 0
       }
     ],
     "CustomContainerDefinitions": [
@@ -220,7 +988,7 @@
             "Moveable": false
           },
           {
-            "TextId": "SingleUseId7",
+            "TextId": "wildcardTextId",
             "TextRotation": "0",
             "Color": {
               "Red": 0,
@@ -228,44 +996,14 @@
               "Blue": 0
             },
             "Alpha": 255,
-            "AutoSize": true,
+            "AutoSize": false,
             "LineSpacing": 0,
-            "Wildcard1": {
-              "UseBuffer": false,
-              "BufferSize": 0
-            },
             "Name": "textArea1",
             "X": 0,
-            "Y": 9,
-            "Width": 0,
+            "Y": 18,
+            "Width": 250,
             "Height": 23,
             "Type": "TextArea",
-            "Visible": true,
-            "Draggable": false,
-            "Clickable": false,
-            "Fadeable": false,
-            "Moveable": false
-          },
-          {
-            "Color": {
-              "Red": 242,
-              "Green": 0,
-              "Blue": 0
-            },
-            "CenterX": 14,
-            "CenterY": 14,
-            "Radius": 13,
-            "LineWidth": 0,
-            "StartAngle": 0,
-            "EndAngle": 360,
-            "CapPrecision": "Butt",
-            "Alpha": 255,
-            "Name": "circle1",
-            "X": 220,
-            "Y": 14,
-            "Width": 30,
-            "Height": 30,
-            "Type": "Circle",
             "Visible": true,
             "Draggable": false,
             "Clickable": false,
@@ -358,7 +1096,7 @@
             "Moveable": false
           },
           {
-            "TextId": "SingleUseId8",
+            "TextId": "wildcardTextIdCenter",
             "TextRotation": "0",
             "Color": {
               "Red": 255,
@@ -369,6 +1107,7 @@
             "AutoSize": false,
             "LineSpacing": 0,
             "Wildcard1": {
+              "TextId": "wildcardTextId",
               "UseBuffer": false,
               "BufferSize": 0
             },
@@ -385,7 +1124,7 @@
             "Moveable": false
           },
           {
-            "TextId": "SingleUseId9",
+            "TextId": "wildcardTextIdCenter",
             "TextRotation": "0",
             "Color": {
               "Red": 255,
@@ -396,6 +1135,7 @@
             "AutoSize": false,
             "LineSpacing": 0,
             "Wildcard1": {
+              "TextId": "wildcardTextId",
               "UseBuffer": false,
               "BufferSize": 0
             },
@@ -412,7 +1152,7 @@
             "Moveable": false
           },
           {
-            "TextId": "SingleUseId10",
+            "TextId": "wildcardTextIdCenter",
             "TextRotation": "0",
             "Color": {
               "Red": 255,
@@ -423,6 +1163,7 @@
             "AutoSize": false,
             "LineSpacing": 0,
             "Wildcard1": {
+              "TextId": "wildcardTextId",
               "UseBuffer": false,
               "BufferSize": 0
             },
@@ -439,7 +1180,7 @@
             "Moveable": false
           },
           {
-            "TextId": "SingleUseId11",
+            "TextId": "wildcardTextIdCenter",
             "TextRotation": "0",
             "Color": {
               "Red": 255,
@@ -450,6 +1191,7 @@
             "AutoSize": false,
             "LineSpacing": 0,
             "Wildcard1": {
+              "TextId": "wildcardTextId",
               "UseBuffer": false,
               "BufferSize": 0
             },
@@ -466,7 +1208,7 @@
             "Moveable": false
           },
           {
-            "TextId": "SingleUseId12",
+            "TextId": "wildcardTextIdCenter",
             "TextRotation": "0",
             "Color": {
               "Red": 255,
@@ -477,6 +1219,7 @@
             "AutoSize": false,
             "LineSpacing": 0,
             "Wildcard1": {
+              "TextId": "wildcardTextId",
               "UseBuffer": false,
               "BufferSize": 0
             },
@@ -522,7 +1265,7 @@
             "Moveable": false
           },
           {
-            "TextId": "SingleUseId13",
+            "TextId": "wildcardTextId",
             "TextRotation": "0",
             "Color": {
               "Red": 0,
@@ -533,13 +1276,14 @@
             "AutoSize": true,
             "LineSpacing": 0,
             "Wildcard1": {
+              "TextId": "wildcardTextId",
               "UseBuffer": false,
               "BufferSize": 0
             },
             "Name": "textAreaStatusBar",
             "X": 0,
             "Y": 2,
-            "Width": 0,
+            "Width": 71,
             "Height": 23,
             "Type": "TextArea",
             "Visible": true,
@@ -555,6 +1299,72 @@
         "Y": 0,
         "Width": 800,
         "Height": 25
+      },
+      {
+        "Components": [
+          {
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Alpha": 255,
+            "Name": "box1",
+            "X": 0,
+            "Y": 0,
+            "Width": 215,
+            "Height": 107,
+            "Type": "Box",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "TextId": "wildcardTextIdCenter",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 0,
+              "Green": 0,
+              "Blue": 0
+            },
+            "Alpha": 255,
+            "AutoSize": false,
+            "LineSpacing": 0,
+            "Wildcard1": {
+              "TextId": "wildcardTextId",
+              "UseBuffer": false,
+              "BufferSize": 0
+            },
+            "Name": "textArea",
+            "X": 0,
+            "Y": 42,
+            "Width": 215,
+            "Height": 23,
+            "Type": "TextArea",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          }
+        ],
+        "Interactions": [],
+        "Name": "scrollItem",
+        "X": 0,
+        "Y": 0,
+        "Width": 215,
+        "Height": 100
+      },
+      {
+        "Components": [],
+        "Interactions": [],
+        "Name": "CurrentDisplay",
+        "X": 0,
+        "Y": 0,
+        "Width": 320,
+        "Height": 109
       }
     ],
     "TextEntries": [
@@ -567,31 +1377,55 @@
         "IsResource": true
       },
       {
-        "TextEntryId": "SingleUseId7",
+        "TextEntryId": "SingleUseId14",
         "IsResource": false
       },
       {
-        "TextEntryId": "SingleUseId8",
+        "TextEntryId": "wildcardTextIdCenter",
+        "IsResource": true
+      },
+      {
+        "TextEntryId": "SingleUseId15",
         "IsResource": false
       },
       {
-        "TextEntryId": "SingleUseId9",
+        "TextEntryId": "SingleUseId16",
         "IsResource": false
       },
       {
-        "TextEntryId": "SingleUseId10",
+        "TextEntryId": "SingleUseId17",
         "IsResource": false
       },
       {
-        "TextEntryId": "SingleUseId11",
+        "TextEntryId": "SingleUseId18",
         "IsResource": false
       },
       {
-        "TextEntryId": "SingleUseId12",
+        "TextEntryId": "SingleUseId19",
         "IsResource": false
       },
       {
-        "TextEntryId": "SingleUseId13",
+        "TextEntryId": "SingleUseId20",
+        "IsResource": false
+      },
+      {
+        "TextEntryId": "SingleUseId21",
+        "IsResource": false
+      },
+      {
+        "TextEntryId": "SingleUseId22",
+        "IsResource": false
+      },
+      {
+        "TextEntryId": "SingleUseId23",
+        "IsResource": false
+      },
+      {
+        "TextEntryId": "SingleUseId28",
+        "IsResource": false
+      },
+      {
+        "TextEntryId": "SingleUseId30",
         "IsResource": false
       }
     ],

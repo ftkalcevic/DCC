@@ -35,9 +35,7 @@
   </MCUProperties>
   <BSPSourceFolderName>Device-specific files</BSPSourceFolderName>
   <MCUMakFile>stm32.mak</MCUMakFile>
-  <ReferencedFrameworks>
-    <string>com.sysprogs.embedded.semihosting_and_profiler</string>
-  </ReferencedFrameworks>
+  <ReferencedFrameworks />
   <FrameworkProperties>
     <Entries>
       <KeyValue>
@@ -91,7 +89,7 @@
     <AllDependencies>
       <ProjectDependency>
         <RelativePath>..\TouchGFX\STM32CubeIDE\.cproject</RelativePath>
-        <Timestamp>132354693203785379</Timestamp>
+        <Timestamp>132356869727594472</Timestamp>
       </ProjectDependency>
     </AllDependencies>
     <RootDirectory>
@@ -213,6 +211,27 @@
                     <VirtualFileSnapshot>
                       <RelativePath>..\TouchGFX\TouchGFX\generated\images\src\LocoIcon.cpp</RelativePath>
                     </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\generated\gui_generated\src\containers\scrollItemBase.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\generated\gui_generated\src\dccsettings_screen\DCCSettingsViewBase.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\generated\gui_generated\src\settings_screen\SettingsViewBase.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\generated\gui_generated\src\containers\CurrentDisplayBase.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Slider_Horizontal_Medium_Indicators_Slider_Round_nob.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Slider_Horizontal_Medium_Slider_Round_back.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Slider_Horizontal_Medium_Slider_Round_fill.cpp</RelativePath>
+                    </VirtualFileSnapshot>
                   </Files>
                 </VirtualDirectorySnapshot>
                 <VirtualDirectorySnapshot>
@@ -265,6 +284,24 @@
                     </VirtualFileSnapshot>
                     <VirtualFileSnapshot>
                       <RelativePath>..\TouchGFX\TouchGFX\gui\src\containers\StatusBar.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\gui\src\containers\scrollItem.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\gui\src\dccsettings_screen\DCCSettingsPresenter.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\gui\src\dccsettings_screen\DCCSettingsView.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\gui\src\settings_screen\SettingsPresenter.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\gui\src\settings_screen\SettingsView.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\gui\src\containers\CurrentDisplay.cpp</RelativePath>
                     </VirtualFileSnapshot>
                   </Files>
                 </VirtualDirectorySnapshot>

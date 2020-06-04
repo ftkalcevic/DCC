@@ -101,6 +101,9 @@
     <ClCompile Include="..\TouchGFX\Core\Src\stm32f4xx_it.c" />
     <ClCompile Include="..\TouchGFX\Drivers\BSP\Components\cs43l22\cs43l22.c" />
     <ClCompile Include="..\TouchGFX\Drivers\BSP\STM32469I-Discovery\stm32469i_discovery_audio.c" />
+    <ClCompile Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\source\touchgfx\widgets\canvas\Canvas.cpp" />
+    <ClCompile Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\source\touchgfx\widgets\TextArea.cpp" />
+    <ClCompile Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\source\touchgfx\widgets\TextAreaWithWildcard.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\fonts\src\ApplicationFontProvider.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\BitmapDatabase.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\fonts\src\CachedFont.cpp" />
@@ -122,10 +125,8 @@
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\up_btn_disabled.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\up_btn_pressed.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\common\BinFileLoader.cpp" />
-    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\common\BMPFileLoader.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\common\CustomButton.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\common\FrontendApplication.cpp" />
-    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\common\TGAFileLoader.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\main_screen\MainPresenter.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\main_screen\MainView.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\model\Model.cpp" />
@@ -218,7 +219,6 @@
     <ClInclude Include="..\TouchGFX\Drivers\BSP\Components\cs43l22\cs43l22.h" />
     <ClInclude Include="..\TouchGFX\Drivers\BSP\STM32469I-Discovery\stm32469i_discovery_audio.h" />
     <ClInclude Include="..\TouchGFX\TouchGFX\gui\include\gui\common\BinFileLoader.h" />
-    <ClInclude Include="..\TouchGFX\TouchGFX\gui\include\gui\common\BMPFileLoader.h" />
     <ClInclude Include="..\TouchGFX\TouchGFX\gui\include\gui\common\PNGFileLoader.h" />
     <ClInclude Include="..\TouchGFX\TouchGFX\gui\include\gui\common\TGAFileLoader.h" />
     <ClInclude Include="..\TouchGFX\TouchGFX\gui\src\common\CustomButton.hpp" />
@@ -327,5 +327,18 @@
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\containers\StatusBar.cpp" />
     <ClCompile Include="$(EFP_BASE)\Profiler\FastSemihosting.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\LocoIcon.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\containers\scrollItemBase.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\dccsettings_screen\DCCSettingsViewBase.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\settings_screen\SettingsViewBase.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\containers\scrollItem.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\dccsettings_screen\DCCSettingsPresenter.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\dccsettings_screen\DCCSettingsView.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\settings_screen\SettingsPresenter.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\settings_screen\SettingsView.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\containers\CurrentDisplayBase.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\containers\CurrentDisplay.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Slider_Horizontal_Medium_Indicators_Slider_Round_nob.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Slider_Horizontal_Medium_Slider_Round_back.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Slider_Horizontal_Medium_Slider_Round_fill.cpp" />
   </ItemGroup>
 </Project>

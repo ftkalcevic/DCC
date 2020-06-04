@@ -2,6 +2,12 @@
 #include "main.h"
 #include "DRV8873S.h"
 #include "AudioTask.h"
+#include "UIMessage.h"
+#include <stdio.h>
+
+
+UIMessage uimsg;
+DRV8873S drv8873S(&hspi2);
 
 
 extern "C" void AppMainTask_Entry(void *argument)
@@ -11,65 +17,109 @@ extern "C" void AppMainTask_Entry(void *argument)
 }
 
 
+enum EKey
+{
+	F1 = 1,
+	F2 = 2,
+	F3 = 3,
+	F4 = 4,
+	F5 = 5,
+	FWD = 6,
+	REV = 7,
+	EStop = 8
+};
+static struct KeyScan
+{
+	GPIO_TypeDef *port;
+	uint16_t pin;
+	EKey key;
+	int debounce;
+	int release;
+	
+} Keys[] = { 
+	{ Fn1_GPIO_Port,   Fn1_Pin,   F1 },	
+	{ Fn2_GPIO_Port,   Fn2_Pin,   F2 },	
+	{ Fn3_GPIO_Port,   Fn3_Pin,   F3 },	
+	{ Fn4_GPIO_Port,   Fn4_Pin,   F4 },
+	{ Fn5_GPIO_Port,   Fn5_Pin,   F5 },
+	{ FWD_GPIO_Port,   FWD_Pin,   FWD },
+	{ REV_GPIO_Port,   REV_Pin,   REV },
+	{ EStop_GPIO_Port, EStop_Pin, EStop }
+};
+
+const int DEBOUNCE_TIMER = 25;	//ms
+static void InitInputs()
+{
+	for (int i = 0; i < countof(Keys); i++)
+		Keys[i].debounce = Keys[i].release = 0;
+}
+
+static void ReadInputs()
+{
+	for (int i = 0; i < countof(Keys); i++)
+	{
+		KeyScan &k = Keys[i];
+		
+		bool keyDown = HAL_GPIO_ReadPin(k.port, k.pin) == GPIO_PIN_RESET;	// all keys are pull up
+		if(k.debounce)
+		{
+			if (keyDown)
+			{
+				k.debounce--;
+				if (k.debounce == 0)
+				{
+					printf("Key %d down\n", k.key);
+					// Key down event.
+					k.release = DEBOUNCE_TIMER;
+				}
+			}
+			else
+				k.debounce = 0;
+		}
+		else if (k.release)
+		{
+			if (!keyDown)
+			{
+				k.release--;
+				if (k.release == 0)
+				{
+					printf("Key %d up\n", k.key);
+					// key release event
+				}
+			}
+			else
+				k.release = DEBOUNCE_TIMER;
+				
+		}
+		else
+		{
+			if (keyDown)
+				k.debounce = DEBOUNCE_TIMER;
+		}
+	}
+		
+}
+
+
+//LED1_GPIO_Port LED1_Pin
+//LED2_GPIO_Port LED2_Pin
+//LED3_GPIO_Port LED3_Pin
+//LED4_GPIO_Port LED4_Pin
+  
+
 void AppMain::Run()
 {
 	// Play startup sound
-//	audioTask.PlaySound(EAudioSounds::Bell2);
+	audioTask.PlaySound(EAudioSounds::Bell2);
 	
-	for(;;) vTaskDelay(pdMS_TO_TICKS(1000));
+	InitInputs();
 	
-			GPIO_InitTypeDef GPIO_InitStruct = { 0 };
-			GPIO_InitStruct.Pin = PrgTrk_DCC_Signal_Pin;
-			GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-			GPIO_InitStruct.Pull = GPIO_NOPULL;
-			GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-			GPIO_InitStruct.Alternate = GPIO_AF3_TIM8;
-			HAL_GPIO_Init(PrgTrk_DCC_Signal_GPIO_Port, &GPIO_InitStruct);
-	
-	HAL_GPIO_WritePin(PrgTrk_Disable_GPIO_Port, PrgTrk_Disable_Pin, GPIO_PIN_SET);
-	
-	uint8_t status, ic1, diag;
-	DRV8873S d(&hspi2);
-	d.WriteRegister(PrgTrk_CS_GPIO_Port, PrgTrk_CS_Pin, MemoryMap::IC3ControlRegister, 0b01000000 );
-	d.WriteRegister(PrgTrk_CS_GPIO_Port, PrgTrk_CS_Pin, MemoryMap::IC1ControlRegister, IC1_TOFF_40us | IC1_SPIIN_FOLLOW_INx | IC1_SR_10_8 | IC1_MODE_PHEN );
-	d.WriteRegister(PrgTrk_CS_GPIO_Port, PrgTrk_CS_Pin, MemoryMap::IC1ControlRegister, IC1_TOFF_40us | IC1_SPIIN_FOLLOW_INx | IC1_SR_10_8 | IC1_MODE_PHEN );
-	d.ReadRegister(PrgTrk_CS_GPIO_Port, PrgTrk_CS_Pin, MemoryMap::IC1ControlRegister, status, ic1);
-	d.ReadRegister(PrgTrk_CS_GPIO_Port, PrgTrk_CS_Pin, MemoryMap::DiagRegister, status, diag);
-	//	d.ReadFaultStatus(PrgTrk_CS_GPIO_Port, PrgTrk_CS_Pin);
-	
-	bool bFault = HAL_GPIO_ReadPin(PrgTrk_Fault_GPIO_Port, PrgTrk_Fault_Pin) == GPIO_PIN_RESET;
-	
-	
-	HAL_GPIO_WritePin(PrgTrk_Disable_GPIO_Port, PrgTrk_Disable_Pin, GPIO_PIN_RESET);
-	
-	HAL_GPIO_WritePin(PrgTrk_DCC_Signal_GPIO_Port, PrgTrk_DCC_Signal_Pin, GPIO_PIN_SET);
-	HAL_GPIO_WritePin(PrgTrk_DCC_Signal_GPIO_Port, PrgTrk_DCC_Signal_Pin, GPIO_PIN_RESET);
-	//HAL_GPIO_WritePin(PrgTrk_Disable_GPIO_Port, PrgTrk_Disable_Pin, GPIO_PIN_SET);			// Enable from Ph/En
-	//HAL_GPIO_WritePin(PrgTrk_Disable_GPIO_Port, PrgTrk_Disable_Pin, GPIO_PIN_SET); 
-
-	
-	//for (;;)
+	for(;  ;)
 	{
-		HAL_GPIO_WritePin(PrgTrk_DCC_Signal_GPIO_Port, PrgTrk_DCC_Signal_Pin, GPIO_PIN_SET);
-		//HAL_GPIO_WritePin(PrgTrk_DCC_Signal_GPIO_Port, PrgTrk_DCC_Signal_Pin, GPIO_PIN_SET);
-		//vTaskDelay(pdMS_TO_TICKS(500));
-		HAL_GPIO_WritePin(PrgTrk_DCC_Signal_GPIO_Port, PrgTrk_DCC_Signal_Pin, GPIO_PIN_RESET);
-		//HAL_GPIO_WritePin(PrgTrk_DCC_Signal_GPIO_Port, PrgTrk_DCC_Signal_Pin, GPIO_PIN_RESET);
-		//vTaskDelay(pdMS_TO_TICKS(500));
-		HAL_GPIO_WritePin(PrgTrk_DCC_Signal_GPIO_Port, PrgTrk_DCC_Signal_Pin, GPIO_PIN_SET);
-		HAL_GPIO_WritePin(PrgTrk_DCC_Signal_GPIO_Port, PrgTrk_DCC_Signal_Pin, GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(PrgTrk_DCC_Signal_GPIO_Port, PrgTrk_DCC_Signal_Pin, GPIO_PIN_SET);
-		HAL_GPIO_WritePin(PrgTrk_DCC_Signal_GPIO_Port, PrgTrk_DCC_Signal_Pin, GPIO_PIN_RESET);
+		ReadInputs();
+		
+		osDelay(pdMS_TO_TICKS(1));
 	}
-
-
-
-	//vTaskDelay(pdMS_TO_TICKS(500));
-
-
-	
-	for (;;)
-		osDelay(pdMS_TO_TICKS(1000));
 }
 
 
@@ -88,13 +138,47 @@ void AppMain::Run()
 			- buttons can be ordered.
 		- buttons will zoom to full screen config (flip over and zoom)
 	- config
-		- app settings
-		- configure dcc/lcc devices - that is define the objects in the list
-		- dcc track programming
-		- lcc config
-		- switch to usb_msc mode
-		- usb on the go
-			- usb hid device input
+		- Settings
+			- Audio volume
+			- key ticks
+			- startup tune (presence of file)
+			- startup screen (presence of file) or default
+		- DCC Settings
+			- Trip current
+			- TOFF 
+			- Slew Rate
+			- Display statuses
+				- Both H-Bridges
+				- Fault Reg
+					- Fault
+					- over temp warning
+					- under voltage fault
+					- over current
+					- over temp fault
+					- open load detected
+				- Diag Reg
+					- open load 1
+					- OL2
+					- trip 1
+					- itrip2
+					- over current fault high 1
+					- ocp_l1
+					- ocp_h2
+					- ocp_l2
+					
+					
+		- DCC Prog
+		- LCC Config
+		- About
+		- Log/Diagnostics
+		- More
+			- app settings
+			- configure dcc/lcc devices - that is define the objects in the list
+			- dcc track programming
+			- lcc config
+			- switch to usb_msc mode
+			- usb on the go
+				- usb hid device input
 		
 	- dcc programming 
 		- track 

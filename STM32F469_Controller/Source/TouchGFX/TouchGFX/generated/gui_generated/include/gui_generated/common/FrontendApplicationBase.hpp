@@ -16,7 +16,7 @@ public:
     virtual ~FrontendApplicationBase() { }
 
     // Main
-    void gotoMainScreenCoverTransitionEast();
+    void gotoMainScreenCoverTransitionSouth();
 
     // StartupScreen
     void gotoStartupScreenScreenNoTransition();
@@ -27,7 +27,7 @@ protected:
     Model& model;
 
     // Main
-    void gotoMainScreenCoverTransitionEastImpl();
+    void gotoMainScreenCoverTransitionSouthImpl();
 
     // StartupScreen
     void gotoStartupScreenScreenNoTransitionImpl();

@@ -35,6 +35,13 @@ public:
         updateTextPosition();
     }
 
+    void setLabelText(const char16_t *t)
+    {
+	    Unicode::strncpy(text, (Unicode::UnicodeChar*)t, sizeof(text)/sizeof(text[0]));
+	    text[sizeof(text)/sizeof(text[0])-1] = 0;
+        updateTextPosition();
+    }
+
     void setLabelText(const char *t)
     {
 	    Unicode::fromUTF8((const uint8_t *)t, text, sizeof(text)/sizeof(text[0]));

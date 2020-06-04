@@ -1,12 +1,13 @@
 #include <gui/main_screen/MainView.hpp>
 #include "BitmapDatabase.hpp"
-#include "AudioTask.h"
 #include <gui/common/BinFileLoader.h>
 #include <texts/TextKeysAndLanguages.hpp>
 #include <touchgfx/Color.hpp>
 #include <gui/common/CustomButton.hpp>
 #include <stdio.h>
-
+#ifndef SIMULATOR
+#include "AudioTask.h"
+#endif
 
 enum EConfigPages
 {
@@ -20,8 +21,14 @@ MainView::MainView():
 	bmpId = BinFileLoader::makeBitmap("/Images/background"); 
 	if (bmpId != BITMAP_INVALID)
 	{
-		backgroundImage1.setBitmap(Bitmap(bmpId));
+		backgroundImage.setBitmap(Bitmap(bmpId));
 	}
+	
+	touchgfx::Container *page = new touchgfx::Container();
+	page->setWidth(800);
+    page->setHeight(430);
+    swipeContainer.add(*page);
+    swipeContainer.setSelectedPage(0);
 	
 	// Add buttons (15, 15) 200x200 spacing
 	touchgfx::CustomButton *button = new touchgfx::CustomButton();
@@ -34,7 +41,7 @@ MainView::MainView():
     button->setLabelColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
     button->setLabelColorPressed(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
     button->setAction(buttonClickCallback);
-    swipeContainer1Page1.add(*button);
+    page->add(*button);
 	
 	
 	button = new touchgfx::CustomButton();
@@ -47,7 +54,7 @@ MainView::MainView():
     button->setLabelColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
     button->setLabelColorPressed(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
     button->setAction(buttonClickCallback);
-    swipeContainer1Page1.add(*button);
+    page->add(*button);
 	
 	
 	
@@ -81,7 +88,7 @@ void MainView::buttonClickHandler(const touchgfx::AbstractButton& src)
         //Interaction1
         //When button1 clicked change screen to Preferences
         //Go to Preferences with screen transition towards East
-        application().gotoPreferencesScreenSlideTransitionEast();
+        application().gotoPreferencesNorth();
     }
 }
 
@@ -91,7 +98,7 @@ void MainView::buttonClickHandler(const touchgfx::AbstractButton& src)
 
 void MainView::handleClickEvent(const ClickEvent & evt)
 {
-	printf("%d click\n", count++);
+	//printf("%d click\n", count++);
 	MainViewBase::handleClickEvent(evt);
 }
 void MainView::handleDragEvent(const DragEvent & evt)

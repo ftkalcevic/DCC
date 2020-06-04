@@ -15,6 +15,10 @@
 #include <gui/startupscreen_screen/StartupScreenPresenter.hpp>
 #include <gui/preferences_screen/PreferencesView.hpp>
 #include <gui/preferences_screen/PreferencesPresenter.hpp>
+#include <gui/settings_screen/SettingsView.hpp>
+#include <gui/settings_screen/SettingsPresenter.hpp>
+#include <gui/dccsettings_screen/DCCSettingsView.hpp>
+#include <gui/dccsettings_screen/DCCSettingsPresenter.hpp>
 
 using namespace touchgfx;
 
@@ -35,15 +39,15 @@ FrontendApplicationBase::FrontendApplicationBase(Model& m, FrontendHeap& heap)
 
 // Main
 
-void FrontendApplicationBase::gotoMainScreenCoverTransitionEast()
+void FrontendApplicationBase::gotoMainScreenCoverTransitionSouth()
 {
-    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplication::gotoMainScreenCoverTransitionEastImpl);
+    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplication::gotoMainScreenCoverTransitionSouthImpl);
     pendingScreenTransitionCallback = &transitionCallback;
 }
 
-void FrontendApplicationBase::gotoMainScreenCoverTransitionEastImpl()
+void FrontendApplicationBase::gotoMainScreenCoverTransitionSouthImpl()
 {
-    touchgfx::makeTransition<MainView, MainPresenter, touchgfx::CoverTransition<EAST>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+    touchgfx::makeTransition<MainView, MainPresenter, touchgfx::CoverTransition<SOUTH>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }
 
 // StartupScreen

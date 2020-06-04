@@ -208,6 +208,30 @@
     <Filter Include="Header Files\generated\gui_generated\containers">
       <UniqueIdentifier>90A74CA6-CF11-5A9A-0DFA-27EF69026F14</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\gui\settings_screen">
+      <UniqueIdentifier>750B416E-9D2C-FE5A-F994-7F77D9BA8C44</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gui\settings_screen">
+      <UniqueIdentifier>9DB8225B-95BC-4AAC-E518-6605B70DF0B3</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gui\dccsettings_screen">
+      <UniqueIdentifier>4B986435-A689-AE3E-8B8F-824560E8E341</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gui\dccsettings_screen">
+      <UniqueIdentifier>7A9B5EA3-4E1A-3389-448C-7A7E997633B6</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\generated\gui_generated\dccsettings_screen">
+      <UniqueIdentifier>1246FC37-2551-ADD7-99E7-9443D78FC9E2</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\generated\gui_generated\dccsettings_screen">
+      <UniqueIdentifier>3D953FF7-6289-83A2-37BE-9DE1A8C0FDD7</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\generated\gui_generated\settings_screen">
+      <UniqueIdentifier>48E97303-0B26-569F-38F5-8DDDE587CCBF</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\generated\gui_generated\settings_screen">
+      <UniqueIdentifier>6D7286D3-0E8B-11FE-7DCA-B4362EB673EA</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(TouchGFXReleasePath)\framework\source\platform\driver\touch\SDL2TouchController.cpp">
@@ -295,6 +319,36 @@
       <Filter>Source Files\gui\containers</Filter>
     </ClCompile>
     <ClCompile Include="..\..\generated\gui_generated\src\containers\StatusBarBase.cpp">
+      <Filter>Source Files\generated\gui_generated\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\dccsettings_screen\DCCSettingsPresenter.cpp">
+      <Filter>Source Files\gui\dccsettings_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\dccsettings_screen\DCCSettingsView.cpp">
+      <Filter>Source Files\gui\dccsettings_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\dccsettings_screen\DCCSettingsViewBase.cpp">
+      <Filter>Source Files\generated\gui_generated\dccsettings_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\containers\scrollItem.cpp">
+      <Filter>Source Files\gui\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\scrollItemBase.cpp">
+      <Filter>Source Files\generated\gui_generated\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\settings_screen\SettingsPresenter.cpp">
+      <Filter>Source Files\gui\settings_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\settings_screen\SettingsView.cpp">
+      <Filter>Source Files\gui\settings_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\settings_screen\SettingsViewBase.cpp">
+      <Filter>Source Files\generated\gui_generated\settings_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\containers\CurrentDisplay.cpp">
+      <Filter>Source Files\gui\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\CurrentDisplayBase.cpp">
       <Filter>Source Files\generated\gui_generated\containers</Filter>
     </ClCompile>
   </ItemGroup>
@@ -788,6 +842,36 @@
       <Filter>Header Files\gui\containers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\StatusBarBase.hpp">
+      <Filter>Header Files\generated\gui_generated\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\dccsettings_screen\DCCSettingsPresenter.hpp">
+      <Filter>Header Files\gui\dccsettings_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\dccsettings_screen\DCCSettingsView.hpp">
+      <Filter>Header Files\gui\dccsettings_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\dccsettings_screen\DCCSettingsViewBase.hpp">
+      <Filter>Header Files\generated\gui_generated\dccsettings_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\containers\scrollItem.hpp">
+      <Filter>Header Files\gui\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\scrollItemBase.hpp">
+      <Filter>Header Files\generated\gui_generated\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\settings_screen\SettingsPresenter.hpp">
+      <Filter>Header Files\gui\settings_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\settings_screen\SettingsView.hpp">
+      <Filter>Header Files\gui\settings_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\settings_screen\SettingsViewBase.hpp">
+      <Filter>Header Files\generated\gui_generated\settings_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\containers\CurrentDisplay.hpp">
+      <Filter>Header Files\gui\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\CurrentDisplayBase.hpp">
       <Filter>Header Files\generated\gui_generated\containers</Filter>
     </ClInclude>
   </ItemGroup>

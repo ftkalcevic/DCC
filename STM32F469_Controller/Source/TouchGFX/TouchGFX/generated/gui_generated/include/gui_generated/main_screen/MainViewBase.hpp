@@ -9,7 +9,6 @@
 #include <gui/main_screen/MainPresenter.hpp>
 #include <touchgfx/widgets/TiledImage.hpp>
 #include <touchgfx/containers/SwipeContainer.hpp>
-#include <touchgfx/containers/Container.hpp>
 #include <gui/containers/FunctionButtons.hpp>
 #include <gui/containers/StatusBar.hpp>
 
@@ -28,12 +27,10 @@ protected:
     /*
      * Member Declarations
      */
-    touchgfx::TiledImage backgroundImage1;
-    touchgfx::SwipeContainer swipeContainer1;
-    touchgfx::Container swipeContainer1Page1;
-    touchgfx::Container swipeContainer1Page2;
-    FunctionButtons functionButtons1;
-    StatusBar statusBar1;
+    touchgfx::TiledImage backgroundImage;
+    touchgfx::SwipeContainer swipeContainer;
+    FunctionButtons functionButtons;
+    StatusBar statusBar;
 
 private:
 

@@ -6,6 +6,9 @@
 #include "task.h"
 #include "semphr.h"
 #include <string.h>
+#include "DRV8873S.h"
+#include "DCCSettings.hpp"
+#include "UIMessage.h"
 
 extern "C" void DCCTask_Entry(void *argument);
 
@@ -32,7 +35,7 @@ struct DCCMessage
 
 
 	
-template<DCCType type, const int ARR_OFFSET, const int CCn_OFFSET, const int BURST_SIZE, const int MESSAGE_QUEUE_LEN >
+template<DCCType type, const int ARR_OFFSET, const int CCn_OFFSET, const int BURST_SIZE, const int MESSAGE_QUEUE_LEN, EUIMessageType statusMsgType >
 class DCC
 {
 	DCCMessage messageTable[MAX_DCC_MESSAGES];
@@ -45,25 +48,64 @@ class DCC
 	uint8_t queueStorageBuffer[sizeof(DCCMessage)*MESSAGE_QUEUE_LEN];
 	StaticQueue_t queueBuffer;
 	QueueHandle_t queueHandle;
-	
+
+	GPIO_TypeDef *CS_Port;
+	uint16_t CS_Pin;
+	GPIO_TypeDef *Disable_Port;
+	uint16_t Disable_Pin;
+
 public:
 	DCC( GPIO_TypeDef *CS_Port, uint16_t CS_Pin, 
-		 GPIO_TypeDef *Enable_Port, uint16_t Enable_Pin, 
+		 GPIO_TypeDef *Disable_Port, uint16_t Disable_Pin, 
 		 GPIO_TypeDef *Fault_Port, uint16_t Fault_Pin, 
 		 ADC_HandleTypeDef *Sense_ADC, uint16_t ADC1_IN1, 
 		 GPIO_TypeDef *Signal_Port, uint16_t Signal_Pin )
 	{
+		this->CS_Port = CS_Port;
+		this->CS_Pin = CS_Pin;
+		this->Disable_Port = Disable_Port;
+		this->Disable_Pin = Disable_Pin;		
 	}
 	
 	DCC( GPIO_TypeDef *CS_Port, uint16_t CS_Pin, 
-		 GPIO_TypeDef *Enable_Port, uint16_t Enable_Pin, 
+		 GPIO_TypeDef *Disable_Port, uint16_t Disable_Pin, 
 		 GPIO_TypeDef *Fault_Port, uint16_t Fault_Pin, 
 		 GPIO_TypeDef *Sense_Port, uint16_t Sense_Pin, 
 		 GPIO_TypeDef *Signal_Port, uint16_t Signal_Pin )
 	{
+		this->CS_Port = CS_Port;
+		this->CS_Pin = CS_Pin;
+		this->Disable_Port = Disable_Port;
+		this->Disable_Pin = Disable_Pin;		
 	}
 
 
+	void InitialiseHBridge()
+	{
+		EnableHBridge(false);		// register changes only take effect when HBridge is off.
+		
+		drv8873S.WriteRegister(PrgTrk_CS_GPIO_Port, PrgTrk_CS_Pin, MemoryMap::IC1ControlRegister, IC1_TOFF_40us | IC1_SPIIN_FOLLOW_INx | IC1_SR_10_8 | IC1_MODE_PHEN );
+		drv8873S.WriteRegister(PrgTrk_CS_GPIO_Port, PrgTrk_CS_Pin, MemoryMap::IC2ControlRegister, IC2_ITRIP_REP_NFAULT_ENABLE | IC2_OVERTEMP_LATCHED | IC2_OTW_REP_NFAULT_DISABLE | IC2_CPUV_ENABLED | IC2_OCP_TRETRY_4_0MS | IC2_OCPMODE_LATCHED_FAULT );
+		//drv.WriteRegister(PrgTrk_CS_GPIO_Port, PrgTrk_CS_Pin, MemoryMap::IC3ControlRegister, IC3_UNLOCK);
+		drv8873S.WriteRegister(PrgTrk_CS_GPIO_Port, PrgTrk_CS_Pin, MemoryMap::IC4ControlRegister, IC4_OLA_ENABLE | IC4_ITRIP_LVL_4_0A );
+	}
+	
+	void ReadHBridgeStatus(uint8_t &status, uint8_t &diag )
+	{
+		drv8873S.ReadRegister(PrgTrk_CS_GPIO_Port, PrgTrk_CS_Pin, MemoryMap::DiagRegister, status, diag);
+	}
+
+	void EnableHBridge(bool enable)
+	{
+		HAL_GPIO_WritePin(PrgTrk_Disable_GPIO_Port, PrgTrk_Disable_Pin, enable ? GPIO_PIN_RESET : GPIO_PIN_SET);
+	}
+	
+	void ResetHBridgeFault()
+	{
+		uint8_t status, ic3;
+		drv8873S.ReadRegister(PrgTrk_CS_GPIO_Port, PrgTrk_CS_Pin, MemoryMap::DiagRegister, status, ic3);
+		drv8873S.WriteRegister(PrgTrk_CS_GPIO_Port, PrgTrk_CS_Pin, MemoryMap::IC3ControlRegister, ic3 | IC3_CLEAR_FAULT );
+	}
 
 	void Initialise()
 	{
@@ -75,6 +117,8 @@ public:
 		// clear timer dma buffer.  Only those registers used will be set, others remain 0
 		memset(bitBuffer, 0, sizeof(bitBuffer));
 	
+		InitialiseHBridge();
+		
 		// Initialise timer and dma to be used.
 		if (type == DCCType::MainTrack)
 		{
@@ -155,14 +199,45 @@ public:
 		trackEnabled = true;
 	#endif
 
-		bool lastTrackEnabled = trackEnabled;
+		bool lastTrackEnabled = !trackEnabled;
+		TickType_t lastTime = xTaskGetTickCount();
 		for (;;)
 		{
+			// Check device status ever second
+			if(xTaskGetTickCount() - lastTime > pdMS_TO_TICKS(1000))
+			{
+				uint8_t status, diag;
+				ReadHBridgeStatus(status, diag);
+				
+				UIMsg msg;
+				msg.type = statusMsgType;
+				msg.hbStatus.fault = (status & FSR_FAULT) != 0;
+				msg.hbStatus.overTemp = (status & FSR_TSD) != 0 ? DCCSettings::Fault : (status & FSR_OTW) != 0 ? DCCSettings::Warning : DCCSettings::Good;
+				msg.hbStatus.overCurrent = (diag & FSR_OCP) != 0 ? DCCSettings::Fault : DCCSettings::Good;
+				msg.hbStatus.openLoad = (diag & FSR_OLD) != 0 ? DCCSettings::Fault : DCCSettings::Good;
+				msg.hbStatus.current = 0;
+				
+				// Send to ui
+				uimsg.Send(msg);
+				lastTime = xTaskGetTickCount();
+			}
+			
 			// if trackenabled changed
 			if(trackEnabled != lastTrackEnabled)
 			{
 				// if disabled, clear msg queue, reset msg repeat
 				lastTrackEnabled = trackEnabled;
+
+				if (trackEnabled)
+				{
+					uint8_t status, diag;
+					ReadHBridgeStatus(status, diag);
+					if (status & FSR_FAULT)
+					{
+						ResetHBridgeFault();
+					}
+				}
+				EnableHBridge(trackEnabled);
 			}
 		
 			// If new message
@@ -174,12 +249,15 @@ public:
 				{
 					
 					// if trackEnabled, send message
+					if(trackEnabled)
+					{
 					// Update local table
 					//      loco commands need to be stored for playback later
+					}
 				}
 			}
 			// Else process message table
-			else 
+			else if ( trackEnabled )
 			{
 				// We can't find a message to send - either empty table, or 5ms gap issue.
 				static uint8_t idleMessage[3] = { 0xFF, 0, 0xFF };

@@ -85,3 +85,5 @@ DRV8873S_Breakout/Default Configuration
 *.OutJob
 LCC_Terminator/Default Configuration
 LCCAtmegaXXM1/Source/test_can/Debug
+MiniSTM32V/VisualGDB/Debug
+MiniSTM32V/VisualGDB/Release

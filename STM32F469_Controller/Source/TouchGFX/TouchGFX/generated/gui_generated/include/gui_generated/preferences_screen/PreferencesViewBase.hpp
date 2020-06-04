@@ -7,9 +7,12 @@
 #include <gui/common/FrontendApplication.hpp>
 #include <mvp/View.hpp>
 #include <gui/preferences_screen/PreferencesPresenter.hpp>
-#include <touchgfx/widgets/Box.hpp>
-#include <touchgfx/containers/scrollers/ScrollList.hpp>
-#include <gui/containers/ListItem.hpp>
+#include <touchgfx/widgets/TiledImage.hpp>
+#include <touchgfx/containers/SwipeContainer.hpp>
+#include <touchgfx/containers/Container.hpp>
+#include <gui/containers/FunctionButtons.hpp>
+#include <gui/containers/StatusBar.hpp>
+#include <touchgfx/canvas_widget_renderer/CanvasWidgetRenderer.hpp>
 
 class PreferencesViewBase : public touchgfx::View<PreferencesPresenter>
 {
@@ -17,11 +20,6 @@ public:
     PreferencesViewBase();
     virtual ~PreferencesViewBase() {}
     virtual void setupScreen();
-
-    virtual void scrollList1UpdateItem(ListItem& item, int16_t itemIndex)
-    {
-        // Override and implement this function in Preferences
-    }
 
 protected:
     FrontendApplication& application() {
@@ -31,18 +29,18 @@ protected:
     /*
      * Member Declarations
      */
-    touchgfx::Box box1;
-    touchgfx::ScrollList scrollList1;
-    touchgfx::DrawableListItems<ListItem, 10> scrollList1ListItems;
+    touchgfx::TiledImage backgroundImage;
+    touchgfx::SwipeContainer swipeContainer;
+    touchgfx::Container swipeContainerPage1;
+    FunctionButtons functionButtons;
+    StatusBar statusBar;
 
 private:
-    touchgfx::Callback<PreferencesViewBase, touchgfx::DrawableListItemsInterface*, int16_t, int16_t> updateItemCallback;
-    void updateItemCallbackHandler(touchgfx::DrawableListItemsInterface* items, int16_t containerIndex, int16_t itemIndex);
 
     /*
      * Canvas Buffer Size
      */
-    static const uint16_t CANVAS_BUFFER_SIZE = 12000;
+    static const uint16_t CANVAS_BUFFER_SIZE = 32767;
     uint8_t canvasBuffer[CANVAS_BUFFER_SIZE];
 };
 

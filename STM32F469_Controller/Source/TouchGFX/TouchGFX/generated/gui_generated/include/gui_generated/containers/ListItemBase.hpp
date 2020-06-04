@@ -8,8 +8,6 @@
 #include <touchgfx/containers/Container.hpp>
 #include <touchgfx/widgets/Box.hpp>
 #include <touchgfx/widgets/TextAreaWithWildcard.hpp>
-#include <touchgfx/widgets/canvas/Circle.hpp>
-#include <touchgfx/widgets/canvas/PainterRGB888.hpp>
 
 class ListItemBase : public touchgfx::Container
 {
@@ -28,8 +26,6 @@ protected:
      */
     touchgfx::Box box1;
     touchgfx::TextAreaWithOneWildcard textArea1;
-    touchgfx::Circle circle1;
-    touchgfx::PainterRGB888 circle1Painter;
 
 private:
 

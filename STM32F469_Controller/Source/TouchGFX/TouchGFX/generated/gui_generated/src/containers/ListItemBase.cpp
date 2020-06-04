@@ -12,22 +12,13 @@ ListItemBase::ListItemBase()
     box1.setPosition(0, 0, 250, 59);
     box1.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
 
-    textArea1.setXY(0, 9);
+    textArea1.setPosition(0, 18, 250, 23);
     textArea1.setColor(touchgfx::Color::getColorFrom24BitRGB(0, 0, 0));
     textArea1.setLinespacing(0);
-    textArea1.setTypedText(touchgfx::TypedText(T_SINGLEUSEID7));
-
-    circle1.setPosition(220, 14, 30, 30);
-    circle1.setCenter(14, 14);
-    circle1.setRadius(13);
-    circle1.setLineWidth(0);
-    circle1.setArc(0, 360);
-    circle1Painter.setColor(touchgfx::Color::getColorFrom24BitRGB(242, 0, 0));
-    circle1.setPainter(circle1Painter);
+    textArea1.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTID));
 
     add(box1);
     add(textArea1);
-    add(circle1);
 }
 
 void ListItemBase::initialize()

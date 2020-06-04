@@ -40,6 +40,16 @@
     <ClCompile Include="..\..\generated\gui_generated\src\containers\FunctionButtonsBase.cpp"/>
     <ClCompile Include="..\..\gui\src\containers\StatusBar.cpp"/>
     <ClCompile Include="..\..\generated\gui_generated\src\containers\StatusBarBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\dccsettings_screen\DCCSettingsPresenter.cpp"/>
+    <ClCompile Include="..\..\gui\src\dccsettings_screen\DCCSettingsView.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\dccsettings_screen\DCCSettingsViewBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\containers\scrollItem.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\scrollItemBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\settings_screen\SettingsPresenter.cpp"/>
+    <ClCompile Include="..\..\gui\src\settings_screen\SettingsView.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\settings_screen\SettingsViewBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\containers\CurrentDisplay.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\CurrentDisplayBase.cpp"/>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(ApplicationRoot)\assets\texts\texts.xlsx"/>
@@ -207,6 +217,16 @@
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\FunctionButtonsBase.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\containers\StatusBar.hpp"/>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\StatusBarBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\dccsettings_screen\DCCSettingsPresenter.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\dccsettings_screen\DCCSettingsView.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\dccsettings_screen\DCCSettingsViewBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\containers\scrollItem.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\scrollItemBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\settings_screen\SettingsPresenter.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\settings_screen\SettingsView.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\settings_screen\SettingsViewBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\containers\CurrentDisplay.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\CurrentDisplayBase.hpp"/>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="$(ApplicationRoot)\generated\simulator\touchgfx.rc"/>

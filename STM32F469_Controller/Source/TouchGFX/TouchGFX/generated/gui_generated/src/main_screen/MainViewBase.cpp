@@ -7,37 +7,28 @@
 MainViewBase::MainViewBase()
 {
 
-    backgroundImage1.setBitmap(touchgfx::Bitmap(BITMAP_DARK_TEXTURES_CARBON_FIBRE_ID));
-    backgroundImage1.setPosition(0, 0, 800, 480);
-    backgroundImage1.setOffset(0, 0);
+    backgroundImage.setBitmap(touchgfx::Bitmap(BITMAP_DARK_TEXTURES_CARBON_FIBRE_ID));
+    backgroundImage.setPosition(0, 0, 800, 480);
+    backgroundImage.setOffset(0, 0);
 
-    swipeContainer1.setXY(0, 25);
-    swipeContainer1.setPageIndicatorBitmaps(touchgfx::Bitmap(BITMAP_BLUE_PAGEINDICATOR_DOT_INDICATOR_SMALL_NORMAL_ID), touchgfx::Bitmap(BITMAP_BLUE_PAGEINDICATOR_DOT_INDICATOR_SMALL_HIGHLIGHT_ID));
-    swipeContainer1.setPageIndicatorXY(385, 404);
-    swipeContainer1.setSwipeCutoff(50);
-    swipeContainer1.setEndSwipeElasticWidth(50);
+    swipeContainer.setXY(0, 25);
+    swipeContainer.setPageIndicatorBitmaps(touchgfx::Bitmap(BITMAP_BLUE_PAGEINDICATOR_DOT_INDICATOR_SMALL_NORMAL_ID), touchgfx::Bitmap(BITMAP_BLUE_PAGEINDICATOR_DOT_INDICATOR_SMALL_HIGHLIGHT_ID));
+    swipeContainer.setPageIndicatorXY(400, 404);
+    swipeContainer.setSwipeCutoff(50);
+    swipeContainer.setEndSwipeElasticWidth(50);
 
-    swipeContainer1Page1.setWidth(800);
-    swipeContainer1Page1.setHeight(430);
-    swipeContainer1.add(swipeContainer1Page1);
+    functionButtons.setXY(0, 455);
 
-    swipeContainer1Page2.setWidth(800);
-    swipeContainer1Page2.setHeight(430);
-    swipeContainer1.add(swipeContainer1Page2);
-    swipeContainer1.setSelectedPage(0);
+    statusBar.setXY(0, 0);
 
-    functionButtons1.setXY(0, 455);
-
-    statusBar1.setXY(0, 0);
-
-    add(backgroundImage1);
-    add(swipeContainer1);
-    add(functionButtons1);
-    add(statusBar1);
+    add(backgroundImage);
+    add(swipeContainer);
+    add(functionButtons);
+    add(statusBar);
 }
 
 void MainViewBase::setupScreen()
 {
-    functionButtons1.initialize();
-    statusBar1.initialize();
+    functionButtons.initialize();
+    statusBar.initialize();
 }

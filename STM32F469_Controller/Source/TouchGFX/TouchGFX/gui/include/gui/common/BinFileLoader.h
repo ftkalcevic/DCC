@@ -1,7 +1,8 @@
 #include <touchgfx/hal/Types.hpp>
 #include <touchgfx/Bitmap.hpp>
+#ifndef SIMULATOR
 #include "fatfs.h"
-
+#endif
 using namespace touchgfx;
 
 class BinFileLoader

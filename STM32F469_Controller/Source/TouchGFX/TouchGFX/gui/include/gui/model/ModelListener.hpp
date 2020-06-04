@@ -27,6 +27,10 @@ public:
     {
         model = m;
     }
+
+	virtual void TrackStatusChanged()
+	{}
+
 protected:
     Model* model;
 };

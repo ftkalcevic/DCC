@@ -37,6 +37,75 @@ enum MemoryMap: uint8_t
 #define IC1_MODE_INDEP 			(2)
 #define IC1_MODE_DISABLED		(3)
 
+#define IC2_ITRIP_REP_NFAULT_DISABLE	(0<<7)
+#define IC2_ITRIP_REP_NFAULT_ENABLE		(1<<7)
+
+#define IC2_OVERTEMP_LATCHED			(0<<6)
+#define IC2_OVERTEMP_AUTO				(1<<6)
+
+#define IC2_OTW_REP_NFAULT_DISABLE		(0<<5)
+#define IC2_OTW_REP_NFAULT_ENABLE		(1<<5)
+
+#define IC2_CPUV_ENABLED				(0<<4)
+#define IC2_CPUV_DISABLED				(1<<4)
+
+#define IC2_OCP_TRETRY_0_5MS			(0<<2)
+#define IC2_OCP_TRETRY_1_0MS			(1<<2)
+#define IC2_OCP_TRETRY_2_0MS			(2<<2)
+#define IC2_OCP_TRETRY_4_0MS			(3<<2)
+
+#define IC2_OCPMODE_LATCHED_FAULT		(0<<0)
+#define IC2_OCPMODE_AUTO_RETRY_FAULT	(1<<0)
+#define IC2_OCPMODE_REPORT_ONLY			(2<<0)
+#define IC2_OCPMODE_IGNORED				(3<<0)
+
+#define IC3_CLEAR_FAULT					(1<<7)
+
+#define IC3_LOCK						(0b011 << 4)
+#define IC3_UNLOCK						(0b100 << 4)
+
+#define IC3_OUT1_DISABLE				(1<<3)
+#define IC3_OUT2_DISABLE				(1<<2)
+
+#define IC3_EN_IN1						(1<<1)
+#define IC3_PH_IN2						(1<<0)
+
+#define IC4_ENABLE_OLP					(1<<6)
+
+#define IC4_OLP_DLY_0_3MS				(0<<5)
+#define IC4_OLP_DLY_1_2S				(1<<5)
+
+#define IC4_OLA_ENABLE					(1<<4)
+#define IC4_OLA_DISABLE					(0<<4)
+
+#define IC4_ITRIP_LVL_4_0A				(0<<2)
+#define IC4_ITRIP_LVL_5_4A				(1<<2)
+#define IC4_ITRIP_LVL_6_5A				(2<<2)
+#define IC4_ITRIP_LVL_7_0A				(3<<2)
+
+#define IC4_ITRIP_OUT1_DISABLED			(1<<0)
+#define IC4_ITRIP_OUT2_DISABLED			(2<<0)
+#define IC4_ITRIP_DISABLED				(IC4_ITRIP_OUT1_DISABLED|IC4_ITRIP_OUT2_DISABLED)
+
+
+#define FSR_FAULT				(1<<6)
+#define FSR_OTW					(1<<5)
+#define FSR_UVLO				(1<<4)
+#define FSR_CPUV				(1<<3)
+#define FSR_OCP					(1<<2)
+#define FSR_TSD					(1<<1)
+#define FSR_OLD					(1<<0)
+
+#define DIAG_OL1				(1<<7)
+#define DIAG_OL2				(1<<6)
+#define DIAG_ITRIP1				(1<<5)
+#define DIAG_ITRIP2				(1<<4)
+#define DIAG_OCP_H1				(1<<3)
+#define DIAG_OCP_L1				(1<<2)
+#define DIAG_OCP_H2				(1<<1)
+#define DIAG_OCP_L2				(1<<0)
+
+
 
 class DRV8873S
 {
@@ -59,3 +128,5 @@ public:
 	bool ReadRegister(GPIO_TypeDef* CS_GPIO, uint16_t CS_Pin, MemoryMap reg, uint8_t &status, uint8_t &data);
 	bool WriteRegister(GPIO_TypeDef* CS_GPIO, uint16_t CS_Pin, MemoryMap reg, uint8_t data);
 };
+
+extern DRV8873S drv8873S;

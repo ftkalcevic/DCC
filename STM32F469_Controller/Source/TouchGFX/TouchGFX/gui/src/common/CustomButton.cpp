@@ -38,6 +38,10 @@ void CustomButton::setBitmaps(const Bitmap& newBackgroundReleased, const Bitmap&
 	const int TEXT_HEIGHT = 25;
     iconX = ((getWidth()-SHADOW_SIZE) / 2) - (newIconPressed.getWidth() / 2);
     iconY = ((getHeight()-SHADOW_SIZE-TEXT_HEIGHT) / 2) - (newIconPressed.getHeight() / 2);
+	if (iconX < 0)
+		iconX = 0;
+	if (iconY < 0)
+		iconY = 0;
 }
 
 void CustomButton::draw(const Rect& area) const
@@ -89,7 +93,7 @@ void CustomButton::draw(const Rect& area) const
 		    labelRect.x += 5;
 		    labelRect.y += 5;
 	    }
-	    Rect dirty = labelRect;// & area;
+	    Rect dirty = labelRect & area;
         if (!dirty.isEmpty())
         {
             dirty.x -= labelRect.x;

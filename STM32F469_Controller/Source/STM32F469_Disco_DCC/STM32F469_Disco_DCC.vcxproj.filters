@@ -720,12 +720,6 @@
     <ClInclude Include="$(EFP_BASE)\Profiler\DebuggerChecker.h">
       <Filter>Header files\Device-specific files\Semihosting/Profiler</Filter>
     </ClInclude>
-    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\common\BMPFileLoader.cpp">
-      <Filter>Source files\Application\User\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\common\TGAFileLoader.cpp">
-      <Filter>Source files\Application\User\gui</Filter>
-    </ClCompile>
     <ClCompile Include="upng.cpp">
       <Filter>Source files\Application\User\gui</Filter>
     </ClCompile>
@@ -787,6 +781,54 @@
       <Filter>Source files\Device-specific files\Semihosting/Profiler</Filter>
     </ClCompile>
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\LocoIcon.cpp">
+      <Filter>Source files\Application\User\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\source\touchgfx\widgets\canvas\Canvas.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\containers\scrollItemBase.cpp">
+      <Filter>Source files\Application\User\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\dccsettings_screen\DCCSettingsViewBase.cpp">
+      <Filter>Source files\Application\User\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\settings_screen\SettingsViewBase.cpp">
+      <Filter>Source files\Application\User\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\containers\scrollItem.cpp">
+      <Filter>Source files\Application\User\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\dccsettings_screen\DCCSettingsPresenter.cpp">
+      <Filter>Source files\Application\User\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\dccsettings_screen\DCCSettingsView.cpp">
+      <Filter>Source files\Application\User\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\settings_screen\SettingsPresenter.cpp">
+      <Filter>Source files\Application\User\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\settings_screen\SettingsView.cpp">
+      <Filter>Source files\Application\User\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\source\touchgfx\widgets\TextArea.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\source\touchgfx\widgets\TextAreaWithWildcard.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\containers\CurrentDisplayBase.cpp">
+      <Filter>Source files\Application\User\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\containers\CurrentDisplay.cpp">
+      <Filter>Source files\Application\User\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Slider_Horizontal_Medium_Indicators_Slider_Round_nob.cpp">
+      <Filter>Source files\Application\User\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Slider_Horizontal_Medium_Slider_Round_back.cpp">
+      <Filter>Source files\Application\User\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Slider_Horizontal_Medium_Slider_Round_fill.cpp">
       <Filter>Source files\Application\User\generated</Filter>
     </ClCompile>
   </ItemGroup>
@@ -880,9 +922,6 @@
     </ClInclude>
     <ClInclude Include="upng.h">
       <Filter>Header files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\TouchGFX\TouchGFX\gui\include\gui\common\BMPFileLoader.h">
-      <Filter>Source files\Application\User\gui</Filter>
     </ClInclude>
     <ClInclude Include="..\TouchGFX\TouchGFX\gui\include\gui\common\TGAFileLoader.h">
       <Filter>Header files</Filter>

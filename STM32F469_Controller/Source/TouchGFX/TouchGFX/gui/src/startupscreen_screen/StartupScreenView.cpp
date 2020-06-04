@@ -42,6 +42,7 @@ void StartupScreenView::tearDownScreen()
 
 bool StartupScreenView::LoadSplashImage()
 {
+#ifndef SIMULATOR
 	bmpId = BinFileLoader::makeBitmap("/Images/Splash"); 
 	if (bmpId != BITMAP_INVALID)
 	{
@@ -50,6 +51,7 @@ bool StartupScreenView::LoadSplashImage()
 		add(image1);		
 		return true;
 	}
+#endif
 	return false;
 
 #ifdef PNG

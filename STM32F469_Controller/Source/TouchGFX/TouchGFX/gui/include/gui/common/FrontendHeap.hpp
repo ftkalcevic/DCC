@@ -2,6 +2,7 @@
 #define FRONTENDHEAP_HPP
 
 #include <gui_generated/common/FrontendHeapBase.hpp>
+#include <touchgfx/transitions/UncoverTransition.hpp>
 
 class FrontendHeap : public FrontendHeapBase
 {
@@ -17,7 +18,7 @@ public:
             > UserDefinedPresenterTypes;
 
     /* List any user-defined transition types here*/
-    typedef meta::TypeList< meta::Nil, //Replace this with first user-defined type
+    typedef meta::TypeList< touchgfx::UncoverTransition<SOUTH>, //Replace this with first user-defined type
             meta::Nil  //List must always end with meta::Nil !
             > UserDefinedTransitionTypes;
 

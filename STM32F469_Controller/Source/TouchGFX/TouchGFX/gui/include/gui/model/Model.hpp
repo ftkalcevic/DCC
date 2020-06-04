@@ -2,6 +2,8 @@
 #define MODEL_HPP
 
 #include <touchgfx/Utils.hpp>
+#include "DCCSettings.hpp"
+
 
 class ModelListener;
 
@@ -37,11 +39,21 @@ public:
      * the ModelListener interface.
      */
     void tick();
+	
+	int getTripCurrent() { return 0; }
+	int getToff() { return 0; }
+	int getSlewRate() { return 0; }
+	DCCSettings::HBStatus getMainTrackStatus() { return mainTrackStatus;}
+	DCCSettings::HBStatus getProgTrackStatus() { return progTrackStatus;}
+
 protected:
     /**
      * Pointer to the currently active presenter.
      */
     ModelListener* modelListener;
+	
+	DCCSettings::HBStatus mainTrackStatus;
+	DCCSettings::HBStatus progTrackStatus;
 };
 
 #endif /* MODEL_HPP */

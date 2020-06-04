@@ -19,6 +19,10 @@
 #include <gui/startupscreen_screen/StartupScreenPresenter.hpp>
 #include <gui/preferences_screen/PreferencesView.hpp>
 #include <gui/preferences_screen/PreferencesPresenter.hpp>
+#include <gui/settings_screen/SettingsView.hpp>
+#include <gui/settings_screen/SettingsPresenter.hpp>
+#include <gui/dccsettings_screen/DCCSettingsView.hpp>
+#include <gui/dccsettings_screen/DCCSettingsPresenter.hpp>
 
 
 /**
@@ -44,7 +48,9 @@ public:
     typedef touchgfx::meta::TypeList< MainView,
             touchgfx::meta::TypeList< StartupScreenView,
             touchgfx::meta::TypeList< PreferencesView,
-            touchgfx::meta::Nil > >
+            touchgfx::meta::TypeList< SettingsView,
+            touchgfx::meta::TypeList< DCCSettingsView,
+            touchgfx::meta::Nil > > > >
             > GeneratedViewTypes;
 
     /**
@@ -59,7 +65,9 @@ public:
     typedef touchgfx::meta::TypeList< MainPresenter,
             touchgfx::meta::TypeList< StartupScreenPresenter,
             touchgfx::meta::TypeList< PreferencesPresenter,
-            touchgfx::meta::Nil > >
+            touchgfx::meta::TypeList< SettingsPresenter,
+            touchgfx::meta::TypeList< DCCSettingsPresenter,
+            touchgfx::meta::Nil > > > >
             > GeneratedPresenterTypes;
 
     /**
@@ -72,7 +80,7 @@ public:
      * @note All transition types used in the application MUST be added to this list!
      */
     typedef touchgfx::meta::TypeList< touchgfx::NoTransition,
-            touchgfx::meta::TypeList< CoverTransition<EAST>,
+            touchgfx::meta::TypeList< CoverTransition<SOUTH>,
             touchgfx::meta::Nil >
             > GeneratedTransitionTypes;
 

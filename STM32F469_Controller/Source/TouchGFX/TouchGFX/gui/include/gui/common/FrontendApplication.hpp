@@ -18,10 +18,16 @@ public:
         model.tick();
         FrontendApplicationBase::handleTickEvent();
     }
-	void gotoPreferencesScreenSlideTransitionEast();
+	void gotoPreferencesNorth();
+	void gotoPreferencesSouth();
+    void gotoSettingsScreen();
+    void gotoDCCSettingsScreen();
 	
 private:
-	void gotoPreferencesScreenSlideTransitionEastImpl();
+	void gotoPreferencesNorthImpl();
+	void gotoPreferencesSouthImpl();
+    void gotoSettingsScreenImpl();
+    void gotoDCCSettingsScreenImpl();
     touchgfx::Callback<FrontendApplication> transitionCallback;
 };
 
