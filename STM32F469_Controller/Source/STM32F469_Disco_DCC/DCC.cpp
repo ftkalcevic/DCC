@@ -74,3 +74,12 @@ void ProgrammingTrack_DCC_Handle_DMA_IRQ()
 	
 }
 
+void MainTrack_DCC_EStop(bool stop)
+{
+	mainTrack.EStop(stop);
+}
+
+void ProgrammingTrack_DCC_EStop(bool stop)
+{
+	programmingTrack.EStop(stop);
+}

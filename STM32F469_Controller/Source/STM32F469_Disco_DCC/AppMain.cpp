@@ -4,21 +4,23 @@
 #include "AudioTask.h"
 #include "UIMessage.h"
 #include <stdio.h>
+#include "dcc.h"
 
 
 UIMessage uimsg;
 DRV8873S drv8873S(&hspi2);
+AppMain app;
 
 
 extern "C" void AppMainTask_Entry(void *argument)
 {
-	AppMain app;
 	app.Run();
 }
 
 
 enum EKey
 {
+	None = 0,
 	F1 = 1,
 	F2 = 2,
 	F3 = 3,
@@ -26,7 +28,8 @@ enum EKey
 	F5 = 5,
 	FWD = 6,
 	REV = 7,
-	EStop = 8
+	EStop = 8,
+	KeyRelease = 0x1000
 };
 static struct KeyScan
 {
@@ -54,11 +57,12 @@ static void InitInputs()
 		Keys[i].debounce = Keys[i].release = 0;
 }
 
-static void ReadInputs()
+static EKey ReadInputs(int &i)
 {
-	for (int i = 0; i < countof(Keys); i++)
+	while (i < countof(Keys))
 	{
 		KeyScan &k = Keys[i];
+		i++;
 		
 		bool keyDown = HAL_GPIO_ReadPin(k.port, k.pin) == GPIO_PIN_RESET;	// all keys are pull up
 		if(k.debounce)
@@ -68,9 +72,9 @@ static void ReadInputs()
 				k.debounce--;
 				if (k.debounce == 0)
 				{
-					printf("Key %d down\n", k.key);
 					// Key down event.
 					k.release = DEBOUNCE_TIMER;
+					return k.key;
 				}
 			}
 			else
@@ -83,8 +87,8 @@ static void ReadInputs()
 				k.release--;
 				if (k.release == 0)
 				{
-					printf("Key %d up\n", k.key);
 					// key release event
+					return (EKey)(k.key + KeyRelease);
 				}
 			}
 			else
@@ -107,20 +111,59 @@ static void ReadInputs()
 	uint16_t avg1 = sum1 / (countof(ADC_Joysticks) / 2);
 	uint16_t avg2 = sum2 / (countof(ADC_Joysticks) / 2);
 	
-	static int count = 0;
-	if (count % 1000 == 0)
-	{
-		printf("%d,%d\n", avg1, avg2);
-	}
-	count++;
+	return None;
 }
 
+static struct LEDDef
+{
+	GPIO_TypeDef *port;
+	uint16_t pin;
+	int counter;
+	
+} LEDs[] = { 
+	{ LED1_GPIO_Port, LED1_Pin,   0 },	// Green
+	{ LED2_GPIO_Port, LED2_Pin,   0 },	// Orange
+	{ LED3_GPIO_Port, LED3_Pin,   0 },	// Red
+	{ LED4_GPIO_Port, LED4_Pin,   0 }	// Blue
+};
 
-//LED1_GPIO_Port LED1_Pin
-//LED2_GPIO_Port LED2_Pin
-//LED3_GPIO_Port LED3_Pin
-//LED4_GPIO_Port LED4_Pin
+static void UpdateLEDs()
+{
+	for (int i = 0; i < countof(LEDs); i++)
+	{
+		LEDDef &led = LEDs[i];
+		if (led.counter > 0)
+		{
+			led.counter--;
+			if ( led.counter == 0 )
+				HAL_GPIO_WritePin(led.port, led.pin, GPIO_PIN_SET);	
+		}
+	}
+}
   
+void AppMain::ShowLED(int id, bool enable, int duration)
+{
+	assert(id >= 0 && id < countof(LEDs) && "LED id is out of range");
+	LEDDef &led = LEDs[id];
+	if (enable)
+	{
+		HAL_GPIO_WritePin(led.port, led.pin, GPIO_PIN_RESET);	
+		led.counter = duration;
+	}
+	else
+	{
+		HAL_GPIO_WritePin(led.port, led.pin, GPIO_PIN_SET);	
+		led.counter = 0;
+	}
+}
+
+void AppMain::ToggleEStop()
+{
+	eStop = !eStop;
+
+	MainTrack_DCC_EStop(eStop);
+	ProgrammingTrack_DCC_EStop(eStop);
+}
 
 void AppMain::Run()
 {
@@ -131,14 +174,27 @@ void AppMain::Run()
 	
 	for(;  ;)
 	{
-		ReadInputs();
+		UpdateLEDs();
+		
+		int i = 0;
+		EKey key;
+		while ((key = ReadInputs(i)) != None)
+		{
+			if (key == EKey::EStop)
+				ToggleEStop();
+		}
 		
 		osDelay(pdMS_TO_TICKS(1));
 	}
 }
 
 
-
+extern "C" {
+	void ShowDiskLED(int enable, int duration) {app.ShowDiskLED(enable, duration);}
+	void ShowTrackPowerLED(int enable, int duration) {app.ShowTrackPowerLED(enable, duration);}
+	void ShowErrorPowerLED(int enable, int duration) {app.ShowErrorLED(enable, duration);}
+	void ShowProgrammingTrackPowerLED(int enable, int duration) {app.ShowProgrammingTrackPowerLED(enable, duration);}
+}
 
 
 /*
@@ -194,6 +250,7 @@ void AppMain::Run()
 			- switch to usb_msc mode
 			- usb on the go
 				- usb hid device input
+				- configure pot range
 		
 	- dcc programming 
 		- track 

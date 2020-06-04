@@ -9,6 +9,7 @@
 #include "DRV8873S.h"
 #include "DCCSettings.hpp"
 #include "UIMessage.h"
+#include "AppMain.h"
 
 extern "C" void DCCTask_Entry(void *argument);
 
@@ -41,6 +42,7 @@ class DCC
 	DCCMessage messageTable[MAX_DCC_MESSAGES];
 	int messageCount;
 	bool trackEnabled;
+	bool eStop;
 	uint32_t bitBuffer[BIT_BUFFER_SIZE*BURST_SIZE];
 	volatile bool sent;
 	SemaphoreHandle_t sentSemaphoreHandle;
@@ -65,6 +67,8 @@ public:
 		this->CS_Pin = CS_Pin;
 		this->Disable_Port = Disable_Port;
 		this->Disable_Pin = Disable_Pin;		
+		eStop = true;
+		trackEnabled = false;
 	}
 	
 	DCC( GPIO_TypeDef *CS_Port, uint16_t CS_Pin, 
@@ -77,6 +81,8 @@ public:
 		this->CS_Pin = CS_Pin;
 		this->Disable_Port = Disable_Port;
 		this->Disable_Pin = Disable_Pin;		
+		eStop = true;
+		trackEnabled = false;
 	}
 
 
@@ -105,6 +111,23 @@ public:
 		uint8_t status, ic3;
 		drv8873S.ReadRegister(PrgTrk_CS_GPIO_Port, PrgTrk_CS_Pin, MemoryMap::DiagRegister, status, ic3);
 		drv8873S.WriteRegister(PrgTrk_CS_GPIO_Port, PrgTrk_CS_Pin, MemoryMap::IC3ControlRegister, ic3 | IC3_CLEAR_FAULT );
+	}
+	
+	void UpdateHBridgeStatus()
+	{
+		uint8_t status, diag;
+		ReadHBridgeStatus(status, diag);
+				
+		UIMsg msg;
+		msg.type = statusMsgType;
+		msg.hbStatus.fault = (status & FSR_FAULT) != 0;
+		msg.hbStatus.overTemp = (status & FSR_TSD) != 0 ? DCCSettings::Fault : (status & FSR_OTW) != 0 ? DCCSettings::Warning : DCCSettings::Good;
+		msg.hbStatus.overCurrent = (diag & FSR_OCP) != 0 ? DCCSettings::Fault : DCCSettings::Good;
+		msg.hbStatus.openLoad = (diag & FSR_OLD) != 0 ? DCCSettings::Fault : DCCSettings::Good;
+		msg.hbStatus.current = 0;
+				
+		// Send to ui
+		uimsg.Send(msg);
 	}
 
 	void Initialise()
@@ -199,36 +222,30 @@ public:
 		trackEnabled = true;
 	#endif
 
-		bool lastTrackEnabled = !trackEnabled;
+		bool lastTrackEnabled = !(trackEnabled && !eStop);
 		TickType_t lastTime = xTaskGetTickCount();
 		for (;;)
 		{
 			// Check device status ever second
 			if(xTaskGetTickCount() - lastTime > pdMS_TO_TICKS(1000))
 			{
-				uint8_t status, diag;
-				ReadHBridgeStatus(status, diag);
-				
-				UIMsg msg;
-				msg.type = statusMsgType;
-				msg.hbStatus.fault = (status & FSR_FAULT) != 0;
-				msg.hbStatus.overTemp = (status & FSR_TSD) != 0 ? DCCSettings::Fault : (status & FSR_OTW) != 0 ? DCCSettings::Warning : DCCSettings::Good;
-				msg.hbStatus.overCurrent = (diag & FSR_OCP) != 0 ? DCCSettings::Fault : DCCSettings::Good;
-				msg.hbStatus.openLoad = (diag & FSR_OLD) != 0 ? DCCSettings::Fault : DCCSettings::Good;
-				msg.hbStatus.current = 0;
-				
-				// Send to ui
-				uimsg.Send(msg);
+				// 1 sec timer
+				UpdateHBridgeStatus();
 				lastTime = xTaskGetTickCount();
 			}
 			
 			// if trackenabled changed
-			if(trackEnabled != lastTrackEnabled)
+			if((trackEnabled && !eStop) != lastTrackEnabled)
 			{
 				// if disabled, clear msg queue, reset msg repeat
-				lastTrackEnabled = trackEnabled;
+				lastTrackEnabled = (trackEnabled && !eStop);
 
-				if (trackEnabled)
+				if (type == DCCType::MainTrack)
+					ShowTrackPowerLED(lastTrackEnabled, 0);
+				else
+					ShowProgrammingTrackPowerLED(lastTrackEnabled, 0);
+					
+				if (trackEnabled && !eStop)
 				{
 					uint8_t status, diag;
 					ReadHBridgeStatus(status, diag);
@@ -237,7 +254,7 @@ public:
 						ResetHBridgeFault();
 					}
 				}
-				EnableHBridge(trackEnabled);
+				EnableHBridge(trackEnabled && !eStop);
 			}
 		
 			// If new message
@@ -331,8 +348,14 @@ public:
 	
 	}
 
+	void EStop(bool stop) { eStop = stop; }
 	void DCCSent()
 	{ 
 		xSemaphoreGiveFromISR(sentSemaphoreHandle, NULL);
 	}
 };
+
+
+
+void MainTrack_DCC_EStop(bool stop);
+void ProgrammingTrack_DCC_EStop(bool stop);
