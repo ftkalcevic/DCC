@@ -23,6 +23,8 @@
 #include <gui/settings_screen/SettingsPresenter.hpp>
 #include <gui/dccsettings_screen/DCCSettingsView.hpp>
 #include <gui/dccsettings_screen/DCCSettingsPresenter.hpp>
+#include <gui/about_screen/AboutView.hpp>
+#include <gui/about_screen/AboutPresenter.hpp>
 
 
 /**
@@ -50,7 +52,8 @@ public:
             touchgfx::meta::TypeList< PreferencesView,
             touchgfx::meta::TypeList< SettingsView,
             touchgfx::meta::TypeList< DCCSettingsView,
-            touchgfx::meta::Nil > > > >
+            touchgfx::meta::TypeList< AboutView,
+            touchgfx::meta::Nil > > > > >
             > GeneratedViewTypes;
 
     /**
@@ -67,7 +70,8 @@ public:
             touchgfx::meta::TypeList< PreferencesPresenter,
             touchgfx::meta::TypeList< SettingsPresenter,
             touchgfx::meta::TypeList< DCCSettingsPresenter,
-            touchgfx::meta::Nil > > > >
+            touchgfx::meta::TypeList< AboutPresenter,
+            touchgfx::meta::Nil > > > > >
             > GeneratedPresenterTypes;
 
     /**

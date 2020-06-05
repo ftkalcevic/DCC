@@ -16,6 +16,7 @@ void DCCSettingsPresenter::activate()
 
 void DCCSettingsPresenter::deactivate()
 {
+	// TODO this could go in dcc.cpp, or at least let it know to reload settings.
 	int tripCurrent, toff, slewRate;
 	view.getSettings(tripCurrent, toff, slewRate);
 	config.setTripCurrent(tripCurrent);

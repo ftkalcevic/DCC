@@ -19,6 +19,8 @@
 #include <gui/settings_screen/SettingsPresenter.hpp>
 #include <gui/dccsettings_screen/DCCSettingsView.hpp>
 #include <gui/dccsettings_screen/DCCSettingsPresenter.hpp>
+#include <gui/about_screen/AboutView.hpp>
+#include <gui/about_screen/AboutPresenter.hpp>
 
 using namespace touchgfx;
 

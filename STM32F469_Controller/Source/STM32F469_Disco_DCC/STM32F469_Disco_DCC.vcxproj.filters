@@ -849,6 +849,18 @@
     <ClCompile Include="FileSystem.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\about_screen\AboutViewBase.cpp">
+      <Filter>Source files\Application\User\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\about_screen\AboutPresenter.cpp">
+      <Filter>Source files\Application\User\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\about_screen\AboutView.cpp">
+      <Filter>Source files\Application\User\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\aboutIcon.cpp">
+      <Filter>Source files\Application\User\generated</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dcc.h">

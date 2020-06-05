@@ -13,7 +13,8 @@ enum EPreferencesButton
 	DCCSettings,
 	DCCProgramming,
 	DCCConfiguration,
-	LCCConfig
+	LCCConfig,
+	About
 };
 
 static struct SPreferencesButton
@@ -27,6 +28,7 @@ static struct SPreferencesButton
 	{ u"DCC Settings", BITMAP_PREFERENCESICON_ID, EPreferencesButton::DCCSettings },
 	{ u"DCC Prog.", BITMAP_LOCOICON_ID, EPreferencesButton::DCCProgramming },
 	{ u"LCC Config", BITMAP_LOCOICON_ID, EPreferencesButton::LCCConfig },
+	{ u"About", BITMAP_ABOUTICON_ID, EPreferencesButton::About },
 };
 
 PreferencesView::PreferencesView():
@@ -72,6 +74,10 @@ void PreferencesView::buttonClickHandler(const touchgfx::AbstractButton& src)
     else if (button.getId() == DCCSettings)
     {
         application().gotoDCCSettingsScreen();
+    }
+    else if (button.getId() == About)
+    {
+        application().gotoAboutScreen();
     }
 }
 

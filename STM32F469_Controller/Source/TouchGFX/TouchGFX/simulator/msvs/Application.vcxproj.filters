@@ -232,6 +232,18 @@
     <Filter Include="Source Files\generated\gui_generated\settings_screen">
       <UniqueIdentifier>6D7286D3-0E8B-11FE-7DCA-B4362EB673EA</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\gui\about_screen">
+      <UniqueIdentifier>69DA7503-8106-E0E2-CF2D-DF17A602F80C</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gui\about_screen">
+      <UniqueIdentifier>EB32E058-8FE4-DF74-6B96-B4CD77005BD3</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\generated\gui_generated\about_screen">
+      <UniqueIdentifier>A178F101-E5EA-6C4B-90DB-D682916D785E</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\generated\gui_generated\about_screen">
+      <UniqueIdentifier>6305AD48-4F7F-6555-A8DB-FDBA16B801F7</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(TouchGFXReleasePath)\framework\source\platform\driver\touch\SDL2TouchController.cpp">
@@ -350,6 +362,15 @@
     </ClCompile>
     <ClCompile Include="..\..\generated\gui_generated\src\containers\CurrentDisplayBase.cpp">
       <Filter>Source Files\generated\gui_generated\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\about_screen\AboutPresenter.cpp">
+      <Filter>Source Files\gui\about_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\about_screen\AboutView.cpp">
+      <Filter>Source Files\gui\about_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\about_screen\AboutViewBase.cpp">
+      <Filter>Source Files\generated\gui_generated\about_screen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -873,6 +894,15 @@
     </ClInclude>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\CurrentDisplayBase.hpp">
       <Filter>Header Files\generated\gui_generated\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\about_screen\AboutPresenter.hpp">
+      <Filter>Header Files\gui\about_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\about_screen\AboutView.hpp">
+      <Filter>Header Files\gui\about_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\about_screen\AboutViewBase.hpp">
+      <Filter>Header Files\generated\gui_generated\about_screen</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

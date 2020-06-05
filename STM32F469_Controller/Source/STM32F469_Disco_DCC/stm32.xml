@@ -89,7 +89,7 @@
     <AllDependencies>
       <ProjectDependency>
         <RelativePath>..\TouchGFX\STM32CubeIDE\.cproject</RelativePath>
-        <Timestamp>132357296824283541</Timestamp>
+        <Timestamp>132358109070290728</Timestamp>
       </ProjectDependency>
     </AllDependencies>
     <RootDirectory>
@@ -232,6 +232,12 @@
                     <VirtualFileSnapshot>
                       <RelativePath>..\TouchGFX\TouchGFX\generated\images\src\up_btn_pressed.cpp</RelativePath>
                     </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\generated\gui_generated\src\about_screen\AboutViewBase.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\generated\images\src\aboutIcon.cpp</RelativePath>
+                    </VirtualFileSnapshot>
                   </Files>
                 </VirtualDirectorySnapshot>
                 <VirtualDirectorySnapshot>
@@ -302,6 +308,12 @@
                     </VirtualFileSnapshot>
                     <VirtualFileSnapshot>
                       <RelativePath>..\TouchGFX\TouchGFX\gui\src\containers\scrollItem.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\gui\src\about_screen\AboutPresenter.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\gui\src\about_screen\AboutView.cpp</RelativePath>
                     </VirtualFileSnapshot>
                   </Files>
                 </VirtualDirectorySnapshot>

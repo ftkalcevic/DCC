@@ -22,12 +22,14 @@ public:
 	void gotoPreferencesSouth();
     void gotoSettingsScreen();
     void gotoDCCSettingsScreen();
+    void gotoAboutScreen();
 	
 private:
 	void gotoPreferencesNorthImpl();
 	void gotoPreferencesSouthImpl();
     void gotoSettingsScreenImpl();
     void gotoDCCSettingsScreenImpl();
+    void gotoAboutScreenImpl();
     touchgfx::Callback<FrontendApplication> transitionCallback;
 };
 

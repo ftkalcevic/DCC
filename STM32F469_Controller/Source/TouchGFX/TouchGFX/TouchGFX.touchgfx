@@ -327,7 +327,19 @@
             "Moveable": false
           }
         ],
-        "Interactions": [],
+        "Interactions": [
+          {
+            "InteractionName": "Interaction1",
+            "HasCompletedTrigger": false,
+            "Trigger": {
+              "ButtonKey": 0,
+              "Type": "TriggerPhysicalButtonClicked"
+            },
+            "Action": {
+              "Type": "ActionNone"
+            }
+          }
+        ],
         "Name": "Settings",
         "OverrideDefaultBufferSize": false,
         "CanvasBufferSize": 0
@@ -961,6 +973,111 @@
         ],
         "Interactions": [],
         "Name": "DCCSettings",
+        "OverrideDefaultBufferSize": false,
+        "CanvasBufferSize": 0
+      },
+      {
+        "Components": [
+          {
+            "CustomContainerDefinitionName": "FunctionButtons",
+            "Name": "functionButtons",
+            "X": 0,
+            "Y": 455,
+            "Width": 800,
+            "Height": 25,
+            "Type": "CustomContainerInstance",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "CustomContainerDefinitionName": "StatusBar",
+            "Name": "statusBar",
+            "X": 0,
+            "Y": 0,
+            "Width": 800,
+            "Height": 25,
+            "Type": "CustomContainerInstance",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "Components": [
+              {
+                "FileName": "__designer\\Dark_Textures_carbon_fibre.png",
+                "Alpha": 255,
+                "OffsetX": 0,
+                "OffsetY": 0,
+                "Name": "backgroundImage",
+                "X": 0,
+                "Y": 0,
+                "Width": 800,
+                "Height": 430,
+                "Type": "TiledImage",
+                "Visible": true,
+                "Draggable": false,
+                "Clickable": false,
+                "Fadeable": false,
+                "Moveable": false
+              },
+              {
+                "TextId": "wildcardTextId",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 255,
+                  "Green": 255,
+                  "Blue": 255
+                },
+                "Alpha": 255,
+                "AutoSize": true,
+                "LineSpacing": 0,
+                "Wildcard1": {
+                  "UseBuffer": false,
+                  "BufferSize": 0
+                },
+                "Name": "textArea1",
+                "X": 5,
+                "Y": 5,
+                "Width": 0,
+                "Height": 23,
+                "Type": "TextArea",
+                "Visible": true,
+                "Draggable": false,
+                "Clickable": false,
+                "Fadeable": false,
+                "Moveable": false
+              }
+            ],
+            "HorizontalScrollEnabled": true,
+            "VerticalScrollEnabled": true,
+            "ScrollbarsVisible": true,
+            "ScrollbarsVisibleOnPressed": true,
+            "ScrollbarsColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "ScrollbarsAlpha": 255,
+            "Name": "scrollableContainer1",
+            "X": 0,
+            "Y": 25,
+            "Width": 800,
+            "Height": 430,
+            "Type": "ScrollableContainer",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          }
+        ],
+        "Interactions": [],
+        "Name": "About",
         "OverrideDefaultBufferSize": false,
         "CanvasBufferSize": 0
       }

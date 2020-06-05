@@ -348,5 +348,9 @@
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Slider_Horizontal_Medium_Indicators_Slider_Round_nob.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Slider_Horizontal_Medium_Slider_Round_back.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Slider_Horizontal_Medium_Slider_Round_fill.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\about_screen\AboutViewBase.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\about_screen\AboutPresenter.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\about_screen\AboutView.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\aboutIcon.cpp" />
   </ItemGroup>
 </Project>

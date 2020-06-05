@@ -5,6 +5,8 @@
 #include <gui/settings_screen/SettingsPresenter.hpp>
 #include <gui/dccsettings_screen/DCCSettingsView.hpp>
 #include <gui/dccsettings_screen/DCCSettingsPresenter.hpp>
+#include <gui/about_screen/AboutView.hpp>
+#include <gui/about_screen/AboutPresenter.hpp>
 #include <touchgfx/transitions/NoTransition.hpp>
 
 #include <new>
@@ -61,4 +63,16 @@ void FrontendApplication::gotoDCCSettingsScreen()
 void FrontendApplication::gotoDCCSettingsScreenImpl()
 {
     touchgfx::makeTransition<DCCSettingsView, DCCSettingsPresenter, touchgfx::CoverTransition<NORTH>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+}
+
+
+void FrontendApplication::gotoAboutScreen()
+{
+    transitionCallback = touchgfx::Callback<FrontendApplication>(this, &FrontendApplication::gotoAboutScreenImpl);
+    pendingScreenTransitionCallback = &transitionCallback;
+}
+
+void FrontendApplication::gotoAboutScreenImpl()
+{
+    touchgfx::makeTransition<AboutView, AboutPresenter, touchgfx::CoverTransition<NORTH>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }
