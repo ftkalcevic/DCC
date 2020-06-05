@@ -36,6 +36,7 @@
 
 /* Private typedef -----------------------------------------------------------*/
 typedef StaticTask_t osStaticThreadDef_t;
+typedef StaticSemaphore_t osStaticMutexDef_t;
 /* USER CODE BEGIN PTD */
 
 /* USER CODE END PTD */
@@ -177,8 +178,15 @@ const osThreadAttr_t AudioTask_attributes = {
   .cb_size = sizeof(AudioTaskControlBlock),
   .priority = (osPriority_t) osPriorityHigh,
 };
+/* Definitions for initialisationMutex */
+osMutexId_t initialisationMutexHandle;
+osStaticMutexDef_t initialisationMutexControlBlock;
+const osMutexAttr_t initialisationMutex_attributes = {
+  .name = "initialisationMutex",
+  .cb_mem = &initialisationMutexControlBlock,
+  .cb_size = sizeof(initialisationMutexControlBlock),
+};
 /* USER CODE BEGIN PV */
-FATFS FatFs;
 DMA_HandleTypeDef hdma_sdio_tx;
 uint16_t ADC_Joysticks[16];
 uint16_t ADC_Current[16];
@@ -354,9 +362,11 @@ int main(void)
 
   /* Init scheduler */
   osKernelInitialize();
+  /* Create the mutex(es) */
+  /* creation of initialisationMutex */
+  initialisationMutexHandle = osMutexNew(&initialisationMutex_attributes);
 
   /* USER CODE BEGIN RTOS_MUTEX */
-	/* add mutexes, ... */
   /* USER CODE END RTOS_MUTEX */
 
   /* USER CODE BEGIN RTOS_SEMAPHORES */
@@ -382,7 +392,7 @@ int main(void)
   DCCTaskHandle = osThreadNew(DCCTask_Entry, (void*) 0, &DCCTask_attributes);
 
   /* creation of DCCTask_PrgTrk */
-  DCCTask_PrgTrkHandle = osThreadNew(DCCTask_Entry, (void*) 1, &DCCTask_PrgTrk_attributes);
+  //DCCTask_PrgTrkHandle = osThreadNew(DCCTask_Entry, (void*) 1, &DCCTask_PrgTrk_attributes);
 
   /* creation of AppMainTask */
   AppMainTaskHandle = osThreadNew(AppMainTask_Entry, NULL, &AppMainTask_attributes);
@@ -569,7 +579,7 @@ static void MX_ADC2_Init(void)
   hadc2.Init.ExternalTrigConv = ADC_SOFTWARE_START;
   hadc2.Init.DataAlign = ADC_DATAALIGN_RIGHT;
   hadc2.Init.NbrOfConversion = 2;
-  hadc2.Init.DMAContinuousRequests = ENABLE;
+  hadc2.Init.DMAContinuousRequests = DISABLE;
   hadc2.Init.EOCSelection = ADC_EOC_SEQ_CONV;
   if (HAL_ADC_Init(&hadc2) != HAL_OK)
   {
@@ -1750,12 +1760,6 @@ void InitialiseTask_Entry(void *argument)
 {
   /* USER CODE BEGIN InitialiseTask_Entry */
 	FRESULT res;
-	res = f_mount(&FatFs, "/", 1);
-	if ( res != FR_OK )
-	{
-		printf("Failed to mount volume - %d\n", res);
-	}
-	
     //MX_USB_DEVICE_Init();
 
     vTaskDelete(NULL);

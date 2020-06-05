@@ -2,10 +2,9 @@
 #include <touchgfx/Color.hpp>
 #include <stdio.h>
 #include <string.h>
-#include "fatfs.h"
+#include "FileSystem.h"
 #include "../STM32F469_Disco_DCC/upng.h"
 
-extern FATFS FatFs;
 
 class FatFsStream : public Stream
 {
@@ -17,8 +16,9 @@ public:
 	uint16_t ReadBytes(uint8_t *buffer, uint16_t len, uint16_t &bytesread)
 	{
 		UINT read = 0;
-		f_read(file, buffer, len, &read);
+		FRESULT res = f_read(file, buffer, len, &read);
 		bytesread = read;
+		return res;
 	}
 
 	uint32_t GetSize()
@@ -89,7 +89,7 @@ BitmapId BinFileLoader::makeBitmap(const char *filename)
 	path[MAX_PATH - 1] = 0;
 	strncat(path, ".bin", MAX_PATH-strlen(path));
 //f_unlink(path);
-	if (f_open(&f, path, FA_READ) == FR_OK)
+	if (FileSystem::f_open(&f, path, FA_READ) == FR_OK)
 	{
 		bmpId = readBinFile(&f);
 		f_close(&f);
@@ -100,7 +100,7 @@ BitmapId BinFileLoader::makeBitmap(const char *filename)
 		strncpy(path, filename, MAX_PATH); 
 		path[MAX_PATH - 1] = 0;
 		strncat(path, ".png", MAX_PATH-strlen(path));
-		if (f_open(&f, path, FA_READ) == FR_OK)
+		if (FileSystem::f_open(&f, path, FA_READ) == FR_OK)
 		{
 			FatFsStream stream(&f);
 			upng png(&stream);
@@ -143,7 +143,7 @@ BitmapId BinFileLoader::makeBitmap(const char *filename)
 					strncat(path, ".bin", MAX_PATH-strlen(path));
 					
 					bool success = false;
-					if (f_open(&f, path, FA_CREATE_NEW | FA_WRITE) == FR_OK)
+					if (FileSystem::f_open(&f, path, FA_CREATE_NEW | FA_WRITE) == FR_OK)
 					{
 						char header[5];
 						header[0] = width & 0xFF;
@@ -175,7 +175,7 @@ BitmapId BinFileLoader::makeBitmap(const char *filename)
 
 					if (success)
 					{
-						if (f_open(&f, path, FA_READ) == FR_OK)
+						if (FileSystem::f_open(&f, path, FA_READ) == FR_OK)
 						{
 							bmpId = readBinFile(&f);
 							f_close(&f);

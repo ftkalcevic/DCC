@@ -9,14 +9,20 @@ DCCSettingsPresenter::DCCSettingsPresenter(DCCSettingsView& v)
 
 void DCCSettingsPresenter::activate()
 {
-	view.setSettings( model->getTripCurrent(), model->getToff(), model->getSlewRate() );
+	config.parse();
+	view.setSettings( config.getTripCurrent(), config.getToff(), config.getSlewRate() );
 	TrackStatusChanged();
-
 }
 
 void DCCSettingsPresenter::deactivate()
 {
-
+	int tripCurrent, toff, slewRate;
+	view.getSettings(tripCurrent, toff, slewRate);
+	config.setTripCurrent(tripCurrent);
+	config.setToff(toff);
+	config.setTripCurrent(tripCurrent);
+	if (config.isDirty())
+		config.write();
 }
 
 

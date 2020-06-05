@@ -316,6 +316,7 @@ void ScrollBase::animateToPosition(int32_t position, int16_t steps)
     }
     if (steps < 1)
     {
+	    stopAnimation();
         setOffset(position);
     }
     else

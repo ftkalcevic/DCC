@@ -24,7 +24,7 @@
 #include "main.h"
 #include "AudioTask.h"
 #include "stm32469i_discovery_audio.h"
-#include "fatfs.h"
+#include "FileSystem.h"
 
 //void printf(...){}
 extern "C" void BSP_AUDIO_OUT_ChangeAudioConfig(uint32_t AudioOutOption);
@@ -269,7 +269,7 @@ void AudioTask::ProcessSample(EAudioSounds sample)
 		strcpy(filePath, rootAudioPath);
 		strncat(filePath, audioFilenames[sample],MAX_PATH_LEN);
 
-		if (f_open(&soundFile, filePath, FA_OPEN_EXISTING | FA_READ) != FR_OK) 
+		if (FileSystem::f_open(&soundFile, filePath, FA_OPEN_EXISTING | FA_READ) != FR_OK) 
 			return;
 	}
 	

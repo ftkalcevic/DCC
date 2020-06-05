@@ -40,9 +40,9 @@ public:
      */
     void tick();
 	
-	int getTripCurrent() { return 0; }
-	int getToff() { return 0; }
-	int getSlewRate() { return 0; }
+	int getTripCurrent();
+	int getToff();
+	int getSlewRate();
 	DCCSettings::HBStatus getMainTrackStatus() { return mainTrackStatus;}
 	DCCSettings::HBStatus getProgTrackStatus() { return progTrackStatus;}
 

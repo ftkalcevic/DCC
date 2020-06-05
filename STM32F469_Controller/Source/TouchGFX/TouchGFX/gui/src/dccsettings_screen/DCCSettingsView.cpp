@@ -77,9 +77,16 @@ void DCCSettingsView::handleGestureEvent(const GestureEvent & evt)
 
 void DCCSettingsView::setSettings(int tripCurrent, int toff, int slewRate)
 {
-//	tripCurrentWheel
-//	toffWheel
-//	slewRateWheel
+	tripCurrentWheel.animateToItem(tripCurrent,0);
+	toffWheel.animateToItem(toff,0);
+	slewRateWheel.animateToItem(slewRate,0);
+}
+
+void DCCSettingsView::getSettings(int &tripCurrent, int &toff, int &slewRate)
+{
+	tripCurrent = tripCurrentWheel.getSelectedItem();
+	toff = toffWheel.getSelectedItem();
+	slewRate = slewRateWheel.getSelectedItem();
 }
 
 void DCCSettingsView::setTrackStatus(DCCSettings::HBStatus mainTrack, DCCSettings::HBStatus progTrack)

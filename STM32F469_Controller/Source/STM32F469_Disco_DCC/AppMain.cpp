@@ -264,5 +264,9 @@ extern "C" {
 		- map events.
 	- Do we want to show a map?
 		- with all accessories, so we can select, or zoom then select?
+		
+TODO
+	- Add selection changed action to scrollwheel.
+	- Create uncover transition.
 	
 */

@@ -1,5 +1,5 @@
 #include "dcc.h"
-
+#include "config.h"
 
 #define MAINTRK_ARR_OFFSET 0
 #define MAINTRK_CCn_OFFSET 3
@@ -26,26 +26,37 @@ DCC<DCCType::ProgrammingTrack, PRGTRK_ARR_OFFSET, PRGTRK_CCn_OFFSET, PRGTRK_BURS
 
 extern "C"
 {
+	static void ReadSettings(int &tripCurrent, int &toff, int &slewRate)
+	{
+		DCCConfig config;
+		config.parse();
+		
+		tripCurrent = config.getTripCurrent();
+		toff = config.getToff();
+		slewRate = config.getSlewRate();
+	}
+	
 	void DCCTask_Entry(void *argument)
 	{
 		DCCType type = static_cast<DCCType>(reinterpret_cast<int>(argument));
-
+		int tripCurrent, toff, slewRate;
+		ReadSettings(tripCurrent, toff, slewRate);
+		
 		switch (type)
 		{
 			case DCCType::ProgrammingTrack:
-				programmingTrack.Initialise();
-				programmingTrack.Run();
+				programmingTrack.Initialise(tripCurrent, toff, slewRate);
+				programmingTrack.Run(false);
 				break;
 			case DCCType::MainTrack:
-				mainTrack.Initialise();
-				mainTrack.Run();
+				mainTrack.Initialise(tripCurrent, toff, slewRate);
+				mainTrack.Run(true);
 				break;
 		}
 		
 		
 		for (;;)
 		{
-			
 			osDelay(1);
 		}
 	}

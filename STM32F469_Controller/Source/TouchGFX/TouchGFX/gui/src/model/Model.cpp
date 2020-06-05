@@ -33,3 +33,16 @@ void Model::tick()
 	}
 }
 
+
+int Model::getTripCurrent() 
+{ 
+	return 0; 
+}
+int Model::getToff() 
+{ 
+	return 0; 
+}
+int Model::getSlewRate() 
+{ 
+	return 0; 
+}

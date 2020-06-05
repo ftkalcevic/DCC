@@ -101,6 +101,9 @@
     <ClCompile Include="..\TouchGFX\Core\Src\stm32f4xx_it.c" />
     <ClCompile Include="..\TouchGFX\Drivers\BSP\Components\cs43l22\cs43l22.c" />
     <ClCompile Include="..\TouchGFX\Drivers\BSP\STM32469I-Discovery\stm32469i_discovery_audio.c" />
+    <ClCompile Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\source\touchgfx\containers\scrollers\ScrollBase.cpp" />
+    <ClCompile Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\source\touchgfx\containers\scrollers\ScrollWheel.cpp" />
+    <ClCompile Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\source\touchgfx\containers\scrollers\ScrollWheelBase.cpp" />
     <ClCompile Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\source\touchgfx\widgets\canvas\Canvas.cpp" />
     <ClCompile Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\source\touchgfx\widgets\TextArea.cpp" />
     <ClCompile Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\source\touchgfx\widgets\TextAreaWithWildcard.cpp" />
@@ -193,9 +196,12 @@
     <ClCompile Include="AudioTask.cpp" />
     <ClCompile Include="DCC.cpp" />
     <ClCompile Include="DRV8873S.cpp" />
+    <ClCompile Include="FileSystem.cpp" />
     <ClCompile Include="LCCTask.cpp" />
+    <ClCompile Include="Config.cpp" />
     <ClCompile Include="stm32f4xx_hal_tim_plus.c" />
     <ClCompile Include="upng.cpp" />
+    <ClCompile Include="yxml.c" />
     <ClInclude Include="..\OpenLCB\src\Configuration.h" />
     <ClInclude Include="..\OpenLCB\src\Datagram.h" />
     <ClInclude Include="..\OpenLCB\src\Event.h" />
@@ -227,7 +233,9 @@
     <ClInclude Include="AudioTask.h" />
     <ClInclude Include="dcc.h" />
     <ClInclude Include="DRV8873S.h" />
+    <ClInclude Include="FileSystem.h" />
     <ClInclude Include="LCCTask.h" />
+    <ClInclude Include="Config.h" />
     <ClInclude Include="stm32f4xx_hal_tim_plus.h" />
     <ClInclude Include="upng.h" />
     <None Include="stm32.props" />

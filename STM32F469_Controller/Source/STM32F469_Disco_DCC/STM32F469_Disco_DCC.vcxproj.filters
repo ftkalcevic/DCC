@@ -831,6 +831,24 @@
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Slider_Horizontal_Medium_Slider_Round_fill.cpp">
       <Filter>Source files\Application\User\generated</Filter>
     </ClCompile>
+    <ClCompile Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\source\touchgfx\containers\scrollers\ScrollBase.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\source\touchgfx\containers\scrollers\ScrollWheelBase.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\source\touchgfx\containers\scrollers\ScrollWheel.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="yxml.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="Config.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="FileSystem.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dcc.h">
@@ -933,6 +951,12 @@
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="..\TouchGFX\TouchGFX\gui\src\common\CustomButton.hpp">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="Config.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="FileSystem.h">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -19,6 +19,8 @@ enum MemoryMap: uint8_t
 #define IC1_TOFF_40us			(1<<6)
 #define IC1_TOFF_60us			(2<<6)
 #define IC1_TOFF_80us			(3<<6)
+#define IC1_TOFF_OFFS			(6)
+#define IC1_TOFF_MASK			(3<<6)
 
 #define IC1_SPIIN_FOLLOW_INx	(0<<5)
 #define IC1_SPIIN_FOLLOW_REG	(1<<5)
@@ -31,6 +33,8 @@ enum MemoryMap: uint8_t
 #define IC1_SR_7_9				(5<<2)
 #define IC1_SR_5_3				(6<<2)
 #define IC1_SR_2_6 				(7<<2)
+#define IC1_SR_OFFS 			(2)
+#define IC1_SR_MASK				(7<<2)
 
 #define IC1_MODE_PHEN 			(0)
 #define IC1_MODE_PWM 			(1)
@@ -82,6 +86,8 @@ enum MemoryMap: uint8_t
 #define IC4_ITRIP_LVL_5_4A				(1<<2)
 #define IC4_ITRIP_LVL_6_5A				(2<<2)
 #define IC4_ITRIP_LVL_7_0A				(3<<2)
+#define IC4_ITRIP_LVL_OFFS				(2)
+#define IC4_ITRIP_LVL_MASK				(3<<2)
 
 #define IC4_ITRIP_OUT1_DISABLED			(1<<0)
 #define IC4_ITRIP_OUT2_DISABLED			(2<<0)

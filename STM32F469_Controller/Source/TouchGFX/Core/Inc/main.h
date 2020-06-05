@@ -32,7 +32,7 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "Common.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -47,7 +47,6 @@ extern "C" {
 
 /* Exported macro ------------------------------------------------------------*/
 /* USER CODE BEGIN EM */
-#define countof(x)      (sizeof(x)/sizeof((x)[0]))
 /* USER CODE END EM */
 
 void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
@@ -63,7 +62,6 @@ extern TIM_HandleTypeDef htim8;
 extern CAN_HandleTypeDef hcan2;
 extern uint16_t ADC_Joysticks[16];
 extern uint16_t ADC_Current[16];
-
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/

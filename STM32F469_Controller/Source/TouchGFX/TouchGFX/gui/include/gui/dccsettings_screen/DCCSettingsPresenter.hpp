@@ -3,6 +3,8 @@
 
 #include <gui/model/ModelListener.hpp>
 #include <mvp/Presenter.hpp>
+#include "Config.h"
+
 
 using namespace touchgfx;
 
@@ -32,6 +34,7 @@ private:
     DCCSettingsPresenter();
 
     DCCSettingsView& view;
+	DCCConfig config;
 };
 
 #endif // DCCSETTINGSPRESENTER_HPP
