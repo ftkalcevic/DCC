@@ -157,16 +157,23 @@ void AppMain::ShowLED(int id, bool enable, int duration)
 	}
 }
 
+	extern "C" void CheckTaskStacks(void);
+
 void AppMain::ToggleEStop()
 {
 	eStop = !eStop;
 
 	MainTrack_DCC_EStop(eStop);
 	ProgrammingTrack_DCC_EStop(eStop);
+	
+	CheckTaskStacks();
+	
+
 }
 
 void AppMain::Run()
 {
+	CheckTaskStacks();
 	// Play startup sound
 	audioTask.PlaySound(EAudioSounds::Bell2);
 	

@@ -103,4 +103,6 @@ void DCCSettingsView::setTrackStatus(DCCSettings::HBStatus mainTrack, DCCSetting
     progOverCurrentBox.setColor(progTrack.overCurrent == DCCSettings::Good ? green : progTrack.overCurrent == DCCSettings::Warning ? amber : red);
     progOverTempBox.setColor(mainTrack.overTemp == DCCSettings::Good ? green : mainTrack.overTemp == DCCSettings::Warning ? amber : red);
     trackOverTempBox.setColor(progTrack.overTemp == DCCSettings::Good ? green : progTrack.overTemp == DCCSettings::Warning ? amber : red);
+	
+	currentDisplay.Update(mainTrack.current, progTrack.current);
 }

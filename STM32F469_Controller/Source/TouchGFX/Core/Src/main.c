@@ -120,7 +120,7 @@ const osThreadAttr_t InitialiseTask_attributes = {
 };
 /* Definitions for DCCTask */
 osThreadId_t DCCTaskHandle;
-uint32_t DCCTaskBuffer[ 128 ];
+uint32_t DCCTaskBuffer[ 2048 ];
 osStaticThreadDef_t DCCTaskControlBlock;
 const osThreadAttr_t DCCTask_attributes = {
   .name = "DCCTask",
@@ -132,7 +132,7 @@ const osThreadAttr_t DCCTask_attributes = {
 };
 /* Definitions for DCCTask_PrgTrk */
 osThreadId_t DCCTask_PrgTrkHandle;
-uint32_t DCCTask_PrgTrkBuffer[ 128 ];
+uint32_t DCCTask_PrgTrkBuffer[ 2048 ];
 osStaticThreadDef_t DCCTask_PrgTrkControlBlock;
 const osThreadAttr_t DCCTask_PrgTrk_attributes = {
   .name = "DCCTask_PrgTrk",
@@ -281,27 +281,44 @@ uint8_t BSP_SD_WriteBlocks_DMA(uint32_t *pData, uint32_t WriteAddr, uint32_t Num
 	return sd_state; 
 }
 
-//void HAL_SPI_MspInit(SPI_HandleTypeDef *hspi)
-//{
-//	if (hspi == &hspi2)
-//	{
-//		// Configure pins
-//		GPIO_InitTypeDef GPIO_InitStruct = { 0 };
-//		
-//		GPIO_InitStruct.Pin = BOOST_SCK_Pin;
-//		GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-//		GPIO_InitStruct.Pull = GPIO_NOPULL;
-//		GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-//		GPIO_InitStruct.Alternate = GPIO_AF5_SPI2;
-//		HAL_GPIO_Init(BOOST_SCK_GPIO_Port, &GPIO_InitStruct);		
-//		
-//		GPIO_InitStruct.Pin = BOOST_MOSI_Pin;
-//		HAL_GPIO_Init(BOOST_MOSI_GPIO_Port, &GPIO_InitStruct);		
-//		
-//		GPIO_InitStruct.Pin = BOOST_MISO_Pin;
-//		HAL_GPIO_Init(BOOST_MISO_GPIO_Port, &GPIO_InitStruct);	 
-//	}
-//}
+
+static struct 
+{
+	const char * name;
+	uint32_t *stack;
+	uint32_t len;
+} stacks[] = { 
+	{ "TouchGFXTask", TouchGFXTaskBuffer, countof(TouchGFXTaskBuffer) },
+	{ "InitialiseTask", InitialiseTaskBuffer, countof(InitialiseTaskBuffer) },
+	{ "DCCTask", DCCTaskBuffer, countof(DCCTaskBuffer) },
+	{ "DCCTask_PrgTrk", DCCTask_PrgTrkBuffer, countof(DCCTask_PrgTrkBuffer) },
+	{ "AppMainTask", AppMainTaskBuffer, countof(AppMainTaskBuffer) },
+	{ "LCCTask", LCCTaskBuffer, countof(LCCTaskBuffer) },
+	{ "AudioTask", AudioTaskBuffer, countof(AudioTaskBuffer) },
+};
+	
+
+void ClearTaskStacks(void)
+{
+//	for (int i = 0; i < countof(stacks); i++)
+//		for (uint32_t j = 0; j < stacks[i].len; j++)
+//			stacks[i].stack[j] = 0xBABEF00D;
+}
+
+void CheckTaskStacks(void)
+{
+	for (int i = 0; i < countof(stacks); i++)
+	{
+		printf("Stack Check '%s' - ", stacks[i].name);	
+		for (uint32_t j = 0; j < stacks[i].len; j++)
+			if (stacks[i].stack[j] != 0xA5A5A5A5)
+			{
+				printf("%u of %u\n", stacks[i].len - j, stacks[i].len);
+				break;
+			}
+	}
+}
+
 
 /* USER CODE END 0 */
 
@@ -358,6 +375,8 @@ int main(void)
   MX_ADC2_Init();
   MX_TouchGFX_Init();
   /* USER CODE BEGIN 2 */
+	
+	ClearTaskStacks();
   /* USER CODE END 2 */
 
   /* Init scheduler */
@@ -382,26 +401,28 @@ int main(void)
   /* USER CODE END RTOS_QUEUES */
 
   /* Create the thread(s) */
+	
+  /* creation of AudioTask */
+  AudioTaskHandle = osThreadNew(AudioTask_Entry, NULL, &AudioTask_attributes);
+
   /* creation of TouchGFXTask */
   TouchGFXTaskHandle = osThreadNew(TouchGFX_Task, NULL, &TouchGFXTask_attributes);
 
-  /* creation of InitialiseTask */
-  InitialiseTaskHandle = osThreadNew(InitialiseTask_Entry, NULL, &InitialiseTask_attributes);
+	/* creation of InitialiseTask */
+  //InitialiseTaskHandle = osThreadNew(InitialiseTask_Entry, NULL, &InitialiseTask_attributes);
 
   /* creation of DCCTask */
   DCCTaskHandle = osThreadNew(DCCTask_Entry, (void*) 0, &DCCTask_attributes);
 
   /* creation of DCCTask_PrgTrk */
-  //DCCTask_PrgTrkHandle = osThreadNew(DCCTask_Entry, (void*) 1, &DCCTask_PrgTrk_attributes);
-
-  /* creation of AppMainTask */
-  AppMainTaskHandle = osThreadNew(AppMainTask_Entry, NULL, &AppMainTask_attributes);
+  DCCTask_PrgTrkHandle = osThreadNew(DCCTask_Entry, (void*) 1, &DCCTask_PrgTrk_attributes);
 
   /* creation of LCCTask */
   LCCTaskHandle = osThreadNew(LCCTask_Entry, NULL, &LCCTask_attributes);
 
-  /* creation of AudioTask */
-  AudioTaskHandle = osThreadNew(AudioTask_Entry, NULL, &AudioTask_attributes);
+  /* creation of AppMainTask */
+  AppMainTaskHandle = osThreadNew(AppMainTask_Entry, NULL, &AppMainTask_attributes);
+
 
   /* USER CODE BEGIN RTOS_THREADS */
 	
@@ -521,7 +542,7 @@ void MX_ADC1_Init(void)
   hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
   hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
   hadc1.Init.NbrOfConversion = 2;
-  hadc1.Init.DMAContinuousRequests = DISABLE;
+  hadc1.Init.DMAContinuousRequests = ENABLE;
   hadc1.Init.EOCSelection = ADC_EOC_SEQ_CONV;
   if (HAL_ADC_Init(&hadc1) != HAL_OK)
   {
@@ -579,7 +600,7 @@ static void MX_ADC2_Init(void)
   hadc2.Init.ExternalTrigConv = ADC_SOFTWARE_START;
   hadc2.Init.DataAlign = ADC_DATAALIGN_RIGHT;
   hadc2.Init.NbrOfConversion = 2;
-  hadc2.Init.DMAContinuousRequests = DISABLE;
+  hadc2.Init.DMAContinuousRequests = ENABLE;
   hadc2.Init.EOCSelection = ADC_EOC_SEQ_CONV;
   if (HAL_ADC_Init(&hadc2) != HAL_OK)
   {

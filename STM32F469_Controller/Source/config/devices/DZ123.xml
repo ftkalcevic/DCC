@@ -1,0 +1,32 @@
+<Decoder Type="Multifunction">
+  <Details Manufacturer="Digitrax"/>
+  <CVs>
+    <CV number="1" name="Address" type="addr"/>
+    <CV number="2" name="Start Voltage" type="int" min="0" max="255"/>
+    <CV number="3" name="Acceleration Rate" type="int" min="0" max="31"/>
+    <CV number="4" name="Deceleration Rate" type="int" min="0" max="31"/>
+    <CV number="5" name="Maximum Voltage" type="int" min="0" max="255"/>
+    <CV number="6" name="Mid Point Voltage" type="int" min="0" max="255"/>
+    <CV number="7" name="Version ID" type="int" readonly="true"/>
+    <CV number="8" name="Manufacturer ID" type="int" readonly="true"/>
+    <!-- <CV number="8" name="Factory Reset" type="int" 0x08 0x09/> -->
+    <CV number="13" name="DC Functions On" type="int" min="0" max="255"/>
+    <CV number="17" name="4 Digit Address Hi Byte" type="int" min="0" max="255"/>
+    <CV number="18" name="4 Digit Address Lo Byte" type="int" min="0" max="255"/>
+    <CV number="19" name="Advanced Consist Address" type="int" min="0" max="255"/>
+    <CV number="21" name="Advanced Consist Functions F1-F8" type="int" min="0" max="255"/>
+    <CV number="22" name="Advanced Consist Functions F0,F9-F12" type="int" min="0" max="63"/>
+    <CV number="29" name="Configuration Register" type="mask">
+      <!-- bits to set mode -->
+      <Mask bit="0" name="Locomotive Direction" off="normal" on="reversed"/>
+      <Mask bit="1" name="FL Location" off="bit 4 of Speed & Direction" on="bit 4 of Function Group 1"/>
+      <Mask bit="2" name="Power Source Conversion" off="NRMA Digital Only" on="Enabled"/>
+      <Mask bit="3" name="Bi-Directional Comms." off="Disabled" on="Enabled"/>
+      <Mask bit="4" name="Speed Table" off="Set by CV2,5 & 6" on="Set by CV 66-99"/>
+      <Mask bit="5" name="Addressing" off="standard 2-byte" on="extended 4-byte"/>
+      <Mask bit="7" name="Decoder Type" off="Multifunction" on="Accessory"/>
+    </CV>
+    
+
+  </CVs>
+</Decoder>

@@ -16,6 +16,7 @@
 #include <gui/containers/scrollItem.hpp>
 #include <touchgfx/widgets/BoxWithBorder.hpp>
 #include <gui/containers/CurrentDisplay.hpp>
+#include <touchgfx/canvas_widget_renderer/CanvasWidgetRenderer.hpp>
 
 class DCCSettingsViewBase : public touchgfx::View<DCCSettingsPresenter>
 {
@@ -85,6 +86,11 @@ private:
     touchgfx::Callback<DCCSettingsViewBase, touchgfx::DrawableListItemsInterface*, int16_t, int16_t> updateItemCallback;
     void updateItemCallbackHandler(touchgfx::DrawableListItemsInterface* items, int16_t containerIndex, int16_t itemIndex);
 
+    /*
+     * Canvas Buffer Size
+     */
+    static const uint16_t CANVAS_BUFFER_SIZE = 12000;
+    uint8_t canvasBuffer[CANVAS_BUFFER_SIZE];
 };
 
 #endif // DCCSETTINGSVIEWBASE_HPP

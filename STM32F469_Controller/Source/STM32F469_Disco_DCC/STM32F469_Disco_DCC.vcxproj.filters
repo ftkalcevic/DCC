@@ -861,6 +861,9 @@
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\aboutIcon.cpp">
       <Filter>Source files\Application\User\generated</Filter>
     </ClCompile>
+    <ClCompile Include="Geometry.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dcc.h">
@@ -969,6 +972,15 @@
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="FileSystem.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="CurrentGraphWidget.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="PaintContext.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry.h">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>

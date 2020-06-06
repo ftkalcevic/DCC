@@ -10,6 +10,8 @@ DCCSettingsViewBase::DCCSettingsViewBase() :
     updateItemCallback(this, &DCCSettingsViewBase::updateItemCallbackHandler)
 {
 
+    touchgfx::CanvasWidgetRenderer::setupBuffer(canvasBuffer, CANVAS_BUFFER_SIZE);
+
     backgroundImage.setBitmap(touchgfx::Bitmap(BITMAP_DARK_TEXTURES_CARBON_FIBRE_ID));
     backgroundImage.setPosition(0, 0, 800, 480);
     backgroundImage.setOffset(0, 0);

@@ -18,6 +18,8 @@ FatFs: Copyright )" u"\xA9" uR"( 2017, ChaN, all right reserved.
 FreeRTOS Kernel: Copyright )" u"\xA9" uR"( 2019 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
 OpenTX: Copyright )" u"\xA9" uR"( OpenTX
 BSP, HAL, TouchGFX: COPYRIGHT )" u"\xA9" uR"( 2017 STMicroelectronics
+Line Clipping: Copyright )" u"\xA9" uR"( Eric Richards http://www.richardssoftware.net/2014/07/clipping-lines-to-rectangle-using-cohen.html
+Line drawing: https://gist.github.com/bert/1085538
 OpenLCB: 
 
 Artwork:

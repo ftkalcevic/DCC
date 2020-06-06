@@ -32,7 +32,8 @@ protected:
 
 #ifdef __cplusplus
 extern "C" {
-#endif
+#endif
+
 void AppMainTask_Entry(void *argument);
 void ShowDiskLED(int enable, int duration);
 void ShowTrackPowerLED(int enable, int duration);

@@ -140,7 +140,18 @@ public:
 		msg.hbStatus.overTemp = (status & FSR_TSD) != 0 ? DCCSettings::Fault : (status & FSR_OTW) != 0 ? DCCSettings::Warning : DCCSettings::Good;
 		msg.hbStatus.overCurrent = (status & FSR_OCP) != 0 ? DCCSettings::Fault : DCCSettings::Good;
 		msg.hbStatus.openLoad = (status & FSR_OLD) != 0;
-		msg.hbStatus.current = 0;
+		
+		uint16_t sum = 0;
+		for (int i = (type == DCCType::MainTrack ? 0 : 1); i < countof(ADC_Current); i += 2)
+			sum += ADC_Current[i];
+		// 3v (3723) = 10 A.  (3v max is 330 ohm sense resistor)
+		// I = 10 / 3723 * n *1000 (mA)		(n = sum/count)
+		uint32_t current = 10;
+		current *= sum;
+		current *= 1000;
+		current /= 3723;
+		current /= countof(ADC_Current);
+		msg.hbStatus.current = current;
 				
 		// Send to ui
 		uimsg.Send(msg);
@@ -235,6 +246,7 @@ public:
 	void Run(bool enable)
 	{
 		trackEnabled = enable;
+		//trackEnabled = true;
 
 		bool lastTrackEnabled = !(trackEnabled && !eStop);
 		TickType_t lastTime = xTaskGetTickCount();

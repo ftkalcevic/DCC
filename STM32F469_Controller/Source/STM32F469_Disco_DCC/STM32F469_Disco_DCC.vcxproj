@@ -197,6 +197,7 @@
     <ClCompile Include="DCC.cpp" />
     <ClCompile Include="DRV8873S.cpp" />
     <ClCompile Include="FileSystem.cpp" />
+    <ClCompile Include="Geometry.cpp" />
     <ClCompile Include="LCCTask.cpp" />
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="stm32f4xx_hal_tim_plus.c" />
@@ -231,11 +232,14 @@
     <ClInclude Include="AppMain.h" />
     <ClInclude Include="Arduino.h" />
     <ClInclude Include="AudioTask.h" />
+    <ClInclude Include="CurrentGraphWidget.h" />
     <ClInclude Include="dcc.h" />
     <ClInclude Include="DRV8873S.h" />
     <ClInclude Include="FileSystem.h" />
+    <ClInclude Include="Geometry.h" />
     <ClInclude Include="LCCTask.h" />
     <ClInclude Include="Config.h" />
+    <ClInclude Include="PaintContext.h" />
     <ClInclude Include="stm32f4xx_hal_tim_plus.h" />
     <ClInclude Include="upng.h" />
     <None Include="stm32.props" />

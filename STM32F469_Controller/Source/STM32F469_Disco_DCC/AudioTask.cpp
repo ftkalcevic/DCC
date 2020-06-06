@@ -223,34 +223,40 @@ void AudioTask::Run()
 
 void AudioTask::PlaySound(EAudioSounds sound, bool highPriority)
 {
-	PlaySoundRecord rec;
-	rec.sound = sound;
-	
-	if (uxQueueSpacesAvailable(hQueue) > 0)
+	if (hQueue)
 	{
-		xQueueSend(hQueue, &rec, 0);
-	}
-	else if (highPriority)
-	{
-		// Full queue, but high priority, remove last entry.
-		xQueueOverwrite(hQueue, &rec);
+		PlaySoundRecord rec;
+		rec.sound = sound;
+
+		if (uxQueueSpacesAvailable(hQueue) > 0)
+		{
+			xQueueSend(hQueue, &rec, 0);
+		}
+		else if (highPriority)
+		{
+			// Full queue, but high priority, remove last entry.
+			xQueueOverwrite(hQueue, &rec);
+		}
 	}
 }
 
 void AudioTask::SoundEvent(EAudioSounds sound)
 {
-	PlaySoundRecord rec;
-	rec.sound = sound;
+	if (hQueue)
+	{
+		PlaySoundRecord rec;
+		rec.sound = sound;
 	
-	if ( !xQueueIsQueueFullFromISR(hQueue) )
-	{
-		xQueueSendFromISR(hQueue, &rec, 0);
-	}
-	else 
-	{
-		// Full queue, but high priority, remove last entry.
-		BaseType_t xHigherPriorityTaskWoken = pdFALSE;
-		xQueueOverwriteFromISR(hQueue, &rec, &xHigherPriorityTaskWoken);
+		if (!xQueueIsQueueFullFromISR(hQueue))
+		{
+			xQueueSendFromISR(hQueue, &rec, 0);
+		}
+		else 
+		{
+			// Full queue, but high priority, remove last entry.
+			BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+			xQueueOverwriteFromISR(hQueue, &rec, &xHigherPriorityTaskWoken);
+		}
 	}
 }
 
