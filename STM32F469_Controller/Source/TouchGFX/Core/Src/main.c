@@ -106,21 +106,9 @@ const osThreadAttr_t TouchGFXTask_attributes = {
   .cb_size = sizeof(TouchGFXTaskControlBlock),
   .priority = (osPriority_t) osPriorityNormal,
 };
-/* Definitions for InitialiseTask */
-osThreadId_t InitialiseTaskHandle;
-uint32_t InitialiseTaskBuffer[ 2048 ];
-osStaticThreadDef_t InitialiseTaskControlBlock;
-const osThreadAttr_t InitialiseTask_attributes = {
-  .name = "InitialiseTask",
-  .stack_mem = &InitialiseTaskBuffer[0],
-  .stack_size = sizeof(InitialiseTaskBuffer),
-  .cb_mem = &InitialiseTaskControlBlock,
-  .cb_size = sizeof(InitialiseTaskControlBlock),
-  .priority = (osPriority_t) osPriorityHigh,
-};
 /* Definitions for DCCTask */
 osThreadId_t DCCTaskHandle;
-uint32_t DCCTaskBuffer[ 2048 ];
+uint32_t DCCTaskBuffer[ 1024 ];
 osStaticThreadDef_t DCCTaskControlBlock;
 const osThreadAttr_t DCCTask_attributes = {
   .name = "DCCTask",
@@ -132,7 +120,7 @@ const osThreadAttr_t DCCTask_attributes = {
 };
 /* Definitions for DCCTask_PrgTrk */
 osThreadId_t DCCTask_PrgTrkHandle;
-uint32_t DCCTask_PrgTrkBuffer[ 2048 ];
+uint32_t DCCTask_PrgTrkBuffer[ 1024 ];
 osStaticThreadDef_t DCCTask_PrgTrkControlBlock;
 const osThreadAttr_t DCCTask_PrgTrk_attributes = {
   .name = "DCCTask_PrgTrk",
@@ -144,7 +132,7 @@ const osThreadAttr_t DCCTask_PrgTrk_attributes = {
 };
 /* Definitions for AppMainTask */
 osThreadId_t AppMainTaskHandle;
-uint32_t AppMainTaskBuffer[ 4096 ];
+uint32_t AppMainTaskBuffer[ 1024 ];
 osStaticThreadDef_t AppMainTaskControlBlock;
 const osThreadAttr_t AppMainTask_attributes = {
   .name = "AppMainTask",
@@ -156,7 +144,7 @@ const osThreadAttr_t AppMainTask_attributes = {
 };
 /* Definitions for LCCTask */
 osThreadId_t LCCTaskHandle;
-uint32_t LCCTaskBuffer[ 4096 ];
+uint32_t LCCTaskBuffer[ 1024 ];
 osStaticThreadDef_t LCCTaskControlBlock;
 const osThreadAttr_t LCCTask_attributes = {
   .name = "LCCTask",
@@ -218,7 +206,6 @@ static void MX_RTC_Init(void);
 static void MX_USB_OTG_FS_USB_Init(void);
 static void MX_ADC2_Init(void);
 void TouchGFX_Task(void *argument);
-void InitialiseTask_Entry(void *argument);
 extern void DCCTask_Entry(void *argument);
 extern void AppMainTask_Entry(void *argument);
 extern void LCCTask_Entry(void *argument);
@@ -401,15 +388,8 @@ int main(void)
   /* USER CODE END RTOS_QUEUES */
 
   /* Create the thread(s) */
-	
-  /* creation of AudioTask */
-  AudioTaskHandle = osThreadNew(AudioTask_Entry, NULL, &AudioTask_attributes);
-
   /* creation of TouchGFXTask */
   TouchGFXTaskHandle = osThreadNew(TouchGFX_Task, NULL, &TouchGFXTask_attributes);
-
-	/* creation of InitialiseTask */
-  //InitialiseTaskHandle = osThreadNew(InitialiseTask_Entry, NULL, &InitialiseTask_attributes);
 
   /* creation of DCCTask */
   DCCTaskHandle = osThreadNew(DCCTask_Entry, (void*) 0, &DCCTask_attributes);
@@ -417,12 +397,14 @@ int main(void)
   /* creation of DCCTask_PrgTrk */
   DCCTask_PrgTrkHandle = osThreadNew(DCCTask_Entry, (void*) 1, &DCCTask_PrgTrk_attributes);
 
-  /* creation of LCCTask */
-  LCCTaskHandle = osThreadNew(LCCTask_Entry, NULL, &LCCTask_attributes);
-
   /* creation of AppMainTask */
   AppMainTaskHandle = osThreadNew(AppMainTask_Entry, NULL, &AppMainTask_attributes);
 
+  /* creation of LCCTask */
+  LCCTaskHandle = osThreadNew(LCCTask_Entry, NULL, &LCCTask_attributes);
+
+  /* creation of AudioTask */
+  AudioTaskHandle = osThreadNew(AudioTask_Entry, NULL, &AudioTask_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
 	
@@ -1768,99 +1750,6 @@ __weak void TouchGFX_Task(void *argument)
     osDelay(1);
   }
   /* USER CODE END 5 */ 
-}
-
-/* USER CODE BEGIN Header_InitialiseTask_Entry */
-/**
-* @brief Function implementing the InitialiseTask thread.
-* @param argument: Not used
-* @retval None
-*/
-/* USER CODE END Header_InitialiseTask_Entry */
-void InitialiseTask_Entry(void *argument)
-{
-  /* USER CODE BEGIN InitialiseTask_Entry */
-	FRESULT res;
-    //MX_USB_DEVICE_Init();
-
-    vTaskDelete(NULL);
-	for (;;) osDelay(pdMS_TO_TICKS(1000));
-	return;
-	if (HAL_GPIO_ReadPin(uSD_Detect_GPIO_Port, uSD_Detect_Pin) == GPIO_PIN_RESET) 
-	{
-        printf("uSD card is present.  Root directory contents...\n");
-
-		
-		DIR d;
-		res = f_opendir(&d, "/Audio");
-		if (res != FR_OK)
-		{
-			printf("Failed to open directory - %d\n", res);
-		}
-		else
-		{
-			FILINFO finfo;
-			char filename[sizeof(finfo.fname)];
-		    for(;;)
-		    {
-			    res = f_readdir(&d, &finfo);
-			    if (res != FR_OK)
-			    {
-				    printf("Error reading directory %d\n", res);
-				    break;
-			    }
-			    if (finfo.fname[0] == 0)
-				    break;
-			    printf("%s\n", finfo.fname);
-			    strcpy(filename, finfo.fname);
-		    }
-
-			#ifdef LIST_LAST_FILE
-			    FIL file;
-			    res = f_open(&file, filename, FA_READ);
-			    if (res != FR_OK)
-			    {
-				    printf("Error opening file '%s' %d\n", filename, res);
-			    }
-			    else
-			    {
-				    char buffer[256];
-				    UINT bytesread;
-				    while ((res = f_read(&file, buffer, sizeof(buffer) - 1, (UINT*)&bytesread)) == FR_OK)
-				    {
-					    if (bytesread == 0)
-						    break;
-					    buffer[bytesread] = 0;
-					    printf(buffer);
-				    }
-				    if (res != FR_OK)
-				    {
-					    printf("Error reading file %d\n", res);
-					
-				    }
-
-				    f_close(&file);
-			    }
-			#endif
-		}
-	}
-	
-	for (;;)
-	{
-		HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
-		osDelay(pdMS_TO_TICKS(100));
-		HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
-		osDelay(pdMS_TO_TICKS(100));
-		HAL_GPIO_TogglePin(LED3_GPIO_Port, LED3_Pin);
-		osDelay(pdMS_TO_TICKS(100));
-		HAL_GPIO_TogglePin(LED4_GPIO_Port, LED4_Pin);
-		osDelay(pdMS_TO_TICKS(100));
-	}
-	
-  /* Infinite loop */
-  vTaskDelete(NULL);
-
-  /* USER CODE END InitialiseTask_Entry */
 }
 
  /**
