@@ -276,7 +276,6 @@ static struct
 	uint32_t len;
 } stacks[] = { 
 	{ "TouchGFXTask", TouchGFXTaskBuffer, countof(TouchGFXTaskBuffer) },
-	{ "InitialiseTask", InitialiseTaskBuffer, countof(InitialiseTaskBuffer) },
 	{ "DCCTask", DCCTaskBuffer, countof(DCCTaskBuffer) },
 	{ "DCCTask_PrgTrk", DCCTask_PrgTrkBuffer, countof(DCCTask_PrgTrkBuffer) },
 	{ "AppMainTask", AppMainTaskBuffer, countof(AppMainTaskBuffer) },

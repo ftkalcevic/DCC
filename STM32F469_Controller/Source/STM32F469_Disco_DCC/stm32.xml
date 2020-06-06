@@ -35,7 +35,9 @@
   </MCUProperties>
   <BSPSourceFolderName>Device-specific files</BSPSourceFolderName>
   <MCUMakFile>stm32.mak</MCUMakFile>
-  <ReferencedFrameworks />
+  <ReferencedFrameworks>
+    <string>com.sysprogs.embedded.semihosting_and_profiler</string>
+  </ReferencedFrameworks>
   <FrameworkProperties>
     <Entries>
       <KeyValue>
@@ -89,7 +91,7 @@
     <AllDependencies>
       <ProjectDependency>
         <RelativePath>..\TouchGFX\STM32CubeIDE\.cproject</RelativePath>
-        <Timestamp>132358743375329837</Timestamp>
+        <Timestamp>132358939663895120</Timestamp>
       </ProjectDependency>
     </AllDependencies>
     <RootDirectory>
