@@ -23,6 +23,7 @@ public:
     void gotoSettingsScreen();
     void gotoDCCSettingsScreen();
     void gotoAboutScreen();
+    void gotoDCCConfigScreen();
 	
 private:
 	void gotoPreferencesNorthImpl();
@@ -30,6 +31,7 @@ private:
     void gotoSettingsScreenImpl();
     void gotoDCCSettingsScreenImpl();
     void gotoAboutScreenImpl();
+    void gotoDCCConfigScreenImpl();
     touchgfx::Callback<FrontendApplication> transitionCallback;
 };
 

@@ -25,6 +25,12 @@
 #include <gui/dccsettings_screen/DCCSettingsPresenter.hpp>
 #include <gui/about_screen/AboutView.hpp>
 #include <gui/about_screen/AboutPresenter.hpp>
+#include <gui/dccconfig_screen/DCCConfigView.hpp>
+#include <gui/dccconfig_screen/DCCConfigPresenter.hpp>
+#include <gui/dccconfig_1_screen/DCCConfig_1View.hpp>
+#include <gui/dccconfig_1_screen/DCCConfig_1Presenter.hpp>
+#include <gui/placeholderscreen_screen/placeHolderScreenView.hpp>
+#include <gui/placeholderscreen_screen/placeHolderScreenPresenter.hpp>
 
 
 /**
@@ -53,7 +59,10 @@ public:
             touchgfx::meta::TypeList< SettingsView,
             touchgfx::meta::TypeList< DCCSettingsView,
             touchgfx::meta::TypeList< AboutView,
-            touchgfx::meta::Nil > > > > >
+            touchgfx::meta::TypeList< DCCConfigView,
+            touchgfx::meta::TypeList< DCCConfig_1View,
+            touchgfx::meta::TypeList< placeHolderScreenView,
+            touchgfx::meta::Nil > > > > > > > >
             > GeneratedViewTypes;
 
     /**
@@ -71,7 +80,10 @@ public:
             touchgfx::meta::TypeList< SettingsPresenter,
             touchgfx::meta::TypeList< DCCSettingsPresenter,
             touchgfx::meta::TypeList< AboutPresenter,
-            touchgfx::meta::Nil > > > > >
+            touchgfx::meta::TypeList< DCCConfigPresenter,
+            touchgfx::meta::TypeList< DCCConfig_1Presenter,
+            touchgfx::meta::TypeList< placeHolderScreenPresenter,
+            touchgfx::meta::Nil > > > > > > > >
             > GeneratedPresenterTypes;
 
     /**

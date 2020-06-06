@@ -46,6 +46,9 @@ public:
 	DCCSettings::HBStatus getMainTrackStatus() { return mainTrackStatus;}
 	DCCSettings::HBStatus getProgTrackStatus() { return progTrackStatus;}
 
+	void EnableProgTrack(bool enable);
+	void ScanProgrammingTrack();
+		
 protected:
     /**
      * Pointer to the currently active presenter.

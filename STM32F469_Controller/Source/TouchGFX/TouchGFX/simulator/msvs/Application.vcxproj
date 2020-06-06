@@ -43,8 +43,6 @@
     <ClCompile Include="..\..\gui\src\dccsettings_screen\DCCSettingsPresenter.cpp"/>
     <ClCompile Include="..\..\gui\src\dccsettings_screen\DCCSettingsView.cpp"/>
     <ClCompile Include="..\..\generated\gui_generated\src\dccsettings_screen\DCCSettingsViewBase.cpp"/>
-    <ClCompile Include="..\..\gui\src\containers\scrollItem.cpp"/>
-    <ClCompile Include="..\..\generated\gui_generated\src\containers\scrollItemBase.cpp"/>
     <ClCompile Include="..\..\gui\src\settings_screen\SettingsPresenter.cpp"/>
     <ClCompile Include="..\..\gui\src\settings_screen\SettingsView.cpp"/>
     <ClCompile Include="..\..\generated\gui_generated\src\settings_screen\SettingsViewBase.cpp"/>
@@ -53,6 +51,18 @@
     <ClCompile Include="..\..\gui\src\about_screen\AboutPresenter.cpp"/>
     <ClCompile Include="..\..\gui\src\about_screen\AboutView.cpp"/>
     <ClCompile Include="..\..\generated\gui_generated\src\about_screen\AboutViewBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\dccconfig_1_screen\DCCConfig_1Presenter.cpp"/>
+    <ClCompile Include="..\..\gui\src\dccconfig_1_screen\DCCConfig_1View.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\dccconfig_1_screen\DCCConfig_1ViewBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\dccconfig_screen\DCCConfigPresenter.cpp"/>
+    <ClCompile Include="..\..\gui\src\dccconfig_screen\DCCConfigView.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\dccconfig_screen\DCCConfigViewBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\containers\scrollWheelItem.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\scrollWheelItemBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\common\ButtonWithLabelAndEnable.cpp"/>
+    <ClCompile Include="..\..\gui\src\placeholderscreen_screen\placeHolderScreenPresenter.cpp"/>
+    <ClCompile Include="..\..\gui\src\placeholderscreen_screen\placeHolderScreenView.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\placeholderscreen_screen\placeHolderScreenViewBase.cpp"/>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(ApplicationRoot)\assets\texts\texts.xlsx"/>
@@ -223,8 +233,6 @@
     <ClInclude Include="..\..\gui\include\gui\dccsettings_screen\DCCSettingsPresenter.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\dccsettings_screen\DCCSettingsView.hpp"/>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\dccsettings_screen\DCCSettingsViewBase.hpp"/>
-    <ClInclude Include="..\..\gui\include\gui\containers\scrollItem.hpp"/>
-    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\scrollItemBase.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\settings_screen\SettingsPresenter.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\settings_screen\SettingsView.hpp"/>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\settings_screen\SettingsViewBase.hpp"/>
@@ -233,6 +241,18 @@
     <ClInclude Include="..\..\gui\include\gui\about_screen\AboutPresenter.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\about_screen\AboutView.hpp"/>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\about_screen\AboutViewBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\dccconfig_1_screen\DCCConfig_1Presenter.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\dccconfig_1_screen\DCCConfig_1View.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\dccconfig_1_screen\DCCConfig_1ViewBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\dccconfig_screen\DCCConfigPresenter.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\dccconfig_screen\DCCConfigView.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\dccconfig_screen\DCCConfigViewBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\containers\scrollWheelItem.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\scrollWheelItemBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\common\ButtonWithLabelAndEnable.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\placeholderscreen_screen\placeHolderScreenPresenter.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\placeholderscreen_screen\placeHolderScreenView.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\placeholderscreen_screen\placeHolderScreenViewBase.hpp"/>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="$(ApplicationRoot)\generated\simulator\touchgfx.rc"/>

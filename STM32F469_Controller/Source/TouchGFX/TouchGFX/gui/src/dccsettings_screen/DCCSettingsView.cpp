@@ -18,7 +18,7 @@ void DCCSettingsView::tearDownScreen()
     DCCSettingsViewBase::tearDownScreen();
 }
 
-void DCCSettingsView::tripCurrentWheelUpdateItem(scrollItem& item, int16_t itemIndex)
+void DCCSettingsView::tripCurrentWheelUpdateItem(scrollWheelItem& item, int16_t itemIndex)
 {
 	const char16_t *text=u"";
 	switch (itemIndex)
@@ -32,7 +32,7 @@ void DCCSettingsView::tripCurrentWheelUpdateItem(scrollItem& item, int16_t itemI
 }
 
 
-void DCCSettingsView::toffWheelUpdateItem(scrollItem& item, int16_t itemIndex)
+void DCCSettingsView::toffWheelUpdateItem(scrollWheelItem& item, int16_t itemIndex)
 {
 	const char16_t *text=u"";
 	switch (itemIndex)
@@ -44,7 +44,7 @@ void DCCSettingsView::toffWheelUpdateItem(scrollItem& item, int16_t itemIndex)
 	}
 	item.setText(text);}
 
-void DCCSettingsView::slewRateWheelUpdateItem(scrollItem& item, int16_t itemIndex)
+void DCCSettingsView::slewRateWheelUpdateItem(scrollWheelItem& item, int16_t itemIndex)
 {
 	const char16_t *text=u"";
 	switch (itemIndex)
@@ -65,7 +65,7 @@ void DCCSettingsView::slewRateWheelUpdateItem(scrollItem& item, int16_t itemInde
 void DCCSettingsView::handleGestureEvent(const GestureEvent & evt)
 {
 	//printf("PreferencesView::%d gesture %d %d\n", count++, evt.getType(), evt.getVelocity());
-	if (evt.getType() == GestureEvent::SWIPE_VERTICAL && evt.getVelocity() < -10 && evt.getX() > 250)
+	if (evt.getType() == GestureEvent::SWIPE_VERTICAL && evt.getVelocity() < -SWIPE_VELOCITY)
 	{
 		application().gotoPreferencesSouth();
 	}

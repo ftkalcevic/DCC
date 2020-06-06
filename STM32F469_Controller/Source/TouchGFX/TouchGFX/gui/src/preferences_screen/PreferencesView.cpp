@@ -5,7 +5,7 @@
 #include <gui/common/CustomButton.hpp>
 //#include <gui/common/BinFileLoader.h>
 #include <stdio.h>
-
+#include "Common.h"
 
 enum EPreferencesButton
 {
@@ -26,7 +26,7 @@ static struct SPreferencesButton
 {
 	{ u"Settings", BITMAP_PREFERENCESICON_ID, EPreferencesButton::Settings },
 	{ u"DCC Settings", BITMAP_PREFERENCESICON_ID, EPreferencesButton::DCCSettings },
-	{ u"DCC Prog.", BITMAP_LOCOICON_ID, EPreferencesButton::DCCProgramming },
+	{ u"DCC Config", BITMAP_LOCOICON_ID, EPreferencesButton::DCCConfiguration },
 	{ u"LCC Config", BITMAP_LOCOICON_ID, EPreferencesButton::LCCConfig },
 	{ u"About", BITMAP_ABOUTICON_ID, EPreferencesButton::About },
 };
@@ -75,6 +75,10 @@ void PreferencesView::buttonClickHandler(const touchgfx::AbstractButton& src)
     {
         application().gotoDCCSettingsScreen();
     }
+    else if (button.getId() == DCCConfiguration)
+    {
+        application().gotoDCCConfigScreen();
+    }
     else if (button.getId() == About)
     {
         application().gotoAboutScreen();
@@ -103,7 +107,7 @@ void PreferencesView::handleDragEvent(const DragEvent & evt)
 void PreferencesView::handleGestureEvent(const GestureEvent & evt)
 {
 	//printf("PreferencesView::%d gesture %d %d\n", count++, evt.getType(), evt.getVelocity());
-	if (evt.getType() == GestureEvent::SWIPE_VERTICAL && evt.getVelocity() < 0 && evt.getX() > 250)
+	if (evt.getType() == GestureEvent::SWIPE_VERTICAL && evt.getVelocity() < 0 && evt.getX() > SWIPE_VELOCITY)
 	{
 		application().gotoMainScreenCoverTransitionSouth();
 	}

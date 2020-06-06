@@ -246,7 +246,6 @@ public:
 	void Run(bool enable)
 	{
 		trackEnabled = enable;
-		//trackEnabled = true;
 
 		bool lastTrackEnabled = !(trackEnabled && !eStop);
 		TickType_t lastTime = xTaskGetTickCount();
@@ -375,6 +374,8 @@ public:
 	}
 
 	void EStop(bool stop) { eStop = stop; }
+	void Enable(bool enable) { trackEnabled = enable;}
+	bool isEnabled() const { return trackEnabled; }
 	void DCCSent()
 	{ 
 		xSemaphoreGiveFromISR(sentSemaphoreHandle, NULL);
@@ -385,3 +386,5 @@ public:
 
 void MainTrack_DCC_EStop(bool stop);
 void ProgrammingTrack_DCC_EStop(bool stop);
+void ProgrammingTrack_DCC_Enable(bool enable);
+void ProgrammingTrack_DCC_ScanProgrammingTrack();

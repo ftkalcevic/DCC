@@ -91,7 +91,7 @@
     <AllDependencies>
       <ProjectDependency>
         <RelativePath>..\TouchGFX\STM32CubeIDE\.cproject</RelativePath>
-        <Timestamp>132358939663895120</Timestamp>
+        <Timestamp>132359499393765051</Timestamp>
       </ProjectDependency>
     </AllDependencies>
     <RootDirectory>
@@ -223,9 +223,6 @@
                       <RelativePath>..\TouchGFX\TouchGFX\generated\images\src\preferencesIcon.cpp</RelativePath>
                     </VirtualFileSnapshot>
                     <VirtualFileSnapshot>
-                      <RelativePath>..\TouchGFX\TouchGFX\generated\gui_generated\src\containers\scrollItemBase.cpp</RelativePath>
-                    </VirtualFileSnapshot>
-                    <VirtualFileSnapshot>
                       <RelativePath>..\TouchGFX\TouchGFX\generated\images\src\up_btn.cpp</RelativePath>
                     </VirtualFileSnapshot>
                     <VirtualFileSnapshot>
@@ -239,6 +236,39 @@
                     </VirtualFileSnapshot>
                     <VirtualFileSnapshot>
                       <RelativePath>..\TouchGFX\TouchGFX\generated\images\src\aboutIcon.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\generated\gui_generated\src\containers\scrollWheelItemBase.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\generated\gui_generated\src\dccconfig_1_screen\DCCConfig_1ViewBase.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\generated\gui_generated\src\dccconfig_screen\DCCConfigViewBase.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\generated\images\src\AccessoryDecoderIcon.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\generated\images\src\MultifunctionAccessoryIcon.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Buttons_Round_Edge_medium.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Buttons_Round_Edge_medium_pressed.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\generated\images\src\ProgTrackButtonDown.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\generated\images\src\ProgTrackButtonUp.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\generated\images\src\Round_Edge_medium_Disabled.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\generated\gui_generated\src\placeholderscreen_screen\placeHolderScreenViewBase.cpp</RelativePath>
                     </VirtualFileSnapshot>
                   </Files>
                 </VirtualDirectorySnapshot>
@@ -309,13 +339,34 @@
                       <RelativePath>..\TouchGFX\TouchGFX\gui\src\common\TGAFileLoader.cpp</RelativePath>
                     </VirtualFileSnapshot>
                     <VirtualFileSnapshot>
-                      <RelativePath>..\TouchGFX\TouchGFX\gui\src\containers\scrollItem.cpp</RelativePath>
-                    </VirtualFileSnapshot>
-                    <VirtualFileSnapshot>
                       <RelativePath>..\TouchGFX\TouchGFX\gui\src\about_screen\AboutPresenter.cpp</RelativePath>
                     </VirtualFileSnapshot>
                     <VirtualFileSnapshot>
                       <RelativePath>..\TouchGFX\TouchGFX\gui\src\about_screen\AboutView.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\gui\src\containers\scrollWheelItem.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\gui\src\dccconfig_1_screen\DCCConfig_1Presenter.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\gui\src\dccconfig_1_screen\DCCConfig_1View.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\gui\src\dccconfig_screen\DCCConfigPresenter.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\gui\src\dccconfig_screen\DCCConfigView.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\gui\src\common\ButtonWithLabelAndEnable.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\gui\src\placeholderscreen_screen\placeHolderScreenPresenter.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\gui\src\placeholderscreen_screen\placeHolderScreenView.cpp</RelativePath>
                     </VirtualFileSnapshot>
                   </Files>
                 </VirtualDirectorySnapshot>

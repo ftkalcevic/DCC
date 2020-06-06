@@ -8,6 +8,7 @@
 #include <touchgfx/containers/Container.hpp>
 #include <touchgfx/widgets/Box.hpp>
 #include <touchgfx/widgets/TextAreaWithWildcard.hpp>
+#include <touchgfx/widgets/Image.hpp>
 
 class ListItemBase : public touchgfx::Container
 {
@@ -26,6 +27,7 @@ protected:
      */
     touchgfx::Box box1;
     touchgfx::TextAreaWithOneWildcard textArea1;
+    touchgfx::Image image1;
 
 private:
 

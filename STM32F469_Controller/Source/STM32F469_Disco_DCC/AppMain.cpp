@@ -245,11 +245,42 @@ extern "C" {
 					- ocp_l2
 					
 					
-		- DCC Prog
+		- DCC Prog/Config
+			- for a new device
+				- Select programming track.
+				- Scan for device.
+					- find address, manufacturer, model, type, CV29
+						- this can be either a new decoder, or an existing one.
+					- How do we do this?
+						- A separate ProgrammingTrack task?  That uses the dcc_programming_track task?  Seems like an uneccessary task.  The DCCProg task doesn't have a loop like the main DCC task.
+						- So do we separate the DCC HAL from the task?  DCC task will have the loop and decoder table.  DCC Prog will have a state machine to send/ack, multiple requests.
+						- When deciding prog or main track, same CV program request, just no ack from main track.  Do we block or async (queue) results - queue obviously.
+					- do we access dcc class directly or go through App?  Already go through model - view -> presenter -> model -> app -> dcc?
+						- DCCHal - timer + DMA + message building + send + send complete
+						- DCC loops through the decoder table
+							- sends status every 1sec.
+						- PrgTrk, only needs to process requests (plus status)
+							- requests via queue.  block, but timeout when status time (queueReceive(msg, timeTillNextStatusUpdate).
+				- Set the address plus CV29 (2 or 4 byte address).
+			- otherwise, 
+				- standard programming
+				- can set anything but the address (can, but should we allow it)
+				- on the programming track we get ACK
+					- so we can send requests via broadcast
+					- we get acks when we write.
+					- we can also read CVs, bit bye bit.
+			- also customisation
+				- change the icon
+				- change the name
+				- change the tune?  For accessories, the change noise - switch, turntable, 
+				- button assignments (Fn1-5, also, HID devices - this may need a separate screen).
+					- do the fn keys have to be assigned to the active decoder?  We could control a train, F1 lights on/of.  F2-5 could be to toggle switches.
+					
 		- LCC Config
 		- About
 		- Log/Diagnostics
 		- More
+			- calibrate touch screen
 			- app settings
 			- configure dcc/lcc devices - that is define the objects in the list
 			- dcc track programming

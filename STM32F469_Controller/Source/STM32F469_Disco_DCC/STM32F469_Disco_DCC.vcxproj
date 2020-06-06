@@ -130,6 +130,7 @@
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\common\BinFileLoader.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\common\CustomButton.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\common\FrontendApplication.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\containers\ListItem.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\main_screen\MainPresenter.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\main_screen\MainView.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\model\Model.cpp" />
@@ -232,6 +233,7 @@
     <ClInclude Include="AppMain.h" />
     <ClInclude Include="Arduino.h" />
     <ClInclude Include="AudioTask.h" />
+    <ClInclude Include="Common.h" />
     <ClInclude Include="CurrentGraphWidget.h" />
     <ClInclude Include="dcc.h" />
     <ClInclude Include="DRV8873S.h" />
@@ -329,7 +331,6 @@
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\preferencesIcon.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\containers\ListItemBase.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\preferences_screen\PreferencesViewBase.cpp" />
-    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\containers\ListItem.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\preferences_screen\PreferencesPresenter.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\preferences_screen\PreferencesView.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\containers\FunctionButtonsBase.cpp" />
@@ -339,10 +340,8 @@
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\containers\StatusBar.cpp" />
     <ClCompile Include="$(EFP_BASE)\Profiler\FastSemihosting.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\LocoIcon.cpp" />
-    <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\containers\scrollItemBase.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\dccsettings_screen\DCCSettingsViewBase.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\settings_screen\SettingsViewBase.cpp" />
-    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\containers\scrollItem.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\dccsettings_screen\DCCSettingsPresenter.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\dccsettings_screen\DCCSettingsView.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\settings_screen\SettingsPresenter.cpp" />
@@ -356,5 +355,24 @@
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\about_screen\AboutPresenter.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\about_screen\AboutView.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\aboutIcon.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\containers\scrollWheelItemBase.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\dccconfig_1_screen\DCCConfig_1ViewBase.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\dccconfig_screen\DCCConfigViewBase.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\AccessoryDecoderIcon.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\MultifunctionAccessoryIcon.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\containers\scrollWheelItem.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\dccconfig_1_screen\DCCConfig_1Presenter.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\dccconfig_1_screen\DCCConfig_1View.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\dccconfig_screen\DCCConfigPresenter.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\dccconfig_screen\DCCConfigView.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\ProgTrackButtonDown.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\ProgTrackButtonUp.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\Round_Edge_medium_Disabled.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\common\ButtonWithLabelAndEnable.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Buttons_Round_Edge_medium.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Buttons_Round_Edge_medium_pressed.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\placeholderscreen_screen\placeHolderScreenViewBase.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\placeholderscreen_screen\placeHolderScreenPresenter.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\placeholderscreen_screen\placeHolderScreenView.cpp" />
   </ItemGroup>
 </Project>

@@ -94,3 +94,12 @@ void ProgrammingTrack_DCC_EStop(bool stop)
 {
 	programmingTrack.EStop(stop);
 }
+
+void ProgrammingTrack_DCC_Enable(bool enable)
+{
+	programmingTrack.Enable(enable);
+}
+
+void ProgrammingTrack_DCC_ScanProgrammingTrack()
+{
+}

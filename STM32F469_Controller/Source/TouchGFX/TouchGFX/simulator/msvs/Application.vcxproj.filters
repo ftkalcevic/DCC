@@ -244,6 +244,42 @@
     <Filter Include="Source Files\generated\gui_generated\about_screen">
       <UniqueIdentifier>6305AD48-4F7F-6555-A8DB-FDBA16B801F7</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\gui\dccconfig_screen">
+      <UniqueIdentifier>5A8C224F-BDE5-783A-AC4D-017B30EA0370</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gui\dccconfig_screen">
+      <UniqueIdentifier>E8837E49-CA18-312D-923C-F55046C91C1B</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gui\dccconfig_1_screen">
+      <UniqueIdentifier>95B7F3A1-E6E6-6673-C857-F5937C988369</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gui\dccconfig_1_screen">
+      <UniqueIdentifier>52DBA5A7-0E2E-DE0C-878F-259893D04C2B</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\generated\gui_generated\dccconfig_1_screen">
+      <UniqueIdentifier>5F24E397-BDD0-0257-2523-3CF26A691BB4</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\generated\gui_generated\dccconfig_1_screen">
+      <UniqueIdentifier>653F3DDC-59C8-9155-1C22-92B38BCB78AB</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\generated\gui_generated\dccconfig_screen">
+      <UniqueIdentifier>F6C163B0-1E9D-26D7-A1F4-B4DB906BC3F2</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\generated\gui_generated\dccconfig_screen">
+      <UniqueIdentifier>4C128058-9B8F-F30E-7CBE-0D8B6408706F</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gui\placeholderscreen_screen">
+      <UniqueIdentifier>A04F6530-3F36-6448-C95D-0DB732D3B9F7</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gui\placeholderscreen_screen">
+      <UniqueIdentifier>6F1F42C8-9B38-6B4C-9ABC-27B8FED1EC6A</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\generated\gui_generated\placeholderscreen_screen">
+      <UniqueIdentifier>6EE818C0-9043-28FD-A11B-052982F89BF8</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\generated\gui_generated\placeholderscreen_screen">
+      <UniqueIdentifier>085B12F4-4A57-E722-1C83-5557AE7F8676</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(TouchGFXReleasePath)\framework\source\platform\driver\touch\SDL2TouchController.cpp">
@@ -342,12 +378,6 @@
     <ClCompile Include="..\..\generated\gui_generated\src\dccsettings_screen\DCCSettingsViewBase.cpp">
       <Filter>Source Files\generated\gui_generated\dccsettings_screen</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\gui\src\containers\scrollItem.cpp">
-      <Filter>Source Files\gui\containers</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\generated\gui_generated\src\containers\scrollItemBase.cpp">
-      <Filter>Source Files\generated\gui_generated\containers</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\gui\src\settings_screen\SettingsPresenter.cpp">
       <Filter>Source Files\gui\settings_screen</Filter>
     </ClCompile>
@@ -371,6 +401,42 @@
     </ClCompile>
     <ClCompile Include="..\..\generated\gui_generated\src\about_screen\AboutViewBase.cpp">
       <Filter>Source Files\generated\gui_generated\about_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\dccconfig_1_screen\DCCConfig_1Presenter.cpp">
+      <Filter>Source Files\gui\dccconfig_1_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\dccconfig_1_screen\DCCConfig_1View.cpp">
+      <Filter>Source Files\gui\dccconfig_1_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\dccconfig_1_screen\DCCConfig_1ViewBase.cpp">
+      <Filter>Source Files\generated\gui_generated\dccconfig_1_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\dccconfig_screen\DCCConfigPresenter.cpp">
+      <Filter>Source Files\gui\dccconfig_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\dccconfig_screen\DCCConfigView.cpp">
+      <Filter>Source Files\gui\dccconfig_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\dccconfig_screen\DCCConfigViewBase.cpp">
+      <Filter>Source Files\generated\gui_generated\dccconfig_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\containers\scrollWheelItem.cpp">
+      <Filter>Source Files\gui\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\scrollWheelItemBase.cpp">
+      <Filter>Source Files\generated\gui_generated\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\common\ButtonWithLabelAndEnable.cpp">
+      <Filter>Source Files\gui\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\placeholderscreen_screen\placeHolderScreenPresenter.cpp">
+      <Filter>Source Files\gui\placeholderscreen_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\placeholderscreen_screen\placeHolderScreenView.cpp">
+      <Filter>Source Files\gui\placeholderscreen_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\placeholderscreen_screen\placeHolderScreenViewBase.cpp">
+      <Filter>Source Files\generated\gui_generated\placeholderscreen_screen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -874,12 +940,6 @@
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\dccsettings_screen\DCCSettingsViewBase.hpp">
       <Filter>Header Files\generated\gui_generated\dccsettings_screen</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\gui\include\gui\containers\scrollItem.hpp">
-      <Filter>Header Files\gui\containers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\scrollItemBase.hpp">
-      <Filter>Header Files\generated\gui_generated\containers</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\gui\include\gui\settings_screen\SettingsPresenter.hpp">
       <Filter>Header Files\gui\settings_screen</Filter>
     </ClInclude>
@@ -903,6 +963,42 @@
     </ClInclude>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\about_screen\AboutViewBase.hpp">
       <Filter>Header Files\generated\gui_generated\about_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\dccconfig_1_screen\DCCConfig_1Presenter.hpp">
+      <Filter>Header Files\gui\dccconfig_1_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\dccconfig_1_screen\DCCConfig_1View.hpp">
+      <Filter>Header Files\gui\dccconfig_1_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\dccconfig_1_screen\DCCConfig_1ViewBase.hpp">
+      <Filter>Header Files\generated\gui_generated\dccconfig_1_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\dccconfig_screen\DCCConfigPresenter.hpp">
+      <Filter>Header Files\gui\dccconfig_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\dccconfig_screen\DCCConfigView.hpp">
+      <Filter>Header Files\gui\dccconfig_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\dccconfig_screen\DCCConfigViewBase.hpp">
+      <Filter>Header Files\generated\gui_generated\dccconfig_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\containers\scrollWheelItem.hpp">
+      <Filter>Header Files\gui\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\scrollWheelItemBase.hpp">
+      <Filter>Header Files\generated\gui_generated\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\common\ButtonWithLabelAndEnable.hpp">
+      <Filter>Header Files\gui\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\placeholderscreen_screen\placeHolderScreenPresenter.hpp">
+      <Filter>Header Files\gui\placeholderscreen_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\placeholderscreen_screen\placeHolderScreenView.hpp">
+      <Filter>Header Files\gui\placeholderscreen_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\placeholderscreen_screen\placeHolderScreenViewBase.hpp">
+      <Filter>Header Files\generated\gui_generated\placeholderscreen_screen</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

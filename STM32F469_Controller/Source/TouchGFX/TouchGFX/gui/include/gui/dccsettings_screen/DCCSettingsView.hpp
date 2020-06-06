@@ -11,9 +11,9 @@ public:
     virtual ~DCCSettingsView() {}
     virtual void setupScreen();
     virtual void tearDownScreen();
-	virtual void tripCurrentWheelUpdateItem(scrollItem& item, int16_t itemIndex);
-	virtual void toffWheelUpdateItem(scrollItem& item, int16_t itemIndex);
-	virtual void slewRateWheelUpdateItem(scrollItem& item, int16_t itemIndex);
+	virtual void tripCurrentWheelUpdateItem(scrollWheelItem& item, int16_t itemIndex);
+	virtual void toffWheelUpdateItem(scrollWheelItem& item, int16_t itemIndex);
+	virtual void slewRateWheelUpdateItem(scrollWheelItem& item, int16_t itemIndex);
 
 	void setSettings( int tripCurrent, int toff, int slewRate );
 	void getSettings( int &tripCurrent, int &toff, int &slewRate );

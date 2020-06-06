@@ -1,6 +1,7 @@
 #include <gui/model/Model.hpp>
 #include <gui/model/ModelListener.hpp>
 #include "UIMessage.h"
+#include "dcc.h"
 
 
 Model::Model() : modelListener(0)
@@ -46,3 +47,15 @@ int Model::getSlewRate()
 { 
 	return 0; 
 }
+
+
+void Model::EnableProgTrack(bool enable)
+{
+	ProgrammingTrack_DCC_Enable(enable);
+}
+
+void Model::ScanProgrammingTrack()
+{
+	ProgrammingTrack_DCC_ScanProgrammingTrack();
+}
+

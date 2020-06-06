@@ -4,21 +4,26 @@
 #include <gui_generated/containers/ListItemBase.hpp>
 #include <touchgfx/Color.hpp>
 #include <texts/TextKeysAndLanguages.hpp>
+#include "BitmapDatabase.hpp"
 
 ListItemBase::ListItemBase()
 {
-    setWidth(250);
-    setHeight(59);
-    box1.setPosition(0, 0, 250, 59);
+    setWidth(350);
+    setHeight(100);
+    box1.setPosition(0, 0, 350, 100);
     box1.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
 
-    textArea1.setPosition(0, 18, 250, 23);
+    textArea1.setPosition(103, 18, 247, 51);
     textArea1.setColor(touchgfx::Color::getColorFrom24BitRGB(0, 0, 0));
     textArea1.setLinespacing(0);
     textArea1.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTID));
 
+    image1.setXY(10, 10);
+    image1.setBitmap(touchgfx::Bitmap(BITMAP_MULTIFUNCTIONACCESSORYICON_ID));
+
     add(box1);
     add(textArea1);
+    add(image1);
 }
 
 void ListItemBase::initialize()

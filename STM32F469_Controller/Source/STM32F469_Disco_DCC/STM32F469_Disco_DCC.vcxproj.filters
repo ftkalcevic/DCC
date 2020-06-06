@@ -753,9 +753,6 @@
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\preferences_screen\PreferencesViewBase.cpp">
       <Filter>Source files\Application\User\generated</Filter>
     </ClCompile>
-    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\containers\ListItem.cpp">
-      <Filter>Source files\Application\User\gui</Filter>
-    </ClCompile>
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\preferences_screen\PreferencesPresenter.cpp">
       <Filter>Source files\Application\User\gui</Filter>
     </ClCompile>
@@ -786,17 +783,11 @@
     <ClCompile Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\source\touchgfx\widgets\canvas\Canvas.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
-    <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\containers\scrollItemBase.cpp">
-      <Filter>Source files\Application\User\generated</Filter>
-    </ClCompile>
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\dccsettings_screen\DCCSettingsViewBase.cpp">
       <Filter>Source files\Application\User\generated</Filter>
     </ClCompile>
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\settings_screen\SettingsViewBase.cpp">
       <Filter>Source files\Application\User\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\containers\scrollItem.cpp">
-      <Filter>Source files\Application\User\gui</Filter>
     </ClCompile>
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\dccsettings_screen\DCCSettingsPresenter.cpp">
       <Filter>Source files\Application\User\gui</Filter>
@@ -863,6 +854,66 @@
     </ClCompile>
     <ClCompile Include="Geometry.cpp">
       <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\containers\scrollWheelItemBase.cpp">
+      <Filter>Source files\Application\User\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\dccconfig_1_screen\DCCConfig_1ViewBase.cpp">
+      <Filter>Source files\Application\User\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\dccconfig_screen\DCCConfigViewBase.cpp">
+      <Filter>Source files\Application\User\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\AccessoryDecoderIcon.cpp">
+      <Filter>Source files\Application\User\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\MultifunctionAccessoryIcon.cpp">
+      <Filter>Source files\Application\User\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\containers\scrollWheelItem.cpp">
+      <Filter>Source files\Application\User\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\dccconfig_1_screen\DCCConfig_1Presenter.cpp">
+      <Filter>Source files\Application\User\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\dccconfig_1_screen\DCCConfig_1View.cpp">
+      <Filter>Source files\Application\User\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\dccconfig_screen\DCCConfigPresenter.cpp">
+      <Filter>Source files\Application\User\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\dccconfig_screen\DCCConfigView.cpp">
+      <Filter>Source files\Application\User\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\ProgTrackButtonDown.cpp">
+      <Filter>Source files\Application\User\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\ProgTrackButtonUp.cpp">
+      <Filter>Source files\Application\User\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\containers\ListItem.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\Round_Edge_medium_Disabled.cpp">
+      <Filter>Source files\Application\User\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\common\ButtonWithLabelAndEnable.cpp">
+      <Filter>Source files\Application\User\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Buttons_Round_Edge_medium.cpp">
+      <Filter>Source files\Application\User\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Buttons_Round_Edge_medium_pressed.cpp">
+      <Filter>Source files\Application\User\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\placeholderscreen_screen\placeHolderScreenViewBase.cpp">
+      <Filter>Source files\Application\User\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\placeholderscreen_screen\placeHolderScreenPresenter.cpp">
+      <Filter>Source files\Application\User\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\placeholderscreen_screen\placeHolderScreenView.cpp">
+      <Filter>Source files\Application\User\gui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -981,6 +1032,9 @@
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="Geometry.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common.h">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>

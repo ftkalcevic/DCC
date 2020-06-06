@@ -76,3 +76,17 @@ void FrontendApplication::gotoAboutScreenImpl()
 {
     touchgfx::makeTransition<AboutView, AboutPresenter, touchgfx::CoverTransition<NORTH>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }
+
+
+
+void FrontendApplication::gotoDCCConfigScreen()
+{
+    transitionCallback = touchgfx::Callback<FrontendApplication>(this, &FrontendApplication::gotoDCCConfigScreenImpl);
+    pendingScreenTransitionCallback = &transitionCallback;
+}
+
+void FrontendApplication::gotoDCCConfigScreenImpl()
+{
+    touchgfx::makeTransition<DCCConfigView, DCCConfigPresenter, touchgfx::CoverTransition<NORTH>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+}
+

@@ -13,10 +13,9 @@
 #include <touchgfx/widgets/TextArea.hpp>
 #include <touchgfx/containers/ScrollableContainer.hpp>
 #include <touchgfx/containers/scrollers/ScrollWheel.hpp>
-#include <gui/containers/scrollItem.hpp>
+#include <gui/containers/scrollWheelItem.hpp>
 #include <touchgfx/widgets/BoxWithBorder.hpp>
 #include <gui/containers/CurrentDisplay.hpp>
-#include <touchgfx/canvas_widget_renderer/CanvasWidgetRenderer.hpp>
 
 class DCCSettingsViewBase : public touchgfx::View<DCCSettingsPresenter>
 {
@@ -25,17 +24,17 @@ public:
     virtual ~DCCSettingsViewBase() {}
     virtual void setupScreen();
 
-    virtual void tripCurrentWheelUpdateItem(scrollItem& item, int16_t itemIndex)
+    virtual void tripCurrentWheelUpdateItem(scrollWheelItem& item, int16_t itemIndex)
     {
         // Override and implement this function in DCCSettings
     }
 
-    virtual void toffWheelUpdateItem(scrollItem& item, int16_t itemIndex)
+    virtual void toffWheelUpdateItem(scrollWheelItem& item, int16_t itemIndex)
     {
         // Override and implement this function in DCCSettings
     }
 
-    virtual void slewRateWheelUpdateItem(scrollItem& item, int16_t itemIndex)
+    virtual void slewRateWheelUpdateItem(scrollWheelItem& item, int16_t itemIndex)
     {
         // Override and implement this function in DCCSettings
     }
@@ -57,16 +56,16 @@ protected:
     touchgfx::TextArea textArea2_1_2;
     touchgfx::ScrollableContainer scrollableContainer1;
     touchgfx::ScrollWheel tripCurrentWheel;
-    touchgfx::DrawableListItems<scrollItem, 3> tripCurrentWheelListItems;
+    touchgfx::DrawableListItems<scrollWheelItem, 2> tripCurrentWheelListItems;
 
     touchgfx::TextArea textArea1;
     touchgfx::TextArea textArea1_1;
     touchgfx::TextArea textArea1_2;
     touchgfx::ScrollWheel toffWheel;
-    touchgfx::DrawableListItems<scrollItem, 3> toffWheelListItems;
+    touchgfx::DrawableListItems<scrollWheelItem, 2> toffWheelListItems;
 
     touchgfx::ScrollWheel slewRateWheel;
-    touchgfx::DrawableListItems<scrollItem, 3> slewRateWheelListItems;
+    touchgfx::DrawableListItems<scrollWheelItem, 2> slewRateWheelListItems;
 
     touchgfx::TextArea textArea2_1;
     touchgfx::TextArea textArea2_1_1;
@@ -86,11 +85,6 @@ private:
     touchgfx::Callback<DCCSettingsViewBase, touchgfx::DrawableListItemsInterface*, int16_t, int16_t> updateItemCallback;
     void updateItemCallbackHandler(touchgfx::DrawableListItemsInterface* items, int16_t containerIndex, int16_t itemIndex);
 
-    /*
-     * Canvas Buffer Size
-     */
-    static const uint16_t CANVAS_BUFFER_SIZE = 12000;
-    uint8_t canvasBuffer[CANVAS_BUFFER_SIZE];
 };
 
 #endif // DCCSETTINGSVIEWBASE_HPP

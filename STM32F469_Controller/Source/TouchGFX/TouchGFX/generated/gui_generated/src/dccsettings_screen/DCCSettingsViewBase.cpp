@@ -10,8 +10,6 @@ DCCSettingsViewBase::DCCSettingsViewBase() :
     updateItemCallback(this, &DCCSettingsViewBase::updateItemCallbackHandler)
 {
 
-    touchgfx::CanvasWidgetRenderer::setupBuffer(canvasBuffer, CANVAS_BUFFER_SIZE);
-
     backgroundImage.setBitmap(touchgfx::Bitmap(BITMAP_DARK_TEXTURES_CARBON_FIBRE_ID));
     backgroundImage.setPosition(0, 0, 800, 480);
     backgroundImage.setOffset(0, 0);
@@ -53,7 +51,7 @@ DCCSettingsViewBase::DCCSettingsViewBase() :
     tripCurrentWheel.setDragAcceleration(10);
     tripCurrentWheel.setNumberOfItems(1);
     tripCurrentWheel.setSelectedItemOffset(17);
-    tripCurrentWheel.setDrawableSize(215, 1);
+    tripCurrentWheel.setDrawableSize(250, 1);
     tripCurrentWheel.setDrawables(tripCurrentWheelListItems, updateItemCallback);
     tripCurrentWheel.animateToItem(0, 0);
     scrollableContainer1.add(tripCurrentWheel);
@@ -84,7 +82,7 @@ DCCSettingsViewBase::DCCSettingsViewBase() :
     toffWheel.setDragAcceleration(10);
     toffWheel.setNumberOfItems(1);
     toffWheel.setSelectedItemOffset(17);
-    toffWheel.setDrawableSize(215, 1);
+    toffWheel.setDrawableSize(250, 1);
     toffWheel.setDrawables(toffWheelListItems, updateItemCallback);
     toffWheel.animateToItem(0, 0);
     scrollableContainer1.add(toffWheel);
@@ -97,7 +95,7 @@ DCCSettingsViewBase::DCCSettingsViewBase() :
     slewRateWheel.setDragAcceleration(10);
     slewRateWheel.setNumberOfItems(1);
     slewRateWheel.setSelectedItemOffset(17);
-    slewRateWheel.setDrawableSize(215, 1);
+    slewRateWheel.setDrawableSize(250, 1);
     slewRateWheel.setDrawables(slewRateWheelListItems, updateItemCallback);
     slewRateWheel.animateToItem(0, 0);
     scrollableContainer1.add(slewRateWheel);
@@ -215,19 +213,19 @@ void DCCSettingsViewBase::updateItemCallbackHandler(touchgfx::DrawableListItemsI
     if (items == &tripCurrentWheelListItems)
     {
         touchgfx::Drawable* d = items->getDrawable(containerIndex);
-        scrollItem* cc = (scrollItem*)d;
+        scrollWheelItem* cc = (scrollWheelItem*)d;
         tripCurrentWheelUpdateItem(*cc, itemIndex);
     }
     if (items == &toffWheelListItems)
     {
         touchgfx::Drawable* d = items->getDrawable(containerIndex);
-        scrollItem* cc = (scrollItem*)d;
+        scrollWheelItem* cc = (scrollWheelItem*)d;
         toffWheelUpdateItem(*cc, itemIndex);
     }
     if (items == &slewRateWheelListItems)
     {
         touchgfx::Drawable* d = items->getDrawable(containerIndex);
-        scrollItem* cc = (scrollItem*)d;
+        scrollWheelItem* cc = (scrollWheelItem*)d;
         slewRateWheelUpdateItem(*cc, itemIndex);
     }
 }
