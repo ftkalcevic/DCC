@@ -915,11 +915,14 @@
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\placeholderscreen_screen\placeHolderScreenView.cpp">
       <Filter>Source files\Application\User\gui</Filter>
     </ClCompile>
+    <ClCompile Include="MainTrackDCC.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="ProgTrackDCC.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="dcc.h">
-      <Filter>Source files</Filter>
-    </ClInclude>
     <ClInclude Include="stm32f4xx_hal_tim_plus.h">
       <Filter>Source files</Filter>
     </ClInclude>
@@ -1035,6 +1038,15 @@
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="Common.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="DCCHal.h">
+      <Filter>Source files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainTrackDCC.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="ProgTrackDCC.h">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>

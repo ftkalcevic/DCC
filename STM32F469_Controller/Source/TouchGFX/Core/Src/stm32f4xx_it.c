@@ -183,8 +183,8 @@ void DebugMon_Handler(void)
 void DMA1_Stream2_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA1_Stream2_IRQn 0 */
-	extern void ProgrammingTrack_DCC_Handle_DMA_IRQ();
-	ProgrammingTrack_DCC_Handle_DMA_IRQ();
+	extern void ProgTrackDCC_Handle_DMA_IRQ();
+	ProgTrackDCC_Handle_DMA_IRQ();
 	return;
   /* USER CODE END DMA1_Stream2_IRQn 0 */
   HAL_DMA_IRQHandler(&hdma_tim3_ch4_up);
@@ -284,8 +284,8 @@ void DMA2_Stream0_IRQHandler(void)
 void DMA2_Stream1_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA2_Stream1_IRQn 0 */
-	extern void MainTrack_DCC_Handle_DMA_IRQ();
-	MainTrack_DCC_Handle_DMA_IRQ();
+	extern void MainTrackDCC_Handle_DMA_IRQ();
+	MainTrackDCC_Handle_DMA_IRQ();
 	return;
   /* USER CODE END DMA2_Stream1_IRQn 0 */
   HAL_DMA_IRQHandler(&hdma_tim8_up);

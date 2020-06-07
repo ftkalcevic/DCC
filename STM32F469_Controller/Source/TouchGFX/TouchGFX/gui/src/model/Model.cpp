@@ -1,7 +1,8 @@
 #include <gui/model/Model.hpp>
 #include <gui/model/ModelListener.hpp>
 #include "UIMessage.h"
-#include "dcc.h"
+#include "ProgTrackDCC.h"
+#include "MainTrackDCC.h"
 
 
 Model::Model() : modelListener(0)

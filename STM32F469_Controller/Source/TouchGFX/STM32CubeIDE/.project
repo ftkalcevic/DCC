@@ -324,6 +324,16 @@
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/Middlewares/Third_Party/FreeRTOS/Source/timers.c</locationURI>
 		</link>
 		<link>
+			<name>Application/User/generated/AboutViewBase.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/about_screen/AboutViewBase.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/AccessoryDecoderIcon.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/AccessoryDecoderIcon.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/generated/ApplicationFontProvider.cpp</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/fonts/src/ApplicationFontProvider.cpp</locationURI>
@@ -332,6 +342,16 @@
 			<name>Application/User/generated/BitmapDatabase.cpp</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/BitmapDatabase.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/Blue_Buttons_Round_Edge_medium.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/__designer/Blue_Buttons_Round_Edge_medium.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/Blue_Buttons_Round_Edge_medium_pressed.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/__designer/Blue_Buttons_Round_Edge_medium_pressed.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/Blue_PageIndicator_dot_indicator_small_highlight.cpp</name>
@@ -367,6 +387,16 @@
 			<name>Application/User/generated/CurrentDisplayBase.cpp</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/containers/CurrentDisplayBase.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/DCCConfigViewBase.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/dccconfig_screen/DCCConfigViewBase.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/DCCConfig_1ViewBase.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/dccconfig_1_screen/DCCConfig_1ViewBase.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/DCCSettingsViewBase.cpp</name>
@@ -439,9 +469,29 @@
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/main_screen/MainViewBase.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/generated/MultifunctionAccessoryIcon.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/MultifunctionAccessoryIcon.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/generated/PreferencesViewBase.cpp</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/preferences_screen/PreferencesViewBase.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/ProgTrackButtonDown.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/ProgTrackButtonDown.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/ProgTrackButtonUp.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/ProgTrackButtonUp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/Round_Edge_medium_Disabled.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/Round_Edge_medium_Disabled.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/SettingsViewBase.cpp</name>
@@ -479,6 +529,11 @@
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/texts/src/TypedTextDatabase.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/generated/aboutIcon.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/aboutIcon.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/generated/buttonDown.cpp</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/buttonDown.cpp</locationURI>
@@ -514,14 +569,19 @@
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/fnBackground.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/generated/placeHolderScreenViewBase.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/placeholderscreen_screen/placeHolderScreenViewBase.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/generated/preferencesIcon.cpp</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/preferencesIcon.cpp</locationURI>
 		</link>
 		<link>
-			<name>Application/User/generated/scrollItemBase.cpp</name>
+			<name>Application/User/generated/scrollWheelItemBase.cpp</name>
 			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/containers/scrollItemBase.cpp</locationURI>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/containers/scrollWheelItemBase.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/up_btn.cpp</name>
@@ -539,6 +599,16 @@
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/up_btn_pressed.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/gui/AboutPresenter.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/about_screen/AboutPresenter.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/AboutView.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/about_screen/AboutView.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/gui/BMPFileLoader.cpp</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/common/BMPFileLoader.cpp</locationURI>
@@ -549,6 +619,11 @@
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/common/BinFileLoader.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/gui/ButtonWithLabelAndEnable.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/common/ButtonWithLabelAndEnable.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/gui/CurrentDisplay.cpp</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/containers/CurrentDisplay.cpp</locationURI>
@@ -557,6 +632,26 @@
 			<name>Application/User/gui/CustomButton.cpp</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/common/CustomButton.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/DCCConfigPresenter.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/dccconfig_screen/DCCConfigPresenter.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/DCCConfigView.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/dccconfig_screen/DCCConfigView.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/DCCConfig_1Presenter.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/dccconfig_1_screen/DCCConfig_1Presenter.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/DCCConfig_1View.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/dccconfig_1_screen/DCCConfig_1View.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/gui/DCCSettingsPresenter.cpp</name>
@@ -644,9 +739,19 @@
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/common/TGAFileLoader.cpp</locationURI>
 		</link>
 		<link>
-			<name>Application/User/gui/scrollItem.cpp</name>
+			<name>Application/User/gui/placeHolderScreenPresenter.cpp</name>
 			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/containers/scrollItem.cpp</locationURI>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/placeholderscreen_screen/placeHolderScreenPresenter.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/placeHolderScreenView.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/placeholderscreen_screen/placeHolderScreenView.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/scrollWheelItem.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/containers/scrollWheelItem.cpp</locationURI>
 		</link>
 		<link>
 			<name>Drivers/BSP/Components/ft6x06.c</name>
@@ -752,156 +857,6 @@
 			<name>Application/User/TouchGFX/target/generated/TouchGFXGeneratedHAL.cpp</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/target/generated/TouchGFXGeneratedHAL.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/gui/AboutPresenter.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/about_screen/AboutPresenter.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/gui/AboutView.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/about_screen/AboutView.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/AboutViewBase.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/about_screen/AboutViewBase.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/aboutIcon.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/aboutIcon.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/gui/scrollWheelItem.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/containers/scrollWheelItem.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/gui/DCCConfig_1Presenter.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/dccconfig_1_screen/DCCConfig_1Presenter.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/gui/DCCConfig_1View.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/dccconfig_1_screen/DCCConfig_1View.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/gui/DCCConfigPresenter.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/dccconfig_screen/DCCConfigPresenter.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/gui/DCCConfigView.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/dccconfig_screen/DCCConfigView.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/scrollWheelItemBase.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/containers/scrollWheelItemBase.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/DCCConfig_1ViewBase.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/dccconfig_1_screen/DCCConfig_1ViewBase.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/DCCConfigViewBase.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/dccconfig_screen/DCCConfigViewBase.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/AccessoryDecoderIcon.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/AccessoryDecoderIcon.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/MultifunctionAccessoryIcon.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/MultifunctionAccessoryIcon.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/Blue_Buttons_Round_Edge_small.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/__designer/Blue_Buttons_Round_Edge_small.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/Blue_Buttons_Round_Edge_small_pressed.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/__designer/Blue_Buttons_Round_Edge_small_pressed.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/Blue_Togglebars_Toggle_RE_small_button_OFF.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/__designer/Blue_Togglebars_Toggle_RE_small_button_OFF.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/Blue_Togglebars_Toggle_RE_small_button_ON.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/__designer/Blue_Togglebars_Toggle_RE_small_button_ON.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/Blue_Buttons_Round_Edge_medium.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/__designer/Blue_Buttons_Round_Edge_medium.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/Blue_Buttons_Round_Edge_medium_pressed.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/__designer/Blue_Buttons_Round_Edge_medium_pressed.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/Dark_Radio_buttons_Radio_Round_button_active.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/__designer/Dark_Radio_buttons_Radio_Round_button_active.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/Dark_Radio_buttons_Radio_Round_button_normal.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/__designer/Dark_Radio_buttons_Radio_Round_button_normal.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/Dark_Radio_buttons_Radio_Round_button_pressed.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/__designer/Dark_Radio_buttons_Radio_Round_button_pressed.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/ProgTrackButtonDown.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/ProgTrackButtonDown.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/ProgTrackButtonUp.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/ProgTrackButtonUp.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/gui/ButtonWithLabelAndEnable.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/common/ButtonWithLabelAndEnable.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/Round_Edge_medium_Disabled.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/Round_Edge_medium_Disabled.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/gui/placeHolderScreenPresenter.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/placeholderscreen_screen/placeHolderScreenPresenter.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/gui/placeHolderScreenView.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/placeholderscreen_screen/placeHolderScreenView.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/placeHolderScreenViewBase.cpp</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/placeholderscreen_screen/placeHolderScreenViewBase.cpp</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

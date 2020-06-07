@@ -106,28 +106,28 @@ const osThreadAttr_t TouchGFXTask_attributes = {
   .cb_size = sizeof(TouchGFXTaskControlBlock),
   .priority = (osPriority_t) osPriorityNormal,
 };
-/* Definitions for DCCTask */
-osThreadId_t DCCTaskHandle;
-uint32_t DCCTaskBuffer[ 1024 ];
-osStaticThreadDef_t DCCTaskControlBlock;
-const osThreadAttr_t DCCTask_attributes = {
-  .name = "DCCTask",
-  .stack_mem = &DCCTaskBuffer[0],
-  .stack_size = sizeof(DCCTaskBuffer),
-  .cb_mem = &DCCTaskControlBlock,
-  .cb_size = sizeof(DCCTaskControlBlock),
+/* Definitions for MainTrkDCCTask */
+osThreadId_t MainTrkDCCTaskHandle;
+uint32_t MainTrkDCCTaskBuffer[ 1024 ];
+osStaticThreadDef_t MainTrkDCCTaskControlBlock;
+const osThreadAttr_t MainTrkDCCTask_attributes = {
+  .name = "MainTrkDCCTask",
+  .stack_mem = &MainTrkDCCTaskBuffer[0],
+  .stack_size = sizeof(MainTrkDCCTaskBuffer),
+  .cb_mem = &MainTrkDCCTaskControlBlock,
+  .cb_size = sizeof(MainTrkDCCTaskControlBlock),
   .priority = (osPriority_t) osPriorityHigh,
 };
-/* Definitions for DCCTask_PrgTrk */
-osThreadId_t DCCTask_PrgTrkHandle;
-uint32_t DCCTask_PrgTrkBuffer[ 1024 ];
-osStaticThreadDef_t DCCTask_PrgTrkControlBlock;
-const osThreadAttr_t DCCTask_PrgTrk_attributes = {
-  .name = "DCCTask_PrgTrk",
-  .stack_mem = &DCCTask_PrgTrkBuffer[0],
-  .stack_size = sizeof(DCCTask_PrgTrkBuffer),
-  .cb_mem = &DCCTask_PrgTrkControlBlock,
-  .cb_size = sizeof(DCCTask_PrgTrkControlBlock),
+/* Definitions for ProgTrkDCCTask */
+osThreadId_t ProgTrkDCCTaskHandle;
+uint32_t ProgTrkDCCTaskBuffer[ 1024 ];
+osStaticThreadDef_t ProgTrkDCCTaskControlBlock;
+const osThreadAttr_t ProgTrkDCCTask_attributes = {
+  .name = "ProgTrkDCCTask",
+  .stack_mem = &ProgTrkDCCTaskBuffer[0],
+  .stack_size = sizeof(ProgTrkDCCTaskBuffer),
+  .cb_mem = &ProgTrkDCCTaskControlBlock,
+  .cb_size = sizeof(ProgTrkDCCTaskControlBlock),
   .priority = (osPriority_t) osPriorityHigh,
 };
 /* Definitions for AppMainTask */
@@ -206,7 +206,8 @@ static void MX_RTC_Init(void);
 static void MX_USB_OTG_FS_USB_Init(void);
 static void MX_ADC2_Init(void);
 void TouchGFX_Task(void *argument);
-extern void DCCTask_Entry(void *argument);
+extern void MainTrkDCCTask_Entry(void *argument);
+extern void ProgTrkDCCTask_Entry(void *argument);
 extern void AppMainTask_Entry(void *argument);
 extern void LCCTask_Entry(void *argument);
 extern void AudioTask_Entry(void *argument);
@@ -276,8 +277,8 @@ static struct
 	uint32_t len;
 } stacks[] = { 
 	{ "TouchGFXTask", TouchGFXTaskBuffer, countof(TouchGFXTaskBuffer) },
-	{ "DCCTask", DCCTaskBuffer, countof(DCCTaskBuffer) },
-	{ "DCCTask_PrgTrk", DCCTask_PrgTrkBuffer, countof(DCCTask_PrgTrkBuffer) },
+	{ "MainTrkDCCTask", MainTrkDCCTaskBuffer, countof(MainTrkDCCTaskBuffer) },
+	{ "ProgTrkDCCTask", ProgTrkDCCTaskBuffer, countof(ProgTrkDCCTaskBuffer) },
 	{ "AppMainTask", AppMainTaskBuffer, countof(AppMainTaskBuffer) },
 	{ "LCCTask", LCCTaskBuffer, countof(LCCTaskBuffer) },
 	{ "AudioTask", AudioTaskBuffer, countof(AudioTaskBuffer) },
@@ -390,11 +391,11 @@ int main(void)
   /* creation of TouchGFXTask */
   TouchGFXTaskHandle = osThreadNew(TouchGFX_Task, NULL, &TouchGFXTask_attributes);
 
-  /* creation of DCCTask */
-  DCCTaskHandle = osThreadNew(DCCTask_Entry, (void*) 0, &DCCTask_attributes);
+  /* creation of MainTrkDCCTask */
+  MainTrkDCCTaskHandle = osThreadNew(MainTrkDCCTask_Entry, NULL, &MainTrkDCCTask_attributes);
 
-  /* creation of DCCTask_PrgTrk */
-  DCCTask_PrgTrkHandle = osThreadNew(DCCTask_Entry, (void*) 1, &DCCTask_PrgTrk_attributes);
+  /* creation of ProgTrkDCCTask */
+  ProgTrkDCCTaskHandle = osThreadNew(ProgTrkDCCTask_Entry, NULL, &ProgTrkDCCTask_attributes);
 
   /* creation of AppMainTask */
   AppMainTaskHandle = osThreadNew(AppMainTask_Entry, NULL, &AppMainTask_attributes);

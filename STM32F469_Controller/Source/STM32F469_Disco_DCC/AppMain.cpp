@@ -4,7 +4,8 @@
 #include "AudioTask.h"
 #include "UIMessage.h"
 #include <stdio.h>
-#include "dcc.h"
+#include "ProgTrackDCC.h"
+#include "MainTrackDCC.h"
 
 
 UIMessage uimsg;

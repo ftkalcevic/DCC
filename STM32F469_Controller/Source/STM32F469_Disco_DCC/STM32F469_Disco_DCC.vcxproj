@@ -201,6 +201,8 @@
     <ClCompile Include="Geometry.cpp" />
     <ClCompile Include="LCCTask.cpp" />
     <ClCompile Include="Config.cpp" />
+    <ClCompile Include="MainTrackDCC.cpp" />
+    <ClCompile Include="ProgTrackDCC.cpp" />
     <ClCompile Include="stm32f4xx_hal_tim_plus.c" />
     <ClCompile Include="upng.cpp" />
     <ClCompile Include="yxml.c" />
@@ -235,13 +237,15 @@
     <ClInclude Include="AudioTask.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="CurrentGraphWidget.h" />
-    <ClInclude Include="dcc.h" />
+    <ClInclude Include="DCCHal.h" />
     <ClInclude Include="DRV8873S.h" />
     <ClInclude Include="FileSystem.h" />
     <ClInclude Include="Geometry.h" />
     <ClInclude Include="LCCTask.h" />
     <ClInclude Include="Config.h" />
+    <ClInclude Include="MainTrackDCC.h" />
     <ClInclude Include="PaintContext.h" />
+    <ClInclude Include="ProgTrackDCC.h" />
     <ClInclude Include="stm32f4xx_hal_tim_plus.h" />
     <ClInclude Include="upng.h" />
     <None Include="stm32.props" />
