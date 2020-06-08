@@ -88,7 +88,7 @@ void MainView::buttonClickHandler(const touchgfx::AbstractButton& src)
         //Interaction1
         //When button1 clicked change screen to Preferences
         //Go to Preferences with screen transition towards East
-        application().gotoPreferencesNorth();
+        application().gotoPreferences();
     }
 }
 

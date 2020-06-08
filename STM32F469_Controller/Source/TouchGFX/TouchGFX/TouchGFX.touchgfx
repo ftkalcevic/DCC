@@ -100,8 +100,8 @@
               "Type": "TriggerInteractionCompleted"
             },
             "Action": {
-              "ScreenTransitionType": "ScreenTransitionCover",
-              "ScreenTransitionDirection": "South",
+              "ScreenTransitionType": "ScreenTransitionSlide",
+              "ScreenTransitionDirection": "North",
               "ActionComponent": "Main",
               "Type": "ActionGotoScreen"
             }

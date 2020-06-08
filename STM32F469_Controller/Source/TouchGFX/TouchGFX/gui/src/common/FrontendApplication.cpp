@@ -20,26 +20,40 @@ FrontendApplication::FrontendApplication(Model& m, FrontendHeap& heap)
 {
 }
 
-void FrontendApplication::gotoPreferencesNorth()
+
+void FrontendApplication::returnToMainScreen()
 {
-    transitionCallback = touchgfx::Callback<FrontendApplication>(this, &FrontendApplication::gotoPreferencesNorthImpl);
+    transitionCallback = touchgfx::Callback<FrontendApplication>(this, &FrontendApplication::returnToMainScreenImpl);
     pendingScreenTransitionCallback = &transitionCallback;
 }
 
-void FrontendApplication::gotoPreferencesNorthImpl()
+void FrontendApplication::returnToMainScreenImpl()
+{
+    touchgfx::makeTransition<MainView, MainPresenter, touchgfx::UncoverTransition<SOUTH>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+}
+
+
+
+void FrontendApplication::gotoPreferences()
+{
+    transitionCallback = touchgfx::Callback<FrontendApplication>(this, &FrontendApplication::gotoPreferencesImpl);
+    pendingScreenTransitionCallback = &transitionCallback;
+}
+
+void FrontendApplication::gotoPreferencesImpl()
 {
     touchgfx::makeTransition<PreferencesView, PreferencesPresenter, touchgfx::CoverTransition<NORTH>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }
 
-void FrontendApplication::gotoPreferencesSouth()
+void FrontendApplication::returnToPreferences()
 {
-    transitionCallback = touchgfx::Callback<FrontendApplication>(this, &FrontendApplication::gotoPreferencesSouthImpl);
+    transitionCallback = touchgfx::Callback<FrontendApplication>(this, &FrontendApplication::returnToPreferencesImpl);
     pendingScreenTransitionCallback = &transitionCallback;
 }
 
-void FrontendApplication::gotoPreferencesSouthImpl()
+void FrontendApplication::returnToPreferencesImpl()
 {
-    touchgfx::makeTransition<PreferencesView, PreferencesPresenter, touchgfx::CoverTransition<SOUTH>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+    touchgfx::makeTransition<PreferencesView, PreferencesPresenter, touchgfx::UncoverTransition<SOUTH>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }
 
 void FrontendApplication::gotoSettingsScreen()

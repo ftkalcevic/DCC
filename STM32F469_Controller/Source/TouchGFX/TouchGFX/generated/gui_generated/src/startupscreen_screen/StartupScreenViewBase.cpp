@@ -24,8 +24,8 @@ void StartupScreenViewBase::handleTickEvent()
         {
             //GoToMain
             //When SplashScreen completed change screen to Main
-            //Go to Main with screen transition towards South
-            application().gotoMainScreenCoverTransitionSouth();
+            //Go to Main with screen transition towards North
+            application().gotoMainScreenSlideTransitionNorth();
         }
     }
 }

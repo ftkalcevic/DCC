@@ -57,7 +57,7 @@ public:
 			{
 				// 1 sec timer
 				UIMsg msg;
-				msg.type = ProgrammingTrackStatusUpdate;
+				msg.type = MainTrackStatusUpdate;
 				UpdateHBridgeStatus(msg.hbStatus);
 				uimsg.Send(msg);
 				lastTime = xTaskGetTickCount();
@@ -103,6 +103,8 @@ public:
 
 			// todo - better timeout - every 1 second to update status.  only need to wait for msg (or enable/estop - should these be messages - high priority) when disabled.
 			vTaskDelay(pdMS_TO_TICKS(5));
+			//printf("M%d\n", ReadCurrent());
+
 		}
 	}
 	

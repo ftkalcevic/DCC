@@ -54,7 +54,7 @@ void AboutView::handleGestureEvent(const GestureEvent & evt)
 	//printf("PreferencesView::%d gesture %d %d\n", count++, evt.getType(), evt.getVelocity());
 	if (evt.getType() == GestureEvent::SWIPE_VERTICAL && evt.getVelocity() < -10 && evt.getX() > 250)
 	{
-		application().gotoPreferencesSouth();
+		application().returnToPreferences();
 	}
 	else
 		AboutViewBase::handleGestureEvent(evt); 

@@ -18,16 +18,18 @@ public:
         model.tick();
         FrontendApplicationBase::handleTickEvent();
     }
-	void gotoPreferencesNorth();
-	void gotoPreferencesSouth();
+	void returnToMainScreen();
+	void gotoPreferences();
+	void returnToPreferences();
     void gotoSettingsScreen();
     void gotoDCCSettingsScreen();
     void gotoAboutScreen();
     void gotoDCCConfigScreen();
 	
 private:
-	void gotoPreferencesNorthImpl();
-	void gotoPreferencesSouthImpl();
+	void returnToMainScreenImpl();
+	void gotoPreferencesImpl();
+	void returnToPreferencesImpl();
     void gotoSettingsScreenImpl();
     void gotoDCCSettingsScreenImpl();
     void gotoAboutScreenImpl();

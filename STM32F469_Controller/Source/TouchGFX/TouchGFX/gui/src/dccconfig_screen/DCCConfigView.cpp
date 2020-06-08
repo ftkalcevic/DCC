@@ -64,7 +64,7 @@ void DCCConfigView::handleGestureEvent(const GestureEvent & evt)
 	//printf("DCCConfigView gesture %d %d\n", evt.getType(), evt.getVelocity());
 	if (evt.getType() == GestureEvent::SWIPE_VERTICAL && evt.getVelocity() < -SWIPE_VELOCITY )
 	{
-		application().gotoPreferencesSouth();
+		application().returnToPreferences();
 	}
 	else
 		DCCConfigViewBase::handleGestureEvent(evt); 

@@ -16,6 +16,12 @@ enum DCCType
 	ProgrammingTrack = 1
 };
 
+
+enum EPreamble
+{
+	Regular,
+	Long
+};
 	
 template<DCCType type, const int ARR_OFFSET, const int CCn_OFFSET, const int BURST_SIZE >
 class DCCHal
@@ -116,8 +122,9 @@ public:
 		current *= sum;
 		current *= 1000;
 		current /= 3723;
-		current /= countof(ADC_Current);
+		current /= countof(ADC_Current)/2;
 		
+		current = sum / (countof(ADC_Current) / 2);
 		return current;
 	}
 
@@ -222,13 +229,13 @@ public:
 		index  += BURST_SIZE;
 	}
 
-	void SendDCCMessage(uint8_t *msg, uint8_t len)
+	void SendDCCMessage(uint8_t *msg, uint8_t len, EPreamble const preamble = EPreamble::Regular)
 	{
 		sent = false;
 		// Build a buffer of timings - a pair for bit off/bit on.
 		// Use dma to stream the timings to the timer. (as used in opentx pxx)
 		int index = 0;
-		for (int i = 0; i < PREAMBLE_BITS; i++)
+		for (int i = 0; i < (preamble == EPreamble::Regular ? PREAMBLE_BITS : LONG_PREAMBLE_BITS); i++)
 			AddBit(index, 1);
 		for (int m = 0; m < len; m++)
 		{
@@ -269,6 +276,31 @@ public:
 			TIM3->CR1 |= TIM_CR1_CEN;		
 		}
 	}
+	
+
+	void SetErrorByte(uint8_t *msg, uint8_t len)
+	{
+		uint8_t e = *msg++;
+		for (int i = 1; i < len - 1; i++)
+			e ^= *msg++;
+		*msg = e;
+	}
+
+	void SendIdle()
+	{
+		// Send Idle
+		static uint8_t idleMessage[3] = { 0xFF, 0, 0xFF };
+		SendDCCMessage(idleMessage, sizeof(idleMessage));
+	}
+
+	
+	void SendReset()
+	{
+		// Send Idle
+		static uint8_t resetMessage[3] = { 0, 0, 0 };
+		SendDCCMessage(resetMessage, sizeof(resetMessage));
+	}
+
 	
 	void EStop(bool stop)
 	{

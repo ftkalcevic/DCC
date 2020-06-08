@@ -55,4 +55,7 @@ void ProgrammingTrack_DCC_Enable(bool enable)
 
 void ProgrammingTrack_DCC_ScanProgrammingTrack()
 {
+	ProgTrackMessage msg;
+	msg.type = EProgTrackMessage::ScanTrack;
+	dcc.SendMsg(msg);
 }

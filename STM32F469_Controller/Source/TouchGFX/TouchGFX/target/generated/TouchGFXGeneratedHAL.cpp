@@ -24,7 +24,7 @@ void TouchGFXGeneratedHAL::initialize()
 
     registerEventListener(*(touchgfx::Application::getInstance()));
 
-    setFrameBufferStartAddresses((void*)0xC0000000, (void*)0, (void*)0);
+    setFrameBufferStartAddresses((void*)0xC0000000, (void*)0, (void*)(0xC0000000+1*(800*480*4)));
     /*
      * Set whether the DMA transfers are locked to the TFT update cycle. If
      * locked, DMA transfer will not begin until the TFT controller has finished
