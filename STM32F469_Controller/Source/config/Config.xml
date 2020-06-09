@@ -1,0 +1,20 @@
+<Config>
+  <Decoders>
+    <Decoder>
+      <Address>0</Address>
+      <ModelFile></ModelFile>
+      <Type>0</Type>
+      <UserName>Test1</UserName>
+      <UserIcon></UserIcon>
+      <UserBackground></UserBackground>
+      <Loco>
+        <SpeedMode>14</SpeedMode>
+        <FL>0</FL>
+        
+      </Loco>
+    </Decoder>    
+  </Decoders>
+  <DecoderOrder>
+    <Address>0</Address>
+  </DecoderOrder>
+</Config>

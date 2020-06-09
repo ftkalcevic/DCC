@@ -921,6 +921,9 @@
     <ClCompile Include="ProgTrackDCC.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\AccessoryIcon.cpp">
+      <Filter>Source files\Application\User\generated</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stm32f4xx_hal_tim_plus.h">

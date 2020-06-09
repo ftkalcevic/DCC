@@ -858,5 +858,10 @@
 			<type>1</type>
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/target/generated/TouchGFXGeneratedHAL.cpp</locationURI>
 		</link>
+		<link>
+			<name>Application/User/generated/AccessoryIcon.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/AccessoryIcon.cpp</locationURI>
+		</link>
 	</linkedResources>
 </projectDescription>

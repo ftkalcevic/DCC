@@ -91,7 +91,7 @@
     <AllDependencies>
       <ProjectDependency>
         <RelativePath>..\TouchGFX\STM32CubeIDE\.cproject</RelativePath>
-        <Timestamp>132359607465787727</Timestamp>
+        <Timestamp>132361349034571579</Timestamp>
       </ProjectDependency>
     </AllDependencies>
     <RootDirectory>
@@ -269,6 +269,9 @@
                     </VirtualFileSnapshot>
                     <VirtualFileSnapshot>
                       <RelativePath>..\TouchGFX\TouchGFX\generated\images\src\up_btn_pressed.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\generated\images\src\AccessoryIcon.cpp</RelativePath>
                     </VirtualFileSnapshot>
                   </Files>
                 </VirtualDirectorySnapshot>

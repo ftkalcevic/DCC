@@ -4,6 +4,8 @@
 #include <gui_generated/main_screen/MainViewBase.hpp>
 #include <gui/main_screen/MainPresenter.hpp>
 #include <touchgfx/widgets/AbstractButton.hpp>
+#include <gui/common/CustomButton.hpp>
+
 
 class MainView : public MainViewBase
 {
@@ -21,8 +23,12 @@ protected:
 	virtual void	handleKeyEvent(uint8_t key);
 private:
 	BitmapId bmpId;
+	touchgfx::Container **pages;
+	touchgfx::CustomButton **buttons;
+	
     touchgfx::Callback<MainView, const touchgfx::AbstractButton&> buttonClickCallback;
     void buttonClickHandler(const touchgfx::AbstractButton& src);
+	void deletePage(Drawable& d);
 };
 
 #endif // MAIN_VIEW_HPP

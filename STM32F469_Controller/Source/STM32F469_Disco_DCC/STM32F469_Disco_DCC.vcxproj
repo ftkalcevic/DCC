@@ -378,5 +378,6 @@
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\placeholderscreen_screen\placeHolderScreenViewBase.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\placeholderscreen_screen\placeHolderScreenPresenter.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\placeholderscreen_screen\placeHolderScreenView.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\AccessoryIcon.cpp" />
   </ItemGroup>
 </Project>
