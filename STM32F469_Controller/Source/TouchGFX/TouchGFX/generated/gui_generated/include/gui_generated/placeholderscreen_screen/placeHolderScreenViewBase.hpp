@@ -8,6 +8,11 @@
 #include <mvp/View.hpp>
 #include <gui/placeholderscreen_screen/placeHolderScreenPresenter.hpp>
 #include <touchgfx/widgets/ButtonWithLabel.hpp>
+#include <touchgfx/containers/Slider.hpp>
+#include <touchgfx/widgets/RadioButton.hpp>
+#include <touchgfx/widgets/Button.hpp>
+#include <touchgfx/widgets/ButtonWithIcon.hpp>
+#include <touchgfx/widgets/RadioButtonGroup.hpp>
 
 class placeHolderScreenViewBase : public touchgfx::View<placeHolderScreenPresenter>
 {
@@ -25,6 +30,15 @@ protected:
      * Member Declarations
      */
     touchgfx::ButtonWithLabel buttonReadAllCVs;
+    touchgfx::Slider slider1;
+    touchgfx::Slider slider2;
+    touchgfx::RadioButton radioButton2;
+    touchgfx::Button button1;
+    touchgfx::Slider sliderBrake;
+    touchgfx::ButtonWithIcon buttonRev;
+    touchgfx::ButtonWithIcon buttonFwd;
+    touchgfx::ButtonWithIcon buttonStop;
+    touchgfx::RadioButtonGroup<1> radioButtonGroup1;
 
 private:
 

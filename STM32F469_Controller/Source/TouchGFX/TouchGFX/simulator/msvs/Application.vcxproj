@@ -63,6 +63,13 @@
     <ClCompile Include="..\..\gui\src\placeholderscreen_screen\placeHolderScreenPresenter.cpp"/>
     <ClCompile Include="..\..\gui\src\placeholderscreen_screen\placeHolderScreenView.cpp"/>
     <ClCompile Include="..\..\generated\gui_generated\src\placeholderscreen_screen\placeHolderScreenViewBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\containers\Decoder.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\DecoderBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\decoders_screen\DecodersPresenter.cpp"/>
+    <ClCompile Include="..\..\gui\src\decoders_screen\DecodersView.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\decoders_screen\DecodersViewBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\containers\CheckBox.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\CheckBoxBase.cpp"/>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(ApplicationRoot)\assets\texts\texts.xlsx"/>
@@ -253,6 +260,13 @@
     <ClInclude Include="..\..\gui\include\gui\placeholderscreen_screen\placeHolderScreenPresenter.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\placeholderscreen_screen\placeHolderScreenView.hpp"/>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\placeholderscreen_screen\placeHolderScreenViewBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\containers\Decoder.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\DecoderBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\decoders_screen\DecodersPresenter.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\decoders_screen\DecodersView.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\decoders_screen\DecodersViewBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\containers\CheckBox.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\CheckBoxBase.hpp"/>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="$(ApplicationRoot)\generated\simulator\touchgfx.rc"/>

@@ -5,6 +5,7 @@
 #include <touchgfx/Color.hpp>
 #include <gui/common/CustomButton.hpp>
 #include <stdio.h>
+#include "Decoders.h"
 #ifndef SIMULATOR
 #include "AudioTask.h"
 #endif
@@ -17,97 +18,69 @@ enum EConfigPages
 
 
 /****************************************************************/
-const int MAX_PATH = 64;
-
-// Enums are assigned values as these are used in config file.
-enum EDecoderType: uint8_t
-{
-	Multifunction=0,
-	Accessory=1
-};
-enum ESpeedSteps: uint8_t
-{
-	ss14=0,
-	ss28=1,
-	ss128=2
-};
-
-enum FrontLightPosition: uint8_t
-{
-	SpeedDirInsBit4=0,		
-	FuncGroupOneBit4=1
-};
-
-struct LocoSettings 
-{
-	ESpeedSteps speedSteps;
-	FrontLightPosition FL;
-};
-
-struct AccessorySettings
-{
-	
-};
-
-
-enum FunctionAction
-{
-	None = 0,
-	FrontLight = 1,
-	ToggleSwitch,
-};
-
-struct Functions
-{
-	FunctionAction Fn1, Fn2, Fn3, Fn4, Fn5;
-};
-struct Decoders
-{
-	char16_t name[20];
-	uint16_t address;
-	// model file
-	EDecoderType type;
-	char UserIconFile[MAX_PATH];
-	char UserBackgroundFile[MAX_PATH];
-	union
-	{
-		LocoSettings loco;
-		AccessorySettings accessory;
-	};
-
-	Functions func;
-};
 
 /****************************************************************/
-static int decoderCount=2;
-static Decoders decoders[2] =
+int activeDecoder = 0;
+int decoderCount=4;
+Decoders decoders[4] =
 { 
-	{	{.name =  u"Loco #0000" }, 
+	{	
+		{.name =  u"Loco #0000" }, 
+		{.description =  u"Marklin 8840 -  DB Class 140 Electric" }, 
 		.address = 0, 
 		.type = EDecoderType::Multifunction, 
 		{ .UserIconFile = "" }, 
 		{.UserBackgroundFile = ""}, 
 		.loco = { 
 			.speedSteps = ESpeedSteps::ss28, 
-			.FL = FrontLightPosition::SpeedDirInsBit4 }, 
+			.FL = EFrontLightPosition::SpeedDirInsBit4 }, 
 		.func = { 
-			.Fn1 = FunctionAction::FrontLight, 
-			.Fn2 = FunctionAction::None, 
-			.Fn3 = FunctionAction::None, 
-			.Fn4 = FunctionAction::None, 
-			.Fn5 = FunctionAction::None } 
+			.Fn1 = EFunctionAction::FrontLight, 
+			.Fn2 = EFunctionAction::None, 
+			.Fn3 = EFunctionAction::None, 
+			.Fn4 = EFunctionAction::None, 
+			.Fn5 = EFunctionAction::None } 
 	},
-	{	{.name =  u"Switch #1" }, 
+	{	
+		{.name =  u"Loco #0001" }, 
+		.address = 1, 
+		.type = EDecoderType::Multifunction, 
+		{ .UserIconFile = "" }, 
+		{.UserBackgroundFile = ""}, 
+		.loco = { 
+			.speedSteps = ESpeedSteps::ss28, 
+			.FL = EFrontLightPosition::SpeedDirInsBit4 }, 
+		.func = { 
+			.Fn1 = EFunctionAction::FrontLight, 
+			.Fn2 = EFunctionAction::None, 
+			.Fn3 = EFunctionAction::None, 
+			.Fn4 = EFunctionAction::None, 
+			.Fn5 = EFunctionAction::None } 
+	},
+	{	{.name =  u"Switch #10" }, 
+		{.description =  u"Turnout to Odek Enterprises" }, 
 		.address = 10, 
 		.type = EDecoderType::Accessory, 
 		{ .UserIconFile = "" }, 
 		{ .UserBackgroundFile = "" }, 
 		.func = { 
-			.Fn1 = FunctionAction::ToggleSwitch, 
-			.Fn2 = FunctionAction::None, 
-			.Fn3 = FunctionAction::None, 
-			.Fn4 = FunctionAction::None, 
-			.Fn5 = FunctionAction::None }  
+			.Fn1 = EFunctionAction::ToggleSwitch, 
+			.Fn2 = EFunctionAction::None, 
+			.Fn3 = EFunctionAction::None, 
+			.Fn4 = EFunctionAction::None, 
+			.Fn5 = EFunctionAction::None }  
+	},		
+	{	{.name =  u"Switch #11" }, 
+		.address = 11, 
+		.type = EDecoderType::Accessory, 
+		{ .UserIconFile = "" }, 
+		{ .UserBackgroundFile = "" }, 
+		.func = { 
+			.Fn1 = EFunctionAction::ToggleSwitch, 
+			.Fn2 = EFunctionAction::None, 
+			.Fn3 = EFunctionAction::None, 
+			.Fn4 = EFunctionAction::None, 
+			.Fn5 = EFunctionAction::None }  
 	}		
 };
 	
@@ -207,6 +180,11 @@ void MainView::buttonClickHandler(const touchgfx::AbstractButton& src)
     {
         application().gotoPreferences();
     }
+	else
+	{
+		activeDecoder = button.getId();
+        application().gotoDecodersScreen();
+	}
 }
 
 
@@ -215,7 +193,7 @@ void MainView::buttonClickHandler(const touchgfx::AbstractButton& src)
 
 void MainView::handleClickEvent(const ClickEvent & evt)
 {
-	//printf("%d click\n", count++);
+	printf("%d click\n", count++);
 	MainViewBase::handleClickEvent(evt);
 }
 void MainView::handleDragEvent(const DragEvent & evt)
@@ -230,6 +208,7 @@ void MainView::handleGestureEvent(const GestureEvent & evt)
 }
 void MainView::handleKeyEvent(uint8_t key)
 {
+	printf("%d key %d\n", count++, key);
 	MainViewBase::handleKeyEvent(key);
 }
 

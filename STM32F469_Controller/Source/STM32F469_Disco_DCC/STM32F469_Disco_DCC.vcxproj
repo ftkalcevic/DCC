@@ -30,14 +30,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">
     <GNUConfigurationType>Debug</GNUConfigurationType>
     <ToolchainID>com.visualgdb.arm-eabi</ToolchainID>
-    <ToolchainVersion>9.2.1/8.3.0/r1</ToolchainVersion>
+    <ToolchainVersion>9.3.1/8.3.1/r1</ToolchainVersion>
     <MCUPropertyListFile>$(ProjectDir)stm32.props</MCUPropertyListFile>
     <TargetExt>.elf</TargetExt>
     <GenerateHexFile>true</GenerateHexFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">
     <ToolchainID>com.visualgdb.arm-eabi</ToolchainID>
-    <ToolchainVersion>9.2.1/8.3.0/r1</ToolchainVersion>
+    <ToolchainVersion>9.3.1/8.3.1/r1</ToolchainVersion>
     <MCUPropertyListFile>$(ProjectDir)stm32.props</MCUPropertyListFile>
     <GenerateHexFile>true</GenerateHexFile>
   </PropertyGroup>
@@ -101,6 +101,7 @@
     <ClCompile Include="..\TouchGFX\Core\Src\stm32f4xx_it.c" />
     <ClCompile Include="..\TouchGFX\Drivers\BSP\Components\cs43l22\cs43l22.c" />
     <ClCompile Include="..\TouchGFX\Drivers\BSP\STM32469I-Discovery\stm32469i_discovery_audio.c" />
+    <ClCompile Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\source\touchgfx\containers\Container.cpp" />
     <ClCompile Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\source\touchgfx\containers\scrollers\ScrollBase.cpp" />
     <ClCompile Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\source\touchgfx\containers\scrollers\ScrollWheel.cpp" />
     <ClCompile Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\source\touchgfx\containers\scrollers\ScrollWheelBase.cpp" />
@@ -192,10 +193,12 @@
     <ClCompile Include="..\TouchGFX\Middlewares\Third_Party\FreeRTOS\Source\stream_buffer.c" />
     <ClCompile Include="..\TouchGFX\Middlewares\Third_Party\FreeRTOS\Source\tasks.c" />
     <ClCompile Include="..\TouchGFX\Middlewares\Third_Party\FreeRTOS\Source\timers.c" />
+    <ClCompile Include="AnalogInputConfigWidget.cpp" />
     <ClCompile Include="AppMain.cpp" />
     <ClCompile Include="Arduino.cpp" />
     <ClCompile Include="AudioTask.cpp" />
     <ClCompile Include="DCC.cpp" />
+    <ClCompile Include="DecoderWidget.cpp" />
     <ClCompile Include="DRV8873S.cpp" />
     <ClCompile Include="FileSystem.cpp" />
     <ClCompile Include="Geometry.cpp" />
@@ -232,21 +235,27 @@
     <ClInclude Include="..\TouchGFX\TouchGFX\gui\include\gui\common\PNGFileLoader.h" />
     <ClInclude Include="..\TouchGFX\TouchGFX\gui\include\gui\common\TGAFileLoader.h" />
     <ClInclude Include="..\TouchGFX\TouchGFX\gui\src\common\CustomButton.hpp" />
+    <ClInclude Include="AnalogInputConfigWidget.h" />
     <ClInclude Include="AppMain.h" />
     <ClInclude Include="Arduino.h" />
     <ClInclude Include="AudioTask.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="CurrentGraphWidget.h" />
     <ClInclude Include="DCCHal.h" />
+    <ClInclude Include="DecoderWidget.h" />
     <ClInclude Include="DRV8873S.h" />
     <ClInclude Include="FileSystem.h" />
     <ClInclude Include="Geometry.h" />
+    <ClInclude Include="InputEvent.h" />
+    <ClInclude Include="KeyEvent.h" />
     <ClInclude Include="LCCTask.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="MainTrackDCC.h" />
     <ClInclude Include="PaintContext.h" />
     <ClInclude Include="ProgTrackDCC.h" />
+    <ClInclude Include="ScalableAspectImage.h" />
     <ClInclude Include="stm32f4xx_hal_tim_plus.h" />
+    <ClInclude Include="ToggleButtonIconAndText.h" />
     <ClInclude Include="upng.h" />
     <None Include="stm32.props" />
     <ClCompile Include="$(BSP_ROOT)\STM32F4xxxx\StartupFiles\startup_stm32f469xx.c" />
@@ -352,9 +361,6 @@
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\settings_screen\SettingsView.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\containers\CurrentDisplayBase.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\containers\CurrentDisplay.cpp" />
-    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Slider_Horizontal_Medium_Indicators_Slider_Round_nob.cpp" />
-    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Slider_Horizontal_Medium_Slider_Round_back.cpp" />
-    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Slider_Horizontal_Medium_Slider_Round_fill.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\about_screen\AboutViewBase.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\about_screen\AboutPresenter.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\about_screen\AboutView.cpp" />
@@ -379,5 +385,41 @@
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\placeholderscreen_screen\placeHolderScreenPresenter.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\placeholderscreen_screen\placeHolderScreenView.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\AccessoryIcon.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\containers\DecoderBase.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\decoders_screen\DecodersViewBase.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\containers\Decoder.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\decoders_screen\DecodersPresenter.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\decoders_screen\DecodersView.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\DecoderScrollWheelMask.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\fonts\src\Font_Asap_Regular_10_4bpp_0.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\fonts\src\Kerning_Asap_Regular_10_4bpp.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\fonts\src\Table_Asap_Regular_10_4bpp.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\turnout-straight-normal.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\turnout-straight-reverse.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\fonts\src\Font_Asap_Regular_40_4bpp_0.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\fonts\src\Kerning_Asap_Regular_40_4bpp.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\fonts\src\Table_Asap_Regular_40_4bpp.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Buttons_Round_Edge_icon_button.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Buttons_Round_Edge_icon_button_pressed.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Slider_Horizontal_Medium_Indicators_Slider2_Round_Edge_nob.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Slider_Horizontal_Medium_Slider2_Round_Edge_back.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Slider_Horizontal_Small_slider_horizontal_small_round_edge_back.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Slider_Horizontal_Small_Indicators_slider_horizontal_small_round_edge_knob.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Buttons_Round_Edge_small.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Buttons_Round_Edge_small_pressed.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Check_buttons_Check_mark_active.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Check_buttons_Check_mark_inactive.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Check_buttons_Check_mark_normal.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Check_buttons_Check_mark_pressed.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Slider_Horizontal_Large_Indicators_Slider_Round_nob.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Slider_Horizontal_Large_Slider_Round_back.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Slider_Horizontal_Large_Slider_Round_fill.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\indicator.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\indicatorMin.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Icons_Back_arrow_32.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Icons_Next_arrow_32.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Icons_Stop_32.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\containers\CheckBoxBase.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\containers\CheckBox.cpp" />
   </ItemGroup>
 </Project>

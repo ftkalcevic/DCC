@@ -15,25 +15,39 @@ SettingsViewBase::SettingsViewBase()
 
     scrollableContainer1.setPosition(0, 25, 800, 430);
     scrollableContainer1.enableHorizontalScroll(false);
-    scrollableContainer1.setScrollbarsColor(touchgfx::Color::getColorFrom24BitRGB(0, 0, 0));
+    scrollableContainer1.setScrollbarsColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
 
     backgroundImage.setBitmap(touchgfx::Bitmap(BITMAP_DARK_TEXTURES_CARBON_FIBRE_ID));
-    backgroundImage.setPosition(0, 0, 800, 591);
+    backgroundImage.setPosition(0, 0, 800, 641);
     backgroundImage.setOffset(0, 0);
     scrollableContainer1.add(backgroundImage);
 
-    sliderBacklight.setXY(378, 44);
-    sliderBacklight.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_SLIDER_HORIZONTAL_MEDIUM_SLIDER_ROUND_BACK_ID), touchgfx::Bitmap(BITMAP_BLUE_SLIDER_HORIZONTAL_MEDIUM_SLIDER_ROUND_FILL_ID), touchgfx::Bitmap(BITMAP_BLUE_SLIDER_HORIZONTAL_MEDIUM_INDICATORS_SLIDER_ROUND_NOB_ID));
-    sliderBacklight.setupHorizontalSlider(2, 19, 2, 0, 310);
-    sliderBacklight.setValueRange(0, 100);
-    sliderBacklight.setValue(0);
-    scrollableContainer1.add(sliderBacklight);
+    textThrottle.setXY(329, 11);
+    textThrottle.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+    textThrottle.setLinespacing(0);
+    textThrottle.setTypedText(touchgfx::TypedText(T_SINGLEUSEID30));
+    scrollableContainer1.add(textThrottle);
 
-    textArea1.setXY(140, 59);
-    textArea1.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
-    textArea1.setLinespacing(0);
-    textArea1.setTypedText(touchgfx::TypedText(T_SINGLEUSEID30));
-    scrollableContainer1.add(textArea1);
+    textBrake.setXY(349, 176);
+    textBrake.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+    textBrake.setLinespacing(0);
+    textBrake.setTypedText(touchgfx::TypedText(T_SINGLEUSEID32));
+    scrollableContainer1.add(textBrake);
+
+    checkBoxReverseThrottle.setXY(114, 111);
+    scrollableContainer1.add(checkBoxReverseThrottle);
+
+    checkBoxReverseBrake.setXY(114, 263);
+    scrollableContainer1.add(checkBoxReverseBrake);
+
+    checkBoxReverseDirection.setXY(114, 456);
+    scrollableContainer1.add(checkBoxReverseDirection);
+
+    textDirection.setXY(319, 345);
+    textDirection.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+    textDirection.setLinespacing(0);
+    textDirection.setTypedText(touchgfx::TypedText(T_SINGLEUSEID34));
+    scrollableContainer1.add(textDirection);
     scrollableContainer1.setScrollbarsPermanentlyVisible();
     scrollableContainer1.setScrollbarsVisible(false);
 
@@ -46,4 +60,7 @@ void SettingsViewBase::setupScreen()
 {
     functionButtons.initialize();
     statusBar.initialize();
+    checkBoxReverseThrottle.initialize();
+    checkBoxReverseBrake.initialize();
+    checkBoxReverseDirection.initialize();
 }

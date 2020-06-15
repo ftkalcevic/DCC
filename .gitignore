@@ -87,3 +87,4 @@ LCC_Terminator/Default Configuration
 LCCAtmegaXXM1/Source/test_can/Debug
 MiniSTM32V/VisualGDB/Debug
 MiniSTM32V/VisualGDB/Release
+STM32F469_Controller/Source/STM32F469_Disco_DCC/.visualgdb

@@ -280,6 +280,18 @@
     <Filter Include="Source Files\generated\gui_generated\placeholderscreen_screen">
       <UniqueIdentifier>085B12F4-4A57-E722-1C83-5557AE7F8676</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\gui\decoders_screen">
+      <UniqueIdentifier>6D955AA8-58E3-44BC-90B4-8BC7A6171C05</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gui\decoders_screen">
+      <UniqueIdentifier>05FFA344-2A16-0D8E-16BB-231426D74E46</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\generated\gui_generated\decoders_screen">
+      <UniqueIdentifier>43EB8B49-808C-36BB-A105-DAC51DF88CFE</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\generated\gui_generated\decoders_screen">
+      <UniqueIdentifier>25084F14-3BE2-8A06-815E-714239721D84</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(TouchGFXReleasePath)\framework\source\platform\driver\touch\SDL2TouchController.cpp">
@@ -437,6 +449,27 @@
     </ClCompile>
     <ClCompile Include="..\..\generated\gui_generated\src\placeholderscreen_screen\placeHolderScreenViewBase.cpp">
       <Filter>Source Files\generated\gui_generated\placeholderscreen_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\containers\Decoder.cpp">
+      <Filter>Source Files\gui\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\DecoderBase.cpp">
+      <Filter>Source Files\generated\gui_generated\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\decoders_screen\DecodersPresenter.cpp">
+      <Filter>Source Files\gui\decoders_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\decoders_screen\DecodersView.cpp">
+      <Filter>Source Files\gui\decoders_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\decoders_screen\DecodersViewBase.cpp">
+      <Filter>Source Files\generated\gui_generated\decoders_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\containers\CheckBox.cpp">
+      <Filter>Source Files\gui\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\CheckBoxBase.cpp">
+      <Filter>Source Files\generated\gui_generated\containers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -999,6 +1032,27 @@
     </ClInclude>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\placeholderscreen_screen\placeHolderScreenViewBase.hpp">
       <Filter>Header Files\generated\gui_generated\placeholderscreen_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\containers\Decoder.hpp">
+      <Filter>Header Files\gui\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\DecoderBase.hpp">
+      <Filter>Header Files\generated\gui_generated\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\decoders_screen\DecodersPresenter.hpp">
+      <Filter>Header Files\gui\decoders_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\decoders_screen\DecodersView.hpp">
+      <Filter>Header Files\gui\decoders_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\decoders_screen\DecodersViewBase.hpp">
+      <Filter>Header Files\generated\gui_generated\decoders_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\containers\CheckBox.hpp">
+      <Filter>Header Files\gui\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\CheckBoxBase.hpp">
+      <Filter>Header Files\generated\gui_generated\containers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

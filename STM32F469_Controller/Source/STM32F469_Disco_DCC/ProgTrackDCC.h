@@ -216,7 +216,7 @@ public:
 			{
 				// 1 sec timer
 				UIMsg msg;
-				msg.type = ProgrammingTrackStatusUpdate;
+				msg.type = EUIMessageType::ProgrammingTrackStatusUpdate;
 				UpdateHBridgeStatus(msg.hbStatus);
 				uimsg.Send(msg);
 				lastTime = xTaskGetTickCount();

@@ -1,0 +1,9 @@
+<UISettings>
+  <ThrottleMin>0</ThrottleMin>
+  <ThrottleMax>1023</ThrottleMax>
+  <ThrottleReverse>0</ThrottleReverse>
+  <BrakeMin>0</BrakeMin>
+  <BrakeMax>1023</BrakeMax>
+  <BrakeReverse>0</BrakeReverse>
+  <DirectionReverse>0</DirectionReverse>
+</UISettings>

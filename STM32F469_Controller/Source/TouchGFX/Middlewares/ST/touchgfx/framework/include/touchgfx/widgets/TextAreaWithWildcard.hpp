@@ -115,7 +115,7 @@ public:
     void setWildcard(const Unicode::UnicodeChar* value)
     {
         wildcard = value;
-	    resizeToCurrentText();
+	    resizeToCurrentTextWithAlignment();
     }
 
     /**
@@ -216,7 +216,7 @@ public:
     void setWildcard1(const Unicode::UnicodeChar* value)
     {
         wc1 = value;
-	    resizeToCurrentText();
+	    resizeToCurrentTextWithAlignment();
     }
 
     /**
@@ -245,7 +245,7 @@ public:
     void setWildcard2(const Unicode::UnicodeChar* value)
     {
         wc2 = value;
-	    resizeToCurrentText();
+	    resizeToCurrentTextWithAlignment();
     }
 
     /**

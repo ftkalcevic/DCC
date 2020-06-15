@@ -8,22 +8,31 @@
 #include <assert.h>
 
 #include "DCCSettings.hpp"
+#include "InputEvent.h"
+#include "KeyEvent.h"
 
 
-enum EUIMessageType
+namespace EUIMessageType
 {
-	MainTrackStatusUpdate,
-	ProgrammingTrackStatusUpdate,
-};
+	enum EUIMessageType
+	{
+		MainTrackStatusUpdate,
+		ProgrammingTrackStatusUpdate,
+		InputEvent,
+		KeyEvent,
+	};
+}
 
 
 struct UIMsg
 {
-	EUIMessageType type;
+	EUIMessageType::EUIMessageType type;
 	
 	union
 	{
-		DCCSettings::HBStatus hbStatus;		
+		DCCSettings::HBStatus hbStatus;
+		InputEvent input;
+		KeyEvent keys;
 	};
 };
 

@@ -2,6 +2,7 @@
 #define MODELLISTENER_HPP
 
 #include <gui/model/Model.hpp>
+#include "UIMessage.h"
 
 /**
  * ModelListener is the interface through which the Model can inform the currently
@@ -30,6 +31,8 @@ public:
 
 	virtual void TrackStatusChanged()
 	{}
+	
+	virtual void UIMessage( UIMsg &msg ) {}
 
 protected:
     Model* model;

@@ -27,6 +27,8 @@
 #include <gui/dccconfig_1_screen/DCCConfig_1Presenter.hpp>
 #include <gui/placeholderscreen_screen/placeHolderScreenView.hpp>
 #include <gui/placeholderscreen_screen/placeHolderScreenPresenter.hpp>
+#include <gui/decoders_screen/DecodersView.hpp>
+#include <gui/decoders_screen/DecodersPresenter.hpp>
 
 using namespace touchgfx;
 

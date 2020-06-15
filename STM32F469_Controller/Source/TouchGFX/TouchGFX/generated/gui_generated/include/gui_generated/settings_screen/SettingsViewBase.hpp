@@ -11,8 +11,8 @@
 #include <gui/containers/StatusBar.hpp>
 #include <touchgfx/containers/ScrollableContainer.hpp>
 #include <touchgfx/widgets/TiledImage.hpp>
-#include <touchgfx/containers/Slider.hpp>
 #include <touchgfx/widgets/TextArea.hpp>
+#include <gui/containers/CheckBox.hpp>
 
 class SettingsViewBase : public touchgfx::View<SettingsPresenter>
 {
@@ -33,8 +33,12 @@ protected:
     StatusBar statusBar;
     touchgfx::ScrollableContainer scrollableContainer1;
     touchgfx::TiledImage backgroundImage;
-    touchgfx::Slider sliderBacklight;
-    touchgfx::TextArea textArea1;
+    touchgfx::TextArea textThrottle;
+    touchgfx::TextArea textBrake;
+    CheckBox checkBoxReverseThrottle;
+    CheckBox checkBoxReverseBrake;
+    CheckBox checkBoxReverseDirection;
+    touchgfx::TextArea textDirection;
 
 private:
 

@@ -26,7 +26,8 @@ public:
     virtual void deactivate();
 
     virtual ~SettingsPresenter() {};
-
+	virtual void UIMessage(UIMsg &msg);
+	
 private:
     SettingsPresenter();
 

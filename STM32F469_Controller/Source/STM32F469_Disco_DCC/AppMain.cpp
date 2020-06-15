@@ -6,11 +6,12 @@
 #include <stdio.h>
 #include "ProgTrackDCC.h"
 #include "MainTrackDCC.h"
-
+#include "Config.h"
 
 UIMessage uimsg;
 DRV8873S drv8873S(&hspi2);
 AppMain app;
+UIConfig uiConfig;
 
 
 extern "C" void AppMainTask_Entry(void *argument)
@@ -19,46 +20,66 @@ extern "C" void AppMainTask_Entry(void *argument)
 }
 
 
-enum EKey
-{
-	None = 0,
-	F1 = 1,
-	F2 = 2,
-	F3 = 3,
-	F4 = 4,
-	F5 = 5,
-	FWD = 6,
-	REV = 7,
-	EStop = 8,
-	KeyRelease = 0x1000
-};
 static struct KeyScan
 {
 	GPIO_TypeDef *port;
 	uint16_t pin;
-	EKey key;
+	EKey::EKey key;
 	int debounce;
 	int release;
-	
+	bool down() const { return release != 0; }
 } Keys[] = { 
-	{ Fn1_GPIO_Port,   Fn1_Pin,   F1 },	
-	{ Fn2_GPIO_Port,   Fn2_Pin,   F2 },	
-	{ Fn3_GPIO_Port,   Fn3_Pin,   F3 },	
-	{ Fn4_GPIO_Port,   Fn4_Pin,   F4 },
-	{ Fn5_GPIO_Port,   Fn5_Pin,   F5 },
-	{ FWD_GPIO_Port,   FWD_Pin,   FWD },
-	{ REV_GPIO_Port,   REV_Pin,   REV },
-	{ EStop_GPIO_Port, EStop_Pin, EStop }
+	{ Fn1_GPIO_Port,   Fn1_Pin,   EKey::F1 },	
+	{ Fn2_GPIO_Port,   Fn2_Pin,   EKey::F2 },	
+	{ Fn3_GPIO_Port,   Fn3_Pin,   EKey::F3 },	
+	{ Fn4_GPIO_Port,   Fn4_Pin,   EKey::F4 },
+	{ Fn5_GPIO_Port,   Fn5_Pin,   EKey::F5 },
+	{ FWD_GPIO_Port,   FWD_Pin,   EKey::FWD },
+	{ REV_GPIO_Port,   REV_Pin,   EKey::REV },
+	{ EStop_GPIO_Port, EStop_Pin, EKey::EStop }
 };
 
+uint16_t throttle, brake;
+
+uint16_t throttleRaw, brakeRaw;
+KeyScan *fwdKey, *revKey;
+
 const int DEBOUNCE_TIMER = 25;	//ms
+
 static void InitInputs()
 {
 	for (int i = 0; i < countof(Keys); i++)
 		Keys[i].debounce = Keys[i].release = 0;
+	uiConfig.parse();
+	for (int i = 0; i < countof(Keys); i++)
+		if (Keys[i].key == EKey::FWD)
+			fwdKey = Keys + i;
+		else if (Keys[i].key == EKey::REV)
+			revKey = Keys + i;
 }
 
-static EKey ReadInputs(int &i)
+static int MapAnalog(int raw, int min, int max, bool reverse, int outMin, int outMax)
+{
+	int out = (outMax - outMin) * (raw - min) / (max - min) + outMin;
+	if (out < outMin)
+		out = outMin;
+	else if (out > outMax)
+		out = outMax;
+
+	if (reverse)
+		out = outMax - out;
+	return out;
+}
+
+static int MapAnalogToFixed(int raw, int min, int max, bool reverse, int outMin, int outMax)
+{
+	const int SCALE = 16;
+	int n = MapAnalog(raw, min, max, reverse, outMin * SCALE, (outMax+1) * SCALE);
+	int out = (n - SCALE / 2) / SCALE;
+	return out;
+}
+
+static EKey::EKey ReadInputs(int &i)
 {
 	while (i < countof(Keys))
 	{
@@ -89,7 +110,7 @@ static EKey ReadInputs(int &i)
 				if (k.release == 0)
 				{
 					// key release event
-					return (EKey)(k.key + KeyRelease);
+					return (EKey::EKey)(k.key + EKey::KeyRelease);
 				}
 			}
 			else
@@ -109,10 +130,10 @@ static EKey ReadInputs(int &i)
 		sum1 += ADC_Joysticks[i + 0];
 		sum2 += ADC_Joysticks[i + 1];
 	}
-	uint16_t avg1 = sum1 / (countof(ADC_Joysticks) / 2);
-	uint16_t avg2 = sum2 / (countof(ADC_Joysticks) / 2);
+	brakeRaw = sum1 / (countof(ADC_Joysticks) / 2);
+	throttleRaw = sum2 / (countof(ADC_Joysticks) / 2);
 	
-	return None;
+	return EKey::None;
 }
 
 static struct LEDDef
@@ -158,7 +179,7 @@ void AppMain::ShowLED(int id, bool enable, int duration)
 	}
 }
 
-	extern "C" void CheckTaskStacks(void);
+extern "C" void CheckTaskStacks(void);
 
 void AppMain::ToggleEStop()
 {
@@ -168,8 +189,6 @@ void AppMain::ToggleEStop()
 	ProgrammingTrack_DCC_EStop(eStop);
 	
 	CheckTaskStacks();
-	
-
 }
 
 void AppMain::Run()
@@ -180,18 +199,46 @@ void AppMain::Run()
 	
 	InitInputs();
 	
+	uint16_t ms_counter;
 	for(;  ;)
 	{
+		ms_counter++;
+		if (ms_counter >= 1000)
+			ms_counter = 0;
+		
 		UpdateLEDs();
 		
 		int i = 0;
-		EKey key;
-		while ((key = ReadInputs(i)) != None)
+		EKey::EKey key;
+		while ((key = ReadInputs(i)) != EKey::None)
 		{
-			if (key == EKey::EStop)
+			if (key == EKey::EStop)	// Should we process this here, or should we listen for our own events?
 				ToggleEStop();
+
+			UIMsg msg;
+			msg.type = EUIMessageType::KeyEvent;
+			msg.keys.keyEvent = key;
+			uimsg.Send(msg);
 		}
 		
+		// Update joysticks periodically
+		if(ms_counter % 50 == 0)
+		{
+			// compute value 0-1023
+			UIMsg msg;
+			msg.type = EUIMessageType::InputEvent;
+			
+			msg.input.throttleRaw = throttleRaw;
+			msg.input.throttle = MapAnalog(throttleRaw, uiConfig.getThrottleMin(), uiConfig.getThrottleMax(), uiConfig.getThrottleReverse(), 0, 128);
+			msg.input.brakeRaw = brakeRaw;
+			msg.input.brake = MapAnalog(brakeRaw, uiConfig.getBrakeMin(), uiConfig.getBrakeMax(), uiConfig.getBrakeReverse(), 0, 100 );
+			if ( uiConfig.getDirectionReverse())
+				msg.input.direction = revKey->down() ? EDirection::Forward : fwdKey->down() ? EDirection::Reverse : EDirection::Stopped;
+			else
+				msg.input.direction = fwdKey->down() ? EDirection::Forward : revKey->down() ? EDirection::Reverse : EDirection::Stopped;
+			
+			uimsg.Send(msg);
+		}
 		osDelay(pdMS_TO_TICKS(1));
 	}
 }
@@ -280,6 +327,10 @@ extern "C" {
 		- LCC Config
 		- About
 		- Log/Diagnostics
+		- Inputs
+			- usb on the go
+				- usb hid device input
+			- configure pot range 
 		- More
 			- calibrate touch screen
 			- app settings
@@ -287,9 +338,6 @@ extern "C" {
 			- dcc track programming
 			- lcc config
 			- switch to usb_msc mode
-			- usb on the go
-				- usb hid device input
-				- configure pot range
 		
 	- dcc programming 
 		- track 
@@ -305,7 +353,6 @@ extern "C" {
 		- with all accessories, so we can select, or zoom then select?
 		
 TODO
-	- Add selection changed action to scrollwheel.
-	- Create uncover transition.
+	- Add disabled to checkbox
 	
 */

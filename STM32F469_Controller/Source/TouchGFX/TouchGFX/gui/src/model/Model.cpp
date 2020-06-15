@@ -1,6 +1,5 @@
 #include <gui/model/Model.hpp>
 #include <gui/model/ModelListener.hpp>
-#include "UIMessage.h"
 #include "ProgTrackDCC.h"
 #include "MainTrackDCC.h"
 
@@ -18,17 +17,18 @@ void Model::tick()
 		{
 			switch (msg.type)
 			{
-				case MainTrackStatusUpdate:
+				case EUIMessageType::MainTrackStatusUpdate:
 					mainTrackStatus = msg.hbStatus;
 					if (modelListener)
 						modelListener->TrackStatusChanged();
 					break;
-				case ProgrammingTrackStatusUpdate:
+				case EUIMessageType::ProgrammingTrackStatusUpdate:
 					progTrackStatus = msg.hbStatus;
 					if (modelListener)
 						modelListener->TrackStatusChanged();
 					break;
 				default:
+					modelListener->UIMessage(msg);
 					break;
 			}
 		}

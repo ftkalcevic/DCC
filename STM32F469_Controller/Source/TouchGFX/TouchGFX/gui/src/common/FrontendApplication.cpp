@@ -7,6 +7,8 @@
 #include <gui/dccsettings_screen/DCCSettingsPresenter.hpp>
 #include <gui/about_screen/AboutView.hpp>
 #include <gui/about_screen/AboutPresenter.hpp>
+#include <gui/decoders_screen/DecodersView.hpp>
+#include <gui/decoders_screen/DecodersPresenter.hpp>
 #include <touchgfx/transitions/NoTransition.hpp>
 
 #include <new>
@@ -102,5 +104,17 @@ void FrontendApplication::gotoDCCConfigScreen()
 void FrontendApplication::gotoDCCConfigScreenImpl()
 {
     touchgfx::makeTransition<DCCConfigView, DCCConfigPresenter, touchgfx::CoverTransition<NORTH>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+}
+
+
+void FrontendApplication::gotoDecodersScreen()
+{
+    transitionCallback = touchgfx::Callback<FrontendApplication>(this, &FrontendApplication::gotoDecodersScreenImpl);
+    pendingScreenTransitionCallback = &transitionCallback;
+}
+
+void FrontendApplication::gotoDecodersScreenImpl()
+{
+    touchgfx::makeTransition<DecodersView, DecodersPresenter, touchgfx::CoverTransition<NORTH>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }
 
