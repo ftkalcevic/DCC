@@ -41,7 +41,7 @@ void ScrollList::setWindowSize(int16_t items)
 
 void ScrollList::setPadding(int16_t paddingBefore, int16_t paddingAfter)
 {
-    int16_t currentOffset = getOffset();
+    int32_t currentOffset = getOffset();
     distanceBeforeAlignedItem = paddingBefore;
     paddingAfterLastItem = paddingAfter;
     setOffset(currentOffset);
@@ -155,19 +155,19 @@ void ScrollList::handleClickEvent(const ClickEvent& evt)
         initialSwipeOffset = getOffset();
 
         setOffset(getNearestAlignedOffset(initialSwipeOffset));
-        int16_t click = (getHorizontal() ? xClick : yClick);
-        int16_t offset = -getNearestAlignedOffset(getOffset() - click);
-        int16_t listSize = getNumberOfItems() * itemSize;
-        if (getCircular())
+        if (itemPressedCallback && itemPressedCallback->isValid())
         {
-            offset += listSize;
-            offset %= listSize;
-        }
-        if (offset >= 0 && offset < listSize)
-        {
-            int16_t item = offset / itemSize;
-            if (itemPressedCallback && itemPressedCallback->isValid())
+            int16_t click = (getHorizontal() ? xClick : yClick);
+            int32_t offset = click - getOffset();
+            int32_t listSize = getNumberOfItems() * itemSize;
+            if (getCircular())
             {
+                offset += listSize;
+                offset %= listSize;
+            }
+            if (offset >= 0 && offset < listSize)
+            {
+                int16_t item = offset / itemSize;
                 itemPressedCallback->execute(item);
             }
         }
@@ -178,19 +178,19 @@ void ScrollList::handleClickEvent(const ClickEvent& evt)
         {
             // For a tiny drag, start by re-aligning (no animation(!))
             setOffset(getNearestAlignedOffset(getOffset()));
-            int16_t click = (getHorizontal() ? xClick : yClick);
-            int16_t offset = -getNearestAlignedOffset(getOffset() - click);
-            int16_t listSize = getNumberOfItems() * itemSize;
-            if (getCircular())
+            if (itemSelectedCallback && itemSelectedCallback->isValid())
             {
-                offset += listSize;
-                offset %= listSize;
-            }
-            if (offset >= 0 && offset < listSize)
-            {
-                int16_t item = offset / itemSize;
-                if (itemSelectedCallback && itemSelectedCallback->isValid())
+                int16_t click = (getHorizontal() ? xClick : yClick);
+                int32_t offset = click - getOffset();
+                int32_t listSize = getNumberOfItems() * itemSize;
+                if (getCircular())
                 {
+                    offset += listSize;
+                    offset %= listSize;
+                }
+                if (offset >= 0 && offset < listSize)
+                {
+                    int16_t item = offset / itemSize;
                     itemSelectedCallback->execute(item);
                 }
             }
@@ -211,23 +211,17 @@ int32_t ScrollList::getNearestAlignedOffset(int32_t offset) const
         return ScrollBase::getNearestAlignedOffset(offset);
     }
 
-    if (getCircular())
-    {
-        return offset;
-    }
-    // non-circular
-    // Only allow negative and 0 values
     return keepOffsetInsideLimits(offset, 0);
 }
 
-int32_t ScrollList::keepOffsetInsideLimits(int32_t offset, int16_t overShoot) const
+int32_t ScrollList::keepOffsetInsideLimits(int32_t newOffset, int16_t overShoot) const
 {
     if (!getCircular())
     {
-        offset = MIN(offset, overShoot);
+        newOffset = MIN(newOffset, overShoot);
         int maxOffToTheStart = windowSize < getNumberOfItems() ? getNumberOfItems() - windowSize : 0;
-        offset = MAX(offset, -(itemSize * maxOffToTheStart) - overShoot);
+        newOffset = MAX(newOffset, -(itemSize * maxOffToTheStart) - overShoot);
     }
-    return offset;
+    return newOffset;
 }
 } // namespace touchgfx

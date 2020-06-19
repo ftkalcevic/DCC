@@ -174,7 +174,7 @@ void ScrollBase::allowVerticalDrag(bool enable)
 void ScrollBase::animateToItem(int16_t itemIndex, int16_t animationSteps /*= -1*/)
 {
     int32_t position = getPositionForItem(itemIndex);
-    animateToPosition(position, animationSteps < 0 ? defaultAnimationSteps : animationSteps);
+    animateToPosition(position, animationSteps);
 }
 
 void ScrollBase::setItemSelectedCallback(GenericCallback<int16_t>& callback)
@@ -226,8 +226,9 @@ void ScrollBase::handleGestureEvent(const GestureEvent& evt)
         int32_t newOffset = getOffset() + direction * steps * swipeAcceleration / 10;
         if (maxSwipeItems > 0)
         {
-            newOffset = MIN(newOffset, initialSwipeOffset + maxSwipeItems * itemSize);
-            newOffset = MAX(newOffset, initialSwipeOffset - maxSwipeItems * itemSize);
+            int32_t maxDistance = maxSwipeItems * itemSize;
+            newOffset = MIN(newOffset, initialSwipeOffset + maxDistance);
+            newOffset = MAX(newOffset, initialSwipeOffset - maxDistance);
         }
         newOffset = keepOffsetInsideLimits(newOffset, 0);
         steps = MIN(steps, defaultAnimationSteps);
@@ -247,7 +248,9 @@ void ScrollBase::handleTickEvent()
             currentAnimationState = NO_ANIMATION;
             gestureStep = 0;
             Application::getInstance()->unregisterTimerWidget(this);
-            setOffset(getNormalizedOffset(getOffset()));
+            setOffset(getNormalizedOffset(gestureEnd));
+            // Also adjust initialSwipeOffset in case it is being used.
+            initialSwipeOffset += getOffset() - gestureEnd;
 
             //Item has settled, call back
             if (animationEndedCallback && animationEndedCallback->isValid())
@@ -282,11 +285,7 @@ int ScrollBase::getNormalizedOffset(int offset) const
     }
     int32_t listSize = numItems * itemSize;
     offset %= listSize;
-    if (offset > 0)
-    {
-        offset -= listSize;
-    }
-    return offset;
+    return offset > 0 ? offset - listSize : offset;
 }
 
 int32_t ScrollBase::getNearestAlignedOffset(int32_t offset) const
@@ -309,11 +308,13 @@ int32_t ScrollBase::getNearestAlignedOffset(int32_t offset) const
 
 void ScrollBase::animateToPosition(int32_t position, int16_t steps)
 {
+    int32_t currentPosition = getOffset();
     position = getNearestAlignedOffset(position);
     if (steps < 0)
     {
         steps = defaultAnimationSteps;
     }
+    steps = MIN(steps, abs(position - currentPosition));
     if (steps < 1)
     {
 	    stopAnimation();
@@ -321,7 +322,7 @@ void ScrollBase::animateToPosition(int32_t position, int16_t steps)
     }
     else
     {
-        gestureStart = getOffset();
+        gestureStart = currentPosition;
         gestureEnd = position;
         gestureStep = 0;
         gestureStepsTotal = steps;

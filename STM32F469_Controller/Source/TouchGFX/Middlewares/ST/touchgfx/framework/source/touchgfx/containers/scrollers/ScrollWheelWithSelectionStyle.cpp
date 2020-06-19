@@ -35,18 +35,32 @@ ScrollWheelWithSelectionStyle::ScrollWheelWithSelectionStyle()
 
 void ScrollWheelWithSelectionStyle::setWidth(int16_t width)
 {
-    ScrollWheelBase::setWidth(width);
     if (getHorizontal())
     {
+        // list and list2 are in the same array of drawables. Avoid using the same drawable twice.
+        list.removeAll();
+        list2.removeAll();
+        ScrollWheelBase::setWidth(width);
         refreshDrawableListsLayout();
+    }
+    else
+    {
+        ScrollWheelBase::setWidth(width);
     }
 }
 
 void ScrollWheelWithSelectionStyle::setHeight(int16_t height)
 {
-    ScrollWheelBase::setHeight(height);
-    if (!getHorizontal())
+    if (getHorizontal())
     {
+        ScrollWheelBase::setHeight(height);
+    }
+    else
+    {
+        // list and list2 are in the same array of drawables. Avoid using the same drawable twice.
+        list.removeAll();
+        list2.removeAll();
+        ScrollWheelBase::setHeight(height);
         refreshDrawableListsLayout();
     }
 }

@@ -80,9 +80,12 @@ int ScrollWheelBase::getSelectedItem() const
 
 int32_t ScrollWheelBase::keepOffsetInsideLimits(int32_t newOffset, int16_t overShoot) const
 {
-    newOffset = MIN(newOffset, overShoot);
-    int16_t numberOfItems = getNumberOfItems();
-    newOffset = MAX(newOffset, -(itemSize * (numberOfItems - 1)) - overShoot);
+    if (!getCircular())
+    {
+        newOffset = MIN(newOffset, overShoot);
+        int16_t numberOfItems = getNumberOfItems();
+        newOffset = MAX(newOffset, -(itemSize * (numberOfItems - 1)) - overShoot);
+    }
     return newOffset;
 }
 
@@ -152,8 +155,9 @@ void ScrollWheelBase::handleGestureEvent(const GestureEvent& evt)
         int32_t newOffset = getOffset() + evt.getVelocity() * swipeAcceleration / 10;
         if (maxSwipeItems > 0)
         {
-            newOffset = MIN(newOffset, initialSwipeOffset + maxSwipeItems * itemSize);
-            newOffset = MAX(newOffset, initialSwipeOffset - maxSwipeItems * itemSize);
+            int32_t maxDistance = maxSwipeItems * itemSize;
+            newOffset = MIN(newOffset, initialSwipeOffset + maxDistance);
+            newOffset = MAX(newOffset, initialSwipeOffset - maxDistance);
         }
         animateToPosition(newOffset);
     }
