@@ -190,7 +190,13 @@ void Decoder::TakeControl(bool control)
 	Decoders &d = decoders[index];
 	if (d.type == EDecoderType::Multifunction )
 	{
+		//presenter.LocoTakeControl(d.address, control);
 		// TODO Call method to take control - possible yield others (multi-control)
+		// Send message.
+		//      picked up by AppMain to start sending dcc messages
+		//          maybe disable other locos
+		//      update the function keys
+		//      
 		d.loco.controlled = control;
 		boxDecoderBackground.setBorderSize(control ? 10 : 0);
         buttonTakeControl.setVisible(!control);;
@@ -202,13 +208,14 @@ void Decoder::TakeControl(bool control)
 
 void Decoder::takeControlClickedCallback(const touchgfx::AbstractButton& src)
 {
-	TakeControl(true);
+	//	TakeControl(true);
+	emitTakeControl(index,true);
 }
 
 void Decoder::yieldControlClickedCallback(const touchgfx::AbstractButton& src)
 {
-	TakeControl(false);
+//	TakeControl(false);
+	emitTakeControl(index,false);
 }
 
-	
 	

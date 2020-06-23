@@ -48,6 +48,8 @@ public:
 
 	void EnableProgTrack(bool enable);
 	void ScanProgrammingTrack();
+	void TakeControl(int decoderIndex, bool control);
+	
 		
 protected:
     /**

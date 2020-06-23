@@ -6,6 +6,9 @@
 #include "semphr.h"
 
 #ifdef __cplusplus
+
+class Decoders;
+
 class AppMain
 {
 public:
@@ -20,8 +23,11 @@ public:
 	void ShowTrackPowerLED(bool enable, int duration) { ShowLED(1, enable, duration);}
 	void ShowErrorLED(bool enable, int duration) { ShowLED(2, enable, duration);}
 	void ShowProgrammingTrackPowerLED(bool enable, int duration) { ShowLED(3, enable, duration);}
+
+	void TakeControl(int decoderIndex, bool control);
 	
 protected:
+	void YieldControl(Decoders &d);
 	void ShowLED(int id, bool enable, int duration);
 	void ToggleEStop();
 	
@@ -42,4 +48,8 @@ void ShowProgrammingTrackPowerLED(int enable, int duration);
 	
 #ifdef __cplusplus
 };
+
+
+extern AppMain app;
+
 #endif

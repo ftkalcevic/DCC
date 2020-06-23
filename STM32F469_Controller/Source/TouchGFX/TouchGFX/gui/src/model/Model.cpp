@@ -60,3 +60,7 @@ void Model::ScanProgrammingTrack()
 	ProgrammingTrack_DCC_ScanProgrammingTrack();
 }
 
+void Model::TakeControl(int decoderIndex, bool control)
+{
+	app.TakeControl(decoderIndex, control);
+}

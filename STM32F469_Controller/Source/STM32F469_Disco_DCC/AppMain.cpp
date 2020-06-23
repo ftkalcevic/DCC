@@ -7,6 +7,7 @@
 #include "ProgTrackDCC.h"
 #include "MainTrackDCC.h"
 #include "Config.h"
+#include "Decoders.h"
 
 UIMessage uimsg;
 DRV8873S drv8873S(&hspi2);
@@ -191,6 +192,52 @@ void AppMain::ToggleEStop()
 	CheckTaskStacks();
 }
 
+void AppMain::YieldControl(Decoders &d)
+{
+	if (d.loco.controlled)
+	{
+		d.loco.controlled = false;
+		// Send something to mainTrackDCC
+		MainTrack_DCC_Stop(d.address);
+	}
+}
+
+void AppMain::TakeControl(int decoderIndex, bool control)
+{
+	if (decoderIndex >= 0 && decoderIndex < decoderCount)
+	{
+		Decoders &d = decoders[decoderIndex];
+		if (d.type == EDecoderType::Multifunction )
+		{
+			if (!control)
+			{
+				YieldControl(d);
+				activeDecoder = -1;
+			}
+			else
+			{
+				// If control only one, release others
+				// TODO - if we support multiple active, then we need to know when a loco has focus on the UI so we can route speed/dir commands to it.
+				//	      or do we have a button to grab it.
+				for (int i = 0; i < decoderCount; i++)
+					if (i!=decoderIndex && decoders[i].type == EDecoderType::Multifunction)
+					{
+						YieldControl(decoders[i]);
+						activeDecoder = -1;
+					}
+
+				d.loco.controlled = control;
+				// Mark this as the active 
+				activeDecoder = decoderIndex;
+				// Send something to mainTrackDCC (happens every 50ms)
+				// update the function keys
+			}
+		}
+	}
+	
+}
+
+
 void AppMain::Run()
 {
 	CheckTaskStacks();
@@ -238,6 +285,10 @@ void AppMain::Run()
 				msg.input.direction = fwdKey->down() ? EDirection::Forward : revKey->down() ? EDirection::Reverse : EDirection::Stopped;
 			
 			uimsg.Send(msg);
+			if (activeDecoder >= 0 && decoders[activeDecoder].type == EDecoderType::Multifunction && decoders[activeDecoder].loco.controlled )
+			{
+				MainTrack_DCC_SetSpeedAndDirection(decoders[activeDecoder].address, msg.input.direction, msg.input.throttle, msg.input.brake);
+			}
 		}
 		osDelay(pdMS_TO_TICKS(1));
 	}

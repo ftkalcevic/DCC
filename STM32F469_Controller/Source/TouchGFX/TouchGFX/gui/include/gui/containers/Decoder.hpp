@@ -25,9 +25,13 @@ public:
     void imageClickHandler(const ScalableAspectImage& img, const ClickEvent& e);
 	void takeControlClickedCallback(const touchgfx::AbstractButton& src);
 	void yieldControlClickedCallback(const touchgfx::AbstractButton& src);
-
+    void setTakeControlCallback(touchgfx::GenericCallback<int,bool>& callback)
+    {
+        this->takeControlCallback = &callback;
+    }
 	
 protected:
+	
     touchgfx::BoxWithBorder boxDecoderBackground;
     touchgfx::Slider sliderSpeed;
     touchgfx::Slider sliderBrake;
@@ -55,6 +59,15 @@ protected:
     Callback<Decoder, const ScalableAspectImage&, const ClickEvent&> imageClickedCallback;    
     touchgfx::Callback<Decoder, const touchgfx::AbstractButton&> takeControlClickCallback;
     touchgfx::Callback<Decoder, const touchgfx::AbstractButton&> yieldControlClickCallback;
+	
+	touchgfx::GenericCallback<int, bool>* takeControlCallback;
+    virtual void emitTakeControl(int decoderIndex, bool control)
+    {
+        if (takeControlCallback && takeControlCallback->isValid())
+        {
+            this->takeControlCallback->execute(decoderIndex, control);
+        }
+    }	
 };
 
 #endif // DECODER_HPP

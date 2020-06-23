@@ -4,7 +4,7 @@
 DecodersPresenter::DecodersPresenter(DecodersView& v)
     : view(v)
 {
-
+	
 }
 
 void DecodersPresenter::activate()
@@ -16,3 +16,10 @@ void DecodersPresenter::deactivate()
 {
 
 }
+
+void DecodersPresenter::TakeControl(int decoderIndex, bool control)
+{
+	model->TakeControl(decoderIndex,control);
+	view.invalidate();
+}
+

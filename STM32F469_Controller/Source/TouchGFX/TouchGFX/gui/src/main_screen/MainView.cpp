@@ -20,7 +20,7 @@ enum EConfigPages
 /****************************************************************/
 
 /****************************************************************/
-int activeDecoder = 0;
+int activeDecoder = -1;
 int decoderCount=4;
 Decoders decoders[4] =
 { 

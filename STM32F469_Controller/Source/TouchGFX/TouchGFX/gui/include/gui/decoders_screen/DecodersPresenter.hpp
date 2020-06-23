@@ -27,6 +27,8 @@ public:
 
     virtual ~DecodersPresenter() {};
 
+	void TakeControl(int decoderIndex, bool control);
+	
 private:
     DecodersPresenter();
 

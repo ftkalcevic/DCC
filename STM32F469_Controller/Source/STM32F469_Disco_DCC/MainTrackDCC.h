@@ -18,11 +18,22 @@
 
 #define MESSAGE_QUEUE_LEN	10
 
+struct DecoderMessage
+{
+	uint16_t address;
+	uint8_t msgLen;
+	uint8_t msg[MAX_DCC_MESSAGE_LEN];
+	uint8_t repeatCount;
+	uint32_t lastSendTime;
+};
+
+
 
 class MainTrackDCC: public DCCHal<DCCType::MainTrack, MAINTRK_ARR_OFFSET, MAINTRK_CCn_OFFSET, MAINTRK_BURST_SIZE>
 {
-	DCCMessage messageTable[MAX_DCC_MESSAGES];
-	int messageCount;
+	DecoderMessage decoderTable[MAX_DCC_MESSAGES];
+	int decoderCount;
+	int nextRecord;
 	SemaphoreHandle_t sentSemaphoreHandle;
 	StaticSemaphore_t sentSemaphoreBuffer;
 	uint8_t queueStorageBuffer[sizeof(DCCMessage)*MESSAGE_QUEUE_LEN];
@@ -36,6 +47,10 @@ public:
 				  GPIO_TypeDef *Signal_Port, uint16_t Signal_Pin ) 
 		: DCCHal(CS_Port, CS_Pin, Disable_Port, Disable_Pin, Fault_Port, Fault_Pin, Signal_Port, Signal_Pin)
 	{
+		for (int i = 0; i < countof(decoderTable); i++)
+			decoderTable[i].address = NO_ADDRESS;
+		decoderCount = 0;
+		nextRecord = -1;
 	}
 	
 	void Initialise(int tripCurrent, int toff, int slewRate)
@@ -44,7 +59,63 @@ public:
 		queueHandle = xQueueCreateStatic(MESSAGE_QUEUE_LEN, sizeof(DCCMessage), queueStorageBuffer, &queueBuffer);
 		DCCHal::Initialise(tripCurrent, toff, slewRate);
 	}
+	
+	// find the next message in the table.  Don't send the same message consecutively - put an idle (or another message) between
+	int findNextRecord(int currentRecord)
+	{
+		int start = currentRecord >= 0 ? currentRecord : 0;
+		for (int i = 0; i < countof(decoderTable); i++)
+		{
+			int index = (start + i) % countof(decoderTable);
+			if (decoderTable[index].address != NO_ADDRESS && index != currentRecord )
+				return index;
+		}
+		return -1;
+	}
+	
+	int findRecord(DCCMessage & msg)
+	{
+		for (int i = 0; i < countof(decoderTable); i++)
+		{
+			if (decoderTable[i].address == msg.address)
+				return i;
+		}
+		for (int i = 0; i < countof(decoderTable); i++)
+		{
+			if (decoderTable[i].address == NO_ADDRESS)
+			{
+				decoderTable[i].address  = msg.address;
+				return i;
+			}
+		}
+		return -1;
+	}
 
+	void ProcessNextRecord()
+	{
+		if (nextRecord < 0)
+		{
+			static uint8_t idleMessage[3] = { 0xFF, 0, 0xFF };
+			SendDCCMessage(idleMessage, sizeof(idleMessage));
+		}
+		else
+		{
+			SendDCCMessage(decoderTable[nextRecord].msg, decoderTable[nextRecord].msgLen);
+			decoderTable[nextRecord].lastSendTime = xTaskGetTickCount();
+			if (decoderTable[nextRecord].repeatCount > 0)
+			{
+				// Repeat count?  Remove record when done.
+				decoderTable[nextRecord].repeatCount--;
+				if (decoderTable[nextRecord].repeatCount == 0)
+				{
+					decoderTable[nextRecord].address = NO_ADDRESS;
+				}
+			}
+		}
+		nextRecord = findNextRecord(nextRecord);
+		xSemaphoreTake(sentSemaphoreHandle, portMAX_DELAY);	// Wait forever for the message to be sent. (or max 5ms?  Why wouldn't it go?)
+	}
+	
 	void Run(bool enable)
 	{
 		Enable(enable);
@@ -52,7 +123,7 @@ public:
 		TickType_t lastTime = xTaskGetTickCount();
 		for (;;)
 		{
-			// Check device status ever second
+			// Check device status every second
 			if(xTaskGetTickCount() - lastTime > pdMS_TO_TICKS(1000))
 			{
 				// 1 sec timer
@@ -79,22 +150,31 @@ public:
 				DCCMessage msg;
 				if (xQueueReceive(queueHandle, &msg, 0) == pdPASS)
 				{
-					
-					// if trackEnabled, send message
-					if(enabled)
-					{
+					msg.msgLen++;
+					SetErrorByte(msg.msg, msg.msgLen);
+
 					// Update local table
-					//      loco commands need to be stored for playback later
+					int index = findRecord(msg);
+					if (index >= 0)
+					{
+						nextRecord = index;
+						decoderTable[index].address = msg.address;
+						memcpy( decoderTable[index].msg, msg.msg, msg.msgLen);
+						decoderTable[index].msgLen = msg.msgLen;
+						decoderTable[index].lastSendTime = 0;
+						decoderTable[index].repeatCount = msg.repeatCount;
 					}
 				}
 			}
-			// Else process message table
-			else if ( enabled )
+			
+			// process message table
+			if ( enabled )
 			{
-				// We can't find a message to send - either empty table, or 5ms gap issue.
-				static uint8_t idleMessage[3] = { 0xFF, 0, 0xFF };
-				SendDCCMessage(idleMessage, sizeof(idleMessage));
-				xSemaphoreTake(sentSemaphoreHandle, portMAX_DELAY);	// Wait forever for the message to be sent. (or max 5ms?  Why wouldn't it go?)
+				ProcessNextRecord();
+			}
+			else
+			{
+				vTaskDelay(pdMS_TO_TICKS(5));
 			}
 		
 			// need to handle a 5ms gap before sending a message to the same decoder.
@@ -102,7 +182,7 @@ public:
 			//                    14 * 58 + 3 * 8 * 58 + 3*100 + 1 * 58 = 2562us
 
 			// todo - better timeout - every 1 second to update status.  only need to wait for msg (or enable/estop - should these be messages - high priority) when disabled.
-			vTaskDelay(pdMS_TO_TICKS(5));
+			//vTaskDelay(pdMS_TO_TICKS(5));
 			//printf("M%d\n", ReadCurrent());
 
 		}
@@ -113,7 +193,19 @@ public:
 		DCCHal::DCCSent();
 		xSemaphoreGiveFromISR(sentSemaphoreHandle, NULL);
 	}
+	
+	void SendMessage(DCCMessage msg)
+	{
+		BaseType_t res = xQueueSend(queueHandle, &msg, 0);
+		if (res != pdPASS)
+		{
+			assert(false && "UI Queue Send failed");
+		}
+	}
+	
 };
 
 
 extern void MainTrack_DCC_EStop(bool stop);
+extern void MainTrack_DCC_Stop(uint16_t address, bool estop=false);
+extern void MainTrack_DCC_SetSpeedAndDirection(uint16_t address, EDirection::EDirection direction, uint8_t throttle, uint8_t brake);

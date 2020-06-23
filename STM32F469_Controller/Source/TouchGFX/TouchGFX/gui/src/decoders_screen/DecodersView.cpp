@@ -3,10 +3,14 @@
 #include "Decoders.h"
 
 
-DecodersView::DecodersView()
+DecodersView::DecodersView() :
+    takeControlCallback(this, &DecodersView::takeControlHandler)
 {
     scrollWheelDecoders.setNumberOfItems(decoderCount);
 	scrollWheelDecoders.animateToItem(activeDecoder,0);
+	
+	for ( int i = 0; i < scrollWheelDecodersListItems.getNumberOfDrawables(); i++ )
+		scrollWheelDecodersListItems[i].setTakeControlCallback(takeControlCallback);
 }
 
 void DecodersView::setupScreen()
@@ -35,4 +39,9 @@ void DecodersView::handleGestureEvent(const GestureEvent & evt)
 	}
 	else
 		DecodersViewBase::handleGestureEvent(evt); 
+}
+
+void DecodersView::takeControlHandler(int decoderIndex, bool control)
+{
+	presenter->TakeControl(decoderIndex, control);
 }
