@@ -88,3 +88,5 @@ LCCAtmegaXXM1/Source/test_can/Debug
 MiniSTM32V/VisualGDB/Debug
 MiniSTM32V/VisualGDB/Release
 STM32F469_Controller/Source/STM32F469_Disco_DCC/.visualgdb
+MiniSTM32V/.visualgdb/CodeDB/MiniSTM32V-Debug-VisualGDB
+MiniSTM32V/.visualgdb/CodeDB/MiniSTM32V-Release-VisualGDB

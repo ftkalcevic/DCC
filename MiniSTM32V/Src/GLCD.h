@@ -73,6 +73,10 @@
 ( blue  >> 3 ))
 
 /* Private function prototypes -----------------------------------------------*/
+#ifdef __cplusplus
+extern "C"
+{
+#endif
 void LCD_Initializtion(void);
 void LCD_Clear(uint16_t Color);
 uint16_t LCD_GetPoint(uint16_t Xpos,uint16_t Ypos);
@@ -84,6 +88,9 @@ void GUI_Text(uint8_t *str, uint16_t Color, uint16_t bkColor);
 void PutChinese(uint16_t Xpos,uint16_t Ypos,uint8_t *str,uint16_t Color,uint16_t bkColor);
 void GUI_Chinese(uint16_t Xpos, uint16_t Ypos, uint8_t *str,uint16_t Color, uint16_t bkColor);
 void GUI_Scroll(uint16_t lines,uint16_t color);
+#ifdef __cplusplus
+}
+#endif
 #endif 
 
 /*********************************************************************************************************

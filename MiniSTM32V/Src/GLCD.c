@@ -1384,7 +1384,7 @@ void PutChar( uint16_t Xpos, uint16_t Ypos, uint8_t ASCII, uint16_t charColor, u
 #define _6X13_HEIGHT 13
 	const int index = (ASCII-32) * _6X13_HEIGHT;
 
-	uint8_t *ptr = _6x13 + index;
+	const uint8_t *ptr = _6x13 + index;
     for( int i=0; i<_6X13_HEIGHT; i++ )
     {
         uint8_t c = *ptr++;

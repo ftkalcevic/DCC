@@ -492,6 +492,15 @@
     <ClInclude Include="$(EFP_BASE)\Profiler\DebuggerChecker.h">
       <Filter>Header files\Device-specific files\Semihosting/Profiler</Filter>
     </ClInclude>
+    <ClCompile Include="DCC.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="Gui.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\stm32f1xx_hal_timebase_tim.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\HzLib.h">
@@ -501,6 +510,12 @@
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="Src\GLCD.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="DCC.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="Gui.h">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>

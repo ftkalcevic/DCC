@@ -50,8 +50,6 @@ extern "C" {
 
 /* USER CODE END EM */
 
-void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
-
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
 
@@ -60,10 +58,12 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define DCC_IN_Pin GPIO_PIN_10
+#define DCC_IN_GPIO_Port GPIOB
 #define SD_CD_Pin GPIO_PIN_3
 #define SD_CD_GPIO_Port GPIOD
 /* USER CODE BEGIN Private defines */
-
+#define countof(x)		(sizeof(x)/sizeof((x)[0]))
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus
