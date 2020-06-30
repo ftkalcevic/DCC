@@ -99,21 +99,41 @@ KEEP extern const touchgfx::GlyphNode glyphs_Asap_Regular_40_4bpp[] FONT_TABLE_L
     { 20708, 0x007B,  10,  36,  31,   0,  11,   0,   0, 0x00 },
     { 20888, 0x007C,   4,  36,  30,   3,  10,   0,   0, 0x00 },
     { 20960, 0x007D,  10,  36,  31,   1,  11,   0,   0, 0x00 },
-    { 21140, 0x007E,  16,   4,  13,   3,  22,   0,   0, 0x00 }
+    { 21140, 0x007E,  16,   4,  13,   3,  22,   0,   0, 0x00 },
+    { 21172, 0x00A1,   5,  28,  21,   3,  12,   0,   0, 0x00 },
+    { 21256, 0x00A2,  16,  27,  24,   2,  19,   0,   0, 0x00 },
+    { 21472, 0x00A3,  17,  28,  28,   1,  20,   0,   0, 0x00 },
+    { 21724, 0x00A5,  22,  28,  28,   0,  22,   0,   0, 0x00 },
+    { 22032, 0x00A9,  30,  28,  28,   0,  30,   0,   0, 0x00 },
+    { 22452, 0x00AE,  30,  28,  28,   0,  30,   0,   0, 0x00 },
+    { 22872, 0x00B1,  20,  24,  24,   1,  22,   0,   0, 0x00 },
+    { 23112, 0x00B4,   7,   6,  30,   3,  13,   0,   0, 0x00 },
+    { 23136, 0x00BA,  10,  11,  28,   2,  13,   0,   0, 0x00 },
+    { 23191, 0x00BF,  16,  28,  21,   0,  17,   0,   0, 0x00 },
+    { 23415, 0x00D7,  19,  18,  18,   2,  22,   0,   0, 0x00 },
+    { 23595, 0x00F7,  20,  19,  19,   1,  22,   0,   0, 0x00 },
+    {     0, 0x201D,  12,   9,  30,   1,  14,   0,   0, 0x00 },
+    {    54, 0x2022,  11,  10,  18,   1,  13,   0,   0, 0x00 },
+    {   114, 0x20AC,  22,  28,  28,   0,  24,   0,   0, 0x00 }
 };
 
 // Asap_Regular_40_4bpp
 extern const touchgfx::GlyphNode glyphs_Asap_Regular_40_4bpp[];
 extern const uint8_t unicodes_Asap_Regular_40_4bpp_0[];
+extern const uint8_t unicodes_Asap_Regular_40_4bpp_4[];
 extern const uint8_t* const unicodes_Asap_Regular_40_4bpp[] =
 {
-    unicodes_Asap_Regular_40_4bpp_0
+    unicodes_Asap_Regular_40_4bpp_0,
+    0,
+    0,
+    0,
+    unicodes_Asap_Regular_40_4bpp_4
 };
 extern const touchgfx::KerningNode kerning_Asap_Regular_40_4bpp[];
 touchgfx::GeneratedFont& getFont_Asap_Regular_40_4bpp();
 
 touchgfx::GeneratedFont& getFont_Asap_Regular_40_4bpp()
 {
-    static touchgfx::GeneratedFont Asap_Regular_40_4bpp(glyphs_Asap_Regular_40_4bpp, 95, 40, 8, 4, 1, 1, 2, unicodes_Asap_Regular_40_4bpp, kerning_Asap_Regular_40_4bpp, 63, 0, 0);
+    static touchgfx::GeneratedFont Asap_Regular_40_4bpp(glyphs_Asap_Regular_40_4bpp, 110, 40, 8, 4, 1, 1, 2, unicodes_Asap_Regular_40_4bpp, kerning_Asap_Regular_40_4bpp, 63, 0, 0);
     return Asap_Regular_40_4bpp;
 }

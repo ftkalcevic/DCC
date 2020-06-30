@@ -43,12 +43,12 @@ protected:
     touchgfx::TiledImage backgroundImage;
     touchgfx::Line line1;
     touchgfx::PainterRGB888 line1Painter;
-    touchgfx::Line line1_1;
-    touchgfx::PainterRGB888 line1_1Painter;
-    touchgfx::Line line1_2;
-    touchgfx::PainterRGB888 line1_2Painter;
-    touchgfx::Line line1_3;
-    touchgfx::PainterRGB888 line1_3Painter;
+    touchgfx::Line line2;
+    touchgfx::PainterRGB888 line2Painter;
+    touchgfx::Line line3;
+    touchgfx::PainterRGB888 line3Painter;
+    touchgfx::Line line4;
+    touchgfx::PainterRGB888 line4Painter;
     touchgfx::ToggleButton toggleProgTrack;
     touchgfx::ScrollList scrollList1;
     touchgfx::DrawableListItems<ListItem, 4> scrollList1ListItems;

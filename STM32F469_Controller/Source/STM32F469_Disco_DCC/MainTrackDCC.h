@@ -93,6 +93,7 @@ public:
 
 	void ProcessNextRecord()
 	{
+		xSemaphoreTake(sentSemaphoreHandle, portMAX_DELAY);	// Wait forever for the message to be sent. (or max 5ms?  Why wouldn't it go?)
 		if (nextRecord < 0)
 		{
 			static uint8_t idleMessage[3] = { 0xFF, 0, 0xFF };
@@ -113,7 +114,6 @@ public:
 			}
 		}
 		nextRecord = findNextRecord(nextRecord);
-		xSemaphoreTake(sentSemaphoreHandle, portMAX_DELAY);	// Wait forever for the message to be sent. (or max 5ms?  Why wouldn't it go?)
 	}
 	
 	void Run(bool enable)
@@ -121,6 +121,9 @@ public:
 		Enable(enable);
 		bool lastTrackEnabled = isEnabled() && !isEStop();
 		TickType_t lastTime = xTaskGetTickCount();
+		
+		xSemaphoreGive(sentSemaphoreHandle);	// Pre trigger semaphore.
+
 		for (;;)
 		{
 			// Check device status every second

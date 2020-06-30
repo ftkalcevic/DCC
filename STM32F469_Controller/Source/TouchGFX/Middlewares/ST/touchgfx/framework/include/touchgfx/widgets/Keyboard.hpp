@@ -27,6 +27,7 @@
 #include <touchgfx/widgets/TextAreaWithWildcard.hpp>
 #include <touchgfx/Callback.hpp>
 #include <touchgfx/Color.hpp>
+#include <touchgfx/widgets/Box.hpp>
 
 namespace touchgfx
 {
@@ -76,8 +77,10 @@ public:
      */
     typedef struct
     {
+        uint8_t            keyId;             ///< The id of a key
         Rect               keyArea;           ///< The area occupied by a key
         GenericCallback<>* callback;          ///< The callback to execute, when the area is "pressed". The callback should be a Callback<YourClass> member in the class using the keyboard
+	    const char16_t *   str;
         BitmapId           highlightBitmapId; ///< A bitmap to show when the area is "pressed"
     } CallbackArea;
 
@@ -89,16 +92,24 @@ public:
      */
     typedef struct
     {
+	    colortype     backColor;
+	    uint8_t       backAlpha;
         BitmapId      bitmap;                ///< The bitmap used for the keyboard layout
         const Key*    keyArray;              ///< The keys on the keyboard layout
         uint8_t       numberOfKeys;          ///< The number of keys on this keyboard layout
         CallbackArea* callbackAreaArray;     ///< The array of areas and corresponding callbacks
         uint8_t       numberOfCallbackAreas; ///< The number of areas and corresponding callbacks
         Rect          textAreaPosition;      ///< The area where text is written
-        TypedText     textAreaFont;          ///< The font used for typing text
+        FontId        textAreaFont;          ///< The font used for typing text
         colortype     textAreaFontColor;     ///< The color used for the typing text
+	    colortype     textAreaBackColor;
         FontId        keyFont;               ///< The font used for the keys
         colortype     keyFontColor;          ///< The color used for the keys
+        colortype     keyBackColor;          ///< The color used for the keys
+        colortype     keyDownBackColor;      ///< The color used for the keys
+        colortype     keyAlpha;              ///< The color used for the keys
+        uint8_t       shadowDepth;
+        colortype     shadowColor;
     } Layout;
 
     /**
@@ -326,12 +337,12 @@ protected:
     Unicode::UnicodeChar*   buffer;         ///< Pointer to zero-terminated buffer where the entered text is being displayed.
     uint16_t                bufferSize;     ///< Size of the buffer
     uint16_t                bufferPosition; ///< Current position in buffer.
-    Image                   image;          ///< Layout bitmap.
-    TextAreaWithOneWildcard enteredText;    ///< Widget capable of displaying the entered text buffer.
+//    TextAreaWithOneWildcard enteredText;    ///< Widget capable of displaying the entered text buffer.
     const Layout*           layout;         ///< Pointer to layout.
     const KeyMappingList*   keyMappingList; ///< Pointer to key mapping.
-    Image                   highlightImage; ///< Image to display when a key is highlighted.
+    //Image                   highlightImage; ///< Image to display when a key is highlighted.
     bool                    cancelIsEmitted;///< Tells if a cancel is emitted to check when a key is released
+    uint8_t                 keyDown;
 
     /**
      * @fn Key Keyboard::getKeyForCoordinates(int16_t x, int16_t y) const;
@@ -372,7 +383,7 @@ protected:
      *
      * @return The CallbackArea, which is empty if not found.
      */
-    CallbackArea getCallbackAreaForCoordinates(int16_t x, int16_t y) const;
+    CallbackArea *getCallbackAreaForCoordinates(int16_t x, int16_t y) const;
 
     /**
      * @fn virtual void Keyboard::setupDrawChain(const Rect& invalidatedArea, Drawable** nextPreviousElement);
@@ -385,6 +396,10 @@ protected:
      * @param [in,out] nextPreviousElement Modifiable element in linked list.
      */
     virtual void setupDrawChain(const Rect& invalidatedArea, Drawable** nextPreviousElement);
+	void DrawKey(const Rect& invalidatedArea, const Rect &keyArea, const LCD::StringVisuals &visuals, Unicode::UnicodeChar const *str, bool isKeyDown) const;
+    void invalidateKeyRect(const Rect& rect);
+    void invalidateKeyRect(uint8_t keyId);
+    void enteredTextInvalidate() const;
 };
 } // namespace touchgfx
 

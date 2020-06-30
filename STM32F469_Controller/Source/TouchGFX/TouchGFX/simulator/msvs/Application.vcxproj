@@ -70,6 +70,8 @@
     <ClCompile Include="..\..\generated\gui_generated\src\decoders_screen\DecodersViewBase.cpp"/>
     <ClCompile Include="..\..\gui\src\containers\CheckBox.cpp"/>
     <ClCompile Include="..\..\generated\gui_generated\src\containers\CheckBoxBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\common\FullKeyboard.cpp"/>
+    <ClCompile Include="..\..\gui\src\common\NumericKeypad.cpp"/>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(ApplicationRoot)\assets\texts\texts.xlsx"/>
@@ -267,6 +269,12 @@
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\decoders_screen\DecodersViewBase.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\containers\CheckBox.hpp"/>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\CheckBoxBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\common\FullKeyboard.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\common\FullKeyboardKeyMapping.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\common\FullKeyboardLayout.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\common\NumericKeypad.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\common\NumericKeypadKeyMapping.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\common\NumericKeypadLayout.hpp"/>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="$(ApplicationRoot)\generated\simulator\touchgfx.rc"/>

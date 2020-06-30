@@ -20,9 +20,18 @@ namespace EUIMessageType
 		ProgrammingTrackStatusUpdate,
 		InputEvent,
 		KeyEvent,
+		ScanTrackReply
 	};
 }
 
+struct ScanTrackReply
+{
+	int16_t address;
+	int16_t manufacturer;
+	int16_t version;
+	int16_t config;
+	int16_t extendedAddress;
+};
 
 struct UIMsg
 {
@@ -33,6 +42,7 @@ struct UIMsg
 		DCCSettings::HBStatus hbStatus;
 		InputEvent input;
 		KeyEvent keys;
+		ScanTrackReply scan;
 	};
 };
 

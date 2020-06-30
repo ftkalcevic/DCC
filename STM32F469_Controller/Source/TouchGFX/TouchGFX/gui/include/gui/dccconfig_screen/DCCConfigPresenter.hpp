@@ -29,7 +29,10 @@ public:
 
 	void EnableProgTrack(bool enable);
 	void ScanProgrammingTrack();
-	
+
+	// ModelListener overrides
+	virtual void UIMessage(UIMsg &msg);
+
 private:
     DCCConfigPresenter();
 

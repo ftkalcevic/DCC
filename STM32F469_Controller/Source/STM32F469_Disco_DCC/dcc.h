@@ -6,7 +6,7 @@
 extern "C" void DCCTask_Entry(void *argument);
 
 const int PREAMBLE_BITS = 14;
-const int LONG_PREAMBLE_BITS = 20;
+const int LONG_PREAMBLE_BITS = 22;
 const int DCC_ONE_TIME = 58;	// usec
 const int DCC_ZERO_TIME = 100;	// usec
 const int MAX_DCC_MESSAGE_LEN = 6;
@@ -21,10 +21,10 @@ const uint16_t NO_ADDRESS = 0xFFFF;
 
 const uint8_t INS_SPEED_AND_DIRECTION = 0b01000000;
 const uint8_t INS_CV_ACCESS = 0b01110000;
-const uint8_t INS_CV_ACCESS_LONG = 0b11100000;
-const uint8_t INS_CV_VERIFY_BYTE = INS_CV_ACCESS_LONG | 0b0100;
-const uint8_t INS_CV_WRITE_BYTE = INS_CV_ACCESS_LONG | 0b1100;
-const uint8_t INS_CV_BIT = INS_CV_ACCESS_LONG | 0b1000;
+//const uint8_t INS_CV_ACCESS_LONG = 0b11100000;
+const uint8_t INS_CV_VERIFY_BYTE = INS_CV_ACCESS | 0b0100;
+const uint8_t INS_CV_WRITE_BYTE = INS_CV_ACCESS | 0b1100;
+const uint8_t INS_CV_BIT = INS_CV_ACCESS | 0b1000;
 
 const uint8_t DATA_CV_WRITE_BIT = 0b11110000;
 const uint8_t DATA_CV_VERIFY_BIT = 0b11100000;
@@ -34,6 +34,14 @@ const uint8_t DATA_SD_STOP = 0;
 const uint8_t DATA_SD_ESTOP = 1;
 const uint8_t DATA_SD_FORWARD = (1 << 5);
 const uint8_t DATA_SD_REVERSE = (0 << 5);
+
+const uint8_t CV29_DIRECTION			= 0x01;
+const uint8_t CV29_FL_LOCATION			= 0x02;
+const uint8_t CV29_POWER_SOURCE_CONV	= 0x04;
+const uint8_t CV29_BIDIRECT_COMMS		= 0x08;
+const uint8_t CV29_FULL_SPEED_TABLE		= 0x10;
+const uint8_t CV29_TWO_BYTE_ADDRESS		= 0x20;
+const uint8_t CV29_ACCESSORY_DECODER	= 0x80;
 
 struct DCCMessage
 {

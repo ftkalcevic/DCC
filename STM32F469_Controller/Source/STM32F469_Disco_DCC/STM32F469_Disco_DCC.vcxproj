@@ -44,7 +44,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">
     <ClCompile>
       <AdditionalIncludeDirectories>D:\Projects\DCC\STM32F469_Controller\Source\OpenLCB\src;..\TouchGFX\Core\Inc;..\TouchGFX\TouchGFX\generated\gui_generated\include;..\TouchGFX\TouchGFX\target;..\TouchGFX\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\TouchGFX\FATFS\App;..\TouchGFX\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS_V2;..\TouchGFX\Drivers\BSP\Components\Common;..\TouchGFX\FATFS\Target;..\TouchGFX\Middlewares\ST\STM32_USB_Device_Library\Class\MSC\Inc;..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy;..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc;..\TouchGFX\Drivers\CMSIS\Include;..\TouchGFX\TouchGFX\App;..\TouchGFX\Middlewares\ST\touchgfx\framework\include;..\TouchGFX\TouchGFX\target\generated;..\TouchGFX\TouchGFX\gui\include;..\TouchGFX\TouchGFX\generated\texts\include;..\TouchGFX\Middlewares\ST\STM32_USB_Device_Library\Core\Inc;..\TouchGFX\TouchGFX\generated\images\include;..\TouchGFX\Middlewares\Third_Party\FreeRTOS\Source\include;..\TouchGFX\Middlewares\Third_Party\FatFs\src;..\TouchGFX\Middlewares\Third_Party\FreeRTOS\Source\portable\GCC\ARM_CM4F;..\TouchGFX\Drivers\BSP\STM32469I-Discovery;..\TouchGFX\TouchGFX\generated\fonts\include;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>DEBUG=1;USE_FREERTOS;USE_USB_FS;USE_HAL_DRIVER;STM32F469xx;%(ClCompile.PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DEBUG=1;USE_FREERTOS;USE_USB_FS;USE_BPP=24;USE_HAL_DRIVER;STM32F469xx;%(ClCompile.PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions />
       <CLanguageStandard />
       <CPPLanguageStandard />
@@ -60,7 +60,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">
     <ClCompile>
       <AdditionalIncludeDirectories>D:\Projects\DCC\STM32F469_Controller\Source\OpenLCB\src;..\TouchGFX\Core\Inc;..\TouchGFX\TouchGFX\generated\gui_generated\include;..\TouchGFX\TouchGFX\target;..\TouchGFX\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\TouchGFX\FATFS\App;..\TouchGFX\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS_V2;..\TouchGFX\Drivers\BSP\Components\Common;..\TouchGFX\FATFS\Target;..\TouchGFX\Middlewares\ST\STM32_USB_Device_Library\Class\MSC\Inc;..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy;..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc;..\TouchGFX\Drivers\CMSIS\Include;..\TouchGFX\TouchGFX\App;..\TouchGFX\Middlewares\ST\touchgfx\framework\include;..\TouchGFX\TouchGFX\target\generated;..\TouchGFX\TouchGFX\gui\include;..\TouchGFX\TouchGFX\generated\texts\include;..\TouchGFX\Middlewares\ST\STM32_USB_Device_Library\Core\Inc;..\TouchGFX\TouchGFX\generated\images\include;..\TouchGFX\Middlewares\Third_Party\FreeRTOS\Source\include;..\TouchGFX\Middlewares\Third_Party\FatFs\src;..\TouchGFX\Middlewares\Third_Party\FreeRTOS\Source\portable\GCC\ARM_CM4F;..\TouchGFX\Drivers\BSP\STM32469I-Discovery;..\TouchGFX\TouchGFX\generated\fonts\include;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>NDEBUG=1;RELEASE=1;USE_FREERTOS;USE_HAL_DRIVER;STM32F469xx;%(ClCompile.PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG=1;RELEASE=1;USE_FREERTOS;USE_BPP=24;USE_HAL_DRIVER;STM32F469xx;%(ClCompile.PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions />
       <CLanguageStandard />
       <CPPLanguageStandard />
@@ -106,6 +106,7 @@
     <ClCompile Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\source\touchgfx\containers\scrollers\ScrollWheel.cpp" />
     <ClCompile Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\source\touchgfx\containers\scrollers\ScrollWheelBase.cpp" />
     <ClCompile Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\source\touchgfx\widgets\canvas\Canvas.cpp" />
+    <ClCompile Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\source\touchgfx\widgets\Keyboard.cpp" />
     <ClCompile Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\source\touchgfx\widgets\TextArea.cpp" />
     <ClCompile Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\source\touchgfx\widgets\TextAreaWithWildcard.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\fonts\src\ApplicationFontProvider.cpp" />
@@ -131,6 +132,8 @@
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\common\BinFileLoader.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\common\CustomButton.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\common\FrontendApplication.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\common\FullKeyboard.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\common\NumericKeypad.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\containers\ListItem.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\main_screen\MainPresenter.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\main_screen\MainView.cpp" />
@@ -232,6 +235,12 @@
     <ClInclude Include="..\TouchGFX\Drivers\BSP\Components\cs43l22\cs43l22.h" />
     <ClInclude Include="..\TouchGFX\Drivers\BSP\STM32469I-Discovery\stm32469i_discovery_audio.h" />
     <ClInclude Include="..\TouchGFX\TouchGFX\gui\include\gui\common\BinFileLoader.h" />
+    <ClInclude Include="..\TouchGFX\TouchGFX\gui\include\gui\common\FullKeyboard.hpp" />
+    <ClInclude Include="..\TouchGFX\TouchGFX\gui\include\gui\common\FullKeyboardKeyMapping.hpp" />
+    <ClInclude Include="..\TouchGFX\TouchGFX\gui\include\gui\common\FullKeyboardLayout.hpp" />
+    <ClInclude Include="..\TouchGFX\TouchGFX\gui\include\gui\common\NumericKeypad.hpp" />
+    <ClInclude Include="..\TouchGFX\TouchGFX\gui\include\gui\common\NumericKeypadKeyMapping.hpp" />
+    <ClInclude Include="..\TouchGFX\TouchGFX\gui\include\gui\common\NumericKeypadLayout.hpp" />
     <ClInclude Include="..\TouchGFX\TouchGFX\gui\include\gui\common\PNGFileLoader.h" />
     <ClInclude Include="..\TouchGFX\TouchGFX\gui\include\gui\common\TGAFileLoader.h" />
     <ClInclude Include="..\TouchGFX\TouchGFX\gui\src\common\CustomButton.hpp" />
@@ -421,5 +430,19 @@
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Icons_Stop_32.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\containers\CheckBoxBase.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\containers\CheckBox.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\fonts\src\Font_consola_40_4bpp_0.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\fonts\src\Kerning_consola_40_4bpp.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\fonts\src\Table_consola_40_4bpp.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\keyboard_key_delete_highlighted.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\keyboard_key_highlighted.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\keyboard_key_num_highlighted.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\keyboard_key_shift_highlighted.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\keyboard_space_highlighted.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\fonts\src\Font_Asap_Regular_20_4bpp_4.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\fonts\src\Font_Asap_Regular_28_4bpp_0.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\fonts\src\Font_Asap_Regular_28_4bpp_4.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\fonts\src\Kerning_Asap_Regular_28_4bpp.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\fonts\src\Table_Asap_Regular_28_4bpp.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\fonts\src\Font_Asap_Regular_40_4bpp_4.cpp" />
   </ItemGroup>
 </Project>

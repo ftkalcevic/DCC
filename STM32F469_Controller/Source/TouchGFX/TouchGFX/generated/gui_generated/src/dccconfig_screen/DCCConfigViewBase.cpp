@@ -19,7 +19,7 @@ DCCConfigViewBase::DCCConfigViewBase() :
     scrollableContainer1.setScrollbarsColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
 
     backgroundImage.setBitmap(touchgfx::Bitmap(BITMAP_DARK_TEXTURES_CARBON_FIBRE_ID));
-    backgroundImage.setPosition(0, 0, 800, 480);
+    backgroundImage.setPosition(0, 0, 800, 786);
     backgroundImage.setOffset(0, 0);
     scrollableContainer1.add(backgroundImage);
 
@@ -32,32 +32,32 @@ DCCConfigViewBase::DCCConfigViewBase() :
     line1.setLineEndingStyle(touchgfx::Line::ROUND_CAP_ENDING);
     scrollableContainer1.add(line1);
 
-    line1_1.setPosition(538, 17, 250, 240);
-    line1_1Painter.setColor(touchgfx::Color::getColorFrom24BitRGB(71, 71, 71));
-    line1_1.setPainter(line1_1Painter);
-    line1_1.setStart(3, 3);
-    line1_1.setEnd(3, 237);
-    line1_1.setLineWidth(5);
-    line1_1.setLineEndingStyle(touchgfx::Line::ROUND_CAP_ENDING);
-    scrollableContainer1.add(line1_1);
+    line2.setPosition(538, 17, 250, 240);
+    line2Painter.setColor(touchgfx::Color::getColorFrom24BitRGB(71, 71, 71));
+    line2.setPainter(line2Painter);
+    line2.setStart(3, 3);
+    line2.setEnd(3, 237);
+    line2.setLineWidth(5);
+    line2.setLineEndingStyle(touchgfx::Line::ROUND_CAP_ENDING);
+    scrollableContainer1.add(line2);
 
-    line1_2.setPosition(538, 17, 250, 240);
-    line1_2Painter.setColor(touchgfx::Color::getColorFrom24BitRGB(71, 71, 71));
-    line1_2.setPainter(line1_2Painter);
-    line1_2.setStart(3, 237);
-    line1_2.setEnd(247, 237);
-    line1_2.setLineWidth(5);
-    line1_2.setLineEndingStyle(touchgfx::Line::ROUND_CAP_ENDING);
-    scrollableContainer1.add(line1_2);
+    line3.setPosition(538, 17, 250, 240);
+    line3Painter.setColor(touchgfx::Color::getColorFrom24BitRGB(71, 71, 71));
+    line3.setPainter(line3Painter);
+    line3.setStart(3, 237);
+    line3.setEnd(247, 237);
+    line3.setLineWidth(5);
+    line3.setLineEndingStyle(touchgfx::Line::ROUND_CAP_ENDING);
+    scrollableContainer1.add(line3);
 
-    line1_3.setPosition(538, 17, 250, 240);
-    line1_3Painter.setColor(touchgfx::Color::getColorFrom24BitRGB(71, 71, 71));
-    line1_3.setPainter(line1_3Painter);
-    line1_3.setStart(247, 3);
-    line1_3.setEnd(247, 237);
-    line1_3.setLineWidth(5);
-    line1_3.setLineEndingStyle(touchgfx::Line::ROUND_CAP_ENDING);
-    scrollableContainer1.add(line1_3);
+    line4.setPosition(538, 17, 250, 240);
+    line4Painter.setColor(touchgfx::Color::getColorFrom24BitRGB(71, 71, 71));
+    line4.setPainter(line4Painter);
+    line4.setStart(247, 3);
+    line4.setEnd(247, 237);
+    line4.setLineWidth(5);
+    line4.setLineEndingStyle(touchgfx::Line::ROUND_CAP_ENDING);
+    scrollableContainer1.add(line4);
 
     toggleProgTrack.setXY(547, 27);
     toggleProgTrack.setBitmaps(touchgfx::Bitmap(BITMAP_PROGTRACKBUTTONUP_ID), touchgfx::Bitmap(BITMAP_PROGTRACKBUTTONDOWN_ID));

@@ -10,20 +10,30 @@
 
 extern "C" void DCCTask_Entry(void *argument);
 
-enum DCCType 
+namespace DCCType
 {
-	MainTrack = 0,
-	ProgrammingTrack = 1
+	enum DCCType 
+	{
+		MainTrack = 0,
+		ProgrammingTrack = 1
+	};
 };
 
 
-enum EPreamble
+namespace EPreamble
 {
-	Regular,
-	Long
+	enum EPreamble
+	{
+		Regular,
+		Long
+	};
 };
-	
-template<DCCType type, const int ARR_OFFSET, const int CCn_OFFSET, const int BURST_SIZE >
+
+const int DCC_ACK_CURRENT = 60;		// mA
+const int DCC_ACK_PERIOD = 5;		// mS
+
+
+template<DCCType::DCCType type, const int ARR_OFFSET, const int CCn_OFFSET, const int BURST_SIZE >
 class DCCHal
 {
 	bool trackEnabled;
@@ -124,7 +134,7 @@ public:
 		current /= 3723;
 		current /= countof(ADC_Current)/2;
 		
-		current = sum / (countof(ADC_Current) / 2);
+		//current = sum / (countof(ADC_Current) / 2);
 		return current;
 	}
 
@@ -229,7 +239,7 @@ public:
 		index  += BURST_SIZE;
 	}
 
-	void SendDCCMessage(uint8_t *msg, uint8_t len, EPreamble const preamble = EPreamble::Regular)
+	void SendDCCMessage(uint8_t *msg, uint8_t len, EPreamble::EPreamble const preamble = EPreamble::Regular)
 	{
 		sent = false;
 		// Build a buffer of timings - a pair for bit off/bit on.
@@ -244,8 +254,10 @@ public:
 				AddBit(index, msg[m] & (1 << (7 - i)));
 		}
 		AddBit(index, 1);
-		for ( int i = 0; i < BURST_SIZE;i++)
-			bitBuffer[index++] = 0;	// add terminator.  Easier to do this than also process the tim update interrupt after dma is finished.
+		AddBit(index, 1);	// without the send '1' the line stays low, not indicating the end of the previous bit
+		AddBit(index, 1);	// without the send '1' the line stays low, not indicating the end of the previous bit
+//		for ( int i = 0; i < BURST_SIZE;i++)
+//			bitBuffer[index++] = 0;	// add terminator.  Easier to do this than also process the tim update interrupt after dma is finished.
 
 		if(type == DCCType::MainTrack)
 		{
@@ -286,19 +298,19 @@ public:
 		*msg = e;
 	}
 
-	void SendIdle()
+	void SendIdle(EPreamble::EPreamble preamble = EPreamble::Regular)
 	{
 		// Send Idle
 		static uint8_t idleMessage[3] = { 0xFF, 0, 0xFF };
-		SendDCCMessage(idleMessage, sizeof(idleMessage));
+		SendDCCMessage(idleMessage, countof(idleMessage), preamble);
 	}
 
 	
-	void SendReset()
+	void SendReset(EPreamble::EPreamble preamble = EPreamble::Regular)
 	{
 		// Send Idle
 		static uint8_t resetMessage[3] = { 0, 0, 0 };
-		SendDCCMessage(resetMessage, sizeof(resetMessage));
+		SendDCCMessage(resetMessage, countof(resetMessage), preamble);
 	}
 
 	

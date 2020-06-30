@@ -17,6 +17,19 @@ void DCCConfigPresenter::deactivate()
 	EnableProgTrack(false);
 }
 
+
+void DCCConfigPresenter::UIMessage( UIMsg &msg ) 
+{
+	switch (msg.type)
+	{
+		case EUIMessageType::ScanTrackReply:
+			view.ScanTrackReply(msg.scan.address, msg.scan.config, msg.scan.extendedAddress, msg.scan.manufacturer, msg.scan.version);
+			break;
+		default:
+			break;
+	}
+}
+	
 void DCCConfigPresenter::EnableProgTrack(bool enable)
 {
 	model->EnableProgTrack(enable);

@@ -8,7 +8,9 @@
 DCCConfigView::DCCConfigView() :
     buttonProgTrackClickCallback(this, &DCCConfigView::buttonProgTrackClickHandler),
     buttonScanTrackClickCallback(this, &DCCConfigView::buttonScanTrackClickHandler),
-    buttonReadAllCVsClickCallback(this, &DCCConfigView::buttonReadAllCVsClickHandler)
+    buttonReadAllCVsClickCallback(this, &DCCConfigView::buttonReadAllCVsClickHandler),
+	editTextClickHandlerCallback(this, &DCCConfigView::editTextClickHandler),
+	state(Editting)
 {
 	toggleProgTrack.setAction(buttonProgTrackClickCallback);
 	
@@ -29,6 +31,106 @@ DCCConfigView::DCCConfigView() :
 	buttonReadAllCVs.Enable(false);
 	buttonReadAllCVs.setAction(buttonReadAllCVsClickCallback);
     scrollableContainer1.add(buttonReadAllCVs);
+	
+	// Decoder
+	int16_t yPos = 275, x1 = 17, x2 = 417;
+    textAreaLabelDecoder.setXY(x1, yPos);
+    textAreaLabelDecoder.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+    textAreaLabelDecoder.setLinespacing(0);
+    textAreaLabelDecoder.setTypedText(touchgfx::TypedText(T_DCCCONFIGDECODER));
+    scrollableContainer1.add(textAreaLabelDecoder);
+
+    boxDecoder.setPosition(x2, yPos, 360, 50);
+    boxDecoder.setColor(touchgfx::Color::getColorFrom24BitRGB(163, 163, 163));
+	boxDecoder.setClickAction(editTextClickHandlerCallback);
+    scrollableContainer1.add(boxDecoder);
+
+	
+	// Address	
+	yPos += 60;
+    textAreaLabelAddress.setXY(x1, yPos);
+    textAreaLabelAddress.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+    textAreaLabelAddress.setLinespacing(0);
+    textAreaLabelAddress.setTypedText(touchgfx::TypedText(T_DCCCONFIGADDRESS));
+    scrollableContainer1.add(textAreaLabelAddress);
+	
+    boxAddress.setPosition(x2, yPos, 100, 50);
+    boxAddress.setColor(touchgfx::Color::getColorFrom24BitRGB(163, 163, 163));
+	boxAddress.setClickAction(editTextClickHandlerCallback);
+    scrollableContainer1.add(boxAddress);
+
+    textAddress.setPosition(x2, yPos, 100, 50);
+    textAddress.setColor(touchgfx::Color::getColorFrom24BitRGB(0, 0, 0));
+    textAddress.setLinespacing(0);
+    textAddress.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTIDNUMERIC));
+textAddress.setWildcard((const Unicode::UnicodeChar *)u"0000");
+    scrollableContainer1.add(textAddress);
+
+	// Name
+	yPos += 60;
+    textAreaLabelName.setXY(x1, yPos);
+    textAreaLabelName.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+    textAreaLabelName.setLinespacing(0);
+    textAreaLabelName.setTypedText(touchgfx::TypedText(T_DCCCONFIGNAME));
+    scrollableContainer1.add(textAreaLabelName);
+
+    boxName.setPosition(x2, yPos, 360, 50);
+    boxName.setColor(touchgfx::Color::getColorFrom24BitRGB(163, 163, 163));
+	boxName.setClickAction(editTextClickHandlerCallback);
+    scrollableContainer1.add(boxName);
+
+    textName.setPosition(x2, yPos, 360, 50);
+    textName.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+    textName.setLinespacing(0);
+    textName.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTIDMEDIUMCENTERED));
+textName.setWildcard((const Unicode::UnicodeChar *)u"Name");
+    scrollableContainer1.add(textName);
+
+	// Description
+	yPos += 60;
+    textAreaLabelDescription.setXY(x1, yPos);
+    textAreaLabelDescription.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+    textAreaLabelDescription.setLinespacing(0);
+    textAreaLabelDescription.setTypedText(touchgfx::TypedText(T_DCCCONFIGDESCRIPTION));
+    scrollableContainer1.add(textAreaLabelDescription);
+
+    boxDescription.setPosition(x2, yPos, 360, 50);
+    boxDescription.setColor(touchgfx::Color::getColorFrom24BitRGB(163, 163, 163));
+	boxDescription.setClickAction(editTextClickHandlerCallback);
+    scrollableContainer1.add(boxDescription);
+
+    textDescription.setPosition(x2, yPos, 360, 50);
+    textDescription.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+    textDescription.setLinespacing(0);
+    textDescription.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTIDSMALLCENTER));
+textDescription.setWildcard((const Unicode::UnicodeChar *)u"Description");
+    scrollableContainer1.add(textDescription);
+
+	// Config
+	yPos += 60;
+    textAreaLabelConfig.setXY(x1, yPos);
+    textAreaLabelConfig.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+    textAreaLabelConfig.setLinespacing(0);
+    textAreaLabelConfig.setTypedText(touchgfx::TypedText(T_DCCCONFIGCONFIG));
+    scrollableContainer1.add(textAreaLabelConfig);
+
+    boxConfig.setPosition(x2, yPos, 360, 240);
+    boxConfig.setColor(touchgfx::Color::getColorFrom24BitRGB(163, 163, 163));
+    scrollableContainer1.add(boxConfig);
+
+	// All CVs
+	yPos += 250;
+    textAreaLabelAllCVs.setXY(x1, yPos);
+    textAreaLabelAllCVs.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+    textAreaLabelAllCVs.setLinespacing(0);
+    textAreaLabelAllCVs.setTypedText(touchgfx::TypedText(T_DCCCONFIGALLCVS));
+	scrollableContainer1.add(textAreaLabelAllCVs);
+
+	yPos += 60 + 20;
+    backgroundImage.setPosition(0, 0, 800, yPos);
+	
+    scrollableContainer1.setScrollbarsPermanentlyVisible();
+    scrollableContainer1.setScrollbarsVisible(false);
 }
 
 void DCCConfigView::setupScreen()
@@ -51,13 +153,49 @@ void DCCConfigView::buttonProgTrackClickHandler(const touchgfx::AbstractButton& 
 
 void DCCConfigView::buttonScanTrackClickHandler(const touchgfx::AbstractButton& src)
 {
+	state = Scanning;
 	presenter->ScanProgrammingTrack();
 }
 
 void DCCConfigView::buttonReadAllCVsClickHandler(const touchgfx::AbstractButton& src)
 {
 }
-	
+
+void DCCConfigView::editTextClickHandler(const Box& b, const ClickEvent& evt)
+{
+	if (state == Editting)
+	{
+	    if (&b == static_cast<const Box *>(&boxAddress) && evt.getType() == ClickEvent::RELEASED )
+	    {
+		    printf("clicked address\n");
+		    NumericKeypad *kb = new NumericKeypad();
+            kb->setPosition(0, 0, 800, 480);
+            add(*kb);
+		    
+	    }
+	    else if (&b == static_cast<const Box *>(&boxName) && evt.getType() == ClickEvent::RELEASED )
+	    {
+		    printf("clicked name\n");
+		    FullKeyboard *kb = new FullKeyboard();
+            kb->setPosition(0, 0, 800, 480);
+            add(*kb);
+		    
+	    }
+	}
+}
+
+void DCCConfigView::ScanTrackReply(int16_t address, int16_t config, int16_t extendedAddress, int16_t manufacturer, int16_t version)
+{
+	if ( state == Scanning )
+	{
+		if (address < 0)
+		{
+			
+		}
+		// If this matches an existing configuration, load it up.
+	}
+}
+
 
 void DCCConfigView::handleGestureEvent(const GestureEvent & evt)
 {

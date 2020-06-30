@@ -1172,7 +1172,7 @@
                 "X": 0,
                 "Y": 0,
                 "Width": 800,
-                "Height": 480,
+                "Height": 786,
                 "Type": "TiledImage",
                 "Visible": true,
                 "Draggable": false,
@@ -1218,7 +1218,7 @@
                 "EndY": 237,
                 "LineWidth": 5,
                 "LineEndingStyle": "Round",
-                "Name": "line1_1",
+                "Name": "line2",
                 "X": 538,
                 "Y": 17,
                 "Width": 250,
@@ -1243,7 +1243,7 @@
                 "EndY": 237,
                 "LineWidth": 5,
                 "LineEndingStyle": "Round",
-                "Name": "line1_2",
+                "Name": "line3",
                 "X": 538,
                 "Y": 17,
                 "Width": 250,
@@ -1268,7 +1268,7 @@
                 "EndY": 237,
                 "LineWidth": 5,
                 "LineEndingStyle": "Round",
-                "Name": "line1_3",
+                "Name": "line4",
                 "X": 538,
                 "Y": 17,
                 "Width": 250,
@@ -2309,6 +2309,50 @@
       {
         "TextEntryId": "SingleUseId34",
         "IsResource": false
+      },
+      {
+        "TextEntryId": "DccConfigAddress",
+        "IsResource": true
+      },
+      {
+        "TextEntryId": "DccConfigName",
+        "IsResource": true
+      },
+      {
+        "TextEntryId": "DccConfigDescription",
+        "IsResource": true
+      },
+      {
+        "TextEntryId": "wildcardTextIdMediumNumeric",
+        "IsResource": true
+      },
+      {
+        "TextEntryId": "DccConfigDecoder",
+        "IsResource": true
+      },
+      {
+        "TextEntryId": "DccConfigConfig",
+        "IsResource": true
+      },
+      {
+        "TextEntryId": "DccConfigAllCVs",
+        "IsResource": true
+      },
+      {
+        "TextEntryId": "wildcardTextIdNumeric",
+        "IsResource": true
+      },
+      {
+        "TextEntryId": "EnteredText",
+        "IsResource": true
+      },
+      {
+        "TextEntryId": "NumMode",
+        "IsResource": true
+      },
+      {
+        "TextEntryId": "AlphaMode",
+        "IsResource": true
       }
     ],
     "Name": "STM32F469I-DISCO",

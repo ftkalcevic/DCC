@@ -64,26 +64,35 @@ static void SetMultiFunctionAddress(uint8_t * &ptr, uint16_t address)
 static uint8_t MakeSpeed(uint16_t speed)	// speed is always 0-128
 {
 //	if (speed_type == 14)
-//	{
-//		return speed;
-//	}
-//	else if (speed_type == 28)
 	{
 		if (speed == 0)
 			return (uint8_t)speed;
 		else
 		{
-			speed = speed * 28 / 128;
-			if (speed > 27)
-				speed = 27;
-			speed += 4;
-			// LSB of bit 4(C) - C S3 S2 S1 S0)
-			if (speed & 1)
-				speed |= (1 << 5);
-			speed >>= 1;
-			return (uint8_t)(speed & 0b00011111);
+			speed = speed * 14 / 128;
+			if (speed > 13)
+				speed = 13;
+			speed += 2;
+			return (uint8_t)speed;
 		}
 	}
+//	else if (speed_type == 28)
+//	{
+//		if (speed == 0)
+//			return (uint8_t)speed;
+//		else
+//		{
+//			speed = speed * 28 / 128;
+//			if (speed > 27)
+//				speed = 27;
+//			speed += 4;
+//			// LSB of bit 4(C) - C S3 S2 S1 S0)
+//			if (speed & 1)
+//				speed |= (1 << 5);
+//			speed >>= 1;
+//			return (uint8_t)(speed & 0b00011111);
+//		}
+//	}
 //	else if (speed_type == 128)
 //	{
 //	}
