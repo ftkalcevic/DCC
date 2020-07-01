@@ -103,6 +103,7 @@ public:
         FontId        textAreaFont;          ///< The font used for typing text
         colortype     textAreaFontColor;     ///< The color used for the typing text
 	    colortype     textAreaBackColor;
+        Alignment     textAreaAlignment;
         FontId        keyFont;               ///< The font used for the keys
         colortype     keyFontColor;          ///< The color used for the keys
         colortype     keyBackColor;          ///< The color used for the keys
@@ -110,6 +111,10 @@ public:
         colortype     keyAlpha;              ///< The color used for the keys
         uint8_t       shadowDepth;
         colortype     shadowColor;
+        Rect          titlePosition;
+        FontId        titleFont;
+        colortype     titleFontColor;
+        Alignment     titleAlignment;
     } Layout;
 
     /**
@@ -177,18 +182,6 @@ public:
      * @param newLayout The new layout.
      */
     void setLayout(const Layout* newLayout);
-
-    /**
-     * @fn void Keyboard::setTextIndentation();
-     *
-     * @brief Sets text indentation.
-     *
-     *        Sets text indentation by making the area for entered text slightly larger. The
-     *        result is that some characters (often 'j' and '_') will not be cut off.
-     *        Indentation is added to both sides of the text area in case the text is right-to-
-     *        left. Indentation is automatically set so all characters will display properly.
-     */
-    void setTextIndentation();
 
     /**
      * @fn const Layout* Keyboard::getLayout() const
@@ -330,19 +323,24 @@ public:
     {
         keyListener = &callback;
     }
-
+    void enteredTextInvalidate() const;
+    void invalidateKeyRect(const Rect& rect);
+    void invalidateKeyRect(uint8_t keyId);
+    void setTitle(const Unicode::UnicodeChar* s) { title = s; }
+    virtual void getLastChild(int16_t x, int16_t y, Drawable** last);
+    virtual Rect getContainedArea() const;
+	
 protected:
     GenericCallback<Unicode::UnicodeChar>* keyListener; ///< Pointer to callback being executed when a key is pressed.
 
     Unicode::UnicodeChar*   buffer;         ///< Pointer to zero-terminated buffer where the entered text is being displayed.
     uint16_t                bufferSize;     ///< Size of the buffer
     uint16_t                bufferPosition; ///< Current position in buffer.
-//    TextAreaWithOneWildcard enteredText;    ///< Widget capable of displaying the entered text buffer.
     const Layout*           layout;         ///< Pointer to layout.
     const KeyMappingList*   keyMappingList; ///< Pointer to key mapping.
-    //Image                   highlightImage; ///< Image to display when a key is highlighted.
     bool                    cancelIsEmitted;///< Tells if a cancel is emitted to check when a key is released
     uint8_t                 keyDown;
+    const Unicode::UnicodeChar* title;
 
     /**
      * @fn Key Keyboard::getKeyForCoordinates(int16_t x, int16_t y) const;
@@ -397,9 +395,7 @@ protected:
      */
     virtual void setupDrawChain(const Rect& invalidatedArea, Drawable** nextPreviousElement);
 	void DrawKey(const Rect& invalidatedArea, const Rect &keyArea, const LCD::StringVisuals &visuals, Unicode::UnicodeChar const *str, bool isKeyDown) const;
-    void invalidateKeyRect(const Rect& rect);
-    void invalidateKeyRect(uint8_t keyId);
-    void enteredTextInvalidate() const;
+    void DrawText(const Unicode::UnicodeChar* str, FontId fontId, Alignment align, colortype color, const Rect textArea, const Rect invalidatedArea) const;
 };
 } // namespace touchgfx
 

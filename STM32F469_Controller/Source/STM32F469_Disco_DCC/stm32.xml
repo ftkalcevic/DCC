@@ -91,7 +91,7 @@
     <AllDependencies>
       <ProjectDependency>
         <RelativePath>..\TouchGFX\STM32CubeIDE\.cproject</RelativePath>
-        <Timestamp>132379769844003401</Timestamp>
+        <Timestamp>132379836281799664</Timestamp>
       </ProjectDependency>
     </AllDependencies>
     <RootDirectory>
@@ -514,6 +514,9 @@
                     </VirtualFileSnapshot>
                     <VirtualFileSnapshot>
                       <RelativePath>..\TouchGFX\TouchGFX\gui\src\common\FullKeyboard.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\gui\src\common\NumericKeypad.cpp</RelativePath>
                     </VirtualFileSnapshot>
                   </Files>
                 </VirtualDirectorySnapshot>

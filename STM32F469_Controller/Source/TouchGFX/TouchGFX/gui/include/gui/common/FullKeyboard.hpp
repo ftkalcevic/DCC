@@ -29,8 +29,21 @@ public:
      * FullKeyboard.
      */
     void setTouchable(bool touch);
-
+    void setTitle(const Unicode::UnicodeChar *title) { keyboard.setTitle(title);}
+	void setText(const Unicode::UnicodeChar *text)
+	{
+		Unicode::strncpy(buffer, text, BUFFER_SIZE);
+		buffer[BUFFER_SIZE - 1] = 0;
+	}
+    void setCloseWindowCallback(touchgfx::GenericCallback<bool>& callback)
+    {
+        this->closeWindowCallback = &callback;
+    }
+    virtual void getLastChild(int16_t x, int16_t y, Drawable** last);
+    virtual Rect getContainedArea() const;
+	
 private:
+	Box backgroundBox;
     /*
      * The size of the buffer that is used by the keyboard.
      * The size determines how much text the keyboard can contain in its textfield.
@@ -52,20 +65,11 @@ private:
      */
     TextArea modeBtnTextArea;
 
-    /**
-     * Callback for the capslock button.
-     */
     Callback<FullKeyboard> capslockPressed;
-
-    /**
-     * Callback for the backspace button.
-     */
     Callback<FullKeyboard> backspacePressed;
-
-    /**
-     * Callback for the keyboard mode button.
-     */
     Callback<FullKeyboard> modePressed;
+    Callback<FullKeyboard> setPressed;
+    Callback<FullKeyboard> cancelPressed;
 
     /**
      * Callback for when keys are pressed on the keyboard.
@@ -106,12 +110,23 @@ private:
      * Callback handler for the mode button.
      */
     void modePressedHandler();
+    void setPressedHandler();
+    void cancelPressedHandler();
 
     /**
      * Callback handler for key presses.
      * @param keyChar The UnicodeChar for the key that was pressed.
      */
     void keyPressedhandler(Unicode::UnicodeChar keyChar);
+	
+	touchgfx::GenericCallback<bool>* closeWindowCallback;
+    virtual void emitCloseWindow(bool success)
+    {
+        if (closeWindowCallback != nullptr && closeWindowCallback->isValid())
+        {
+            this->closeWindowCallback->execute(success);
+        }
+    }	
 };
 
 #endif /* FULLKEYBOARD_HPP_ */

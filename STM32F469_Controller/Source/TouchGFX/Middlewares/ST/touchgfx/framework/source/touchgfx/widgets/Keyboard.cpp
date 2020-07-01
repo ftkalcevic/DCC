@@ -19,7 +19,7 @@
 namespace touchgfx
 {
 Keyboard::Keyboard()
-    : Container(), keyListener(0), bufferSize(0), bufferPosition(0), keyDown(0), cancelIsEmitted(false)
+    : Container(), keyListener(0), bufferSize(0), bufferPosition(0), keyDown(0), cancelIsEmitted(false), title(NULL)
 {
     setTouchable(true);
 
@@ -49,10 +49,6 @@ void Keyboard::setLayout(const Layout* newLayout)
 {
     layout = newLayout;
     invalidate();
-}
-
-void Keyboard::setTextIndentation()
-{
 }
 
 Keyboard::Key Keyboard::getKeyForCoordinates(int16_t x, int16_t y) const
@@ -147,6 +143,35 @@ void Keyboard::DrawKey(const Rect& invalidatedArea, const Rect &origKeyArea, con
     }
 }
 
+void Keyboard::DrawText(const Unicode::UnicodeChar *str, FontId fontId, Alignment align, colortype color, const Rect textArea, const Rect invalidatedArea) const
+{
+	if (str != nullptr && textArea.intersect(invalidatedArea))
+	{
+		Font *font = FontManager::getFont(fontId);
+		if (font != nullptr)
+		{
+	        LCD::StringVisuals visuals;
+            visuals.font = font;
+            visuals.alignment = align;
+            visuals.color = color;
+
+	        Rect adjTextArea = textArea;
+	        // Draw text
+            uint16_t fontHeight = font->getMinimumTextHeight();
+	        uint16_t offset = (adjTextArea.height - fontHeight) / 2;
+	        adjTextArea.y += offset;
+	        adjTextArea.height -= offset;
+	        // Calculate the invalidated area relative to the box
+	        Rect invalidatedAreaRelative = textArea & invalidatedArea;
+	        invalidatedAreaRelative.x -= textArea.x;
+	        invalidatedAreaRelative.y -= textArea.y;
+
+            translateRectToAbsolute(adjTextArea);
+	        HAL::lcd().drawString(adjTextArea, invalidatedAreaRelative, visuals, str);
+		}
+	}
+}
+
 void Keyboard::draw(const Rect& invalidatedArea) const
 {
     assert(layout && "No layout configured for Keyboard");
@@ -183,6 +208,7 @@ void Keyboard::draw(const Rect& invalidatedArea) const
             }
         }
 	    
+	    // Entered text
         Rect invalidatedTextAreaRelative = layout->textAreaPosition;
 	    invalidatedTextAreaRelative = invalidatedTextAreaRelative & invalidatedArea;
         translateRectToAbsolute(invalidatedTextAreaRelative);
@@ -190,32 +216,23 @@ void Keyboard::draw(const Rect& invalidatedArea) const
 	    {
 		    HAL::lcd().fillRect(invalidatedTextAreaRelative, layout->textAreaBackColor, layout->keyAlpha);
 
-		    font = FontManager::getFont(layout->textAreaFont);
-		    assert(font && "Keyboard::draw: Unable to find textArea font, is font db initialized?");
-		    if (font != 0)
-		    {
-			    LCD::StringVisuals visuals;
-                visuals.font = font;
-                visuals.alignment = CENTER;
-                visuals.color = layout->textAreaFontColor;
-
-			    Rect textArea = layout->textAreaPosition;
-			    // Draw text
-                uint16_t fontHeight = font->getMinimumTextHeight();
-	            uint16_t offset = (textArea.height - fontHeight) / 2;
-	            textArea.y += offset;
-	            textArea.height -= offset;
-	            // Calculate the invalidated area relative to the box
-	            Rect invalidatedAreaRelative = layout->textAreaPosition & invalidatedArea;
-	            invalidatedAreaRelative.x -= textArea.x;
-	            invalidatedAreaRelative.y -= textArea.y;
-
-	            HAL::lcd().drawString(textArea, invalidatedAreaRelative, visuals, buffer);
-		    }
+			DrawText(buffer, layout->textAreaFont, layout->textAreaAlignment, layout->textAreaFontColor, layout->textAreaPosition, invalidatedArea);
 	    }
+	    
+	    // title
+		DrawText(title, layout->titleFont, layout->titleAlignment, layout->titleFontColor, layout->titlePosition, invalidatedArea);
     }
 }
-#include <stdio.h>
+
+Rect Keyboard::getContainedArea() const
+{
+	return Container::getContainedArea();
+}
+	
+void Keyboard::getLastChild(int16_t x, int16_t y, Drawable** last)
+{
+	Container::getLastChild(x, y, last);
+}	
 void Keyboard::handleClickEvent(const ClickEvent& evt)
 {
     ClickEvent::ClickEventType type = evt.getType();
@@ -393,3 +410,16 @@ void Keyboard::enteredTextInvalidate() const
 	invalidateRect(temp);
 }
 } // namespace touchgfx
+
+
+
+/*
+ TODO - 
+    - draw frame(s)
+    - fix Title aligment
+    - numeric range and digit checking
+    - touch beep
+    - numeric - disable unavailable keys
+    - images on keys - shift, backspace
+    - toggle keys - caps lock
+ **/

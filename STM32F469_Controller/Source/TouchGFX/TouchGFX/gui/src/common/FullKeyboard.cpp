@@ -5,19 +5,28 @@ FullKeyboard::FullKeyboard() : keyboard(),
     capslockPressed(this, &FullKeyboard::capslockPressedHandler),
     backspacePressed(this, &FullKeyboard::backspacePressedHandler),
     modePressed(this, &FullKeyboard::modePressedHandler),
+    setPressed(this, &FullKeyboard::setPressedHandler),
+    cancelPressed(this, &FullKeyboard::cancelPressedHandler),
     keyPressed(this, &FullKeyboard::keyPressedhandler),
     alphaKeys(true),
     uppercaseKeys(false),
     firstCharacterEntry(false)
 {
+	backgroundBox.setColor(touchgfx::Color::getColorFrom24BitRGB(0, 0, 0));
+	backgroundBox.setAlpha(128);
+	backgroundBox.setPosition(0, 0, HAL::DISPLAY_WIDTH, HAL::DISPLAY_HEIGHT);
+	backgroundBox.setTouchable(true);
+	add(backgroundBox);
+	
     //Set the callbacks for the callback areas of the keyboard and set its layout.
-    fullKeyboardLayout.callbackAreaArray[0].callback = &capslockPressed;
-    fullKeyboardLayout.callbackAreaArray[1].callback = &backspacePressed;
-    fullKeyboardLayout.callbackAreaArray[2].callback = &modePressed;
+    fullKeyboardLayout.callbackAreaArray[KeyboardCallbacks::CapsLock].callback = &capslockPressed;
+    fullKeyboardLayout.callbackAreaArray[KeyboardCallbacks::Backspace].callback = &backspacePressed;
+    fullKeyboardLayout.callbackAreaArray[KeyboardCallbacks::Mode].callback = &modePressed;
+    fullKeyboardLayout.callbackAreaArray[KeyboardCallbacks::Set].callback = &setPressed;
+    fullKeyboardLayout.callbackAreaArray[KeyboardCallbacks::Cancel].callback = &cancelPressed;
     keyboard.setLayout(&fullKeyboardLayout);
     keyboard.setKeyListener(keyPressed);
     keyboard.setPosition(37, 15, 726, 455);
-    keyboard.setTextIndentation();
     //Allocate the buffer associated with keyboard.
     memset(buffer, 0, sizeof(buffer));
     keyboard.setBuffer(buffer, BUFFER_SIZE);
@@ -25,20 +34,21 @@ FullKeyboard::FullKeyboard() : keyboard(),
     uppercaseKeys = true;
     firstCharacterEntry = true;
 
-    modeBtnTextArea.setPosition(5, 196, 56, 40);
-    modeBtnTextArea.setColor(Color::getColorFrom24BitRGB(0xFF, 0xFF, 0xFF));
+//    modeBtnTextArea.setPosition(5, 196, 56, 40);
+//    modeBtnTextArea.setColor(Color::getColorFrom24BitRGB(0xFF, 0xFF, 0xFF));
 
     setKeyMappingList();
 
     add(keyboard);
-    add(modeBtnTextArea);
+//    add(modeBtnTextArea);
 }
 
 void FullKeyboard::setKeyMappingList()
 {
     if (alphaKeys)
     {
-        modeBtnTextArea.setTypedText(TypedText(T_ALPHAMODE));
+	    //modeBtnTextArea.setTypedText(TypedText(T_ALPHAMODE));
+		fullKeyboardCallbackAreas[KeyboardCallbacks::Mode].str = u"Abc";
         if (uppercaseKeys)
         {
             keyboard.setKeymappingList(&fullKeyboardKeyMappingListAlphaUpper);
@@ -50,7 +60,8 @@ void FullKeyboard::setKeyMappingList()
     }
     else
     {
-        modeBtnTextArea.setTypedText(TypedText(T_NUMMODE));
+        //modeBtnTextArea.setTypedText(TypedText(T_NUMMODE));
+		fullKeyboardCallbackAreas[KeyboardCallbacks::Mode].str = u"123";
         if (uppercaseKeys)
         {
             keyboard.setKeymappingList(&fullKeyboardKeyMappingListNumUpper);
@@ -60,6 +71,7 @@ void FullKeyboard::setKeyMappingList()
             keyboard.setKeymappingList(&fullKeyboardKeyMappingListNumLower);
         }
     }
+	keyboard.invalidateKeyRect(fullKeyboardCallbackAreas[KeyboardCallbacks::Mode].keyId);
 }
 
 void FullKeyboard::backspacePressedHandler()
@@ -104,6 +116,17 @@ void FullKeyboard::modePressedHandler()
     setKeyMappingList();
 }
 
+void FullKeyboard::setPressedHandler()
+{
+	emitCloseWindow(true);
+}
+
+void FullKeyboard::cancelPressedHandler()
+{
+	emitCloseWindow(false);
+}
+
+
 void FullKeyboard::keyPressedhandler(Unicode::UnicodeChar keyChar)
 {
     // After the first keypress, the keyboard will shift to lowercase.
@@ -120,3 +143,14 @@ void FullKeyboard::setTouchable(bool touch)
     Container::setTouchable(touch);
     keyboard.setTouchable(touch);
 }
+
+Rect FullKeyboard::getContainedArea() const
+{
+	return Container::getContainedArea();
+}
+	
+void FullKeyboard::getLastChild(int16_t x, int16_t y, Drawable** last)
+{
+	Container::getLastChild(x, y, last);
+}	
+

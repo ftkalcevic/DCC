@@ -10,6 +10,8 @@ DCCConfigView::DCCConfigView() :
     buttonScanTrackClickCallback(this, &DCCConfigView::buttonScanTrackClickHandler),
     buttonReadAllCVsClickCallback(this, &DCCConfigView::buttonReadAllCVsClickHandler),
 	editTextClickHandlerCallback(this, &DCCConfigView::editTextClickHandler),
+    closeKeypadWindowCallback(this, &DCCConfigView::closeKeypadWindowHandler),
+    closeKeyboardWindowCallback(this, &DCCConfigView::closeKeyboardWindowHandler),
 	state(Editting)
 {
 	toggleProgTrack.setAction(buttonProgTrackClickCallback);
@@ -131,6 +133,14 @@ textDescription.setWildcard((const Unicode::UnicodeChar *)u"Description");
 	
     scrollableContainer1.setScrollbarsPermanentlyVisible();
     scrollableContainer1.setScrollbarsVisible(false);
+	
+	numericKeypad.setVisible(false);
+	numericKeypad.setCloseWindowCallback(closeKeypadWindowCallback);
+	add(numericKeypad);
+	
+	keyboard.setVisible(false);
+	keyboard.setCloseWindowCallback(closeKeyboardWindowCallback);
+	add(keyboard);
 }
 
 void DCCConfigView::setupScreen()
@@ -168,19 +178,48 @@ void DCCConfigView::editTextClickHandler(const Box& b, const ClickEvent& evt)
 	    if (&b == static_cast<const Box *>(&boxAddress) && evt.getType() == ClickEvent::RELEASED )
 	    {
 		    printf("clicked address\n");
-		    NumericKeypad *kb = new NumericKeypad();
-            kb->setPosition(0, 0, 800, 480);
-            add(*kb);
-		    
+		    numericKeypad.setTitle((const Unicode::UnicodeChar *)u"Address");
+            numericKeypad.setPosition(0, 0, 800, 480);
+		    numericKeypad.setNumber(0);
+		    numericKeypad.setRange(0, 9999);
+		    numericKeypad.setVisible(true);
+		    numericKeypad.invalidate();
+		    state = Keypad;
 	    }
 	    else if (&b == static_cast<const Box *>(&boxName) && evt.getType() == ClickEvent::RELEASED )
 	    {
 		    printf("clicked name\n");
-		    FullKeyboard *kb = new FullKeyboard();
-            kb->setPosition(0, 0, 800, 480);
-            add(*kb);
-		    
+            keyboard.setPosition(0, 0, 800, 480);
+		    keyboard.setTitle((const Unicode::UnicodeChar *)u"Name");
+		    keyboard.setText((const Unicode::UnicodeChar *)u"Decoder name");
+		    keyboard.setVisible(true);
+		    keyboard.invalidate();
+		    state = Keyboard;
 	    }
+	}
+}
+
+void DCCConfigView::closeKeypadWindowHandler(bool success)
+{
+	state = Editting;
+	numericKeypad.setVisible(false);
+	numericKeypad.invalidate();
+	if (success)
+	{
+		uint16_t newValue = numericKeypad.getNumber();
+		// put it back where?
+	}
+}
+
+void DCCConfigView::closeKeyboardWindowHandler(bool success)
+{
+	state = Editting;
+	keyboard.setVisible(false);
+	keyboard.invalidate();
+	if (success)
+	{
+		//const Unicode::UnicodeChar * = keyboard.buffer;
+		// put it back where?
 	}
 }
 
@@ -199,6 +238,9 @@ void DCCConfigView::ScanTrackReply(int16_t address, int16_t config, int16_t exte
 
 void DCCConfigView::handleGestureEvent(const GestureEvent & evt)
 {
+	if (state == Keyboard || state == Keypad)
+		return;
+	
 	//printf("DCCConfigView gesture %d %d\n", evt.getType(), evt.getVelocity());
 	if (evt.getType() == GestureEvent::SWIPE_VERTICAL && evt.getVelocity() < -SWIPE_VELOCITY )
 	{

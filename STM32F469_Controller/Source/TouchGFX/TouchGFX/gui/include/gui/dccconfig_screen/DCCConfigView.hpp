@@ -34,6 +34,8 @@ public:
     touchgfx::TextArea textAreaLabelDecoder;
     touchgfx::TextArea textAreaLabelConfig;
     touchgfx::TextArea textAreaLabelAllCVs;
+    NumericKeypad numericKeypad;
+    FullKeyboard keyboard;
 
 protected:
 	touchgfx::ButtonWithLabelAndEnable buttonScanTrack;
@@ -42,7 +44,9 @@ protected:
 	enum EState
 	{
 		Editting,
-		Scanning
+		Scanning,
+        Keypad,
+        Keyboard
 	} state;
 
 	
@@ -55,7 +59,10 @@ protected:
 	void handleGestureEvent(const GestureEvent & evt);
     touchgfx::Callback<DCCConfigView, const Box&, const ClickEvent& > editTextClickHandlerCallback;
     void editTextClickHandler(const Box& b, const ClickEvent& evt);
-
+    touchgfx::Callback<DCCConfigView, bool> closeKeypadWindowCallback;
+    void closeKeypadWindowHandler(bool success);
+    touchgfx::Callback<DCCConfigView, bool> closeKeyboardWindowCallback;
+    void closeKeyboardWindowHandler(bool success);
 };
 
 #endif // DCCCONFIGVIEW_HPP

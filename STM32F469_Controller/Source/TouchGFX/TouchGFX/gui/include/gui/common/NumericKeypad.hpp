@@ -29,63 +29,53 @@ public:
      * NumericKeypad.
      */
     void setTouchable(bool touch);
+    void setTitle(const Unicode::UnicodeChar *title) { keyboard.setTitle(title);}
+	void setNumber(uint16_t n);
+	uint16_t getNumber() const;
+	void setRange(uint16_t min, uint16_t max)
+	{
+		rangeMin = min;
+		rangeMax = max;
+	}
+    void setCloseWindowCallback(touchgfx::GenericCallback<bool>& callback)
+    {
+        this->closeWindowCallback = &callback;
+    }
+	virtual void handleDragEvent(const DragEvent& evt);
 
 private:
-    /*
-     * The size of the buffer that is used by the keyboard.
-     * The size determines how much text the keyboard can contain in its textfield.
-     */
-    static const uint8_t BUFFER_SIZE = 18;
+	uint16_t rangeMin;
+	uint16_t rangeMax;
+	static const uint8_t BUFFER_SIZE = 9;
+    Unicode::UnicodeChar buffer[BUFFER_SIZE];
+	Box                     backgroundBox;
 
-    /**
-     * The keyboard which this NumericKeypad wraps.
-     */
     Keyboard keyboard;
 
-    /**
-     * The buffer used by the keyboard for text input.
-     */
-    Unicode::UnicodeChar buffer[BUFFER_SIZE];
-
-    /**
-     * Used to display text on top of the button for changing keyboard mode.
-     */
-    TextArea modeBtnTextArea;
-
-    /**
+	enum EMode
+	{
+		Dec,
+		Hex,
+		Bin
+	} mode;
+/**
      * Callback for the capslock button.
      */
-    Callback<NumericKeypad> capslockPressed;
-
-    /**
-     * Callback for the backspace button.
-     */
-    Callback<NumericKeypad> backspacePressed;
-
-    /**
-     * Callback for the keyboard mode button.
-     */
+    Callback<NumericKeypad> clearPressed;
     Callback<NumericKeypad> modePressed;
-
-    /**
-     * Callback for when keys are pressed on the keyboard.
-     */
+    Callback<NumericKeypad> setPressed;
+    Callback<NumericKeypad> cancelPressed;
     Callback<NumericKeypad, Unicode::UnicodeChar> keyPressed;
 
-    /**
-     * True if the keyboard should show alpha keys, false for numeric.
-     */
-    bool alphaKeys;
-
-    /**
-     * True if the keyboard should show upper-case keys.
-     */
-    bool uppercaseKeys;
-
-    /**
-     * True if the input position in the text field, and hence the buffer, is at the beginning.
-     */
-    bool firstCharacterEntry;
+	touchgfx::GenericCallback<bool>* closeWindowCallback;
+    virtual void emitCloseWindow(bool success)
+    {
+        if (closeWindowCallback != nullptr && closeWindowCallback->isValid())
+        {
+            this->closeWindowCallback->execute(success);
+        }
+    }	
+	
 
     /*
      * Sets the correct key mappings of the keyboard according to alpha/numeric and upper-case/lower-case.
@@ -95,23 +85,18 @@ private:
     /**
      * Callback handler for the backspace button.
      */
-    void backspacePressedHandler();
-
-    /**
-     * Callback handler for the caps-lock button.
-     */
-    void capslockPressedHandler();
-
-    /**
-     * Callback handler for the mode button.
-     */
+    void clearPressedHandler();
     void modePressedHandler();
+    void setPressedHandler();
+    void cancelPressedHandler();
 
     /**
      * Callback handler for key presses.
      * @param keyChar The UnicodeChar for the key that was pressed.
      */
     void keyPressedhandler(Unicode::UnicodeChar keyChar);
+
+	void setMode(EMode m);
 };
 
 #endif /* NUMERICKEYPAD_HPP_ */
