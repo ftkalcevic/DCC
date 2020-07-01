@@ -48,7 +48,6 @@ private:
 	uint16_t rangeMax;
 	static const uint8_t BUFFER_SIZE = 9;
     Unicode::UnicodeChar buffer[BUFFER_SIZE];
-	Box                     backgroundBox;
 
     Keyboard keyboard;
 

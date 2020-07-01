@@ -11,12 +11,6 @@ NumericKeypad::NumericKeypad() : keyboard(),
     cancelPressed(this, &NumericKeypad::cancelPressedHandler),
     keyPressed(this, &NumericKeypad::keyPressedhandler)
 {
-	backgroundBox.setColor(touchgfx::Color::getColorFrom24BitRGB(0, 0, 0));
-	backgroundBox.setAlpha(128);
-	backgroundBox.setPosition(0, 0, HAL::DISPLAY_WIDTH, HAL::DISPLAY_HEIGHT);
-	backgroundBox.setTouchable(true);
-	add(backgroundBox);
-	
 	rangeMin = 0;
 	rangeMax = 0xFF;
 	

@@ -12,12 +12,6 @@ FullKeyboard::FullKeyboard() : keyboard(),
     uppercaseKeys(false),
     firstCharacterEntry(false)
 {
-	backgroundBox.setColor(touchgfx::Color::getColorFrom24BitRGB(0, 0, 0));
-	backgroundBox.setAlpha(128);
-	backgroundBox.setPosition(0, 0, HAL::DISPLAY_WIDTH, HAL::DISPLAY_HEIGHT);
-	backgroundBox.setTouchable(true);
-	add(backgroundBox);
-	
     //Set the callbacks for the callback areas of the keyboard and set its layout.
     fullKeyboardLayout.callbackAreaArray[KeyboardCallbacks::CapsLock].callback = &capslockPressed;
     fullKeyboardLayout.callbackAreaArray[KeyboardCallbacks::Backspace].callback = &backspacePressed;
@@ -34,20 +28,15 @@ FullKeyboard::FullKeyboard() : keyboard(),
     uppercaseKeys = true;
     firstCharacterEntry = true;
 
-//    modeBtnTextArea.setPosition(5, 196, 56, 40);
-//    modeBtnTextArea.setColor(Color::getColorFrom24BitRGB(0xFF, 0xFF, 0xFF));
-
     setKeyMappingList();
 
     add(keyboard);
-//    add(modeBtnTextArea);
 }
 
 void FullKeyboard::setKeyMappingList()
 {
     if (alphaKeys)
     {
-	    //modeBtnTextArea.setTypedText(TypedText(T_ALPHAMODE));
 		fullKeyboardCallbackAreas[KeyboardCallbacks::Mode].str = u"Abc";
         if (uppercaseKeys)
         {
@@ -60,7 +49,6 @@ void FullKeyboard::setKeyMappingList()
     }
     else
     {
-        //modeBtnTextArea.setTypedText(TypedText(T_NUMMODE));
 		fullKeyboardCallbackAreas[KeyboardCallbacks::Mode].str = u"123";
         if (uppercaseKeys)
         {

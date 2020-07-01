@@ -19,19 +19,13 @@
 namespace touchgfx
 {
 Keyboard::Keyboard()
-    : Container(), keyListener(0), bufferSize(0), bufferPosition(0), keyDown(0), cancelIsEmitted(false), title(NULL)
+    : keyListener(0), bufferSize(0), bufferPosition(0), keyDown(0), cancelIsEmitted(false), title(NULL)
 {
     setTouchable(true);
-
+	
     keyMappingList = static_cast<KeyMappingList*>(0);
     buffer = static_cast<Unicode::UnicodeChar*>(0);
     layout = static_cast<Layout*>(0);
-
-//    highlightImage.setVisible(false);
-//    Container::add(highlightImage);
-
-//    enteredText.setColor(Color::getColorFrom24BitRGB(0, 0, 0));
-//    Container::add(enteredText);
 }
 
 void Keyboard::setBuffer(Unicode::UnicodeChar* newBuffer, uint16_t newBufferSize)
@@ -39,8 +33,7 @@ void Keyboard::setBuffer(Unicode::UnicodeChar* newBuffer, uint16_t newBufferSize
     buffer = newBuffer;
     bufferSize = newBufferSize;
 
-    // Place cursor at end of string if we already have something
-    // in the edit buffer.
+    // Place cursor at end of string if we already have something in the edit buffer.
     bufferPosition = Unicode::strlen(buffer);
 	enteredTextInvalidate();
 }
@@ -59,7 +52,10 @@ Keyboard::Key Keyboard::getKeyForCoordinates(int16_t x, int16_t y) const
     {
         for (uint8_t i = 0; i < layout->numberOfKeys; i++)
         {
-            if (layout->keyArray[i].keyArea.intersect(x, y))
+	        Rect keyArea = layout->keyArray[i].keyArea;
+	        keyArea.x += keyboardRect.x;
+	        keyArea.y += keyboardRect.y;
+            if (keyArea.intersect(x, y))
             {
                 key = layout->keyArray[i];
                 break;
@@ -76,7 +72,10 @@ Keyboard::CallbackArea *Keyboard::getCallbackAreaForCoordinates(int16_t x, int16
     {
         for (uint8_t i = 0; i < layout->numberOfCallbackAreas; i++)
         {
-            if (layout->callbackAreaArray[i].keyArea.intersect(x, y))
+	        Rect keyArea = layout->callbackAreaArray[i].keyArea;
+	        keyArea.x += keyboardRect.x;
+	        keyArea.y += keyboardRect.y;
+            if (keyArea.intersect(x, y))
             {
                 area = layout->callbackAreaArray + i;
                 break;
@@ -87,15 +86,17 @@ Keyboard::CallbackArea *Keyboard::getCallbackAreaForCoordinates(int16_t x, int16
 }
 
 	
-void Keyboard::DrawKey(const Rect& invalidatedArea, const Rect &origKeyArea, const LCD::StringVisuals &visuals, Unicode::UnicodeChar const *str, bool isKeyDown ) const
+void Keyboard::DrawKey(const Rect& invalidatedArea, const Rect &_origKeyArea, const LCD::StringVisuals &visuals, Unicode::UnicodeChar const *str, bool isKeyDown ) const
 {
+	Rect origKeyArea = _origKeyArea;
+	origKeyArea.x += keyboardRect.x;
+	origKeyArea.y += keyboardRect.y;
     if (origKeyArea.intersect(invalidatedArea))
     {
 	    // Get a copy of the keyArea and v-center the area for the character
 		Rect keyArea = origKeyArea;
 	                    
 	    // Draw key
-	    //if ( keyUp )
 	    {
 	        uint16_t shadowDepth = layout->shadowDepth;
 		    if (isKeyDown)
@@ -107,19 +108,16 @@ void Keyboard::DrawKey(const Rect& invalidatedArea, const Rect &origKeyArea, con
 			    
             Rect buttonRect = keyArea;
 		    buttonRect = buttonRect & invalidatedArea;
-            translateRectToAbsolute(buttonRect);
 		    if ( !buttonRect.isEmpty() )
                 HAL::lcd().fillRect(buttonRect, layout->keyBackColor, layout->keyAlpha);
 		    
 		    Rect bottomShadow(keyArea.x + layout->shadowDepth, keyArea.bottom(), keyArea.width, layout->shadowDepth);
 		    bottomShadow = bottomShadow & invalidatedArea;
-            translateRectToAbsolute(bottomShadow);
 		    if ( !bottomShadow.isEmpty() )
                 HAL::lcd().fillRect(bottomShadow, layout->shadowColor, layout->keyAlpha);
 
 		    Rect rightShadow(keyArea.right(), keyArea.y + layout->shadowDepth, layout->shadowDepth, keyArea.height);
 		    rightShadow = rightShadow & invalidatedArea;
-            translateRectToAbsolute(rightShadow);
 		    if ( !rightShadow.isEmpty() )
                 HAL::lcd().fillRect(rightShadow, layout->shadowColor, layout->keyAlpha);
 	    }
@@ -155,18 +153,18 @@ void Keyboard::DrawText(const Unicode::UnicodeChar *str, FontId fontId, Alignmen
             visuals.alignment = align;
             visuals.color = color;
 
-	        Rect adjTextArea = textArea;
 	        // Draw text
+	        Rect adjTextArea = textArea;
             uint16_t fontHeight = font->getMinimumTextHeight();
 	        uint16_t offset = (adjTextArea.height - fontHeight) / 2;
 	        adjTextArea.y += offset;
 	        adjTextArea.height -= offset;
+			
 	        // Calculate the invalidated area relative to the box
 	        Rect invalidatedAreaRelative = textArea & invalidatedArea;
 	        invalidatedAreaRelative.x -= textArea.x;
 	        invalidatedAreaRelative.y -= textArea.y;
 
-            translateRectToAbsolute(adjTextArea);
 	        HAL::lcd().drawString(adjTextArea, invalidatedAreaRelative, visuals, str);
 		}
 	}
@@ -177,10 +175,13 @@ void Keyboard::draw(const Rect& invalidatedArea) const
     assert(layout && "No layout configured for Keyboard");
     if (layout != 0)
     {
-	    // background
 	    {
+	        // background
             Rect dirty = invalidatedArea;
-            translateRectToAbsolute(dirty);
+            HAL::lcd().fillRect(dirty, touchgfx::Color::getColorFrom24BitRGB(0, 0, 0), 128);        // Grey out background
+		    
+		    // keyboard
+            dirty = keyboardRect & invalidatedArea;
             HAL::lcd().fillRect(dirty, layout->backColor, layout->backAlpha);
 	    }
 	    
@@ -209,30 +210,26 @@ void Keyboard::draw(const Rect& invalidatedArea) const
         }
 	    
 	    // Entered text
-        Rect invalidatedTextAreaRelative = layout->textAreaPosition;
+	    Rect textAreaPosition = layout->textAreaPosition;
+	    textAreaPosition.x += keyboardRect.x;
+	    textAreaPosition.y += keyboardRect.y;
+        Rect invalidatedTextAreaRelative = textAreaPosition;
 	    invalidatedTextAreaRelative = invalidatedTextAreaRelative & invalidatedArea;
-        translateRectToAbsolute(invalidatedTextAreaRelative);
 	    if (!invalidatedTextAreaRelative.isEmpty())
 	    {
 		    HAL::lcd().fillRect(invalidatedTextAreaRelative, layout->textAreaBackColor, layout->keyAlpha);
 
-			DrawText(buffer, layout->textAreaFont, layout->textAreaAlignment, layout->textAreaFontColor, layout->textAreaPosition, invalidatedArea);
+			DrawText(buffer, layout->textAreaFont, layout->textAreaAlignment, layout->textAreaFontColor, textAreaPosition, invalidatedArea);
 	    }
 	    
 	    // title
-		DrawText(title, layout->titleFont, layout->titleAlignment, layout->titleFontColor, layout->titlePosition, invalidatedArea);
+	    Rect titlePosition = layout->titlePosition;
+	    titlePosition.x += keyboardRect.x;
+	    titlePosition.y += keyboardRect.y;
+		DrawText(title, layout->titleFont, layout->titleAlignment, layout->titleFontColor, titlePosition, invalidatedArea);
     }
 }
 
-Rect Keyboard::getContainedArea() const
-{
-	return Container::getContainedArea();
-}
-	
-void Keyboard::getLastChild(int16_t x, int16_t y, Drawable** last)
-{
-	Container::getLastChild(x, y, last);
-}	
 void Keyboard::handleClickEvent(const ClickEvent& evt)
 {
     ClickEvent::ClickEventType type = evt.getType();
@@ -350,7 +347,7 @@ void Keyboard::invalidateKeyRect(uint8_t keyId)
 	
 void Keyboard::invalidateKeyRect(const Rect &rect)
 {
-	Rect toDraw(rect.x, rect.y, rect.width+layout->shadowDepth, rect.height+layout->shadowDepth);
+	Rect toDraw(rect.x + keyboardRect.x, rect.y + keyboardRect.y, rect.width+layout->shadowDepth, rect.height+layout->shadowDepth);
     invalidateRect(toDraw);
 }
 
@@ -381,17 +378,6 @@ Unicode::UnicodeChar Keyboard::getCharForKey(uint8_t keyId) const
     return ch;
 }
 
-void Keyboard::setupDrawChain(const Rect& invalidatedArea, Drawable** nextPreviousElement)
-{
-    // Keyboard is a Container, and they do not normally appear in the draw chain (they just draw children).
-    // But this particular container actually has a draw() function implementation, so we must change default
-    // behavior.
-    // First, add children
-    Container::setupDrawChain(invalidatedArea, nextPreviousElement);
-    // Then add yourself
-    Drawable::setupDrawChain(invalidatedArea, nextPreviousElement);
-}
-
 void Keyboard::setBufferPosition(uint16_t newPos)
 {
     bufferPosition = newPos;
@@ -407,8 +393,16 @@ void Keyboard::setKeymappingList(const KeyMappingList* newKeyMappingList)
 void Keyboard::enteredTextInvalidate() const
 {
 	Rect temp(layout->textAreaPosition);
+	temp.x += keyboardRect.x;
+	temp.y += keyboardRect.y;
 	invalidateRect(temp);
 }
+	
+Rect Keyboard::getSolidRect() const
+{
+	return keyboardRect;
+}
+	
 } // namespace touchgfx
 
 

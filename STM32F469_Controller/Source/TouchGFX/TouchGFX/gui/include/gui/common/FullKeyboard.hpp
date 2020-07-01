@@ -43,12 +43,11 @@ public:
     virtual Rect getContainedArea() const;
 	
 private:
-	Box backgroundBox;
     /*
      * The size of the buffer that is used by the keyboard.
      * The size determines how much text the keyboard can contain in its textfield.
      */
-    static const uint8_t BUFFER_SIZE = 18;
+    static const uint8_t BUFFER_SIZE = 127;
 
     /**
      * The keyboard which this FullKeyboard wraps.

@@ -55,7 +55,7 @@ namespace touchgfx
  *
  * @see Container
  */
-class Keyboard : public Container
+class Keyboard : public Widget
 {
 public:
     /**
@@ -327,8 +327,16 @@ public:
     void invalidateKeyRect(const Rect& rect);
     void invalidateKeyRect(uint8_t keyId);
     void setTitle(const Unicode::UnicodeChar* s) { title = s; }
-    virtual void getLastChild(int16_t x, int16_t y, Drawable** last);
-    virtual Rect getContainedArea() const;
+//    virtual void getLastChild(int16_t x, int16_t y, Drawable** last);
+//    virtual Rect getContainedArea() const;
+	void setPosition(uint16_t x, uint16_t y, uint16_t width, uint16_t height)
+	{
+		keyboardRect.x = x;
+		keyboardRect.y = y;
+		keyboardRect.width = width;
+		keyboardRect.height = height;
+		Widget::setPosition(0, 0, HAL::DISPLAY_WIDTH, HAL::DISPLAY_HEIGHT);
+	}
 	
 protected:
     GenericCallback<Unicode::UnicodeChar>* keyListener; ///< Pointer to callback being executed when a key is pressed.
@@ -341,7 +349,14 @@ protected:
     bool                    cancelIsEmitted;///< Tells if a cancel is emitted to check when a key is released
     uint8_t                 keyDown;
     const Unicode::UnicodeChar* title;
-
+	Rect                    keyboardRect;
+	
+//	void translateRectToAbsolute(Rect &r) const
+//	{
+//		r.x += keyboardRect.x;
+//		r.y += keyboardRect.y;
+//	}
+	
     /**
      * @fn Key Keyboard::getKeyForCoordinates(int16_t x, int16_t y) const;
      *
@@ -393,10 +408,11 @@ protected:
      * @param invalidatedArea              Include drawables that intersect with this area only.
      * @param [in,out] nextPreviousElement Modifiable element in linked list.
      */
-    virtual void setupDrawChain(const Rect& invalidatedArea, Drawable** nextPreviousElement);
+    //virtual void setupDrawChain(const Rect& invalidatedArea, Drawable** nextPreviousElement);
 	void DrawKey(const Rect& invalidatedArea, const Rect &keyArea, const LCD::StringVisuals &visuals, Unicode::UnicodeChar const *str, bool isKeyDown) const;
     void DrawText(const Unicode::UnicodeChar* str, FontId fontId, Alignment align, colortype color, const Rect textArea, const Rect invalidatedArea) const;
-};
+	virtual Rect getSolidRect() const;
+	};
 } // namespace touchgfx
 
 #endif // KEYBOARD_HPP
