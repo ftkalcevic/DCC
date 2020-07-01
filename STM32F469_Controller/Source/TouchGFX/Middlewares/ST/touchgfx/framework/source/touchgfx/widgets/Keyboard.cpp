@@ -15,6 +15,8 @@
 
 #include <touchgfx/hal/Types.hpp>
 #include <touchgfx/widgets/Keyboard.hpp>
+#include "AudioTask.h"
+
 
 namespace touchgfx
 {
@@ -53,8 +55,7 @@ Keyboard::Key Keyboard::getKeyForCoordinates(int16_t x, int16_t y) const
         for (uint8_t i = 0; i < layout->numberOfKeys; i++)
         {
 	        Rect keyArea = layout->keyArray[i].keyArea;
-	        keyArea.x += keyboardRect.x;
-	        keyArea.y += keyboardRect.y;
+	        translateToAbsolute(keyArea);
             if (keyArea.intersect(x, y))
             {
                 key = layout->keyArray[i];
@@ -73,8 +74,7 @@ Keyboard::CallbackArea *Keyboard::getCallbackAreaForCoordinates(int16_t x, int16
         for (uint8_t i = 0; i < layout->numberOfCallbackAreas; i++)
         {
 	        Rect keyArea = layout->callbackAreaArray[i].keyArea;
-	        keyArea.x += keyboardRect.x;
-	        keyArea.y += keyboardRect.y;
+	        translateToAbsolute(keyArea);
             if (keyArea.intersect(x, y))
             {
                 area = layout->callbackAreaArray + i;
@@ -86,11 +86,10 @@ Keyboard::CallbackArea *Keyboard::getCallbackAreaForCoordinates(int16_t x, int16
 }
 
 	
-void Keyboard::DrawKey(const Rect& invalidatedArea, const Rect &_origKeyArea, const LCD::StringVisuals &visuals, Unicode::UnicodeChar const *str, bool isKeyDown ) const
+void Keyboard::DrawKey(const Rect& invalidatedArea, const Rect &_origKeyArea, const LCD::StringVisuals &visuals, Unicode::UnicodeChar const *str, BitmapId bitmapId, bool isKeyDown ) const
 {
 	Rect origKeyArea = _origKeyArea;
-	origKeyArea.x += keyboardRect.x;
-	origKeyArea.y += keyboardRect.y;
+	translateToAbsolute(origKeyArea);
     if (origKeyArea.intersect(invalidatedArea))
     {
 	    // Get a copy of the keyArea and v-center the area for the character
@@ -125,18 +124,37 @@ void Keyboard::DrawKey(const Rect& invalidatedArea, const Rect &_origKeyArea, co
 	             
 	    if (str[0] != 0)
 	    {
-            uint16_t fontHeight = visuals.font->getMinimumTextHeight();
-            uint16_t offset = (keyArea.height - fontHeight) / 2;
-            keyAreaDirty.y += offset;
-            keyAreaDirty.height -= offset;
-            // Calculate the invalidated area relative to the key
-            Rect invalidatedAreaRelative = keyArea & invalidatedArea;
-            invalidatedAreaRelative.x -= keyAreaDirty.x;
-            invalidatedAreaRelative.y -= keyAreaDirty.y;
-	        // Set up string with one character
+		    uint16_t fontHeight = visuals.font->getMinimumTextHeight();
+		    uint16_t offset = (keyArea.height - fontHeight) / 2;
+		    keyAreaDirty.y += offset;
+		    keyAreaDirty.height -= offset;
+		    // Calculate the invalidated area relative to the key
+		    Rect invalidatedAreaRelative = keyArea & invalidatedArea;
+		    invalidatedAreaRelative.x -= keyAreaDirty.x;
+		    invalidatedAreaRelative.y -= keyAreaDirty.y;
+		    // Set up string with one character
 
-            translateRectToAbsolute(keyAreaDirty);
-            HAL::lcd().drawString(keyAreaDirty, invalidatedAreaRelative, visuals, str);
+			HAL::lcd().drawString(keyAreaDirty, invalidatedAreaRelative, visuals, str);
+	    }
+	    else if (bitmapId > 0)
+	    {
+            Bitmap bmp(bitmapId);
+		    
+		    // Center icon
+		    Rect iconRect(keyArea);
+		    iconRect.x += (iconRect.width - bmp.getWidth()) / 2;
+		    iconRect.y += (iconRect.height - bmp.getHeight()) / 2;
+		    iconRect.width = bmp.getWidth();
+		    iconRect.height = bmp.getHeight();
+		    // Does it need drawing?
+            Rect dirty = invalidatedArea & iconRect;
+            if (!dirty.isEmpty())
+            {
+	            // dirty is the portion that needs to be painted, relative to iconRect.x/y
+	            dirty.x -= iconRect.x;
+	            dirty.y -= iconRect.y;
+                HAL::lcd().drawPartialBitmap(bmp, iconRect.x, iconRect.y, dirty, 255);
+            }
 	    }
     }
 }
@@ -183,6 +201,23 @@ void Keyboard::draw(const Rect& invalidatedArea) const
 		    // keyboard
             dirty = keyboardRect & invalidatedArea;
             HAL::lcd().fillRect(dirty, layout->backColor, layout->backAlpha);
+		    
+		    // Frame - todo make this 3d
+		    uint16_t borderWidth = 2;
+		    colortype borderColor = touchgfx::Color::getColorFrom24BitRGB(0, 0, 0);
+		    Rect left(keyboardRect.x, keyboardRect.y, borderWidth, keyboardRect.height);
+		    Rect right(keyboardRect.right()-borderWidth, keyboardRect.y, borderWidth, keyboardRect.height);
+		    Rect top(keyboardRect.x, keyboardRect.y, keyboardRect.width, borderWidth );
+		    Rect bottom(keyboardRect.x, keyboardRect.bottom() - borderWidth, keyboardRect.width, borderWidth );
+		    
+		    left &= invalidatedArea;
+		    right &= invalidatedArea;
+		    top &= invalidatedArea;
+		    bottom &= invalidatedArea;
+		    if ( !left.isEmpty() )  HAL::lcd().fillRect(left, borderColor, 255);
+		    if ( !right.isEmpty() )  HAL::lcd().fillRect(right, borderColor, 255);
+		    if ( !top.isEmpty() )  HAL::lcd().fillRect(top, borderColor, 255);
+		    if ( !bottom.isEmpty() )  HAL::lcd().fillRect(bottom, borderColor, 255);
 	    }
 	    
         Font* font = FontManager::getFont(layout->keyFont);
@@ -200,19 +235,18 @@ void Keyboard::draw(const Rect& invalidatedArea) const
                 const Key& key = layout->keyArray[i];
                 Unicode::UnicodeChar c = getCharForKey(key.keyId);
 		        Unicode::UnicodeChar str[2] = { c, 0 };
-	            DrawKey(invalidatedArea, key.keyArea, visuals, str, keyDown == key.keyId);
+	            DrawKey(invalidatedArea, key.keyArea, visuals, str, key.highlightBitmapId, keyDown == key.keyId);
             }
             for (uint8_t i = 0; i < layout->numberOfCallbackAreas; i++)
             {
                 const CallbackArea& callbackArea = layout->callbackAreaArray[i];
-	            DrawKey(invalidatedArea, callbackArea.keyArea, visuals, (Unicode::UnicodeChar*)callbackArea.str, keyDown == callbackArea.keyId);
+	            DrawKey(invalidatedArea, callbackArea.keyArea, visuals, (Unicode::UnicodeChar*)callbackArea.str, callbackArea.highlightBitmapId, keyDown == callbackArea.keyId);
             }
         }
 	    
 	    // Entered text
 	    Rect textAreaPosition = layout->textAreaPosition;
-	    textAreaPosition.x += keyboardRect.x;
-	    textAreaPosition.y += keyboardRect.y;
+	    translateToAbsolute(textAreaPosition);
         Rect invalidatedTextAreaRelative = textAreaPosition;
 	    invalidatedTextAreaRelative = invalidatedTextAreaRelative & invalidatedArea;
 	    if (!invalidatedTextAreaRelative.isEmpty())
@@ -224,8 +258,7 @@ void Keyboard::draw(const Rect& invalidatedArea) const
 	    
 	    // title
 	    Rect titlePosition = layout->titlePosition;
-	    titlePosition.x += keyboardRect.x;
-	    titlePosition.y += keyboardRect.y;
+	    translateToAbsolute(titlePosition);
 		DrawText(title, layout->titleFont, layout->titleAlignment, layout->titleFontColor, titlePosition, invalidatedArea);
     }
 }
@@ -244,6 +277,7 @@ void Keyboard::handleClickEvent(const ClickEvent& evt)
 	        invalidateKeyRect(keyDown);
             invalidateKeyRect(callbackArea->keyArea);
 	        keyDown = callbackArea->keyId;
+	        audioTask.PlaySound(EAudioSounds::KeyPressTone);
         }
 
         if (type == ClickEvent::RELEASED)
@@ -275,6 +309,7 @@ void Keyboard::handleClickEvent(const ClickEvent& evt)
 	            invalidateKeyRect(keyDown);
 	            invalidateKeyRect(key.keyArea);
 	            keyDown = key.keyId;
+	            audioTask.PlaySound(EAudioSounds::KeyPressTone);
             }
 
             if (type == ClickEvent::RELEASED)
@@ -314,6 +349,7 @@ void Keyboard::handleClickEvent(const ClickEvent& evt)
         }
     }
 
+
     if (type == ClickEvent::RELEASED || type == ClickEvent::CANCEL)
     {
 	    invalidateKeyRect(keyDown);
@@ -347,7 +383,8 @@ void Keyboard::invalidateKeyRect(uint8_t keyId)
 	
 void Keyboard::invalidateKeyRect(const Rect &rect)
 {
-	Rect toDraw(rect.x + keyboardRect.x, rect.y + keyboardRect.y, rect.width+layout->shadowDepth, rect.height+layout->shadowDepth);
+	Rect toDraw(rect.x, rect.y, rect.width+layout->shadowDepth, rect.height+layout->shadowDepth);
+	translateToAbsolute(toDraw);
     invalidateRect(toDraw);
 }
 
@@ -393,8 +430,7 @@ void Keyboard::setKeymappingList(const KeyMappingList* newKeyMappingList)
 void Keyboard::enteredTextInvalidate() const
 {
 	Rect temp(layout->textAreaPosition);
-	temp.x += keyboardRect.x;
-	temp.y += keyboardRect.y;
+	translateToAbsolute(temp);
 	invalidateRect(temp);
 }
 	
@@ -409,11 +445,8 @@ Rect Keyboard::getSolidRect() const
 
 /*
  TODO - 
-    - draw frame(s)
-    - fix Title aligment
     - numeric range and digit checking
-    - touch beep
     - numeric - disable unavailable keys
-    - images on keys - shift, backspace
     - toggle keys - caps lock
+    - if just starting, typing deletes what's there.
  **/

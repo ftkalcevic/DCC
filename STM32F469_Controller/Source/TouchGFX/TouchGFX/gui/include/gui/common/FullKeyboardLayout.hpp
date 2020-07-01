@@ -61,7 +61,7 @@ static const Keyboard::Key fullKeyboardKeyArray[30] =
     {28, Rect(14 + 64 * 7, 217, 52, 62), 0},
     {29, Rect(14 + 64 * 8, 217, 52, 62), 0},
 	
-    {30, Rect(14 + 64 * 2, 287, 436, 62), BITMAP_KEYBOARD_SPACE_HIGHLIGHTED_ID}
+    {30, Rect(14 + 64 * 2, 287, 436, 62), 0}
 };
 
 /**
@@ -81,7 +81,7 @@ namespace KeyboardCallbacks
 static Keyboard::CallbackArea fullKeyboardCallbackAreas[5] =
 {
     {128, Rect(14 + 64 * 0, 217, 116, 62), 0, u"caps",   0},     // caps-lock
-    {129, Rect(14 + 64 * 9, 217, 116, 62), 0, u"bksp",   0},  // backspace
+    {129, Rect(14 + 64 * 9, 217, 116, 62), 0, 0,         BITMAP_BACKSPACE_ID},  // backspace
     {130, Rect(14 + 64 * 0, 287, 116, 62), 0, u"123",    0},       // mode
     {131, Rect(14,  380, 155, 62),         0, u"Set",    0},       // set
     {132, Rect(551, 380, 155, 62),         0, u"Cancel", 0},       // cancel

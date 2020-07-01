@@ -1173,5 +1173,10 @@
 			<type>1</type>
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/common/NumericKeypad.cpp</locationURI>
 		</link>
+		<link>
+			<name>Application/User/generated/backspace.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/backspace.cpp</locationURI>
+		</link>
 	</linkedResources>
 </projectDescription>

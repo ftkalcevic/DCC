@@ -91,7 +91,7 @@
     <AllDependencies>
       <ProjectDependency>
         <RelativePath>..\TouchGFX\STM32CubeIDE\.cproject</RelativePath>
-        <Timestamp>132379836281799664</Timestamp>
+        <Timestamp>132380572998732525</Timestamp>
       </ProjectDependency>
     </AllDependencies>
     <RootDirectory>
@@ -370,21 +370,6 @@
                       <RelativePath>..\TouchGFX\TouchGFX\generated\fonts\src\Table_consola_40_4bpp.cpp</RelativePath>
                     </VirtualFileSnapshot>
                     <VirtualFileSnapshot>
-                      <RelativePath>..\TouchGFX\TouchGFX\generated\images\src\keyboard_key_delete_highlighted.cpp</RelativePath>
-                    </VirtualFileSnapshot>
-                    <VirtualFileSnapshot>
-                      <RelativePath>..\TouchGFX\TouchGFX\generated\images\src\keyboard_key_highlighted.cpp</RelativePath>
-                    </VirtualFileSnapshot>
-                    <VirtualFileSnapshot>
-                      <RelativePath>..\TouchGFX\TouchGFX\generated\images\src\keyboard_key_num_highlighted.cpp</RelativePath>
-                    </VirtualFileSnapshot>
-                    <VirtualFileSnapshot>
-                      <RelativePath>..\TouchGFX\TouchGFX\generated\images\src\keyboard_key_shift_highlighted.cpp</RelativePath>
-                    </VirtualFileSnapshot>
-                    <VirtualFileSnapshot>
-                      <RelativePath>..\TouchGFX\TouchGFX\generated\images\src\keyboard_space_highlighted.cpp</RelativePath>
-                    </VirtualFileSnapshot>
-                    <VirtualFileSnapshot>
                       <RelativePath>..\TouchGFX\TouchGFX\generated\fonts\src\Font_Asap_Regular_20_4bpp_4.cpp</RelativePath>
                     </VirtualFileSnapshot>
                     <VirtualFileSnapshot>
@@ -401,6 +386,9 @@
                     </VirtualFileSnapshot>
                     <VirtualFileSnapshot>
                       <RelativePath>..\TouchGFX\TouchGFX\generated\fonts\src\Font_Asap_Regular_40_4bpp_4.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\generated\images\src\backspace.cpp</RelativePath>
                     </VirtualFileSnapshot>
                   </Files>
                 </VirtualDirectorySnapshot>

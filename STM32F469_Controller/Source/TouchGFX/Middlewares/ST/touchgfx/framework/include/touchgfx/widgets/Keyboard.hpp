@@ -351,11 +351,11 @@ protected:
     const Unicode::UnicodeChar* title;
 	Rect                    keyboardRect;
 	
-//	void translateRectToAbsolute(Rect &r) const
-//	{
-//		r.x += keyboardRect.x;
-//		r.y += keyboardRect.y;
-//	}
+	void translateToAbsolute(Rect &r) const // this is not translateRectToAbsolute - it is a helper to position the keyboard rect relative to the full screen background rect
+	{
+		r.x += keyboardRect.x;
+		r.y += keyboardRect.y;
+	}
 	
     /**
      * @fn Key Keyboard::getKeyForCoordinates(int16_t x, int16_t y) const;
@@ -409,7 +409,7 @@ protected:
      * @param [in,out] nextPreviousElement Modifiable element in linked list.
      */
     //virtual void setupDrawChain(const Rect& invalidatedArea, Drawable** nextPreviousElement);
-	void DrawKey(const Rect& invalidatedArea, const Rect &keyArea, const LCD::StringVisuals &visuals, Unicode::UnicodeChar const *str, bool isKeyDown) const;
+	void DrawKey(const Rect& invalidatedArea, const Rect &keyArea, const LCD::StringVisuals &visuals, Unicode::UnicodeChar const *str, BitmapId bitmapId, bool isKeyDown) const;
     void DrawText(const Unicode::UnicodeChar* str, FontId fontId, Alignment align, colortype color, const Rect textArea, const Rect invalidatedArea) const;
 	virtual Rect getSolidRect() const;
 	};
