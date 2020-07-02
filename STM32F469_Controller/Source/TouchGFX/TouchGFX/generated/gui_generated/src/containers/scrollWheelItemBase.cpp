@@ -15,8 +15,8 @@ scrollWheelItemBase::scrollWheelItemBase()
     textArea.setPosition(0, 36, 250, 27);
     textArea.setColor(touchgfx::Color::getColorFrom24BitRGB(0, 0, 0));
     textArea.setLinespacing(0);
-    textArea.setWildcard(touchgfx::TypedText(T_WILDCARDTEXTID).getText());
-    textArea.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTIDCENTER));
+    textArea.setWildcard(touchgfx::TypedText(T_WILDCARDTEXTLEFT20PXID).getText());
+    textArea.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTCENTER20PXID));
 
     add(box1);
     add(textArea);

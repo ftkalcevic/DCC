@@ -63,18 +63,28 @@ DCCConfigViewBase::DCCConfigViewBase() :
     toggleProgTrack.setBitmaps(touchgfx::Bitmap(BITMAP_PROGTRACKBUTTONUP_ID), touchgfx::Bitmap(BITMAP_PROGTRACKBUTTONDOWN_ID));
     scrollableContainer1.add(toggleProgTrack);
 
-    scrollList1.setPosition(17, 17, 350, 240);
-    scrollList1.setHorizontal(false);
-    scrollList1.setCircular(false);
-    scrollList1.setEasingEquation(touchgfx::EasingEquations::backEaseOut);
-    scrollList1.setSwipeAcceleration(10);
-    scrollList1.setDragAcceleration(10);
-    scrollList1.setNumberOfItems(1);
-    scrollList1.setPadding(0, 0);
-    scrollList1.setSnapping(false);
-    scrollList1.setDrawableSize(100, 0);
-    scrollList1.setDrawables(scrollList1ListItems, updateItemCallback);
-    scrollableContainer1.add(scrollList1);
+    scrollWheelDecoders.setPosition(17, 17, 350, 240);
+    scrollWheelDecoders.setHorizontal(false);
+    scrollWheelDecoders.setCircular(false);
+    scrollWheelDecoders.setEasingEquation(touchgfx::EasingEquations::backEaseOut);
+    scrollWheelDecoders.setSwipeAcceleration(10);
+    scrollWheelDecoders.setDragAcceleration(10);
+    scrollWheelDecoders.setNumberOfItems(1);
+    scrollWheelDecoders.setSelectedItemOffset(65);
+    scrollWheelDecoders.setDrawableSize(100, 5);
+    scrollWheelDecoders.setDrawables(scrollWheelDecodersListItems, updateItemCallback);
+    scrollWheelDecoders.animateToItem(0, 0);
+    scrollableContainer1.add(scrollWheelDecoders);
+
+    tiledImageBottomMask.setBitmap(touchgfx::Bitmap(BITMAP_DECODERSWHEELMASKBOTTOM_ID));
+    tiledImageBottomMask.setPosition(17, 193, 350, 65);
+    tiledImageBottomMask.setOffset(0, 0);
+    scrollableContainer1.add(tiledImageBottomMask);
+
+    tiledImageTopMask.setBitmap(touchgfx::Bitmap(BITMAP_DECODERSWHEELMASKTOP_ID));
+    tiledImageTopMask.setPosition(17, 17, 350, 64);
+    tiledImageTopMask.setOffset(0, 0);
+    scrollableContainer1.add(tiledImageTopMask);
     scrollableContainer1.setScrollbarsPermanentlyVisible();
     scrollableContainer1.setScrollbarsVisible(false);
 
@@ -87,19 +97,19 @@ void DCCConfigViewBase::setupScreen()
 {
     statusBar.initialize();
     functionButtons.initialize();
-    scrollList1.initialize();
-    for (int i = 0; i < scrollList1ListItems.getNumberOfDrawables(); i++)
+    scrollWheelDecoders.initialize();
+    for (int i = 0; i < scrollWheelDecodersListItems.getNumberOfDrawables(); i++)
     {
-        scrollList1ListItems[i].initialize();
+        scrollWheelDecodersListItems[i].initialize();
     }
 }
 
 void DCCConfigViewBase::updateItemCallbackHandler(touchgfx::DrawableListItemsInterface* items, int16_t containerIndex, int16_t itemIndex)
 {
-    if (items == &scrollList1ListItems)
+    if (items == &scrollWheelDecodersListItems)
     {
         touchgfx::Drawable* d = items->getDrawable(containerIndex);
-        ListItem* cc = (ListItem*)d;
-        scrollList1UpdateItem(*cc, itemIndex);
+        ListItemDecoder* cc = (ListItemDecoder*)d;
+        scrollWheelDecodersUpdateItem(*cc, itemIndex);
     }
 }

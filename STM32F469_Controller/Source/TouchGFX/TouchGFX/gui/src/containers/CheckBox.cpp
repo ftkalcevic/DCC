@@ -40,3 +40,16 @@ void CheckBox::getLastChild(int16_t x, int16_t y, Drawable** last)
 }
 
 
+void CheckBox::repositionText()
+{
+	// Keep text and icon aligned in middle of box
+	Rect r = getRect();
+	Rect c = check.getRect();
+	Rect t = text.getRect();
+	const Font *f = text.getTypedText().getFont();
+    uint16_t fontHeight = f->getMinimumTextHeight();
+	
+	check.setPosition(c.x, (r.height-c.height)/2, c.width, c.height);
+	text.setPosition(t.x, (r.height-fontHeight)/2, t.width, t.height);
+	
+}

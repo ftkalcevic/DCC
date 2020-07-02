@@ -10,38 +10,37 @@ TEXT_LOCATION_FLASH_PRAGMA
 KEEP extern const uint32_t indicesGb[] TEXT_LOCATION_FLASH_ATTRIBUTE =
 {
     0, // T_ResourceId1
-    14, // T_wildcardTextId
+    14, // T_wildcardTextLeft20pxId
     202, // T_SingleUseId14
-    14, // T_wildcardTextIdCenter
-    30, // T_SingleUseId15
-    105, // T_SingleUseId16
+    14, // T_wildcardTextCenter20pxId
+    43, // T_SingleUseId15
+    135, // T_SingleUseId16
     177, // T_SingleUseId17
-    196, // T_SingleUseId18
+    190, // T_SingleUseId18
     99, // T_SingleUseId19
-    190, // T_SingleUseId20
-    115, // T_SingleUseId21
-    43, // T_SingleUseId22
+    196, // T_SingleUseId20
+    105, // T_SingleUseId21
+    30, // T_SingleUseId22
     125, // T_SingleUseId23
     35, // T_SingleUseId28
     94, // T_resourceIdScanTrack
     56, // T_resourceReadAllCVs
-    14, // T_wildcardTextIdSmallCenter
     16, // T_ResourceId2
     69, // T_ResourceId3
-    14, // T_wildcardTextIdMediumCentered
+    14, // T_wildcardTextCentered40pxId
     145, // T_SingleUseId30
     184, // T_SingleUseId32
-    14, // T_wildcardTextIdMedium
-    135, // T_SingleUseId34
-    162, // T_DccConfigAddress
+    14, // T_wildcardTextLeft40pxId
+    115, // T_SingleUseId34
+    154, // T_DccConfigAddress
     207, // T_DccConfigName
     82, // T_DccConfigDescription
-    14, // T_wildcardTextIdMediumNumeric
-    154, // T_DccConfigDecoder
+    162, // T_DccConfigDecoder
     170, // T_DccConfigConfig
     61, // T_DccConfigAllCVs
-    14, // T_wildcardTextIdNumeric
+    14, // T_wildcardTextLeft40pxNumericId
     14, // T_EnteredText
-    212, // T_NumMode
-    216  // T_AlphaMode
+    216, // T_NumMode
+    212, // T_AlphaMode
+    14  // T_wildcardTextLeft28px
 };

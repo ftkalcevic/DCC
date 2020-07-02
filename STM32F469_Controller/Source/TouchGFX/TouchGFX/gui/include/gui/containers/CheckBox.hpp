@@ -14,10 +14,16 @@ public:
 	void setText(const Unicode::UnicodeChar *txt)
 	{
 		text.setWildcard(txt);
+		repositionText();
 	}
 	void setText(const char16_t *txt)
 	{
 		this->setText((const Unicode::UnicodeChar *)txt);
+	}
+	void setTypedText(TypedText typedText)
+	{
+		text.setTypedText(typedText);
+		repositionText();
 	}
 	
 	virtual void handleClickEvent(const ClickEvent & event);
@@ -33,6 +39,7 @@ public:
 		check.setTouchable(touch);
 		text.setTouchable(touch);
 	}
+	void repositionText();
 	
 protected:
     GenericCallback< const CheckBox& >* action; ///< The callback to be executed when this AbstractButton is clicked

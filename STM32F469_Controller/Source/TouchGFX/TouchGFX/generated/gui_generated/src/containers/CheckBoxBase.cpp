@@ -10,7 +10,7 @@ CheckBoxBase::CheckBoxBase()
 {
     setWidth(338);
     setHeight(65);
-    check.setXY(10, 10);
+    check.setXY(11, 10);
     check.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_CHECK_BUTTONS_CHECK_MARK_INACTIVE_ID), touchgfx::Bitmap(BITMAP_BLUE_CHECK_BUTTONS_CHECK_MARK_PRESSED_ID), touchgfx::Bitmap(BITMAP_BLUE_CHECK_BUTTONS_CHECK_MARK_ACTIVE_ID), touchgfx::Bitmap(BITMAP_BLUE_CHECK_BUTTONS_CHECK_MARK_NORMAL_ID));
     check.setSelected(false);
     check.setDeselectionEnabled(true);
@@ -18,7 +18,7 @@ CheckBoxBase::CheckBoxBase()
     text.setXY(70, 8);
     text.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
     text.setLinespacing(0);
-    text.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTIDMEDIUM));
+    text.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTLEFT40PXID));
 
     add(check);
     add(text);

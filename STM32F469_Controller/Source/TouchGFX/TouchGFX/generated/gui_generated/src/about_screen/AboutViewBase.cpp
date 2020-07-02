@@ -24,7 +24,7 @@ AboutViewBase::AboutViewBase()
     textArea1.setXY(5, 5);
     textArea1.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
     textArea1.setLinespacing(0);
-    textArea1.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTID));
+    textArea1.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTLEFT20PXID));
     scrollableContainer1.add(textArea1);
     scrollableContainer1.setScrollbarsPermanentlyVisible();
 

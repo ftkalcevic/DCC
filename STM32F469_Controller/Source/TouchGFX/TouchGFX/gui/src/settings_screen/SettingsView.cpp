@@ -40,7 +40,7 @@ SettingsView::SettingsView() :
 	
     toggleCalibrate2.setXY(117, 544);
     toggleCalibrate2.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_MEDIUM_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_MEDIUM_PRESSED_ID));
-	toggleCalibrate2.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTIDMEDIUM));
+	toggleCalibrate2.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTLEFT40PXID));
 	toggleCalibrate2.setText(u"Calibrate");
 	toggleCalibrate2.setLabelColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
 	toggleCalibrate2.setLabelColorPressed(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));

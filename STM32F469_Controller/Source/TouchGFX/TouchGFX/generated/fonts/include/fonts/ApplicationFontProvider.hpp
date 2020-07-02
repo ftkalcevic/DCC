@@ -8,27 +8,21 @@
 
 struct Typography
 {
-    static const touchgfx::FontId DEFAULT = 0;
-    static const touchgfx::FontId TYPOGRAPHY_00 = 1;
-    static const touchgfx::FontId TYPOGRAPHY_10PX = 2;
-    static const touchgfx::FontId TYPOGRAPHY_40PX = 3;
-    static const touchgfx::FontId TYPOGRAPHY_NUMERIC_40PX = 4;
-    static const touchgfx::FontId DISPLAY = 5;
-    static const touchgfx::FontId KEYBOARD = 6;
-    static const touchgfx::FontId MODE = 7;
+    static const touchgfx::FontId SANSSERIF80PX = 0;
+    static const touchgfx::FontId SANSSERIF40PX = 1;
+    static const touchgfx::FontId NUMERIC40PX = 2;
+    static const touchgfx::FontId SANSSERIF28PX = 3;
+    static const touchgfx::FontId SANSSERIF20PX = 4;
 };
 
 struct TypographyFontIndex
 {
-    static const touchgfx::FontId DEFAULT = 0;                 // Asap_Regular_80_4bpp
-    static const touchgfx::FontId TYPOGRAPHY_00 = 1;           // Asap_Regular_20_4bpp
-    static const touchgfx::FontId TYPOGRAPHY_10PX = 2;         // Asap_Regular_10_4bpp
-    static const touchgfx::FontId TYPOGRAPHY_40PX = 3;         // Asap_Regular_40_4bpp
-    static const touchgfx::FontId TYPOGRAPHY_NUMERIC_40PX = 4; // consola_40_4bpp
-    static const touchgfx::FontId DISPLAY = 5;                 // Asap_Regular_28_4bpp
-    static const touchgfx::FontId KEYBOARD = 1;                // Asap_Regular_20_4bpp
-    static const touchgfx::FontId MODE = 1;                    // Asap_Regular_20_4bpp
-    static const uint16_t NUMBER_OF_FONTS = 6;
+    static const touchgfx::FontId SANSSERIF80PX = 0; // Asap_Regular_80_4bpp
+    static const touchgfx::FontId SANSSERIF40PX = 1; // Asap_Regular_40_4bpp
+    static const touchgfx::FontId NUMERIC40PX = 2;   // consola_40_4bpp
+    static const touchgfx::FontId SANSSERIF28PX = 3; // Asap_Regular_28_4bpp
+    static const touchgfx::FontId SANSSERIF20PX = 4; // Asap_Regular_20_4bpp
+    static const uint16_t NUMBER_OF_FONTS = 5;
 };
 
 class ApplicationFontProvider : public touchgfx::FontProvider

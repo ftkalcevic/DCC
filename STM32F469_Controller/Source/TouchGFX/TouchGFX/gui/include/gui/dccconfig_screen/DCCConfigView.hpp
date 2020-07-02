@@ -9,6 +9,7 @@
 #include <touchgfx/mixins/ClickListener.hpp>
 #include "gui/common/FullKeyboard.hpp"
 #include "gui/common/NumericKeypad.hpp"
+#include <gui/containers/CheckBox.hpp>
 
 class DCCConfigView : public DCCConfigViewBase
 {
@@ -33,9 +34,22 @@ public:
     touchgfx::TextArea textAreaLabelDescription;
     touchgfx::TextArea textAreaLabelDecoder;
     touchgfx::TextArea textAreaLabelConfig;
+	CheckBox chkMFDirection;
+	CheckBox chkMFFLLocation;
+	CheckBox chkMFPowerSourceConversion;
+	CheckBox chkMFBiDirectionalComms;
+	CheckBox chkMFSpeedTable;
+	CheckBox chkMFTwoByteAddressing;
+	CheckBox chkAccBiDirectionalComms;
+	CheckBox chkAccType;
+	CheckBox chkAccAddressMethod;
     touchgfx::TextArea textAreaLabelAllCVs;
     NumericKeypad numericKeypad;
     FullKeyboard keyboard;
+    int16_t selectStartX;
+    int16_t selectStartY;
+	int selectedDecoderItem;
+	TickType_t selectStartTime;
 
 protected:
 	touchgfx::ButtonWithLabelAndEnable buttonScanTrack;
@@ -48,21 +62,28 @@ protected:
         Keypad,
         Keyboard
 	} state;
+	Unicode::UnicodeChar addressTextBuffer[5];
 
-	
+	virtual void scrollWheelDecodersUpdateItem(ListItemDecoder& item, int16_t itemIndex);
+	void displayDecoder();
+		
     touchgfx::Callback<DCCConfigView, const touchgfx::AbstractButton&> buttonProgTrackClickCallback;
     void buttonProgTrackClickHandler(const touchgfx::AbstractButton& src);
     touchgfx::Callback<DCCConfigView, const touchgfx::AbstractButton&> buttonScanTrackClickCallback;
     void buttonScanTrackClickHandler(const touchgfx::AbstractButton& src);
     touchgfx::Callback<DCCConfigView, const touchgfx::AbstractButton&> buttonReadAllCVsClickCallback;
     void buttonReadAllCVsClickHandler(const touchgfx::AbstractButton& src);
-	void handleGestureEvent(const GestureEvent & evt);
+	virtual void handleGestureEvent(const GestureEvent & evt);
+    virtual void handleDragEvent(const DragEvent& evt);
     touchgfx::Callback<DCCConfigView, const Box&, const ClickEvent& > editTextClickHandlerCallback;
     void editTextClickHandler(const Box& b, const ClickEvent& evt);
     touchgfx::Callback<DCCConfigView, bool> closeKeypadWindowCallback;
     void closeKeypadWindowHandler(bool success);
     touchgfx::Callback<DCCConfigView, bool> closeKeyboardWindowCallback;
     void closeKeyboardWindowHandler(bool success);
+	
+    touchgfx::Callback<DCCConfigView, const ScrollWheel&, const ClickEvent& > scrollWheelDecodersClickCallback;
+    void scrollWheelDecodersClickHandler(const ScrollWheel& b, const ClickEvent& evt);
 };
 
 #endif // DCCCONFIGVIEW_HPP

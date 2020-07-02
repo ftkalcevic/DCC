@@ -354,12 +354,6 @@
     <ClCompile Include="..\..\gui\src\common\CustomButton.cpp">
       <Filter>Source Files\gui\common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\gui\src\containers\ListItem.cpp">
-      <Filter>Source Files\gui\containers</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\generated\gui_generated\src\containers\ListItemBase.cpp">
-      <Filter>Source Files\generated\gui_generated\containers</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\gui\src\preferences_screen\PreferencesPresenter.cpp">
       <Filter>Source Files\gui\preferences_screen</Filter>
     </ClCompile>
@@ -476,6 +470,12 @@
     </ClCompile>
     <ClCompile Include="..\..\gui\src\common\NumericKeypad.cpp">
       <Filter>Source Files\gui\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\containers\ListItemDecoder.cpp">
+      <Filter>Source Files\gui\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\ListItemDecoderBase.cpp">
+      <Filter>Source Files\generated\gui_generated\containers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -946,9 +946,6 @@
     <ClInclude Include="..\..\gui\include\gui\containers\ListItem.hpp">
       <Filter>Header Files\gui\containers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\ListItemBase.hpp">
-      <Filter>Header Files\generated\gui_generated\containers</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\gui\include\gui\preferences_screen\PreferencesPresenter.hpp">
       <Filter>Header Files\gui\preferences_screen</Filter>
     </ClInclude>
@@ -1077,6 +1074,12 @@
     </ClInclude>
     <ClInclude Include="..\..\gui\include\gui\common\NumericKeypadLayout.hpp">
       <Filter>Header Files\gui\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\containers\ListItemDecoder.hpp">
+      <Filter>Header Files\gui\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\ListItemDecoderBase.hpp">
+      <Filter>Header Files\generated\gui_generated\containers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

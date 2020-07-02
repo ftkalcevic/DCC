@@ -28,32 +28,32 @@ FunctionButtonsBase::FunctionButtonsBase()
     textArea1.setPosition(0, 0, 160, 25);
     textArea1.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
     textArea1.setLinespacing(0);
-    textArea1.setWildcard(touchgfx::TypedText(T_WILDCARDTEXTID).getText());
-    textArea1.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTIDCENTER));
+    textArea1.setWildcard(touchgfx::TypedText(T_WILDCARDTEXTLEFT20PXID).getText());
+    textArea1.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTCENTER20PXID));
 
     textArea2.setPosition(160, 0, 160, 25);
     textArea2.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
     textArea2.setLinespacing(0);
-    textArea2.setWildcard(touchgfx::TypedText(T_WILDCARDTEXTID).getText());
-    textArea2.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTIDCENTER));
+    textArea2.setWildcard(touchgfx::TypedText(T_WILDCARDTEXTLEFT20PXID).getText());
+    textArea2.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTCENTER20PXID));
 
     textArea3.setPosition(320, 0, 160, 25);
     textArea3.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
     textArea3.setLinespacing(0);
-    textArea3.setWildcard(touchgfx::TypedText(T_WILDCARDTEXTID).getText());
-    textArea3.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTIDCENTER));
+    textArea3.setWildcard(touchgfx::TypedText(T_WILDCARDTEXTLEFT20PXID).getText());
+    textArea3.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTCENTER20PXID));
 
     textArea4.setPosition(480, 0, 160, 25);
     textArea4.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
     textArea4.setLinespacing(0);
-    textArea4.setWildcard(touchgfx::TypedText(T_WILDCARDTEXTID).getText());
-    textArea4.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTIDCENTER));
+    textArea4.setWildcard(touchgfx::TypedText(T_WILDCARDTEXTLEFT20PXID).getText());
+    textArea4.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTCENTER20PXID));
 
     textArea5.setPosition(640, 0, 160, 25);
     textArea5.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
     textArea5.setLinespacing(0);
-    textArea5.setWildcard(touchgfx::TypedText(T_WILDCARDTEXTID).getText());
-    textArea5.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTIDCENTER));
+    textArea5.setWildcard(touchgfx::TypedText(T_WILDCARDTEXTLEFT20PXID).getText());
+    textArea5.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTCENTER20PXID));
 
     add(image1);
     add(image2);

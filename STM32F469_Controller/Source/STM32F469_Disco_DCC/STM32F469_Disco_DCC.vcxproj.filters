@@ -747,9 +747,6 @@
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\preferencesIcon.cpp">
       <Filter>Source files\Application\User\generated</Filter>
     </ClCompile>
-    <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\containers\ListItemBase.cpp">
-      <Filter>Source files\Application\User\generated</Filter>
-    </ClCompile>
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\preferences_screen\PreferencesViewBase.cpp">
       <Filter>Source files\Application\User\generated</Filter>
     </ClCompile>
@@ -882,9 +879,6 @@
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\ProgTrackButtonUp.cpp">
       <Filter>Source files\Application\User\generated</Filter>
     </ClCompile>
-    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\containers\ListItem.cpp">
-      <Filter>Source files</Filter>
-    </ClCompile>
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\Round_Edge_medium_Disabled.cpp">
       <Filter>Source files\Application\User\generated</Filter>
     </ClCompile>
@@ -938,15 +932,6 @@
     </ClCompile>
     <ClCompile Include="DecoderWidget.cpp">
       <Filter>Source files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\TouchGFX\TouchGFX\generated\fonts\src\Font_Asap_Regular_10_4bpp_0.cpp">
-      <Filter>Source files\Application\User\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\TouchGFX\TouchGFX\generated\fonts\src\Kerning_Asap_Regular_10_4bpp.cpp">
-      <Filter>Source files\Application\User\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="..\TouchGFX\TouchGFX\generated\fonts\src\Table_Asap_Regular_10_4bpp.cpp">
-      <Filter>Source files\Application\User\generated</Filter>
     </ClCompile>
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\turnout-straight-normal.cpp">
       <Filter>Source files\Application\User\generated</Filter>
@@ -1069,6 +1054,18 @@
       <Filter>Source files</Filter>
     </ClCompile>
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\backspace.cpp">
+      <Filter>Source files\Application\User\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\containers\ListItemDecoderBase.cpp">
+      <Filter>Source files\Application\User\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\containers\ListItemDecoder.cpp">
+      <Filter>Source files\Application\User\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\DecodersWheelMaskBottom.cpp">
+      <Filter>Source files\Application\User\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\DecodersWheelMaskTop.cpp">
       <Filter>Source files\Application\User\generated</Filter>
     </ClCompile>
   </ItemGroup>

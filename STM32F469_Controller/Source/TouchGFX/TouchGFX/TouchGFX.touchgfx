@@ -1076,7 +1076,7 @@
                 "Moveable": false
               },
               {
-                "TextId": "wildcardTextId",
+                "TextId": "wildcardTextLeft20pxId",
                 "TextRotation": "0",
                 "Color": {
                   "Red": 255,
@@ -1298,25 +1298,62 @@
                 "Moveable": false
               },
               {
-                "PaddingBefore": 0,
-                "PaddingAfter": 0,
-                "Snapping": false,
+                "SelectedItemOffset": 65,
+                "UseSelectedStyle": false,
+                "ExtraSizeBefore": 0,
+                "ExtraSizeAfter": 0,
+                "MarginBefore": 0,
+                "MarginAfter": 0,
                 "IsHorizontal": false,
                 "IsCircular": false,
-                "ItemTemplateName": "ListItem",
+                "ItemTemplateName": "ListItemDecoder",
                 "NumberofItems": 1,
                 "InitialElement": 0,
-                "ItemMargin": 0,
+                "ItemMargin": 5,
                 "Easing": "Back",
                 "EasingOption": "Out",
                 "SwipeAcceleration": 1.0,
                 "DragAcceleration": 1.0,
-                "Name": "scrollList1",
+                "Name": "scrollWheelDecoders",
                 "X": 17,
                 "Y": 17,
                 "Width": 350,
                 "Height": 240,
-                "Type": "ScrollList",
+                "Type": "ScrollWheel",
+                "Visible": true,
+                "Draggable": false,
+                "Clickable": true,
+                "Fadeable": false,
+                "Moveable": false
+              },
+              {
+                "FileName": "DecodersWheelMaskBottom.png",
+                "Alpha": 255,
+                "OffsetX": 0,
+                "OffsetY": 0,
+                "Name": "tiledImageBottomMask",
+                "X": 17,
+                "Y": 193,
+                "Width": 350,
+                "Height": 65,
+                "Type": "TiledImage",
+                "Visible": true,
+                "Draggable": false,
+                "Clickable": false,
+                "Fadeable": false,
+                "Moveable": false
+              },
+              {
+                "FileName": "DecodersWheelMaskTop.png",
+                "Alpha": 255,
+                "OffsetX": 0,
+                "OffsetY": 0,
+                "Name": "tiledImageTopMask",
+                "X": 17,
+                "Y": 17,
+                "Width": 350,
+                "Height": 64,
+                "Type": "TiledImage",
                 "Visible": true,
                 "Draggable": false,
                 "Clickable": false,
@@ -1737,13 +1774,19 @@
               "Green": 255,
               "Blue": 255
             },
+            "BorderColor": {
+              "Red": 255,
+              "Green": 169,
+              "Blue": 0
+            },
+            "BorderSize": 0,
             "Alpha": 255,
-            "Name": "box1",
+            "Name": "boxBackground",
             "X": 0,
             "Y": 0,
             "Width": 350,
             "Height": 100,
-            "Type": "Box",
+            "Type": "BoxWithBorder",
             "Visible": true,
             "Draggable": false,
             "Clickable": false,
@@ -1751,7 +1794,7 @@
             "Moveable": false
           },
           {
-            "TextId": "wildcardTextId",
+            "TextId": "wildcardTextLeft20pxId",
             "TextRotation": "0",
             "Color": {
               "Red": 0,
@@ -1761,7 +1804,7 @@
             "Alpha": 255,
             "AutoSize": false,
             "LineSpacing": 0,
-            "Name": "textArea1",
+            "Name": "textArea",
             "X": 103,
             "Y": 18,
             "Width": 247,
@@ -1776,7 +1819,7 @@
           {
             "RelativeFilename": "MultifunctionAccessoryIcon.png",
             "Alpha": 255,
-            "Name": "image1",
+            "Name": "image",
             "X": 10,
             "Y": 10,
             "Width": 80,
@@ -1790,7 +1833,7 @@
           }
         ],
         "Interactions": [],
-        "Name": "ListItem",
+        "Name": "ListItemDecoder",
         "X": 0,
         "Y": 0,
         "Width": 350,
@@ -1874,7 +1917,7 @@
             "Moveable": false
           },
           {
-            "TextId": "wildcardTextIdCenter",
+            "TextId": "wildcardTextCenter20pxId",
             "TextRotation": "0",
             "Color": {
               "Red": 255,
@@ -1885,7 +1928,7 @@
             "AutoSize": false,
             "LineSpacing": 0,
             "Wildcard1": {
-              "TextId": "wildcardTextId",
+              "TextId": "wildcardTextLeft20pxId",
               "UseBuffer": false,
               "BufferSize": 0
             },
@@ -1902,7 +1945,7 @@
             "Moveable": false
           },
           {
-            "TextId": "wildcardTextIdCenter",
+            "TextId": "wildcardTextCenter20pxId",
             "TextRotation": "0",
             "Color": {
               "Red": 255,
@@ -1913,7 +1956,7 @@
             "AutoSize": false,
             "LineSpacing": 0,
             "Wildcard1": {
-              "TextId": "wildcardTextId",
+              "TextId": "wildcardTextLeft20pxId",
               "UseBuffer": false,
               "BufferSize": 0
             },
@@ -1930,7 +1973,7 @@
             "Moveable": false
           },
           {
-            "TextId": "wildcardTextIdCenter",
+            "TextId": "wildcardTextCenter20pxId",
             "TextRotation": "0",
             "Color": {
               "Red": 255,
@@ -1941,7 +1984,7 @@
             "AutoSize": false,
             "LineSpacing": 0,
             "Wildcard1": {
-              "TextId": "wildcardTextId",
+              "TextId": "wildcardTextLeft20pxId",
               "UseBuffer": false,
               "BufferSize": 0
             },
@@ -1958,7 +2001,7 @@
             "Moveable": false
           },
           {
-            "TextId": "wildcardTextIdCenter",
+            "TextId": "wildcardTextCenter20pxId",
             "TextRotation": "0",
             "Color": {
               "Red": 255,
@@ -1969,7 +2012,7 @@
             "AutoSize": false,
             "LineSpacing": 0,
             "Wildcard1": {
-              "TextId": "wildcardTextId",
+              "TextId": "wildcardTextLeft20pxId",
               "UseBuffer": false,
               "BufferSize": 0
             },
@@ -1986,7 +2029,7 @@
             "Moveable": false
           },
           {
-            "TextId": "wildcardTextIdCenter",
+            "TextId": "wildcardTextCenter20pxId",
             "TextRotation": "0",
             "Color": {
               "Red": 255,
@@ -1997,7 +2040,7 @@
             "AutoSize": false,
             "LineSpacing": 0,
             "Wildcard1": {
-              "TextId": "wildcardTextId",
+              "TextId": "wildcardTextLeft20pxId",
               "UseBuffer": false,
               "BufferSize": 0
             },
@@ -2043,7 +2086,7 @@
             "Moveable": false
           },
           {
-            "TextId": "wildcardTextId",
+            "TextId": "wildcardTextLeft20pxId",
             "TextRotation": "0",
             "Color": {
               "Red": 0,
@@ -2054,7 +2097,7 @@
             "AutoSize": true,
             "LineSpacing": 0,
             "Wildcard1": {
-              "TextId": "wildcardTextId",
+              "TextId": "wildcardTextLeft20pxId",
               "UseBuffer": false,
               "BufferSize": 0
             },
@@ -2100,7 +2143,7 @@
             "Moveable": false
           },
           {
-            "TextId": "wildcardTextIdCenter",
+            "TextId": "wildcardTextCenter20pxId",
             "TextRotation": "0",
             "Color": {
               "Red": 0,
@@ -2111,7 +2154,7 @@
             "AutoSize": false,
             "LineSpacing": 0,
             "Wildcard1": {
-              "TextId": "wildcardTextId",
+              "TextId": "wildcardTextLeft20pxId",
               "UseBuffer": false,
               "BufferSize": 0
             },
@@ -2166,7 +2209,7 @@
             "Style": "Style4",
             "RadioButtonGroup": "",
             "Name": "check",
-            "X": 10,
+            "X": 11,
             "Y": 10,
             "Width": 44,
             "Height": 44,
@@ -2178,7 +2221,7 @@
             "Moveable": false
           },
           {
-            "TextId": "wildcardTextIdMedium",
+            "TextId": "wildcardTextLeft40pxId",
             "TextRotation": "0",
             "Color": {
               "Red": 255,
@@ -2219,7 +2262,7 @@
         "IsResource": true
       },
       {
-        "TextEntryId": "wildcardTextId",
+        "TextEntryId": "wildcardTextLeft20pxId",
         "IsResource": true
       },
       {
@@ -2227,7 +2270,7 @@
         "IsResource": false
       },
       {
-        "TextEntryId": "wildcardTextIdCenter",
+        "TextEntryId": "wildcardTextCenter20pxId",
         "IsResource": true
       },
       {
@@ -2279,10 +2322,6 @@
         "IsResource": true
       },
       {
-        "TextEntryId": "wildcardTextIdSmallCenter",
-        "IsResource": true
-      },
-      {
         "TextEntryId": "ResourceId2",
         "IsResource": true
       },
@@ -2291,7 +2330,7 @@
         "IsResource": true
       },
       {
-        "TextEntryId": "wildcardTextIdMediumCentered",
+        "TextEntryId": "wildcardTextCentered40pxId",
         "IsResource": true
       },
       {
@@ -2303,7 +2342,7 @@
         "IsResource": false
       },
       {
-        "TextEntryId": "wildcardTextIdMedium",
+        "TextEntryId": "wildcardTextLeft40pxId",
         "IsResource": true
       },
       {
@@ -2323,10 +2362,6 @@
         "IsResource": true
       },
       {
-        "TextEntryId": "wildcardTextIdMediumNumeric",
-        "IsResource": true
-      },
-      {
         "TextEntryId": "DccConfigDecoder",
         "IsResource": true
       },
@@ -2339,7 +2374,7 @@
         "IsResource": true
       },
       {
-        "TextEntryId": "wildcardTextIdNumeric",
+        "TextEntryId": "wildcardTextLeft40pxNumericId",
         "IsResource": true
       },
       {
@@ -2352,6 +2387,10 @@
       },
       {
         "TextEntryId": "AlphaMode",
+        "IsResource": true
+      },
+      {
+        "TextEntryId": "wildcardTextLeft28px",
         "IsResource": true
       }
     ],

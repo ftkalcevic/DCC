@@ -163,9 +163,3 @@ struct Decoders
 	Functions func;
 };
 
-
-
-extern int decoderCount;
-extern Decoders decoders[];
-extern int activeDecoder;
-

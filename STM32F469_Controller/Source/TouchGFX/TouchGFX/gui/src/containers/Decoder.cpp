@@ -5,7 +5,7 @@
 #include <touchgfx/Color.hpp>
 #include "BitmapDatabase.hpp"
 #include <texts/TextKeysAndLanguages.hpp>
-#include "Decoders.h"
+#include "DecodersConfig.h"
 
 
 Decoder::Decoder()
@@ -45,12 +45,12 @@ Decoder::Decoder()
     textSpeedValue.setXY(210, 269);
     textSpeedValue.setColor(touchgfx::Color::getColorFrom24BitRGB(0, 0, 0));
     textSpeedValue.setLinespacing(0);
-    textSpeedValue.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTIDCENTER));
+    textSpeedValue.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTCENTER20PXID));
 
     textBrakeValue.setXY(297, 314);
     textBrakeValue.setColor(touchgfx::Color::getColorFrom24BitRGB(0, 0, 0));
     textBrakeValue.setLinespacing(0);
-    textBrakeValue.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTIDCENTER));
+    textBrakeValue.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTCENTER20PXID));
 
     imageDecoder.setXY(170, 54);
 	//imageDecoder.setScalingAlgorithm(ScalableImage::NEAREST_NEIGHBOR);
@@ -59,17 +59,17 @@ Decoder::Decoder()
     textTitle.setXY(206, 9);
     textTitle.setColor(touchgfx::Color::getColorFrom24BitRGB(0, 0, 0));
     textTitle.setLinespacing(0);
-    textTitle.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTIDMEDIUMCENTERED));
+    textTitle.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTCENTERED40PXID));
 
     textDescription.setXY(189, 210);
     textDescription.setColor(touchgfx::Color::getColorFrom24BitRGB(0, 0, 0));
     textDescription.setLinespacing(0);
-    textDescription.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTIDCENTER));
+    textDescription.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTCENTER20PXID));
 
     textPosition.setXY(206, 237);
     textPosition.setColor(touchgfx::Color::getColorFrom24BitRGB(0, 0, 0));
     textPosition.setLinespacing(0);
-    textPosition.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTIDCENTER));
+    textPosition.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTCENTER20PXID));
 
     buttonTakeControl.setXY(240, 349);
     buttonTakeControl.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_PRESSED_ID));
@@ -130,10 +130,10 @@ void Decoder::setIndex(int newIndex)
 { 
 	index = newIndex;
 	
-	if (index < 0 || index >= decoderCount)
+	if (index < 0 || index >= uiDecodersConfig.Count())
 		return;
 
-	Decoders &d = decoders[index];
+	Decoders &d = uiDecodersConfig[index];
 	
 	bool isMultiFunction = d.type == EDecoderType::Multifunction;
 	SetWidgetVisibility(isMultiFunction, isMultiFunction ? d.loco.controlled : false);
@@ -176,7 +176,7 @@ void Decoder::SetupAccessory(Decoders &decoder)
 
 void Decoder::imageClickHandler(const ScalableAspectImage& img, const ClickEvent& e)
 {
-	Decoders &d = decoders[index];
+	Decoders &d = uiDecodersConfig[index];
 	if (d.type == EDecoderType::Accessory && e.getType() == ClickEvent::PRESSED )
 	{
 		d.accessory.currentState = (d.accessory.currentState + 1) & 1;
@@ -187,7 +187,7 @@ void Decoder::imageClickHandler(const ScalableAspectImage& img, const ClickEvent
 
 void Decoder::TakeControl(bool control)
 {
-	Decoders &d = decoders[index];
+	Decoders &d = uiDecodersConfig[index];
 	if (d.type == EDecoderType::Multifunction )
 	{
 		//presenter.LocoTakeControl(d.address, control);

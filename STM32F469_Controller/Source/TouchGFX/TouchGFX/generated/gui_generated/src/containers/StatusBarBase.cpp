@@ -15,9 +15,9 @@ StatusBarBase::StatusBarBase()
     textAreaStatusBar.setXY(0, 2);
     textAreaStatusBar.setColor(touchgfx::Color::getColorFrom24BitRGB(0, 0, 0));
     textAreaStatusBar.setLinespacing(0);
-    textAreaStatusBar.setWildcard(touchgfx::TypedText(T_WILDCARDTEXTID).getText());
+    textAreaStatusBar.setWildcard(touchgfx::TypedText(T_WILDCARDTEXTLEFT20PXID).getText());
     textAreaStatusBar.resizeToCurrentText();
-    textAreaStatusBar.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTID));
+    textAreaStatusBar.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTLEFT20PXID));
 
     add(box1);
     add(textAreaStatusBar);

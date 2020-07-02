@@ -39,7 +39,7 @@ PreferencesView::PreferencesView():
 	{
 		touchgfx::CustomButton *button = new touchgfx::CustomButton();
 		button->setXY(15 + (i%4)*200, 15 + (i/4)*200);
-		button->setLabelText(touchgfx::TypedText(T_WILDCARDTEXTID));
+		button->setLabelText(touchgfx::TypedText(T_WILDCARDTEXTLEFT20PXID));
 		button->setLabelText(buttonCfg[i].label);
 		button->setBitmaps(touchgfx::Bitmap(BITMAP_BUTTONUP_ID), touchgfx::Bitmap(BITMAP_BUTTONDOWN_ID), touchgfx::Bitmap(buttonCfg[i].bmpId), touchgfx::Bitmap(buttonCfg[i].bmpId));
 		button->setId(buttonCfg[i].id);

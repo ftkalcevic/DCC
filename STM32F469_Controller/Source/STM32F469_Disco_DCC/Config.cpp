@@ -17,23 +17,47 @@ ConfigStream::ConfigStream(const char *path)
 	}
 }
 
-void ConfigStream::WriteStartElement(const char *elem)
+void ConfigStream::WriteStartElementTag(const char *elem)
 {
 	UINT bytesWritten;
 	f_write(&file, "<", 1, &bytesWritten);
 	f_write(&file, elem, strlen(elem), &bytesWritten);
-	f_write(&file, ">\n", 2, &bytesWritten);
+	f_write(&file, ">", 2, &bytesWritten);
+}
+
+void ConfigStream::WriteStartElement(const char *elem)
+{
+	WriteStartElementTag(elem);
+	UINT bytesWritten;
+	f_write(&file, "\n", 1, &bytesWritten);
 }
 
 void ConfigStream::WriteElement(const char *elem, int value)
 {
+	WriteStartElementTag(elem);
 	UINT bytesWritten;
-	f_write(&file, "<", 1, &bytesWritten);
-	f_write(&file, elem, strlen(elem), &bytesWritten);
-	f_write(&file, ">", 1, &bytesWritten);
 	char buffer[12];
 	itoa(value, buffer, 10);
 	f_write(&file, buffer, strlen(buffer), &bytesWritten);
+	WriteEndElement(elem);
+}
+
+void ConfigStream::WriteElement(const char *elem, char16_t *str)
+{
+	WriteStartElementTag(elem);
+	while (*str != 0)
+	{
+		UINT bytesWritten;
+		f_write(&file, str, 1, &bytesWritten);
+	}
+	WriteEndElement(elem);
+}
+
+void ConfigStream::WriteElement(const char *elem, char *str)
+{
+	WriteStartElementTag(elem);
+	UINT bytesWritten;
+	f_write(&file, str, strlen(str), &bytesWritten);
 	WriteEndElement(elem);
 }
 

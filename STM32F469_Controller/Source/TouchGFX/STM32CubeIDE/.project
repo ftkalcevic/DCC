@@ -1178,5 +1178,25 @@
 			<type>1</type>
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/backspace.cpp</locationURI>
 		</link>
+		<link>
+			<name>Application/User/gui/ListItemDecoder.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/containers/ListItemDecoder.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/ListItemDecoderBase.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/containers/ListItemDecoderBase.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/DecodersWheelMaskBottom.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/DecodersWheelMaskBottom.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/DecodersWheelMaskTop.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/DecodersWheelMaskTop.cpp</locationURI>
+		</link>
 	</linkedResources>
 </projectDescription>

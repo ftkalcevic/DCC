@@ -91,7 +91,7 @@
     <AllDependencies>
       <ProjectDependency>
         <RelativePath>..\TouchGFX\STM32CubeIDE\.cproject</RelativePath>
-        <Timestamp>132380572998732525</Timestamp>
+        <Timestamp>132381494941563938</Timestamp>
       </ProjectDependency>
     </AllDependencies>
     <RootDirectory>
@@ -173,9 +173,6 @@
                     </VirtualFileSnapshot>
                     <VirtualFileSnapshot>
                       <RelativePath>..\TouchGFX\TouchGFX\generated\texts\src\LanguageGb.cpp</RelativePath>
-                    </VirtualFileSnapshot>
-                    <VirtualFileSnapshot>
-                      <RelativePath>..\TouchGFX\TouchGFX\generated\gui_generated\src\containers\ListItemBase.cpp</RelativePath>
                     </VirtualFileSnapshot>
                     <VirtualFileSnapshot>
                       <RelativePath>..\TouchGFX\TouchGFX\generated\images\src\LocoIcon.cpp</RelativePath>
@@ -286,15 +283,6 @@
                       <RelativePath>..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Slider_Horizontal_Medium_Slider2_Round_Edge_back.cpp</RelativePath>
                     </VirtualFileSnapshot>
                     <VirtualFileSnapshot>
-                      <RelativePath>..\TouchGFX\TouchGFX\generated\fonts\src\Font_Asap_Regular_10_4bpp_0.cpp</RelativePath>
-                    </VirtualFileSnapshot>
-                    <VirtualFileSnapshot>
-                      <RelativePath>..\TouchGFX\TouchGFX\generated\fonts\src\Kerning_Asap_Regular_10_4bpp.cpp</RelativePath>
-                    </VirtualFileSnapshot>
-                    <VirtualFileSnapshot>
-                      <RelativePath>..\TouchGFX\TouchGFX\generated\fonts\src\Table_Asap_Regular_10_4bpp.cpp</RelativePath>
-                    </VirtualFileSnapshot>
-                    <VirtualFileSnapshot>
                       <RelativePath>..\TouchGFX\TouchGFX\generated\images\src\__designer\Blue_Buttons_Round_Edge_small.cpp</RelativePath>
                     </VirtualFileSnapshot>
                     <VirtualFileSnapshot>
@@ -390,6 +378,15 @@
                     <VirtualFileSnapshot>
                       <RelativePath>..\TouchGFX\TouchGFX\generated\images\src\backspace.cpp</RelativePath>
                     </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\generated\gui_generated\src\containers\ListItemDecoderBase.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\generated\images\src\DecodersWheelMaskBottom.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\generated\images\src\DecodersWheelMaskTop.cpp</RelativePath>
+                    </VirtualFileSnapshot>
                   </Files>
                 </VirtualDirectorySnapshot>
                 <VirtualDirectorySnapshot>
@@ -439,9 +436,6 @@
                     </VirtualFileSnapshot>
                     <VirtualFileSnapshot>
                       <RelativePath>..\TouchGFX\TouchGFX\gui\src\containers\FunctionButtons.cpp</RelativePath>
-                    </VirtualFileSnapshot>
-                    <VirtualFileSnapshot>
-                      <RelativePath>..\TouchGFX\TouchGFX\gui\src\containers\ListItem.cpp</RelativePath>
                     </VirtualFileSnapshot>
                     <VirtualFileSnapshot>
                       <RelativePath>..\TouchGFX\TouchGFX\gui\src\main_screen\MainPresenter.cpp</RelativePath>
@@ -505,6 +499,9 @@
                     </VirtualFileSnapshot>
                     <VirtualFileSnapshot>
                       <RelativePath>..\TouchGFX\TouchGFX\gui\src\common\NumericKeypad.cpp</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\TouchGFX\TouchGFX\gui\src\containers\ListItemDecoder.cpp</RelativePath>
                     </VirtualFileSnapshot>
                   </Files>
                 </VirtualDirectorySnapshot>

@@ -7,12 +7,13 @@
 #include "ProgTrackDCC.h"
 #include "MainTrackDCC.h"
 #include "Config.h"
-#include "Decoders.h"
+#include "DecodersConfig.h"
 
 UIMessage uimsg;
 DRV8873S drv8873S(&hspi2);
 AppMain app;
 UIConfig uiConfig;
+DecodersConfig uiDecodersConfig;;
 
 
 extern "C" void AppMainTask_Entry(void *argument)
@@ -204,31 +205,31 @@ void AppMain::YieldControl(Decoders &d)
 
 void AppMain::TakeControl(int decoderIndex, bool control)
 {
-	if (decoderIndex >= 0 && decoderIndex < decoderCount)
+	if (decoderIndex >= 0 && decoderIndex < uiDecodersConfig.Count() )
 	{
-		Decoders &d = decoders[decoderIndex];
+		Decoders &d = uiDecodersConfig[decoderIndex];
 		if (d.type == EDecoderType::Multifunction )
 		{
 			if (!control)
 			{
 				YieldControl(d);
-				activeDecoder = -1;
+				uiDecodersConfig.setActiveDecoder(-1);
 			}
 			else
 			{
 				// If control only one, release others
 				// TODO - if we support multiple active, then we need to know when a loco has focus on the UI so we can route speed/dir commands to it.
 				//	      or do we have a button to grab it.
-				for (int i = 0; i < decoderCount; i++)
-					if (i!=decoderIndex && decoders[i].type == EDecoderType::Multifunction)
+				for (int i = 0; i < uiDecodersConfig.Count(); i++)
+					if (i!=decoderIndex && uiDecodersConfig[i].type == EDecoderType::Multifunction)
 					{
-						YieldControl(decoders[i]);
-						activeDecoder = -1;
+						YieldControl(uiDecodersConfig[i]);
+						uiDecodersConfig.setActiveDecoder(-1);
 					}
 
 				d.loco.controlled = control;
 				// Mark this as the active 
-				activeDecoder = decoderIndex;
+				uiDecodersConfig.setActiveDecoder(decoderIndex);
 				// Send something to mainTrackDCC (happens every 50ms)
 				// update the function keys
 			}
@@ -285,9 +286,10 @@ void AppMain::Run()
 				msg.input.direction = fwdKey->down() ? EDirection::Forward : revKey->down() ? EDirection::Reverse : EDirection::Stopped;
 			
 			uimsg.Send(msg);
-			if (activeDecoder >= 0 && decoders[activeDecoder].type == EDecoderType::Multifunction && decoders[activeDecoder].loco.controlled )
+			if ( uiDecodersConfig.getActiveDecoder() >= 0 && 
+				 uiDecodersConfig[uiDecodersConfig.getActiveDecoder()].type == EDecoderType::Multifunction && uiDecodersConfig[uiDecodersConfig.getActiveDecoder()].loco.controlled )
 			{
-				MainTrack_DCC_SetSpeedAndDirection(decoders[activeDecoder].address, msg.input.direction, msg.input.throttle, msg.input.brake);
+				MainTrack_DCC_SetSpeedAndDirection(uiDecodersConfig[uiDecodersConfig.getActiveDecoder()].address, msg.input.direction, msg.input.throttle, msg.input.brake);
 			}
 		}
 		osDelay(pdMS_TO_TICKS(1));

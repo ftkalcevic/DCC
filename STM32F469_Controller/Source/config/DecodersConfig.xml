@@ -1,0 +1,39 @@
+<DecodersConfig>
+  <Decoders>
+    <Decoder>
+      <Name></Name>
+      <Descr></Descr>
+      <Address></Address>
+      <Type></Type>
+      <Icon></Icon>
+      <IconFile></IconFile>
+      <Background></Background>
+      <BackgroundFile></BackgroundFile>
+      <DecoderModel></DecoderModel>
+      
+      <locoReleaseAction></locoReleaseAction>
+      
+      <accType></accType>
+      <accNetwork></accNetwork>
+      <accImage></accImage>
+      <accIamgePath></accIamgePath>
+      <accDefaultState></accDefaultState>
+      <accNumStates></accNumStates>
+      <accSoundEffect></accSoundEffect>
+
+      <CVs>
+        <CV CVn="123" CVv="12"/>
+      </CVs>
+      
+      <Functions>
+        <Fn Key="" Action=""/>
+      </Functions>
+    </Decoder>
+  </Decoders>
+  <SortOrder>
+    <Dec Addr=""/>
+  </SortOrder>
+</DecodersConfig>
+
+
+    

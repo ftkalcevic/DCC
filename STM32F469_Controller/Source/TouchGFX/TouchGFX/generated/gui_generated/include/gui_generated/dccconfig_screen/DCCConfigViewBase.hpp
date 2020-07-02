@@ -14,8 +14,9 @@
 #include <touchgfx/widgets/canvas/Line.hpp>
 #include <touchgfx/widgets/canvas/PainterRGB888.hpp>
 #include <touchgfx/widgets/ToggleButton.hpp>
-#include <touchgfx/containers/scrollers/ScrollList.hpp>
-#include <gui/containers/ListItem.hpp>
+#include <touchgfx/containers/scrollers/ScrollWheel.hpp>
+#include <gui/containers/ListItemDecoder.hpp>
+#include <touchgfx/mixins/ClickListener.hpp>
 
 class DCCConfigViewBase : public touchgfx::View<DCCConfigPresenter>
 {
@@ -24,7 +25,7 @@ public:
     virtual ~DCCConfigViewBase() {}
     virtual void setupScreen();
 
-    virtual void scrollList1UpdateItem(ListItem& item, int16_t itemIndex)
+    virtual void scrollWheelDecodersUpdateItem(ListItemDecoder& item, int16_t itemIndex)
     {
         // Override and implement this function in DCCConfig
     }
@@ -50,8 +51,11 @@ protected:
     touchgfx::Line line4;
     touchgfx::PainterRGB888 line4Painter;
     touchgfx::ToggleButton toggleProgTrack;
-    touchgfx::ScrollList scrollList1;
-    touchgfx::DrawableListItems<ListItem, 4> scrollList1ListItems;
+    touchgfx::ClickListener< touchgfx::ScrollWheel > scrollWheelDecoders;
+    touchgfx::DrawableListItems<ListItemDecoder, 4> scrollWheelDecodersListItems;
+
+    touchgfx::TiledImage tiledImageBottomMask;
+    touchgfx::TiledImage tiledImageTopMask;
 
 private:
     touchgfx::Callback<DCCConfigViewBase, touchgfx::DrawableListItemsInterface*, int16_t, int16_t> updateItemCallback;

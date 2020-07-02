@@ -134,7 +134,6 @@
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\common\FrontendApplication.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\common\FullKeyboard.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\common\NumericKeypad.cpp" />
-    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\containers\ListItem.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\main_screen\MainPresenter.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\main_screen\MainView.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\model\Model.cpp" />
@@ -351,7 +350,6 @@
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\buttonDown.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\buttonUp.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\preferencesIcon.cpp" />
-    <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\containers\ListItemBase.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\preferences_screen\PreferencesViewBase.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\preferences_screen\PreferencesPresenter.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\preferences_screen\PreferencesView.cpp" />
@@ -400,9 +398,6 @@
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\decoders_screen\DecodersPresenter.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\decoders_screen\DecodersView.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\DecoderScrollWheelMask.cpp" />
-    <ClCompile Include="..\TouchGFX\TouchGFX\generated\fonts\src\Font_Asap_Regular_10_4bpp_0.cpp" />
-    <ClCompile Include="..\TouchGFX\TouchGFX\generated\fonts\src\Kerning_Asap_Regular_10_4bpp.cpp" />
-    <ClCompile Include="..\TouchGFX\TouchGFX\generated\fonts\src\Table_Asap_Regular_10_4bpp.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\turnout-straight-normal.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\turnout-straight-reverse.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\fonts\src\Font_Asap_Regular_40_4bpp_0.cpp" />
@@ -440,5 +435,9 @@
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\fonts\src\Table_Asap_Regular_28_4bpp.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\fonts\src\Font_Asap_Regular_40_4bpp_4.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\backspace.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\containers\ListItemDecoderBase.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\containers\ListItemDecoder.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\DecodersWheelMaskBottom.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\DecodersWheelMaskTop.cpp" />
   </ItemGroup>
 </Project>

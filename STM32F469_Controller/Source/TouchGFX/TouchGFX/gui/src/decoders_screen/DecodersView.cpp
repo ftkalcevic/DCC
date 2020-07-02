@@ -1,13 +1,13 @@
 #include <gui/decoders_screen/DecodersView.hpp>
 #include "Common.h"
-#include "Decoders.h"
+#include "DecodersConfig.h"
 
 
 DecodersView::DecodersView() :
     takeControlCallback(this, &DecodersView::takeControlHandler)
 {
-    scrollWheelDecoders.setNumberOfItems(decoderCount);
-	scrollWheelDecoders.animateToItem(activeDecoder,0);
+    scrollWheelDecoders.setNumberOfItems(uiDecodersConfig.Count());
+	scrollWheelDecoders.animateToItem(uiDecodersConfig.getActiveDecoder(),0);
 	
 	for ( int i = 0; i < scrollWheelDecodersListItems.getNumberOfDrawables(); i++ )
 		scrollWheelDecodersListItems[i].setTakeControlCallback(takeControlCallback);
