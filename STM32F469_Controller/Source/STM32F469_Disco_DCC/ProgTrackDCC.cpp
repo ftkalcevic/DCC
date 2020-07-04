@@ -59,3 +59,13 @@ void ProgrammingTrack_DCC_ScanProgrammingTrack()
 	msg.type = EProgTrackMessage::ScanTrack;
 	dcc.SendMsg(msg);
 }
+
+void ProgrammingTrack_DCC_WriteCV(uint16_t cv, uint8_t value)
+{
+	ProgTrackMessage msg;
+	msg.type = EProgTrackMessage::WriteCV;
+	msg.cv.cv = cv;
+	msg.cv.value = value;
+	dcc.SendMsg(msg);
+}
+

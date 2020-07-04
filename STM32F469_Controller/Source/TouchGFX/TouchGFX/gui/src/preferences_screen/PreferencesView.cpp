@@ -6,6 +6,7 @@
 //#include <gui/common/BinFileLoader.h>
 #include <stdio.h>
 #include "Common.h"
+#include "AudioTask.h"
 
 enum EPreferencesButton
 {
@@ -66,7 +67,8 @@ void PreferencesView::tearDownScreen()
 void PreferencesView::buttonClickHandler(const touchgfx::AbstractButton& src)
 {
 	const touchgfx::CustomButton &button = (const touchgfx::CustomButton &)src;
-
+	audioTask.PlaySound(EAudioSounds::KeyPressTone);
+	
     if (button.getId() == Settings)
     {
         application().gotoSettingsScreen();

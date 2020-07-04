@@ -20,18 +20,49 @@ namespace EUIMessageType
 		ProgrammingTrackStatusUpdate,
 		InputEvent,
 		KeyEvent,
-		ScanTrackReply
+		ScanTrackReply,
+		CVWriteReply
 	};
 }
 
+namespace EErrorCode
+{
+	enum EErrorCode
+	{
+		Success=0,
+		NoACK,
+		ValueMismatch,
+		NoTrackPower,
+		MAX_ERROR_CODE
+	};
+}
+
+
+inline const char16_t *ErrorCodeText(EErrorCode::EErrorCode code)
+{
+	if (code < EErrorCode::MAX_ERROR_CODE)
+	{
+		static const char16_t *errors[] = { u"Success",
+											u"No Ack from Decoder",
+											u"Value Mismatch",
+											u"No Track Power"
+										   };
+		return errors[code];
+	}
+	return u"Unknown Error";
+}
+	
+	
 struct ScanTrackReply
 {
+	EErrorCode::EErrorCode result;
 	int16_t address;
 	int16_t manufacturer;
 	int16_t version;
 	int16_t config;
 	int16_t extendedAddress;
 };
+
 
 struct UIMsg
 {
@@ -43,6 +74,7 @@ struct UIMsg
 		InputEvent input;
 		KeyEvent keys;
 		ScanTrackReply scan;
+		EErrorCode::EErrorCode result;
 	};
 };
 

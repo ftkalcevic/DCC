@@ -42,7 +42,7 @@ void ConfigStream::WriteElement(const char *elem, int value)
 	WriteEndElement(elem);
 }
 
-void ConfigStream::WriteElement(const char *elem, char16_t *str)
+void ConfigStream::WriteElement(const char *elem, const char16_t *str)
 {
 	WriteStartElementTag(elem);
 	while (*str != 0)
@@ -53,7 +53,7 @@ void ConfigStream::WriteElement(const char *elem, char16_t *str)
 	WriteEndElement(elem);
 }
 
-void ConfigStream::WriteElement(const char *elem, char *str)
+void ConfigStream::WriteElement(const char *elem, const char *str)
 {
 	WriteStartElementTag(elem);
 	UINT bytesWritten;

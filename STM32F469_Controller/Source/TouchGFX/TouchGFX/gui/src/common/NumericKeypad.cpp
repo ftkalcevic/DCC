@@ -33,6 +33,11 @@ NumericKeypad::NumericKeypad() : keyboard(),
     add(keyboard);
 }
 
+void NumericKeypad::Reset()
+{
+	setMode(Dec);
+}
+
 void NumericKeypad::setKeyMappingList()
 {
     keyboard.setKeymappingList(&numericKeypadKeyMappingList);

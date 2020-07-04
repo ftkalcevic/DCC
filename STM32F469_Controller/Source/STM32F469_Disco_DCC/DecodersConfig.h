@@ -68,10 +68,10 @@ public:
 		{
 			Decoders *d = *it;
 			stream.WriteStartElement( "Decoder" );
-			stream.WriteElement( "Name", d->name );
-			stream.WriteElement( "Description", d->description );
-			stream.WriteElement( "Address", d->address );
-			stream.WriteElement( "Type", d->type );
+			stream.WriteElement( "Name", d->getName() );
+			stream.WriteElement( "Description", d->getDescription() );
+			stream.WriteElement( "Address", d->getAddress() );
+			stream.WriteElement( "Type", d->getType() );
 			stream.WriteEndElement( "Decoder" );
 		}
 		stream.WriteEndElement( "Decoders" );
@@ -101,10 +101,10 @@ public:
 		Decoders *decoder = new Decoders();
 		memset(decoder, 0, sizeof(Decoders));
 		decoders.push_back(decoder);
-		Unicode::strncpy((Unicode::UnicodeChar *)decoder->name, (Unicode::UnicodeChar *)u"New Decoder", countof(decoder->name));
-		decoder->description[0] = 0;
-		decoder->address = 0;
-		decoder->type = EDecoderType::Multifunction;
+		decoder->setName(u"New Decoder");
+		decoder->setDescription(u"");
+		decoder->setAddress(0);
+		decoder->setType(EDecoderType::Multifunction);
 		return decoders.size()-1;
 	}
 	

@@ -82,7 +82,7 @@ public:
 		return true;
 	}
 
-	bool Verify_SM(uint8_t *msg, uint8_t len)
+	bool VerifyMsg_SM(uint8_t *msg, uint8_t len)
 	{
 		bool ret = false;
 		
@@ -145,7 +145,7 @@ public:
 		
 		uint8_t msg[4] = { (uint8_t)(INS_CV_BIT | (((cv - 1) >> 8) & 3)), (uint8_t)((cv - 1) & 0xFF), (uint8_t)(DATA_CV_VERIFY_BIT | (set ? DATA_BIT : 0) | bit), 0 };
 		SetErrorByte(msg, 4);
-		bool ret = Verify_SM(msg, 4);
+		bool ret = VerifyMsg_SM(msg, 4);
 
 		CVDEBUG("\n");
 		return ret;
@@ -157,7 +157,7 @@ public:
 		
 		uint8_t msg[4] = { (uint8_t)(INS_CV_VERIFY_BYTE | (uint8_t)(((cv - 1) >> 8) & 3)), (uint8_t)((cv - 1) & 0xFF), value, 0 };
 		SetErrorByte(msg, 4);
-		bool ret = Verify_SM(msg, 4);
+		bool ret = VerifyMsg_SM(msg, 4);
 
 		CVDEBUG("\n");
 		return ret;
@@ -184,7 +184,17 @@ public:
 			return -1;
 		}
 	}
-
+	
+	EErrorCode::EErrorCode WriteCV_SM(uint16_t cv, uint8_t value)
+	{
+		uint8_t msg[4] = { (uint8_t)(INS_CV_WRITE_BYTE | (uint8_t)(((cv - 1) >> 8) & 3)), (uint8_t)((cv - 1) & 0xFF), value, 0 };
+		if (!VerifyMsg_SM(msg, sizeof(msg)))
+			return EErrorCode::NoACK;
+		if (!VerifyByte_SM(cv, value))
+			return EErrorCode::ValueMismatch;
+		return EErrorCode::Success;
+	}
+	
 	void Run(bool enable)
 	{
 		Enable(enable);
@@ -220,6 +230,7 @@ public:
 				xSemaphoreTake(sentSemaphoreHandle, portMAX_DELAY);	// Wait for the message to be sent.
 				initialisationPacketCount--;
 			}
+			// TODO - if not enabled, we need to reply to the message.
 			else if (enabled)
 			{
 				if (uxQueueMessagesWaiting(queueHandle))
@@ -244,14 +255,27 @@ public:
 								}
 								
 								// Send Reply
-								UIMsg msg;
-								msg.type = EUIMessageType::ScanTrackReply;
-								msg.scan.address = address;
-								msg.scan.config = config;
-								msg.scan.manufacturer = manufacturer;
-								msg.scan.version = version;
-								msg.scan.extendedAddress = extendedAddress;
-								uimsg.Send(msg);
+								UIMsg uiMsg;
+								uiMsg.type = EUIMessageType::ScanTrackReply;
+								uiMsg.scan.result = EErrorCode::Success;
+								uiMsg.scan.address = address;
+								uiMsg.scan.config = config;
+								uiMsg.scan.manufacturer = manufacturer;
+								uiMsg.scan.version = version;
+								uiMsg.scan.extendedAddress = extendedAddress;
+								uimsg.Send(uiMsg);
+								break;
+							}
+							case EProgTrackMessage::WriteCV:
+							{
+								EErrorCode::EErrorCode ret = WriteCV_SM(msg.cv.cv, msg.cv.value);
+								
+								// Send Reply
+								// Send Reply
+								UIMsg uiMsg;
+								uiMsg.type = EUIMessageType::CVWriteReply;
+								uiMsg.result = ret;
+								uimsg.Send(uiMsg);
 								break;
 							}
 							default:
@@ -268,7 +292,35 @@ public:
 			else
 			{
 				if (uxQueueMessagesWaiting(queueHandle))
-					xQueueReset(queueHandle);
+				{
+					ProgTrackMessage msg;
+					if (xQueueReceive(queueHandle, &msg, 0) == pdPASS)
+					{
+						switch (msg.type)
+						{
+							case EProgTrackMessage::ScanTrack:
+								{
+									// Send Reply
+									UIMsg uiMsg;
+									uiMsg.type = EUIMessageType::ScanTrackReply;
+									uiMsg.scan.result = EErrorCode::NoTrackPower;
+									uimsg.Send(uiMsg);
+									break;
+								}
+							case EProgTrackMessage::WriteCV:
+								{
+									// Send Reply
+									UIMsg uiMsg;
+									uiMsg.type = EUIMessageType::CVWriteReply;
+									uiMsg.result = EErrorCode::NoTrackPower;
+									uimsg.Send(uiMsg);
+									break;
+								}
+							default:
+								break;
+						}
+					}
+				}
 				vTaskDelay(pdMS_TO_TICKS(5));
 			}
 			// need to handle a 5ms gap before sending a message to the same decoder.
@@ -295,3 +347,4 @@ public:
 extern void ProgrammingTrack_DCC_EStop(bool stop);
 extern void ProgrammingTrack_DCC_Enable(bool enable); 
 extern void ProgrammingTrack_DCC_ScanProgrammingTrack();
+extern void ProgrammingTrack_DCC_WriteCV(uint16_t cv, uint8_t value);

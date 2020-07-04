@@ -135,17 +135,17 @@ void Decoder::setIndex(int newIndex)
 
 	Decoders &d = uiDecodersConfig[index];
 	
-	bool isMultiFunction = d.type == EDecoderType::Multifunction;
-	SetWidgetVisibility(isMultiFunction, isMultiFunction ? d.loco.controlled : false);
+	bool isMultiFunction = d.getType() == EDecoderType::Multifunction;
+	SetWidgetVisibility(isMultiFunction, isMultiFunction ? d.getLoco().controlled : false);
 
-	if (*d.name)
+	if (*d.getName())
 	{
-		textTitle.setWildcard((const Unicode::UnicodeChar*)d.name);
+		textTitle.setWildcard((const Unicode::UnicodeChar*)d.getName());
 	}
 	else
 		textTitle.setVisible(false);
-	if (*d.description)
-		textDescription.setWildcard((const Unicode::UnicodeChar*)d.description);
+	if (*d.getDescription())
+		textDescription.setWildcard((const Unicode::UnicodeChar*)d.getDescription());
 	else
 		textDescription.setVisible(false);	
 	
@@ -159,14 +159,14 @@ void Decoder::setIndex(int newIndex)
 
 void Decoder::SetupMultiFunction(Decoders &decoder)
 {
-    boxDecoderBackground.setBorderSize(decoder.loco.controlled ? 10 : 0);
+    boxDecoderBackground.setBorderSize(decoder.getLoco().controlled ? 10 : 0);
 	imageDecoder.setBitmap(touchgfx::Bitmap(BITMAP_LOCOICON_ID));
 	imageDecoder.setPosition(20, 15, 380, 210);
 }
 
 void Decoder::SetupAccessory(Decoders &decoder)
 {
-	if ( decoder.accessory.currentState == 0 )
+	if ( decoder.getAcc().currentState == 0 )
 	    imageDecoder.setBitmap(touchgfx::Bitmap(BITMAP_TURNOUT_STRAIGHT_NORMAL_ID));
 	else
 	    imageDecoder.setBitmap(touchgfx::Bitmap(BITMAP_TURNOUT_STRAIGHT_REVERSE_ID));
@@ -177,9 +177,9 @@ void Decoder::SetupAccessory(Decoders &decoder)
 void Decoder::imageClickHandler(const ScalableAspectImage& img, const ClickEvent& e)
 {
 	Decoders &d = uiDecodersConfig[index];
-	if (d.type == EDecoderType::Accessory && e.getType() == ClickEvent::PRESSED )
+	if (d.getType() == EDecoderType::Accessory && e.getType() == ClickEvent::PRESSED )
 	{
-		d.accessory.currentState = (d.accessory.currentState + 1) & 1;
+		d.getAcc().currentState = (d.getAcc().currentState + 1) & 1;
 		SetupAccessory(d);
 		imageDecoder.invalidate();
 	}
@@ -188,7 +188,7 @@ void Decoder::imageClickHandler(const ScalableAspectImage& img, const ClickEvent
 void Decoder::TakeControl(bool control)
 {
 	Decoders &d = uiDecodersConfig[index];
-	if (d.type == EDecoderType::Multifunction )
+	if (d.getType() == EDecoderType::Multifunction )
 	{
 		//presenter.LocoTakeControl(d.address, control);
 		// TODO Call method to take control - possible yield others (multi-control)
@@ -197,7 +197,7 @@ void Decoder::TakeControl(bool control)
 		//          maybe disable other locos
 		//      update the function keys
 		//      
-		d.loco.controlled = control;
+		d.getLoco().controlled = control;
 		boxDecoderBackground.setBorderSize(control ? 10 : 0);
         buttonTakeControl.setVisible(!control);;
         buttonYieldControl.setVisible(control);;

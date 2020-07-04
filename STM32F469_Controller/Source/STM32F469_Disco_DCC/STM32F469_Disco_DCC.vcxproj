@@ -102,6 +102,7 @@
     <ClCompile Include="..\TouchGFX\Drivers\BSP\Components\cs43l22\cs43l22.c" />
     <ClCompile Include="..\TouchGFX\Drivers\BSP\STM32469I-Discovery\stm32469i_discovery_audio.c" />
     <ClCompile Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\source\touchgfx\containers\Container.cpp" />
+    <ClCompile Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\source\touchgfx\containers\ModalBoxWindow.cpp" />
     <ClCompile Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\source\touchgfx\containers\scrollers\ScrollBase.cpp" />
     <ClCompile Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\source\touchgfx\containers\scrollers\ScrollWheel.cpp" />
     <ClCompile Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\source\touchgfx\containers\scrollers\ScrollWheelBase.cpp" />
@@ -109,6 +110,7 @@
     <ClCompile Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\source\touchgfx\widgets\Keyboard.cpp" />
     <ClCompile Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\source\touchgfx\widgets\TextArea.cpp" />
     <ClCompile Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\source\touchgfx\widgets\TextAreaWithWildcard.cpp" />
+    <ClCompile Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\source\touchgfx\widgets\TextWithFrame.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\fonts\src\ApplicationFontProvider.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\BitmapDatabase.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\fonts\src\CachedFont.cpp" />
@@ -233,6 +235,9 @@
     <ClInclude Include="..\OpenLCB\src\STM32F469xx\can.h" />
     <ClInclude Include="..\TouchGFX\Drivers\BSP\Components\cs43l22\cs43l22.h" />
     <ClInclude Include="..\TouchGFX\Drivers\BSP\STM32469I-Discovery\stm32469i_discovery_audio.h" />
+    <ClInclude Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\include\touchgfx\containers\ModalBoxWindow.hpp" />
+    <ClInclude Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\include\touchgfx\widgets\TextAreaWithWildcardWithBox.hpp" />
+    <ClInclude Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\include\touchgfx\widgets\TextWithFrame.hpp" />
     <ClInclude Include="..\TouchGFX\TouchGFX\gui\include\gui\common\BinFileLoader.h" />
     <ClInclude Include="..\TouchGFX\TouchGFX\gui\include\gui\common\FullKeyboard.hpp" />
     <ClInclude Include="..\TouchGFX\TouchGFX\gui\include\gui\common\FullKeyboardKeyMapping.hpp" />

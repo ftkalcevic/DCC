@@ -59,6 +59,7 @@ enum EAudioSounds
 	Tone,
 	LAST_SAMPLE,
 	KeyPressTone,
+	BadKeyPressTone,
 	LAST_TONE,
 	BUFFER_HALF_EMPTY = 0xFE,
 	BUFFER_EMPTY = 0xFF

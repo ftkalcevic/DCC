@@ -23,7 +23,7 @@ void DCCConfigPresenter::UIMessage( UIMsg &msg )
 	switch (msg.type)
 	{
 		case EUIMessageType::ScanTrackReply:
-			view.ScanTrackReply(msg.scan.address, msg.scan.config, msg.scan.extendedAddress, msg.scan.manufacturer, msg.scan.version);
+			view.ScanTrackReply(msg.scan.result, msg.scan.address, msg.scan.config, msg.scan.extendedAddress, msg.scan.manufacturer, msg.scan.version);
 			break;
 		default:
 			break;

@@ -43,9 +43,11 @@ void Keyboard::setBuffer(Unicode::UnicodeChar* newBuffer, uint16_t newBufferSize
 void Keyboard::setLayout(const Layout* newLayout)
 {
     layout = newLayout;
+	entryAreaFontId = layout->textAreaFont;
+	entryAreaAlignment = layout->textAreaAlignment;
     invalidate();
 }
-
+	
 Keyboard::Key Keyboard::getKeyForCoordinates(int16_t x, int16_t y) const
 {
     Key key;
@@ -253,7 +255,7 @@ void Keyboard::draw(const Rect& invalidatedArea) const
 	    {
 		    HAL::lcd().fillRect(invalidatedTextAreaRelative, layout->textAreaBackColor, layout->keyAlpha);
 
-			DrawText(buffer, layout->textAreaFont, layout->textAreaAlignment, layout->textAreaFontColor, textAreaPosition, invalidatedArea);
+			DrawText(buffer, entryAreaFontId, entryAreaAlignment, layout->textAreaFontColor, textAreaPosition, invalidatedArea);
 	    }
 	    
 	    // title

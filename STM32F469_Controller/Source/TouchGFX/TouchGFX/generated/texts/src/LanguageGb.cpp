@@ -11,14 +11,14 @@ KEEP extern const uint32_t indicesGb[] TEXT_LOCATION_FLASH_ATTRIBUTE =
 {
     0, // T_ResourceId1
     14, // T_wildcardTextLeft20pxId
-    202, // T_SingleUseId14
+    207, // T_SingleUseId14
     14, // T_wildcardTextCenter20pxId
     43, // T_SingleUseId15
     135, // T_SingleUseId16
     177, // T_SingleUseId17
-    190, // T_SingleUseId18
+    184, // T_SingleUseId18
     99, // T_SingleUseId19
-    196, // T_SingleUseId20
+    190, // T_SingleUseId20
     105, // T_SingleUseId21
     30, // T_SingleUseId22
     125, // T_SingleUseId23
@@ -29,18 +29,19 @@ KEEP extern const uint32_t indicesGb[] TEXT_LOCATION_FLASH_ATTRIBUTE =
     69, // T_ResourceId3
     14, // T_wildcardTextCentered40pxId
     145, // T_SingleUseId30
-    184, // T_SingleUseId32
+    196, // T_SingleUseId32
     14, // T_wildcardTextLeft40pxId
     115, // T_SingleUseId34
     154, // T_DccConfigAddress
-    207, // T_DccConfigName
+    202, // T_DccConfigName
     82, // T_DccConfigDescription
     162, // T_DccConfigDecoder
     170, // T_DccConfigConfig
     61, // T_DccConfigAllCVs
     14, // T_wildcardTextLeft40pxNumericId
     14, // T_EnteredText
-    216, // T_NumMode
-    212, // T_AlphaMode
-    14  // T_wildcardTextLeft28px
+    212, // T_NumMode
+    216, // T_AlphaMode
+    14, // T_wildcardTextLeft28px
+    220  // T_waitButtonOKId
 };

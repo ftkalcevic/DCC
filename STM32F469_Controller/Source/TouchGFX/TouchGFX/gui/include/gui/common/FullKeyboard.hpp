@@ -35,12 +35,21 @@ public:
 		Unicode::strncpy(buffer, text, BUFFER_SIZE);
 		buffer[BUFFER_SIZE - 1] = 0;
 	}
+	const Unicode::UnicodeChar *getText() const
+	{
+		return buffer;
+	}
+	void setTextMaxLen(uint16_t maxLen);
+	void setEntryAreaFont(FontId fontId) { keyboard.setEntryAreaFont(fontId); }
+	void setEntryAreaAlignment(Alignment align) { keyboard.setEntryAreaAlignment( align ); }
+	
     void setCloseWindowCallback(touchgfx::GenericCallback<bool>& callback)
     {
         this->closeWindowCallback = &callback;
     }
     virtual void getLastChild(int16_t x, int16_t y, Drawable** last);
     virtual Rect getContainedArea() const;
+	void Reset();
 	
 private:
     /*
@@ -62,8 +71,6 @@ private:
     /**
      * Used to display text on top of the button for changing keyboard mode.
      */
-    TextArea modeBtnTextArea;
-
     Callback<FullKeyboard> capslockPressed;
     Callback<FullKeyboard> backspacePressed;
     Callback<FullKeyboard> modePressed;

@@ -1,6 +1,11 @@
 #pragma once
 
 #include "InputEvent.h"
+#include <touchgfx/Unicode.hpp>
+#include "Common.h"
+
+
+using namespace touchgfx;
 
 const int MAX_PATH = 64;
 
@@ -147,6 +152,7 @@ struct Functions
 
 struct Decoders
 {
+private:
 	char16_t name[20];
 	char16_t description[100];
 	uint16_t address;	// How do we address LCC devices
@@ -161,5 +167,57 @@ struct Decoders
 	};
 
 	Functions func;
+protected:
+	bool dirty;
+public:
+	const char16_t *getName() const { return name;}
+	const uint16_t getNameMaxLen() const { return countof(name);}
+	const char16_t *getDescription() const { return description;}
+	const uint16_t getDescriptionMaxLen() const { return countof(description);}
+	uint16_t getAddress() const { return address; }
+	EDecoderType::EDecoderType getType() const { return type; }
+	LocoSettings &getLoco()
+	{
+		assert(type == EDecoderType::Multifunction && "Can only getLoco if decoder type is multifunction");
+		return loco;
+	}
+	AccessorySettings &getAcc()
+	{
+		assert(type == EDecoderType::Accessory && "Can only getAcc if decoder type is accessory");
+		return accessory;
+	}
+	void setName(const char16_t *newName) 
+	{ 
+		if (Unicode::strncmp((const Unicode::UnicodeChar *)name, (const Unicode::UnicodeChar *)newName, countof(name)) != 0) 
+		{ 
+			Unicode::strncpy((Unicode::UnicodeChar *)name, (const Unicode::UnicodeChar *)newName, countof(name));
+			dirty = true;
+		}
+	}
+	void setDescription( const char16_t *newDescription )
+	{ 
+		if (Unicode::strncmp((const Unicode::UnicodeChar *)description, (const Unicode::UnicodeChar *)newDescription, countof(description)) != 0) 
+		{ 
+			Unicode::strncpy((Unicode::UnicodeChar *)description, (const Unicode::UnicodeChar *)newDescription, countof(description));
+			dirty = true;
+		}
+	}
+	
+	void setAddress( uint16_t newAddress ) 
+	{ 
+		if (address != newAddress)
+		{
+			address = newAddress;
+			dirty = true;
+		}
+	}
+	void setType( EDecoderType::EDecoderType newType ) 
+	{ 
+		if (type != newType)
+		{
+			type = newType;
+			dirty = true;
+		}
+	}
 };
 

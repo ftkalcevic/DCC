@@ -356,6 +356,9 @@ void AudioTask::ProcessTone(EAudioSounds tone)
 		case KeyPressTone:	
 			CreateTone(BEEP_DEFAULT_FREQ, 40); 
 			break;
+		case BadKeyPressTone:	
+			CreateTone(500, 90); 
+			break;
 		default:
 			break;
 	}

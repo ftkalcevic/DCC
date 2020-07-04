@@ -1068,6 +1068,12 @@
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\DecodersWheelMaskTop.cpp">
       <Filter>Source files\Application\User\generated</Filter>
     </ClCompile>
+    <ClCompile Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\source\touchgfx\widgets\TextWithFrame.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\source\touchgfx\containers\ModalBoxWindow.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stm32f4xx_hal_tim_plus.h">
@@ -1230,6 +1236,15 @@
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="..\TouchGFX\TouchGFX\gui\include\gui\common\NumericKeypadKeyMapping.hpp">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\include\touchgfx\widgets\TextAreaWithWildcardWithBox.hpp">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\include\touchgfx\widgets\TextWithFrame.hpp">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\include\touchgfx\containers\ModalBoxWindow.hpp">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>

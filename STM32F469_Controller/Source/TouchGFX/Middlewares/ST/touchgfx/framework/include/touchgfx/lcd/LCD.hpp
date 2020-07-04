@@ -976,6 +976,7 @@ protected:
     friend class Font;
     friend class TextArea;
     friend class TextAreaWithWildcardBase;
+    friend class TextWithFrame;
 
     /**
      * @fn FORCE_INLINE_FUNCTION static uint8_t LCD::getAlphaFromA4(const uint16_t* data, uint32_t offset)

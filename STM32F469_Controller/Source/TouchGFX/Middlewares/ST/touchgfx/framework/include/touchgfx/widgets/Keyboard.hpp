@@ -182,6 +182,8 @@ public:
      * @param newLayout The new layout.
      */
     void setLayout(const Layout* newLayout);
+	void setEntryAreaFont(FontId fontId) { entryAreaFontId = fontId; }
+	void setEntryAreaAlignment(Alignment align) { entryAreaAlignment = align; }
 
     /**
      * @fn const Layout* Keyboard::getLayout() const
@@ -350,6 +352,8 @@ protected:
     uint8_t                 keyDown;
     const Unicode::UnicodeChar* title;
 	Rect                    keyboardRect;
+	FontId                  entryAreaFontId;
+	Alignment               entryAreaAlignment;
 	
 	void translateToAbsolute(Rect &r) const // this is not translateRectToAbsolute - it is a helper to position the keyboard rect relative to the full screen background rect
 	{

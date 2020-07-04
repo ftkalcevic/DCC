@@ -195,11 +195,11 @@ void AppMain::ToggleEStop()
 
 void AppMain::YieldControl(Decoders &d)
 {
-	if (d.loco.controlled)
+	if (d.getLoco().controlled)
 	{
-		d.loco.controlled = false;
+		d.getLoco().controlled = false;
 		// Send something to mainTrackDCC
-		MainTrack_DCC_Stop(d.address);
+		MainTrack_DCC_Stop(d.getAddress());
 	}
 }
 
@@ -208,7 +208,7 @@ void AppMain::TakeControl(int decoderIndex, bool control)
 	if (decoderIndex >= 0 && decoderIndex < uiDecodersConfig.Count() )
 	{
 		Decoders &d = uiDecodersConfig[decoderIndex];
-		if (d.type == EDecoderType::Multifunction )
+		if (d.getType() == EDecoderType::Multifunction )
 		{
 			if (!control)
 			{
@@ -221,13 +221,13 @@ void AppMain::TakeControl(int decoderIndex, bool control)
 				// TODO - if we support multiple active, then we need to know when a loco has focus on the UI so we can route speed/dir commands to it.
 				//	      or do we have a button to grab it.
 				for (int i = 0; i < uiDecodersConfig.Count(); i++)
-					if (i!=decoderIndex && uiDecodersConfig[i].type == EDecoderType::Multifunction)
+					if (i!=decoderIndex && uiDecodersConfig[i].getType() == EDecoderType::Multifunction)
 					{
 						YieldControl(uiDecodersConfig[i]);
 						uiDecodersConfig.setActiveDecoder(-1);
 					}
 
-				d.loco.controlled = control;
+				d.getLoco().controlled = control;
 				// Mark this as the active 
 				uiDecodersConfig.setActiveDecoder(decoderIndex);
 				// Send something to mainTrackDCC (happens every 50ms)
@@ -287,9 +287,9 @@ void AppMain::Run()
 			
 			uimsg.Send(msg);
 			if ( uiDecodersConfig.getActiveDecoder() >= 0 && 
-				 uiDecodersConfig[uiDecodersConfig.getActiveDecoder()].type == EDecoderType::Multifunction && uiDecodersConfig[uiDecodersConfig.getActiveDecoder()].loco.controlled )
+				 uiDecodersConfig[uiDecodersConfig.getActiveDecoder()].getType() == EDecoderType::Multifunction && uiDecodersConfig[uiDecodersConfig.getActiveDecoder()].getLoco().controlled )
 			{
-				MainTrack_DCC_SetSpeedAndDirection(uiDecodersConfig[uiDecodersConfig.getActiveDecoder()].address, msg.input.direction, msg.input.throttle, msg.input.brake);
+				MainTrack_DCC_SetSpeedAndDirection(uiDecodersConfig[uiDecodersConfig.getActiveDecoder()].getAddress(), msg.input.direction, msg.input.throttle, msg.input.brake);
 			}
 		}
 		osDelay(pdMS_TO_TICKS(1));

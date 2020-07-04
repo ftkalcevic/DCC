@@ -22,7 +22,7 @@ void ListItemDecoder::setIndex(int i, bool selected)
 	if (index < uiDecodersConfig.Count())
 	{
 		textArea.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTLEFT20PXID));
-		textArea.setWildcard((const Unicode::UnicodeChar *)uiDecodersConfig[index].name);
+		textArea.setWildcard((const Unicode::UnicodeChar *)uiDecodersConfig[index].getName());
 		
 	}
 	else

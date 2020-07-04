@@ -127,11 +127,11 @@ MainView::MainView():
 		}
 		else
 		{
-			if ( uiDecodersConfig[i].type == EDecoderType::Multifunction )
+			if ( uiDecodersConfig[i].getType() == EDecoderType::Multifunction )
 				button->setBitmaps(touchgfx::Bitmap(BITMAP_BUTTONUP_ID), touchgfx::Bitmap(BITMAP_BUTTONDOWN_ID), touchgfx::Bitmap(BITMAP_LOCOICON_ID), touchgfx::Bitmap(BITMAP_LOCOICON_ID));
 			else
 				button->setBitmaps(touchgfx::Bitmap(BITMAP_BUTTONUP_ID), touchgfx::Bitmap(BITMAP_BUTTONDOWN_ID), touchgfx::Bitmap(BITMAP_ACCESSORYICON_ID), touchgfx::Bitmap(BITMAP_ACCESSORYICON_ID));
-			button->setLabelText( uiDecodersConfig[i].name);
+			button->setLabelText( uiDecodersConfig[i].getName());
 			button->setId(i);
 		}
 		page->add(*button);
@@ -175,7 +175,8 @@ void MainView::tearDownScreen()
 void MainView::buttonClickHandler(const touchgfx::AbstractButton& src)
 {
 	const touchgfx::CustomButton &button = (const touchgfx::CustomButton &)src;
-
+	audioTask.PlaySound(EAudioSounds::KeyPressTone);
+	
     if (button.getId() == uiDecodersConfig.Count())		// Last index is the preferences button
     {
         application().gotoPreferences();

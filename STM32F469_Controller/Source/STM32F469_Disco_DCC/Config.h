@@ -148,8 +148,8 @@ public:
 	void WriteStartElementTag(const char *elem);
 	void WriteStartElement(const char *elem);
 	void WriteElement(const char *elem, int value);
-	void WriteElement(const char *elem, char16_t *str);
-	void WriteElement(const char *elem, char *str);
+	void WriteElement(const char *elem, const char16_t *str);
+	void WriteElement(const char *elem, const char *str);
 	void WriteEndElement(const char *elem);
 	void Close();
 };

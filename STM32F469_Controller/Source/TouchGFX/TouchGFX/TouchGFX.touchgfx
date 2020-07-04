@@ -2392,6 +2392,10 @@
       {
         "TextEntryId": "wildcardTextLeft28px",
         "IsResource": true
+      },
+      {
+        "TextEntryId": "waitButtonOKId",
+        "IsResource": true
       }
     ],
     "Name": "STM32F469I-DISCO",

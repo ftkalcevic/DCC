@@ -1,7 +1,6 @@
 #include <gui/common/FullKeyboard.hpp>
 
 FullKeyboard::FullKeyboard() : keyboard(),
-    modeBtnTextArea(),
     capslockPressed(this, &FullKeyboard::capslockPressedHandler),
     backspacePressed(this, &FullKeyboard::backspacePressedHandler),
     modePressed(this, &FullKeyboard::modePressedHandler),
@@ -31,6 +30,20 @@ FullKeyboard::FullKeyboard() : keyboard(),
     setKeyMappingList();
 
     add(keyboard);
+}
+
+void FullKeyboard::Reset()
+{
+	alphaKeys = true;
+    uppercaseKeys = true;
+    firstCharacterEntry = true;
+	keyboard.setBuffer(buffer, BUFFER_SIZE);
+}
+
+void FullKeyboard::setTextMaxLen(uint16_t maxLen)
+{
+	assert(maxLen < BUFFER_SIZE && "Text buffer is bigger than keyboard buffer");
+	keyboard.setBuffer(buffer, maxLen);
 }
 
 void FullKeyboard::setKeyMappingList()
@@ -141,4 +154,3 @@ void FullKeyboard::getLastChild(int16_t x, int16_t y, Drawable** last)
 {
 	Container::getLastChild(x, y, last);
 }	
-

@@ -42,7 +42,8 @@ public:
         this->closeWindowCallback = &callback;
     }
 	virtual void handleDragEvent(const DragEvent& evt);
-
+	void Reset();
+	
 private:
 	uint16_t rangeMin;
 	uint16_t rangeMax;

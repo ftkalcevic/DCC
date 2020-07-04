@@ -35,6 +35,11 @@ const uint8_t DATA_SD_ESTOP = 1;
 const uint8_t DATA_SD_FORWARD = (1 << 5);
 const uint8_t DATA_SD_REVERSE = (0 << 5);
 
+
+const uint16_t CV_PRIMARY_ADDRESS		= 1;
+const uint16_t CV_EXTENDED_ADDRESS_MSB	= 17;
+const uint16_t CV_EXTENDED_ADDRESS_LSB	= 18;
+
 const uint8_t CV29_DIRECTION			= 0x01;
 const uint8_t CV29_FL_LOCATION			= 0x02;
 const uint8_t CV29_POWER_SOURCE_CONV	= 0x04;
@@ -55,10 +60,21 @@ struct DCCMessage
 enum EProgTrackMessage
 {
 	ScanTrack,
+	WriteCV,
+};
+
+struct CV
+{
+	uint16_t cv;
+	uint8_t value;
 };
 
 struct ProgTrackMessage
 {
 	EProgTrackMessage type;
+	union
+	{
+		CV cv;
+	};
 };
 

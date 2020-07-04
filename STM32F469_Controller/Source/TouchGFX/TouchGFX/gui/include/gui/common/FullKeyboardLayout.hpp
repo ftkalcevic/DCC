@@ -5,22 +5,11 @@
 #include <touchgfx/hal/Types.hpp>
 #include <fonts/ApplicationFontProvider.hpp>
 #include "BitmapDatabase.hpp"
+#include "UIDefaults.h"
+
 
 using namespace touchgfx;
 
-
-
-#if !defined(USE_BPP) || USE_BPP==16
-static_assert(false);
-#elif USE_BPP==24
-    #define GETCOLORFROM24BITRGB(red,green,blue)    ((red << 16) | (green << 8) | (blue))
-#elif USE_BPP==4
-__cpp_static_assert(false);
-#elif USE_BPP==2
-__cpp_static_assert(false);
-#else
-#error Unknown USE_BPP
-#endif
 
 
 
@@ -111,6 +100,10 @@ static const Keyboard::Layout fullKeyboardLayout =
     .keyAlpha               =0xFF,
 	.shadowDepth            =5,
 	.shadowColor            =GETCOLORFROM24BITRGB(180, 180, 180),
+    .titlePosition          = Rect(15, 15, 334, 50),
+    .titleFont              = Typography::SANSSERIF40PX,
+    .titleFontColor         = GETCOLORFROM24BITRGB(0, 0, 0),
+	.titleAlignment         = LEFT,
 };
 
 #endif
