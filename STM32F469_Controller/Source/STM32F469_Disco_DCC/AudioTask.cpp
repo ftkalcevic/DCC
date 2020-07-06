@@ -584,8 +584,6 @@ void AudioTask::ProcessBufferFill(EAudioSounds event)
 
 void AudioTask::ProcessEvent(EAudioSounds event)
 {
-	if (mute)
-		return;
 	switch (event)
 	{
 		case EAudioSounds::BUFFER_HALF_EMPTY:

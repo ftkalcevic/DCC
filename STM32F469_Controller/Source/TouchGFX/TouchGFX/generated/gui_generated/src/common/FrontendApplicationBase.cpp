@@ -29,6 +29,8 @@
 #include <gui/placeholderscreen_screen/placeHolderScreenPresenter.hpp>
 #include <gui/decoders_screen/DecodersView.hpp>
 #include <gui/decoders_screen/DecodersPresenter.hpp>
+#include <gui/audioconfig_screen/AudioConfigView.hpp>
+#include <gui/audioconfig_screen/AudioConfigPresenter.hpp>
 
 using namespace touchgfx;
 

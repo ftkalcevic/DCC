@@ -4,6 +4,8 @@
 #include "BitmapDatabase.hpp"
 #include <texts/TextKeysAndLanguages.hpp>
 #include "Config.h"
+#include "AudioTask.h"
+
 
 SettingsView::SettingsView() :
     buttonCalibrateClickCallback(this, &SettingsView::buttonCalibrateClickHandler),
@@ -126,6 +128,7 @@ void SettingsView::UpdateDirection(const EDirection::EDirection dir, bool force)
 
 void SettingsView::buttonCalibrateClickHandler(const touchgfx::AbstractButton& src)
 {
+	audioTask.PlaySound(EAudioSounds::KeyPressTone);
 	bool calibrate = toggleCalibrate2.getState();
 	sliderThrottle.setAllowUpdate(calibrate);
 	sliderBrake.setAllowUpdate(calibrate);
@@ -144,6 +147,7 @@ void SettingsView::buttonCalibrateClickHandler(const touchgfx::AbstractButton& s
 
 void SettingsView::checkBoxHandler(const CheckBox& src)
 {
+	audioTask.PlaySound(EAudioSounds::KeyPressTone);
 	bool calibrate = toggleCalibrate2.getState();
 	if (calibrate)
 	{

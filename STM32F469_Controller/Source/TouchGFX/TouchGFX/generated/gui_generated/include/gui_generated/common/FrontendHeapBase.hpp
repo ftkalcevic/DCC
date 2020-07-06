@@ -33,6 +33,8 @@
 #include <gui/placeholderscreen_screen/placeHolderScreenPresenter.hpp>
 #include <gui/decoders_screen/DecodersView.hpp>
 #include <gui/decoders_screen/DecodersPresenter.hpp>
+#include <gui/audioconfig_screen/AudioConfigView.hpp>
+#include <gui/audioconfig_screen/AudioConfigPresenter.hpp>
 
 
 /**
@@ -65,7 +67,8 @@ public:
             touchgfx::meta::TypeList< DCCConfig_1View,
             touchgfx::meta::TypeList< placeHolderScreenView,
             touchgfx::meta::TypeList< DecodersView,
-            touchgfx::meta::Nil > > > > > > > > >
+            touchgfx::meta::TypeList< AudioConfigView,
+            touchgfx::meta::Nil > > > > > > > > > >
             > GeneratedViewTypes;
 
     /**
@@ -87,7 +90,8 @@ public:
             touchgfx::meta::TypeList< DCCConfig_1Presenter,
             touchgfx::meta::TypeList< placeHolderScreenPresenter,
             touchgfx::meta::TypeList< DecodersPresenter,
-            touchgfx::meta::Nil > > > > > > > > >
+            touchgfx::meta::TypeList< AudioConfigPresenter,
+            touchgfx::meta::Nil > > > > > > > > > >
             > GeneratedPresenterTypes;
 
     /**

@@ -292,6 +292,18 @@
     <Filter Include="Header Files\generated\gui_generated\decoders_screen">
       <UniqueIdentifier>25084F14-3BE2-8A06-815E-714239721D84</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\gui\audioconfig_screen">
+      <UniqueIdentifier>5A8C54E3-7A80-C91A-7176-7EEA61078DD7</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gui\audioconfig_screen">
+      <UniqueIdentifier>C4BED93D-CD36-DA2D-E35B-3B9B83B5DCEB</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\generated\gui_generated\audioconfig_screen">
+      <UniqueIdentifier>E57012BF-C17B-74C1-1FCC-A920EB409BCA</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\generated\gui_generated\audioconfig_screen">
+      <UniqueIdentifier>2876AC3A-D80C-CA05-CC5D-C05938AE9824</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(TouchGFXReleasePath)\framework\source\platform\driver\touch\SDL2TouchController.cpp">
@@ -476,6 +488,15 @@
     </ClCompile>
     <ClCompile Include="..\..\generated\gui_generated\src\containers\ListItemDecoderBase.cpp">
       <Filter>Source Files\generated\gui_generated\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\audioconfig_screen\AudioConfigPresenter.cpp">
+      <Filter>Source Files\gui\audioconfig_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\audioconfig_screen\AudioConfigView.cpp">
+      <Filter>Source Files\gui\audioconfig_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\audioconfig_screen\AudioConfigViewBase.cpp">
+      <Filter>Source Files\generated\gui_generated\audioconfig_screen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1080,6 +1101,15 @@
     </ClInclude>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\ListItemDecoderBase.hpp">
       <Filter>Header Files\generated\gui_generated\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\audioconfig_screen\AudioConfigPresenter.hpp">
+      <Filter>Header Files\gui\audioconfig_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\audioconfig_screen\AudioConfigView.hpp">
+      <Filter>Header Files\gui\audioconfig_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\audioconfig_screen\AudioConfigViewBase.hpp">
+      <Filter>Header Files\generated\gui_generated\audioconfig_screen</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -31,7 +31,7 @@ SettingsViewBase::SettingsViewBase()
     textBrake.setXY(349, 176);
     textBrake.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
     textBrake.setLinespacing(0);
-    textBrake.setTypedText(touchgfx::TypedText(T_SINGLEUSEID32));
+    textBrake.setTypedText(touchgfx::TypedText(T_SINGLEUSEID35));
     scrollableContainer1.add(textBrake);
 
     checkBoxReverseThrottle.setXY(114, 111);

@@ -244,7 +244,7 @@ void AppMain::Run()
 	CheckTaskStacks();
 	// Play startup sound
 	audioTask.PlaySound(EAudioSounds::Bell2);
-	audioTask.Mute();
+	//audioTask.Mute(true);
 	
 	InitInputs();
 	uiDecodersConfig.parse();
@@ -441,7 +441,9 @@ DCCConfigView
 		- Or, do we make them change the configuration and define limits?
 		
 preferences
-	- add sound mute box
+	- sound preferences
+	- sound mute box
+	- beep volume
 	
 decoders view 
 	- remove all widgets except take control	

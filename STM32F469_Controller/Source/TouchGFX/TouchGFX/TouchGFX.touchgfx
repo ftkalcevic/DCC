@@ -278,7 +278,7 @@
                 "Moveable": false
               },
               {
-                "TextId": "SingleUseId32",
+                "TextId": "SingleUseId35",
                 "TextRotation": "0",
                 "Color": {
                   "Red": 255,
@@ -1763,6 +1763,73 @@
         "Name": "Decoders",
         "OverrideDefaultBufferSize": false,
         "CanvasBufferSize": 0
+      },
+      {
+        "Components": [
+          {
+            "CustomContainerDefinitionName": "FunctionButtons",
+            "Name": "functionButtons",
+            "X": 0,
+            "Y": 455,
+            "Width": 800,
+            "Height": 25,
+            "Type": "CustomContainerInstance",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "CustomContainerDefinitionName": "StatusBar",
+            "Name": "statusBar",
+            "X": 0,
+            "Y": 0,
+            "Width": 800,
+            "Height": 25,
+            "Type": "CustomContainerInstance",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "FileName": "__designer\\Dark_Textures_carbon_fibre.png",
+            "Alpha": 255,
+            "OffsetX": 0,
+            "OffsetY": 0,
+            "Name": "backgroundImage",
+            "X": 0,
+            "Y": 25,
+            "Width": 800,
+            "Height": 430,
+            "Type": "TiledImage",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "CustomContainerDefinitionName": "CheckBox",
+            "Name": "checkBoxMute",
+            "X": 9,
+            "Y": 38,
+            "Width": 338,
+            "Height": 65,
+            "Type": "CustomContainerInstance",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          }
+        ],
+        "Interactions": [],
+        "Name": "AudioConfig",
+        "OverrideDefaultBufferSize": false,
+        "CanvasBufferSize": 0
       }
     ],
     "CustomContainerDefinitions": [
@@ -2338,10 +2405,6 @@
         "IsResource": false
       },
       {
-        "TextEntryId": "SingleUseId32",
-        "IsResource": false
-      },
-      {
         "TextEntryId": "wildcardTextLeft40pxId",
         "IsResource": true
       },
@@ -2404,6 +2467,10 @@
       {
         "TextEntryId": "waitButtonCancelId",
         "IsResource": true
+      },
+      {
+        "TextEntryId": "SingleUseId35",
+        "IsResource": false
       }
     ],
     "Name": "STM32F469I-DISCO",

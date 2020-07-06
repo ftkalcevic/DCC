@@ -26,6 +26,7 @@ public:
     void gotoAboutScreen();
     void gotoDCCConfigScreen();
     void gotoDecodersScreen();
+    void gotoAudioConfigScreen();
 	
 private:
 	void returnToMainScreenImpl();
@@ -36,6 +37,7 @@ private:
     void gotoAboutScreenImpl();
     void gotoDCCConfigScreenImpl();
     void gotoDecodersScreenImpl();
+    void gotoAudioConfigScreenImpl();
     touchgfx::Callback<FrontendApplication> transitionCallback;
 };
 

@@ -158,6 +158,7 @@ public:
 	void PlaySound(EAudioSounds sound, bool highPriority=false);
 	void SoundEvent(EAudioSounds sound);
 	void Mute(bool mute = true);
+	bool isMute() const { return mute; }
 };
 
 

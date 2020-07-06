@@ -26,7 +26,7 @@ Artwork:
 background.png: https://wallpaperaccess.com/train
 Splash.png: https://www.pinterest.com.au/pin/320177854738516822/
 locoIcon.png: Icons made by Freepik from www.flaticon.com
-
+spkrIcon.png: https://commons.wikimedia.org/wiki/File:Speaker_Icon.svg
 )";
 	
 AboutView::AboutView()

@@ -5,6 +5,8 @@
 #include <gui/settings_screen/SettingsPresenter.hpp>
 #include <gui/dccsettings_screen/DCCSettingsView.hpp>
 #include <gui/dccsettings_screen/DCCSettingsPresenter.hpp>
+#include <gui/audioconfig_screen/AudioConfigView.hpp>
+#include <gui/audioconfig_screen/AudioConfigPresenter.hpp>
 #include <gui/about_screen/AboutView.hpp>
 #include <gui/about_screen/AboutPresenter.hpp>
 #include <gui/decoders_screen/DecodersView.hpp>
@@ -117,4 +119,17 @@ void FrontendApplication::gotoDecodersScreenImpl()
 {
     touchgfx::makeTransition<DecodersView, DecodersPresenter, touchgfx::CoverTransition<NORTH>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }
+
+
+void FrontendApplication::gotoAudioConfigScreen()
+{
+    transitionCallback = touchgfx::Callback<FrontendApplication>(this, &FrontendApplication::gotoAudioConfigScreenImpl);
+    pendingScreenTransitionCallback = &transitionCallback;
+}
+
+void FrontendApplication::gotoAudioConfigScreenImpl()
+{
+    touchgfx::makeTransition<AudioConfigView, AudioConfigPresenter, touchgfx::CoverTransition<NORTH>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+}
+
 

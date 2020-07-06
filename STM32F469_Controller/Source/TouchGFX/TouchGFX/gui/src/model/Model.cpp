@@ -28,7 +28,8 @@ void Model::tick()
 						modelListener->TrackStatusChanged();
 					break;
 				default:
-					modelListener->UIMessage(msg);
+					if (modelListener)
+						modelListener->UIMessage(msg);
 					break;
 			}
 		}
