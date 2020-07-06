@@ -218,4 +218,3 @@ void Decoder::yieldControlClickedCallback(const touchgfx::AbstractButton& src)
 	emitTakeControl(index,false);
 }
 
-	

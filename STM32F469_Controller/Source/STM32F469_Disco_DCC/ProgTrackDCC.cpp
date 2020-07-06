@@ -67,6 +67,14 @@ void ProgrammingTrack_DCC_ScanAllCVs()
 	msg.type = EProgTrackMessage::ScanAllCVs;
 	msg.scanAll.cv = 0;
 	msg.scanAll.retries = 0;
+	msg.scanAll.cancel = false;
+	dcc.SendMsg(msg);
+}
+
+void ProgrammingTrack_DCC_StopScanAllCVs()
+{
+	ProgTrackMessage msg;
+	msg.type = EProgTrackMessage::StopScanAllCVs;
 	dcc.SendMsg(msg);
 }
 

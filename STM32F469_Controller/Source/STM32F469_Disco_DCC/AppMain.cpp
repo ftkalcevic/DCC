@@ -409,5 +409,44 @@ extern "C" {
 		
 TODO
 	- Add disabled to checkbox
+
+DCCConfigView
+	- Make clickable sections bigger (Address, Name, etc)
+	- Select a comerical decoder
+	- Read All Cvs
+		- And do something with them
+	- Edit cvs
+		- from "decoder" definition (or "Unknown")
+		- uint8_t, bits, specials (eg speed chart)
+	- More config
+		- don't change icon on DCCConfig screen, will either be loco or accessory
+		- select small icon for MainView
+		- select small user image for Mainview
+		- select large icon for decoders view
+		- select large user image for decoders view
+			- decoders view - remove all widgets except take control
+		- other options
+			- Decoder type is read from CV29 bit 7
+			- Speed steps are defined by CV29 bit ?
+				- 0 - 14 speed steps
+				- 1 - 28 speed steps (or 128 using the other command).
+					- how do we pick 28/128?
+			- front light position
+			- release action - when yielding, stop, estop, or nothing.
+			
+			
+			
+	- How to handle 4 digit addresses?
+		- Do we just let them enter a number and we work it out?
+		- Or, do we make them change the configuration and define limits?
+		
+preferences
+	- add sound mute box
 	
+decoders view 
+	- remove all widgets except take control	
+	- one button for Take control/yield (larger button)
+
+General
+	- re-read spec.  Find and reference key design points
 */

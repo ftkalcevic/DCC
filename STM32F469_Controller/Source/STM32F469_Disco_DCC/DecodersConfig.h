@@ -15,6 +15,7 @@ class DecodersConfig: public Config<127, 80>	// longest element is a description
 		Decoder,
 		DecoderName,
 		DecoderDescription,
+		DecoderAddress,
 		DecoderType,
 		DecoderCV29		
 	};
@@ -32,6 +33,7 @@ protected:
 			{ "Decoder", Decoder },
 			{ "Name", DecoderName },
 			{ "Description", DecoderDescription },
+			{ "Address", DecoderAddress },
 			{ "Type", DecoderType },
 			{ "CV29", DecoderCV29 },
 		};
@@ -48,6 +50,7 @@ protected:
 		{
 			case DecoderName:			decoders.back()->setName(buffer); break;
 			case DecoderDescription:	decoders.back()->setDescription(buffer); break;
+			case DecoderAddress:		decoders.back()->setAddress(atoi(buffer)); break;
 			case DecoderType:			decoders.back()->setType((EDecoderType::EDecoderType)atoi(buffer)); break;
 			case DecoderCV29:			decoders.back()->setConfig(atoi(buffer)); break;
 			default:
@@ -135,6 +138,14 @@ public:
 			if (decoders[i]->getAddress() == address)
 				return i;
 		return -1;
+	}
+	
+	void deleteDecoder(int item)
+	{
+		if (item >= 0 && item < decoders.size())
+		{
+			decoders.erase(decoders.begin() + item);
+		}
 	}
 	
 };

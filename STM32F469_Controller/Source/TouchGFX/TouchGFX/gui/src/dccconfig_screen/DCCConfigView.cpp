@@ -15,11 +15,13 @@ DCCConfigView::DCCConfigView() :
     buttonProgTrackClickCallback(this, &DCCConfigView::buttonProgTrackClickHandler),
     buttonScanTrackClickCallback(this, &DCCConfigView::buttonScanTrackClickHandler),
     buttonReadAllCVsClickCallback(this, &DCCConfigView::buttonReadAllCVsClickHandler),
+	buttonDeleteClickCallback(this, &DCCConfigView::buttonDeleteClickHandler),
 	editTextClickHandlerCallback(this, &DCCConfigView::editTextClickHandler),
     closeKeypadWindowCallback(this, &DCCConfigView::closeKeypadWindowHandler),
     closeKeyboardWindowCallback(this, &DCCConfigView::closeKeyboardWindowHandler),
     scrollWheelDecodersClickCallback(this, &DCCConfigView::scrollWheelDecodersClickHandler),
-	waitButtonClickCallback(this, &DCCConfigView::waitButtonClickHandler),
+	waitOKButtonClickCallback(this, &DCCConfigView::waitOKButtonClickHandler),
+	waitCancelButtonClickCallback(this, &DCCConfigView::waitCancelButtonClickHandler),
 	state(Editting),
 	selectedDecoderItem(-1)
 {
@@ -31,7 +33,7 @@ DCCConfigView::DCCConfigView() :
     buttonScanTrack.setLabelText(touchgfx::TypedText(T_RESOURCEIDSCANTRACK));
     buttonScanTrack.setLabelColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
     buttonScanTrack.setLabelColorPressed(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
-	buttonScanTrack.Enable(false);
+	buttonScanTrack.setEnabled(false);
 	buttonScanTrack.setAction(buttonScanTrackClickCallback);
     scrollableContainer1.add(buttonScanTrack);
 
@@ -40,12 +42,22 @@ DCCConfigView::DCCConfigView() :
     buttonReadAllCVs.setLabelText(touchgfx::TypedText(T_RESOURCEREADALLCVS));
     buttonReadAllCVs.setLabelColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
     buttonReadAllCVs.setLabelColorPressed(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
-	buttonReadAllCVs.Enable(false);
+	buttonReadAllCVs.setEnabled(false);
 	buttonReadAllCVs.setAction(buttonReadAllCVsClickCallback);
     scrollableContainer1.add(buttonReadAllCVs);
+
+	int16_t yPos = 275, x1 = 17, x2 = 417;
+    buttonDelete.setXY(x1, yPos);
+    buttonDelete.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_MEDIUM_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_MEDIUM_PRESSED_ID), touchgfx::Bitmap(BITMAP_ROUND_EDGE_MEDIUM_DISABLED_ID));
+    buttonDelete.setLabelText(touchgfx::TypedText(T_RESOURCEDELETE));
+    buttonDelete.setLabelColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+    buttonDelete.setLabelColorPressed(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+	buttonDelete.setEnabled(false);
+	buttonDelete.setAction(buttonDeleteClickCallback);
+    scrollableContainer1.add(buttonDelete);
 	
 	// Decoder
-	int16_t yPos = 275, x1 = 17, x2 = 417;
+	yPos += 80;
     textAreaLabelDecoder.setXY(x1, yPos);
     textAreaLabelDecoder.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
     textAreaLabelDecoder.setLinespacing(0);
@@ -182,16 +194,32 @@ DCCConfigView::DCCConfigView() :
 
 	displayDecoder();
 	
+	waitText.setFontId(Typography::SANSSERIF40PX);
+	waitText.setAlignment(CENTER);
+	waitText.setBoxColor(Color::getColorFrom24BitRGB(255, 255, 255));
+
+	waitSubText.setFontId(Typography::SANSSERIF28PX);
+	waitSubText.setAlignment(CENTER);
+	waitSubText.setBoxColor(Color::getColorFrom24BitRGB(255, 255, 255));
 	
-	waitButton.setXY(547, 107);
-    waitButton.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_PRESSED_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID));
-    waitButton.setLabelText(touchgfx::TypedText(T_WAITBUTTONOKID));
-    waitButton.setLabelColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
-    waitButton.setLabelColorPressed(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
-	waitButton.setAction(waitButtonClickCallback);
+	waitOKButton.setXY(547, 107);
+    waitOKButton.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_PRESSED_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID));
+    waitOKButton.setLabelText(touchgfx::TypedText(T_WAITBUTTONOKID));
+    waitOKButton.setLabelColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+    waitOKButton.setLabelColorPressed(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+	waitOKButton.setAction(waitOKButtonClickCallback);
+	
+	waitCancelButton.setXY(547, 107);
+    waitCancelButton.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_PRESSED_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID));
+    waitCancelButton.setLabelText(touchgfx::TypedText(T_WAITBUTTONCANCELID));
+    waitCancelButton.setLabelColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+    waitCancelButton.setLabelColorPressed(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+	waitCancelButton.setAction(waitCancelButtonClickCallback);
 	
 	waitWindow.add(waitText);
-	waitWindow.add(waitButton);
+	waitWindow.add(waitSubText);
+	waitWindow.add(waitOKButton);
+	waitWindow.add(waitCancelButton);
 }
 
 void DCCConfigView::setupScreen()
@@ -288,6 +316,7 @@ void DCCConfigView::displayDecoder()
 		textDescription.setText((const Unicode::UnicodeChar *)u"");
 		setConfig(0);
 	}
+	buttonDelete.setEnabled(hasDecoder);
 	textAddress.setEnabled(hasDecoder && progTrackEnabled);
 	textName.setEnabled(hasDecoder);
 	textDescription.setEnabled(hasDecoder);
@@ -302,8 +331,8 @@ void DCCConfigView::buttonProgTrackClickHandler(const touchgfx::AbstractButton& 
 	audioTask.PlaySound(EAudioSounds::KeyPressTone);
 	bool trackEnabled = toggleProgTrack.getState();
 	presenter->EnableProgTrack(trackEnabled);
-	buttonScanTrack.Enable(trackEnabled);
-	buttonReadAllCVs.Enable(trackEnabled);
+	buttonScanTrack.setEnabled(trackEnabled);
+	buttonReadAllCVs.setEnabled(trackEnabled);
 	displayDecoder();
 }
 
@@ -311,16 +340,22 @@ void DCCConfigView::buttonScanTrackClickHandler(const touchgfx::AbstractButton& 
 {
 	audioTask.PlaySound(EAudioSounds::KeyPressTone);
 	ShowWaitWindow(u"Scanning Programming Track");	
-	state = Scanning;
+	state = EState::Scanning;
 	presenter->ScanProgrammingTrack();
 }
 
 void DCCConfigView::buttonReadAllCVsClickHandler(const touchgfx::AbstractButton& src)
 {
 	audioTask.PlaySound(EAudioSounds::KeyPressTone);
-	ShowWaitWindow(u"Scanning for All CVs");	
-	state = Scanning;
+	ShowWaitWindow(u"Scanning for All CVs", u"", EButtons::Cancel);	
+	state = EState::ScanningAllCVs;
 	presenter->ScanAllCVsTrack();
+}
+
+void DCCConfigView::buttonDeleteClickHandler(const touchgfx::AbstractButton& src)
+{
+	ShowWaitWindow(u"Delete Decoder?", nullptr, EButtons::OK | EButtons::Cancel);	
+	state = EState::DeleteDecoder;
 }
 
 void DCCConfigView::EditNumeric(EField field, const char16_t *title, uint16_t value, int min, int max)
@@ -332,7 +367,7 @@ void DCCConfigView::EditNumeric(EField field, const char16_t *title, uint16_t va
 	numericKeypad.setRange(min, max);
 	numericKeypad.setVisible(true);
 	numericKeypad.invalidate();
-	state = Keypad;
+	state = EState::Keypad;
 	edittingField = field;
 }
 
@@ -347,14 +382,14 @@ void DCCConfigView::EditText(EField field, const char16_t *title, const char16_t
 	keyboard.setEntryAreaAlignment(align);
 	keyboard.setVisible(true);
 	keyboard.invalidate();	
-	state = Keyboard;
+	state = EState::Keyboard;
 	edittingField = field;
 }
 
 //void DCCConfigView::editTextClickHandler(const Box& b, const ClickEvent& evt)
 void DCCConfigView::editTextClickHandler(const TextWithFrame& b, const ClickEvent& evt)
 {
-	if (state == Editting && selectedDecoderItem >= 0 )
+	if (state == EState::Editting && selectedDecoderItem >= 0 )
 	{
 		Decoders &d = uiDecodersConfig[selectedDecoderItem];
 	    if (&b == static_cast<const TextWithFrame *>(&textAddress) && evt.getType() == ClickEvent::RELEASED )
@@ -385,7 +420,7 @@ void DCCConfigView::editTextClickHandler(const TextWithFrame& b, const ClickEven
 
 void DCCConfigView::closeKeypadWindowHandler(bool success)
 {
-	state = Editting;
+	state = EState::Editting;
 	numericKeypad.setVisible(false);
 	numericKeypad.invalidate();
 	if (success)
@@ -419,7 +454,7 @@ void DCCConfigView::closeKeypadWindowHandler(bool success)
 
 void DCCConfigView::closeKeyboardWindowHandler(bool success)
 {
-	state = Editting;
+	state = EState::Editting;
 	keyboard.setVisible(false);
 	keyboard.invalidate();
 	if (success)
@@ -451,9 +486,11 @@ void DCCConfigView::ScanAllCVsReply(EErrorCode::EErrorCode result, uint16_t cv, 
 	else
 	{
 		if (result == EErrorCode::Success)
-			printf("CV(%d)=%d\n", cv, value);
+			Unicode::snprintf((Unicode::UnicodeChar *)scanAllTextBuffer, countof(scanAllTextBuffer), "CV[%d]=%d", cv, value);
 		else
-			printf("CV(%d) !%d!\n", cv, result);
+			Unicode::snprintf((Unicode::UnicodeChar *)scanAllTextBuffer, countof(scanAllTextBuffer), "CV[%d]=%s!", cv, ErrorCodeText(result) );
+		waitSubText.setText(scanAllTextBuffer);
+		waitSubText.invalidate();
 	}
 }
 
@@ -462,7 +499,7 @@ void DCCConfigView::WriteReply(EErrorCode::EErrorCode result)
 	CloseWaitWindow(result);
 	if (result == EErrorCode::Success)
 	{
-		state = Editting;
+		state = EState::Editting;
 	}
 }
 
@@ -470,13 +507,15 @@ void DCCConfigView::ScanTrackReply(EErrorCode::EErrorCode result, int16_t addres
 {
 	printf("ScanTrackReply %d addr=%d config=%d extAddr=%d manufacturer=%d version=%d\n", result, address, config, extendedAddress, manufacturer, version);
 	CloseWaitWindow(result);
-	if ( state == Scanning && result == EErrorCode::Success )
+	if ( state == EState::Scanning && result == EErrorCode::Success )
 	{
 		int index = uiDecodersConfig.findEncoder(address);
 		if (index >= 0)
 		{
 			// If this matches an existing configuration, load it up.
 			selectedDecoderItem = index;
+			scrollWheelDecoders.itemChanged(index);
+			scrollWheelDecoders.animateToItem(index);
 			displayDecoder();
 		}
 		else
@@ -494,23 +533,23 @@ void DCCConfigView::ScanTrackReply(EErrorCode::EErrorCode result, int16_t addres
 		}
 	}
 	if (result == EErrorCode::Success)
-		state = Editting;
+		state = EState::Editting;
 }
 
 
 void DCCConfigView::handleGestureEvent(const GestureEvent & evt)
 {
-	if (state == Keyboard || state == Keypad)
+	if (state != EState::Editting )
 		return;
 	
 	//printf("DCCConfigView gesture %d %d\n", evt.getType(), evt.getVelocity());
-	if (evt.getType() == GestureEvent::SWIPE_VERTICAL && evt.getVelocity() < -SWIPE_VELOCITY )
-	{
-		application().returnToPreferences();
-	}
-	else if(scrollWheelDecoders.getRect().intersect(evt.getX(), evt.getY()))
+	if(scrollWheelDecoders.getRect().intersect(evt.getX(), evt.getY()))
 	{
 		scrollWheelDecoders.handleGestureEvent(evt);
+	}
+	else if (evt.getType() == GestureEvent::SWIPE_VERTICAL && evt.getVelocity() < -SWIPE_VELOCITY )
+	{
+		application().returnToPreferences();
 	}
 	else
 	{
@@ -538,36 +577,49 @@ void DCCConfigView::scrollWheelDecodersUpdateItem(ListItemDecoder& item, int16_t
 }
 
 
-void DCCConfigView::ShowWaitWindow(const char16_t *msg, bool button)
+void DCCConfigView::ShowWaitWindow(const char16_t *title, const char16_t *subtitle, EButtons buttons )
 {
-	if (!button)
+	const int spacing = 15;
+	const int windowWidth = 600;
+	const int windowHeight = 240;
+	const int textwidth = windowWidth - 50;
+	waitWindow.setWindowSize(windowWidth, windowHeight);
+	waitWindow.setWindowBorderColor(Color::getColorFrom24BitRGB(3, 129, 174));
+	
+	if (subtitle == nullptr)
 	{
-		
-		waitWindow.setWindowSize(600, 240);
-		waitWindow.setWindowBorderColor(Color::getColorFrom24BitRGB(3, 129, 174));
-
-		waitText.setPosition(25, 85, 550, 50);
-		waitText.setFontId(Typography::SANSSERIF40PX);
-		waitText.setAlignment(CENTER);
-		waitText.setBoxColor(Color::getColorFrom24BitRGB(255, 255, 255));
-		
-		waitButton.setVisible(false);
+		waitText.setPosition((windowWidth - textwidth)/2, 65, textwidth, 50);
+		waitSubText.setVisible(false);
 	}
 	else
 	{
-		waitWindow.setWindowSize(600, 240);
-		waitWindow.setWindowBorderColor(Color::getColorFrom24BitRGB(3, 129, 174));
-
-		waitText.setPosition(25, 55, 550, 50);
-		waitText.setFontId(Typography::SANSSERIF40PX);
-		waitText.setAlignment(CENTER);
-		waitText.setBoxColor(Color::getColorFrom24BitRGB(255, 255, 255));
-
-		waitButton.setVisible(true);
-		waitButton.setXY((600-170)/2, 150);
+		waitText.setPosition((windowWidth - textwidth)/2, 15, textwidth, 50);
+		waitSubText.setPosition((windowWidth - textwidth)/2, 85, textwidth, 50);
+		waitSubText.setVisible(true);
 	}
 
-	waitText.setText(msg);
+	waitOKButton.setVisible( ((buttons & EButtons::OK) != 0) ? true : false);
+	waitCancelButton.setVisible( ((buttons & EButtons::Cancel) != 0) ? true : false);
+
+	int buttonWidth = waitOKButton.getWidth();
+	if ((buttons & (EButtons::Cancel | EButtons::OK)) == (EButtons::Cancel | EButtons::OK))
+	{
+		// 2 buttons
+		waitOKButton.setXY(windowWidth / 2 - buttonWidth - spacing, 150);
+		waitCancelButton.setXY(windowWidth / 2 + spacing, 150);
+	}
+	else if ((buttons & EButtons::Cancel) == EButtons::Cancel)
+	{
+		waitCancelButton.setXY((windowWidth-buttonWidth)/2, 150);
+	}
+	else
+	{
+		waitOKButton.setXY((windowWidth-buttonWidth)/2, 150);
+	}
+
+	waitText.setText(title);
+	if ( subtitle != nullptr )
+		waitSubText.setText(title);
 	add(waitWindow);
 	waitWindow.setVisible(true);
 	waitWindow.invalidate();
@@ -582,23 +634,35 @@ void DCCConfigView::CloseWaitWindow(EErrorCode::EErrorCode result)
 	
 	if (result != EErrorCode::Success)
 	{
-		ShowWaitWindow(ErrorCodeText(result), true);
+		ShowWaitWindow(ErrorCodeText(result), nullptr, EButtons::OK);
 	}
 }
 
 
-void DCCConfigView::waitButtonClickHandler(const touchgfx::AbstractButton& src)
+void DCCConfigView::waitOKButtonClickHandler(const touchgfx::AbstractButton& src)
 {
+	if (state == EState::DeleteDecoder && selectedDecoderItem > 0 )
+	{
+		uiDecodersConfig.deleteDecoder(selectedDecoderItem);
+		selectedDecoderItem = -1;
+		scrollWheelDecoders.setNumberOfItems(uiDecodersConfig.Count() + 1);
+		scrollWheelDecoders.invalidate();
+	}
+	
 	CloseWaitWindow(EErrorCode::Success);
-	state = Editting;
+	state = EState::Editting;
 }
 
-/*
-	- Make clickable sections bigger (Address, Name, etc)
-	- Select a decoder
-	- Read All Cvs
-	- Edit cvs
-		- from "decoder" definition (or "Unknown")
-		- uint8_t, bits, specials (eg speed chart)
-*/
 
+void DCCConfigView::waitCancelButtonClickHandler(const touchgfx::AbstractButton& src)
+{
+	if (state == EState::ScanningAllCVs)
+	{
+		presenter->StopScanAllCVsTrack();
+	}
+	else
+	{
+		CloseWaitWindow(EErrorCode::Success);
+		state = EState::Editting;
+	}
+}

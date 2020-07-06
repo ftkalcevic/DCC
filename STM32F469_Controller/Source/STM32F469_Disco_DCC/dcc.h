@@ -65,6 +65,7 @@ enum EProgTrackMessage
 {
 	ScanTrack,
 	ScanAllCVs,
+	StopScanAllCVs,
 	WriteCV,
 };
 
@@ -79,6 +80,7 @@ struct ScanAll
 {
 	uint16_t cv;
 	uint8_t retries;
+	bool cancel;
 };
 
 struct ProgTrackMessage

@@ -30,8 +30,8 @@ public:
 
     virtual void draw(const Rect& area) const;
 	void setBitmaps(const Bitmap& newBackgroundReleased, const Bitmap& newBackgroundPressed, const Bitmap& newBackgroundDisabled);
-	void Enable(bool enable) {buttonEnabled = enable; invalidate();}
-	bool isEnabled() const { return buttonEnabled;}
+	void setEnabled(bool enable) {buttonEnabled = enable; invalidate();}
+	bool getEnabled() const { return buttonEnabled;}
 	virtual void handleClickEvent(const ClickEvent & event);
 protected:
 	Bitmap  backgroundDisabled;

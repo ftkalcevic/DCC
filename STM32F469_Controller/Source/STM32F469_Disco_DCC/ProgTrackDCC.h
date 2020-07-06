@@ -288,8 +288,36 @@ public:
 								uimsg.Send(uiMsg);
 								break;
 							}
+							case EProgTrackMessage::StopScanAllCVs:
+							{
+								// If we are scanning, there will be a message in the queue.
+								int count = uxQueueMessagesWaiting(queueHandle);
+								for ( int i = 0; i < count; i++ )
+								{
+									ProgTrackMessage msg;
+									if (xQueueReceive(queueHandle, &msg, 0) == pdPASS)
+									{
+										if (msg.type == EProgTrackMessage::ScanAllCVs)
+											msg.scanAll.cancel = true;
+										xQueueSend(queueHandle, &msg, 0);
+										break;
+									}
+									else
+										break;
+								}
+								break;
+							}
 							case EProgTrackMessage::ScanAllCVs:
 							{
+								UIMsg uiMsg;
+								if (msg.scanAll.cancel)
+								{
+									uiMsg.type = EUIMessageType::ScanAllCVsReply;
+									uiMsg.scanAllCVs.result = EErrorCode::Complete;
+									uimsg.Send(uiMsg);
+									break;
+								}
+								
 								uint16_t nextCV = msg.scanAll.cv;
 								if (nextCV == 0)	// First
 									nextCV = 1;	
@@ -298,7 +326,6 @@ public:
 								EErrorCode::EErrorCode result = ReadCV_SM(nextCV, value);
 								
 								// Send Reply
-								UIMsg uiMsg;
 								uiMsg.type = EUIMessageType::ScanAllCVsReply;
 								uiMsg.scanAllCVs.result = result;
 								uiMsg.scanAllCVs.CV = nextCV;
@@ -422,3 +449,4 @@ extern void ProgrammingTrack_DCC_Enable(bool enable);
 extern void ProgrammingTrack_DCC_ScanProgrammingTrack();
 extern void ProgrammingTrack_DCC_WriteCV(uint16_t cv, uint8_t value);
 extern void ProgrammingTrack_DCC_ScanAllCVs();
+extern void ProgrammingTrack_DCC_StopScanAllCVs();

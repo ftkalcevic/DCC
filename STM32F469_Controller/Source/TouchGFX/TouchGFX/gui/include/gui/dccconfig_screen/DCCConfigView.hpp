@@ -16,6 +16,14 @@
 class DCCConfigView : public DCCConfigViewBase
 {
 public:
+	enum EButtons
+	{
+		None   = 0x00,
+		OK	   = 0x01,
+		Cancel = 0x02
+	};
+
+	
 	DCCConfigView();
 	virtual ~DCCConfigView() {}
 	virtual void setupScreen();
@@ -53,11 +61,14 @@ public:
 	TickType_t selectStartTime;
 	ModalBoxWindow waitWindow;
 	touchgfx::TextWithFrame waitText;
-	touchgfx::ButtonWithLabelAndEnable waitButton;
+	touchgfx::TextWithFrame waitSubText;
+	touchgfx::ButtonWithLabelAndEnable waitOKButton;
+	touchgfx::ButtonWithLabelAndEnable waitCancelButton;
 	
 protected:
 	touchgfx::ButtonWithLabelAndEnable buttonScanTrack;
 	touchgfx::ButtonWithLabelAndEnable buttonReadAllCVs;
+	touchgfx::ButtonWithLabelAndEnable buttonDelete;
 	
 	enum EField
 	{
@@ -69,10 +80,14 @@ protected:
 	{
 		Editting,
 		Scanning,
+		ScanningAllCVs,
 		Keypad,
-		Keyboard
+		Keyboard,
+		DeleteDecoder
 	} state;
-	Unicode::UnicodeChar addressTextBuffer[5];
+
+	Unicode::UnicodeChar addressTextBuffer[5];	// max 4 digits plus terminator
+	Unicode::UnicodeChar scanAllTextBuffer[50];
 
 	void EditNumeric(EField field, const char16_t *title, uint16_t value, int min, int max);
 	void EditText(EField field, const char16_t *title, const char16_t *text, uint16_t maxLen, FontId font, Alignment align);
@@ -85,6 +100,8 @@ protected:
 	void buttonScanTrackClickHandler(const touchgfx::AbstractButton& src);
 	touchgfx::Callback<DCCConfigView, const touchgfx::AbstractButton&> buttonReadAllCVsClickCallback;
 	void buttonReadAllCVsClickHandler(const touchgfx::AbstractButton& src);
+	touchgfx::Callback<DCCConfigView, const touchgfx::AbstractButton&> buttonDeleteClickCallback;
+	void buttonDeleteClickHandler(const touchgfx::AbstractButton& src);
 	virtual void handleGestureEvent(const GestureEvent & evt);
 	virtual void handleDragEvent(const DragEvent& evt);
 	touchgfx::Callback<DCCConfigView, const TextWithFrame&, const ClickEvent& > editTextClickHandlerCallback;
@@ -96,17 +113,32 @@ protected:
 	
 	touchgfx::Callback<DCCConfigView, const ScrollWheel&, const ClickEvent& > scrollWheelDecodersClickCallback;
 	void scrollWheelDecodersClickHandler(const ScrollWheel& b, const ClickEvent& evt);
-	touchgfx::Callback<DCCConfigView, const touchgfx::AbstractButton&> waitButtonClickCallback;
-	void waitButtonClickHandler(const touchgfx::AbstractButton& src);
+	touchgfx::Callback<DCCConfigView, const touchgfx::AbstractButton&> waitOKButtonClickCallback;
+	void waitOKButtonClickHandler(const touchgfx::AbstractButton& src);
+	touchgfx::Callback<DCCConfigView, const touchgfx::AbstractButton&> waitCancelButtonClickCallback;
+	void waitCancelButtonClickHandler(const touchgfx::AbstractButton& src);
 
 	bool isProgTrackEnabled() const 
 	{
 		return toggleProgTrack.getState();
 	}
 	
-	void ShowWaitWindow(const char16_t *msg, bool button = false);
+	void ShowWaitWindow(const char16_t *title, const char16_t *subtitle = nullptr, EButtons buttons = EButtons::None);
 	void CloseWaitWindow(EErrorCode::EErrorCode result);
 	void setConfig(uint8_t cv29);
 };
+
+inline DCCConfigView::EButtons operator | (DCCConfigView::EButtons a, DCCConfigView::EButtons b)
+{
+	return static_cast<DCCConfigView::EButtons>(static_cast<int>(a) | static_cast<int>(b));
+}
+	
+inline DCCConfigView::EButtons operator & (DCCConfigView::EButtons a, DCCConfigView::EButtons b)
+{
+	return static_cast<DCCConfigView::EButtons>(static_cast<int>(a) & static_cast<int>(b));
+}
+	
+
+
 
 #endif // DCCCONFIGVIEW_HPP

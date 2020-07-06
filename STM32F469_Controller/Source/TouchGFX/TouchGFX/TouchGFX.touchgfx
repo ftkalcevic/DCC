@@ -2396,6 +2396,14 @@
       {
         "TextEntryId": "waitButtonOKId",
         "IsResource": true
+      },
+      {
+        "TextEntryId": "resourceDelete",
+        "IsResource": true
+      },
+      {
+        "TextEntryId": "waitButtonCancelId",
+        "IsResource": true
       }
     ],
     "Name": "STM32F469I-DISCO",

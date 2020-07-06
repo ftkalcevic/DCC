@@ -91,7 +91,7 @@
     <AllDependencies>
       <ProjectDependency>
         <RelativePath>..\TouchGFX\STM32CubeIDE\.cproject</RelativePath>
-        <Timestamp>132383058444160675</Timestamp>
+        <Timestamp>132384915885226226</Timestamp>
       </ProjectDependency>
     </AllDependencies>
     <RootDirectory>

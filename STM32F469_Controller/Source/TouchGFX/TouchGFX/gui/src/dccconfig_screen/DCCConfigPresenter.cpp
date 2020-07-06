@@ -53,3 +53,7 @@ void DCCConfigPresenter::ScanAllCVsTrack()
 	model->ScanAllCVsTrack();
 }
 
+void DCCConfigPresenter::StopScanAllCVsTrack()
+{
+	model->StopScanAllCVsTrack();
+}

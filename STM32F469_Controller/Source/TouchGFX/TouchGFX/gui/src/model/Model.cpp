@@ -69,3 +69,8 @@ void Model::ScanAllCVsTrack()
 {
 	ProgrammingTrack_DCC_ScanAllCVs();
 }
+
+void Model::StopScanAllCVsTrack()
+{
+	ProgrammingTrack_DCC_StopScanAllCVs();
+}
