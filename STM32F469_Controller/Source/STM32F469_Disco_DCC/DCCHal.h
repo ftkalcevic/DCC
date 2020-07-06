@@ -38,7 +38,7 @@ class DCCHal
 {
 	bool trackEnabled;
 	bool eStop;
-	uint32_t bitBuffer[BIT_BUFFER_SIZE*BURST_SIZE];
+	uint32_t bitBuffer[BIT_BUFFER_SIZE*BURST_SIZE];	// TODO - this can be uint16_t and DMA transfers 16 -> 32
 	volatile bool sent;
 
 	GPIO_TypeDef *CS_Port;
@@ -259,6 +259,8 @@ public:
 //		for ( int i = 0; i < BURST_SIZE;i++)
 //			bitBuffer[index++] = 0;	// add terminator.  Easier to do this than also process the tim update interrupt after dma is finished.
 
+		assert(index < countof(bitBuffer) && "Bit buffer overflow");
+		
 		if(type == DCCType::MainTrack)
 		{
 			DMA2_Stream1->PAR = (uint32_t)&(TIM8->DMAR);

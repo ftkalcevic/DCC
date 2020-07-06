@@ -9,7 +9,7 @@
 #include <assert.h>
 
 
-template<int MAX_ELEMENT_LENGTH, int READ_BUFFER_SIZE=50>
+template<int MAX_ELEMENT_LENGTH, int YXML_WORKING_BUFFER_SIZE = 100, int READ_BUFFER_SIZE=100>
 class Config
 {
 protected:
@@ -25,8 +25,8 @@ protected:
 	}
 	bool dirtyFlag;
 	int activeElement;
-	char buffer[MAX_ELEMENT_LENGTH];
-	int bufferIndex;
+	char contentBuffer[MAX_ELEMENT_LENGTH];
+	int contentBufferIndex;
 	
 	void dirty() { dirtyFlag = true;}
 	virtual const char *getPath() const = 0;
@@ -37,10 +37,10 @@ protected:
 		{
 			while ((*data) != '\0')
 			{
-				if (bufferIndex < countof(buffer) - 1)	
+				if (contentBufferIndex < countof(contentBuffer) - 1)	
 				{
-					buffer[bufferIndex++] = *data++;
-					buffer[bufferIndex] = 0;
+					contentBuffer[contentBufferIndex++] = *data++;
+					contentBuffer[contentBufferIndex] = 0;
 				}
 				else 
 					break;
@@ -55,7 +55,7 @@ protected:
 		for ( int i = 0; i < elements; i++ )
 			if (strcmp(element, e[i].elementName ) == 0)
 				activeElement = e[i].id;
-		bufferIndex = 0;
+		contentBufferIndex = 0;
 		return true;
 	}
 	
@@ -63,12 +63,14 @@ public:
 	bool isDirty() const { return dirtyFlag;}
 	void parse()
 	{
+		memset(contentBuffer, 0, sizeof(contentBuffer));
 		activeElement = 0;
 	
-		uint8_t buffer[READ_BUFFER_SIZE];
+		uint8_t yxmlWorkingBuffer[YXML_WORKING_BUFFER_SIZE];
+		memset(yxmlWorkingBuffer, 0, sizeof(yxmlWorkingBuffer));
 		yxml_t xml;
 	
-		yxml_init(&xml, buffer, READ_BUFFER_SIZE);
+		yxml_init(&xml, yxmlWorkingBuffer, sizeof(yxmlWorkingBuffer));
 	
 		FIL file;
 		if (FileSystem::f_open(&file, getPath(), FA_READ) == FR_OK)
@@ -76,7 +78,7 @@ public:
 			bool run = true;
 			while ( run )
 			{
-				uint8_t readBuffer[50];
+				uint8_t readBuffer[READ_BUFFER_SIZE];
 				UINT bytesRead;
 				if (f_read(&file, readBuffer, sizeof(readBuffer), &bytesRead) == FR_OK)
 				{
@@ -131,6 +133,9 @@ public:
 			f_close(&file);
 		}
 	
+		assert(contentBuffer[sizeof(contentBuffer) - 1] == 0 && "Potential contentBuffer overflow");
+		assert(yxmlWorkingBuffer[sizeof(yxmlWorkingBuffer) - 1] == 0 && "Potential yxmlWorkingBuffer overflow");
+		
 		dirtyFlag = false;
 	}
 
@@ -156,7 +161,7 @@ public:
 
 
 
-class DCCConfig: public Config<10>	// longest element is an int 
+class DCCConfig: public Config<12>	// longest element is an int 
 {
 	enum Elements
 	{
@@ -183,7 +188,7 @@ protected:
 	}
 	virtual bool elementEnd() 
 	{
-		int n = atoi(buffer);
+		int n = atoi(contentBuffer);
 		switch (activeElement)
 		{
 			case DCCConfig::TripCurrent: if ( n >= 0 && n <= 3 ) tripCurrent = n; break;
@@ -223,7 +228,7 @@ public:
 
 
 
-class UIConfig: public Config<10>	// longest element is an int 
+class UIConfig: public Config<12>	// longest element is an int 
 {
 	enum Elements
 	{
@@ -262,7 +267,7 @@ protected:
 	}
 	virtual bool elementEnd() 
 	{
-		int n = atoi(buffer);
+		int n = atoi(contentBuffer);
 		switch (activeElement)
 		{
 			case ThrottleMin: if (n >= 0 && n <= 4095) throttleMin = n; break;

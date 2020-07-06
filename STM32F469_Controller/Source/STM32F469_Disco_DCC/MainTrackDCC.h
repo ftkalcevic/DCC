@@ -61,13 +61,15 @@ public:
 	}
 	
 	// find the next message in the table.  Don't send the same message consecutively - put an idle (or another message) between
-	int findNextRecord(int currentRecord)
+	int findNextRecord(int currentRecord, TickType_t now )
 	{
+		const TickType_t MIN_TIME_BETWEEN_PACKETS = pdMS_TO_TICKS(5);	// 5ms
 		int start = currentRecord >= 0 ? currentRecord : 0;
 		for (int i = 0; i < countof(decoderTable); i++)
 		{
 			int index = (start + i) % countof(decoderTable);
-			if (decoderTable[index].address != NO_ADDRESS && index != currentRecord )
+			if (decoderTable[index].address != NO_ADDRESS && index != currentRecord && 
+				(decoderTable[index].lastSendTime == 0 ||  now - decoderTable[index].lastSendTime > MIN_TIME_BETWEEN_PACKETS) )
 				return index;
 		}
 		return -1;
@@ -94,15 +96,13 @@ public:
 	void ProcessNextRecord()
 	{
 		xSemaphoreTake(sentSemaphoreHandle, portMAX_DELAY);	// Wait forever for the message to be sent. (or max 5ms?  Why wouldn't it go?)
-		if (nextRecord < 0)
+		
+		TickType_t now = xTaskGetTickCount();
+		if (nextRecord >= 0)
 		{
-			static uint8_t idleMessage[3] = { 0xFF, 0, 0xFF };
-			SendDCCMessage(idleMessage, sizeof(idleMessage));
-		}
-		else
-		{
-			SendDCCMessage(decoderTable[nextRecord].msg, decoderTable[nextRecord].msgLen);
-			decoderTable[nextRecord].lastSendTime = xTaskGetTickCount();
+			
+			decoderTable[nextRecord].lastSendTime = now;
+		
 			if (decoderTable[nextRecord].repeatCount > 0)
 			{
 				// Repeat count?  Remove record when done.
@@ -113,7 +113,17 @@ public:
 				}
 			}
 		}
-		nextRecord = findNextRecord(nextRecord);
+
+		nextRecord = findNextRecord(nextRecord, now);
+		if (nextRecord < 0)
+		{
+			static uint8_t idleMessage[3] = { 0xFF, 0, 0xFF };
+			SendDCCMessage(idleMessage, sizeof(idleMessage));
+		}
+		else
+		{
+			SendDCCMessage(decoderTable[nextRecord].msg, decoderTable[nextRecord].msgLen);
+		}
 	}
 	
 	void Run(bool enable)

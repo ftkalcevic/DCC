@@ -48,11 +48,11 @@ protected:
 	{
 		switch (activeElement)
 		{
-			case DecoderName:			decoders.back()->setName(buffer); break;
-			case DecoderDescription:	decoders.back()->setDescription(buffer); break;
-			case DecoderAddress:		decoders.back()->setAddress(atoi(buffer)); break;
-			case DecoderType:			decoders.back()->setType((EDecoderType::EDecoderType)atoi(buffer)); break;
-			case DecoderCV29:			decoders.back()->setConfig(atoi(buffer)); break;
+			case DecoderName:			decoders.back()->setName(contentBuffer); break;
+			case DecoderDescription:	decoders.back()->setDescription(contentBuffer); break;
+			case DecoderAddress:		decoders.back()->setAddress(atoi(contentBuffer)); break;
+			case DecoderType:			decoders.back()->setType((EDecoderType::EDecoderType)atoi(contentBuffer)); break;
+			case DecoderCV29:			decoders.back()->setConfig(atoi(contentBuffer)); break;
 			default:
 				break;
 		}
