@@ -128,44 +128,47 @@ public:
 		    x += bmpIcon.getWidth();
 	    }
 	    
-        if (typedText.hasValidId())
-        {
-            const Font* fontToDraw = typedText.getFont(); //never return 0
-            uint8_t height = textHeightIncludingSpacing;
-            int16_t offsety;
-            int16_t offsetx;
-            Rect labelRect;
-            switch (rotation)
+	    if (text != nullptr)
+	    {
+            if (typedText.hasValidId())
             {
-                default:
-                case TEXT_ROTATE_0:
-                case TEXT_ROTATE_180:
-                    offsety = (this->getHeight() - height)/2;
-                    offsetx = ((this->getWidth()-x) - textWidth)/2;
-                    labelRect = Rect(offsetx, offsety, textWidth, height);
-                    break;
-                case TEXT_ROTATE_90:
-                case TEXT_ROTATE_270:
-                    offsety = (this->getWidth() - height)/2;
-                    labelRect = Rect(offsety, 0, height, this->getHeight());
-                    break;
-            }
+                const Font* fontToDraw = typedText.getFont(); //never return 0
+                uint8_t height = textHeightIncludingSpacing;
+                int16_t offsety;
+                int16_t offsetx;
+                Rect labelRect;
+                switch (rotation)
+                {
+                    default:
+                    case TEXT_ROTATE_0:
+                    case TEXT_ROTATE_180:
+                        offsety = (this->getHeight() - height)/2;
+                        offsetx = ((this->getWidth()-x) - textWidth)/2;
+                        labelRect = Rect(offsetx, offsety, textWidth, height);
+                        break;
+                    case TEXT_ROTATE_90:
+                    case TEXT_ROTATE_270:
+                        offsety = (this->getWidth() - height)/2;
+                        labelRect = Rect(offsety, 0, height, this->getHeight());
+                        break;
+                }
 
-//	        if (pressed)
-//	        {
-//		        labelRect.x += 5;
-//		        labelRect.y += 5;
-//	        }
-	        Rect dirty = labelRect & invalidatedArea;
-            if (!dirty.isEmpty())
-            {
-                dirty.x -= labelRect.x;
-                dirty.y -= labelRect.y;
-                translateRectToAbsolute(labelRect);
-                LCD::StringVisuals visuals(fontToDraw, pressed ? textColorPressed : textColor, alpha, typedText.getAlignment(), 0, rotation, typedText.getTextDirection(), 0, WIDE_TEXT_NONE);
-                HAL::lcd().drawString(labelRect, dirty, visuals, text);
+    //	        if (pressed)
+    //	        {
+    //		        labelRect.x += 5;
+    //		        labelRect.y += 5;
+    //	        }
+	            Rect dirty = labelRect & invalidatedArea;
+                if (!dirty.isEmpty())
+                {
+                    dirty.x -= labelRect.x;
+                    dirty.y -= labelRect.y;
+                    translateRectToAbsolute(labelRect);
+                    LCD::StringVisuals visuals(fontToDraw, pressed ? textColorPressed : textColor, alpha, typedText.getAlignment(), 0, rotation, typedText.getTextDirection(), 0, WIDE_TEXT_NONE);
+                    HAL::lcd().drawString(labelRect, dirty, visuals, text);
+                }
             }
-        }
+	    }
 	    
     }
 	

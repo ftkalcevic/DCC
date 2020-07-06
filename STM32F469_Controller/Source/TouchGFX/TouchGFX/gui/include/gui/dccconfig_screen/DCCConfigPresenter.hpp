@@ -29,6 +29,8 @@ public:
 
 	void EnableProgTrack(bool enable);
 	void ScanProgrammingTrack();
+	void ScanAllCVsTrack();
+
 
 	// ModelListener overrides
 	virtual void UIMessage(UIMsg &msg);

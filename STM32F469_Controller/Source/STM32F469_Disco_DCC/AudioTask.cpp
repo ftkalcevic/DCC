@@ -223,6 +223,8 @@ void AudioTask::Run()
 
 void AudioTask::PlaySound(EAudioSounds sound, bool highPriority)
 {
+	if (mute)
+		return;
 	if (hQueue)
 	{
 		PlaySoundRecord rec;
@@ -603,9 +605,9 @@ void AudioTask::ProcessEvent(EAudioSounds event)
 	}
 }
 
-void AudioTask::Mute(bool mute)
+void AudioTask::Mute(bool m)
 {
-	mute = true;
+	mute = m;
 	if (playing)
 	{
         BSP_AUDIO_OUT_Stop(CODEC_PDWN_SW); 

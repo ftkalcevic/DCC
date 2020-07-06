@@ -60,6 +60,16 @@ void ProgrammingTrack_DCC_ScanProgrammingTrack()
 	dcc.SendMsg(msg);
 }
 
+
+void ProgrammingTrack_DCC_ScanAllCVs()
+{
+	ProgTrackMessage msg;
+	msg.type = EProgTrackMessage::ScanAllCVs;
+	msg.scanAll.cv = 0;
+	msg.scanAll.retries = 0;
+	dcc.SendMsg(msg);
+}
+
 void ProgrammingTrack_DCC_WriteCV(uint16_t cv, uint8_t value)
 {
 	ProgTrackMessage msg;

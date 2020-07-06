@@ -64,3 +64,8 @@ void Model::TakeControl(int decoderIndex, bool control)
 {
 	app.TakeControl(decoderIndex, control);
 }
+
+void Model::ScanAllCVsTrack()
+{
+	ProgrammingTrack_DCC_ScanAllCVs();
+}

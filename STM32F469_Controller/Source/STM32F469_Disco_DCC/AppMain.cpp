@@ -244,8 +244,10 @@ void AppMain::Run()
 	CheckTaskStacks();
 	// Play startup sound
 	audioTask.PlaySound(EAudioSounds::Bell2);
+	audioTask.Mute();
 	
 	InitInputs();
+	uiDecodersConfig.parse();
 	
 	uint16_t ms_counter;
 	for(;  ;)

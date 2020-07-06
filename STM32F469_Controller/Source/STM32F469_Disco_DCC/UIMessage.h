@@ -21,6 +21,7 @@ namespace EUIMessageType
 		InputEvent,
 		KeyEvent,
 		ScanTrackReply,
+		ScanAllCVsReply,
 		CVWriteReply
 	};
 }
@@ -30,6 +31,7 @@ namespace EErrorCode
 	enum EErrorCode
 	{
 		Success=0,
+		Complete,
 		NoACK,
 		ValueMismatch,
 		NoTrackPower,
@@ -43,10 +45,12 @@ inline const char16_t *ErrorCodeText(EErrorCode::EErrorCode code)
 	if (code < EErrorCode::MAX_ERROR_CODE)
 	{
 		static const char16_t *errors[] = { u"Success",
+											u"Complete",
 											u"No Ack from Decoder",
 											u"Value Mismatch",
 											u"No Track Power"
 										   };
+		static_assert(EErrorCode::MAX_ERROR_CODE == countof(errors) && "Number of error strings doesn't match the number of error codes");
 		return errors[code];
 	}
 	return u"Unknown Error";
@@ -63,6 +67,13 @@ struct ScanTrackReply
 	int16_t extendedAddress;
 };
 
+struct ScanAllCVsReply
+{
+	EErrorCode::EErrorCode result;
+	int16_t CV;
+	int8_t value;
+};
+
 
 struct UIMsg
 {
@@ -75,6 +86,7 @@ struct UIMsg
 		KeyEvent keys;
 		ScanTrackReply scan;
 		EErrorCode::EErrorCode result;
+		ScanAllCVsReply scanAllCVs;
 	};
 };
 

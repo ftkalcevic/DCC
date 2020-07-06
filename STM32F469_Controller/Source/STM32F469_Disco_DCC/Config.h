@@ -52,7 +52,7 @@ protected:
 	bool matchElement(const char * element, ElementNames *e, int elements)
 	{
 		activeElement = 0;
-		for ( int i = 0; i < countof(e); i++ )
+		for ( int i = 0; i < elements; i++ )
 			if (strcmp(element, e[i].elementName ) == 0)
 				activeElement = e[i].id;
 		bufferIndex = 0;

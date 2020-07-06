@@ -57,13 +57,16 @@ void TextWithFrame::draw(const Rect& invalidatedArea) const
 	translateRectToAbsolute(dirty);
 	if (!dirty.isEmpty())
 		HAL::lcd().fillRect(dirty, enabled ? boxColor : disabledBoxColor, alpha);
-	
-	Font *font = FontManager::getFont(fontId);
-	if (font != nullptr)
-    {
-        LCD::StringVisuals visuals(font, enabled ? color : disabledColor, alpha, alignment, linespace, TEXT_ROTATE_0, TEXT_DIRECTION_LTR, indentation, wideTextAction);
-        HAL::lcd().drawString(getAbsoluteRect(), invalidatedArea, visuals, text, 0, 0);
-    }
+
+	if (text != nullptr)
+	{
+		Font *font = FontManager::getFont(fontId);
+		if (font != nullptr)
+		{
+			LCD::StringVisuals visuals(font, enabled ? color : disabledColor, alpha, alignment, linespace, TEXT_ROTATE_0, TEXT_DIRECTION_LTR, indentation, wideTextAction);
+			HAL::lcd().drawString(getAbsoluteRect(), invalidatedArea, visuals, text, 0, 0);
+		}
+	}
 }
 
 void TextWithFrame::resizeToCurrentText()

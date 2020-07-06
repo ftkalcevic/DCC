@@ -164,35 +164,51 @@ public:
 	}
 
 	// Direct mode
-	int16_t ReadCV_SM(uint8_t cv)
+	EErrorCode::EErrorCode ReadCV_SM(uint8_t cv, uint8_t &value)
 	{
-		uint8_t value = 0;
+		value = 0;
 		for (int i = 0; i < 8; i++)
 		{
-			value |= VerifyBit_SM(cv, i, true) << i;
+			bool bitValue = VerifyBit_SM(cv, i, true);
+			if ( bitValue )
+				value |= 1 << i;
+			if (i == 0 && !bitValue)
+			{
+				// double check the first bit acks when we send 0 (ie check we are actually talking to someone)
+				if (!VerifyBit_SM(cv, 0, false))
+					return EErrorCode::NoACK;
+			}
 		}
 		
-		// verify byte
-		if(VerifyByte_SM(cv, value))
+		if(VerifyByte_SM(cv, value))						// verify byte
 		{
 			CVDEBUG("Verified VC(%d)=%d\n", cv, value);
-			return value;
+			return EErrorCode::Success;
 		}
 		else
 		{
 			CVDEBUG("Failed Verification! VC(%d)=%d\n", cv, value);
-			return -1;
+			return EErrorCode::ValueMismatch;
 		}
 	}
 	
 	EErrorCode::EErrorCode WriteCV_SM(uint16_t cv, uint8_t value)
 	{
 		uint8_t msg[4] = { (uint8_t)(INS_CV_WRITE_BYTE | (uint8_t)(((cv - 1) >> 8) & 3)), (uint8_t)((cv - 1) & 0xFF), value, 0 };
+		SetErrorByte(msg, 4);
 		if (!VerifyMsg_SM(msg, sizeof(msg)))
 			return EErrorCode::NoACK;
 		if (!VerifyByte_SM(cv, value))
 			return EErrorCode::ValueMismatch;
 		return EErrorCode::Success;
+	}
+	
+	uint16_t selectNextCV(uint16_t cv)
+	{
+		cv++;
+		if (cv == 1025)
+			cv = 0;
+		return cv;
 	}
 	
 	void Run(bool enable)
@@ -243,27 +259,75 @@ public:
 							case EProgTrackMessage::ScanTrack:
 							{
 								// Read CV1,  CV7,CV8, CV29,  (CV17,CV18 extended address)
-								int16_t address = ReadCV_SM(1);
-								int16_t config = ReadCV_SM(29);
-								int16_t manufacturer = ReadCV_SM(8);
-								int16_t version = ReadCV_SM(7);
+								uint8_t address, config, manufacturer, version;
 								uint16_t extendedAddress = 0;
+								EErrorCode::EErrorCode result;
+								
+								result = ReadCV_SM(1, address);
+								if ( result == EErrorCode::Success ) ReadCV_SM(29, config);
+								if ( result == EErrorCode::Success ) ReadCV_SM(8, manufacturer);
+								if ( result == EErrorCode::Success ) ReadCV_SM(7, version);
+								extendedAddress = 0;
 								if (config > 0 && (config & CV29_TWO_BYTE_ADDRESS) != 0)
 								{
-									extendedAddress = ReadCV_SM(17) << 8;
-									extendedAddress |= ReadCV_SM(18);
+									uint8_t addrMSB, addrLSB;
+									if ( result == EErrorCode::Success ) ReadCV_SM(17, addrMSB);
+									if ( result == EErrorCode::Success ) ReadCV_SM(18, addrLSB);
+									extendedAddress = (addrMSB << 8) | addrLSB;
 								}
 								
 								// Send Reply
 								UIMsg uiMsg;
 								uiMsg.type = EUIMessageType::ScanTrackReply;
-								uiMsg.scan.result = EErrorCode::Success;
+								uiMsg.scan.result = result;
 								uiMsg.scan.address = address;
 								uiMsg.scan.config = config;
 								uiMsg.scan.manufacturer = manufacturer;
 								uiMsg.scan.version = version;
 								uiMsg.scan.extendedAddress = extendedAddress;
 								uimsg.Send(uiMsg);
+								break;
+							}
+							case EProgTrackMessage::ScanAllCVs:
+							{
+								uint16_t nextCV = msg.scanAll.cv;
+								if (nextCV == 0)	// First
+									nextCV = 1;	
+
+								uint8_t value;
+								EErrorCode::EErrorCode result = ReadCV_SM(nextCV, value);
+								
+								// Send Reply
+								UIMsg uiMsg;
+								uiMsg.type = EUIMessageType::ScanAllCVsReply;
+								uiMsg.scanAllCVs.result = result;
+								uiMsg.scanAllCVs.CV = nextCV;
+								uiMsg.scanAllCVs.value = value;
+								uimsg.Send(uiMsg);
+								
+								if (result != EErrorCode::Success && msg.scanAll.retries < MAX_SCANALL_RETRIES)
+								{
+									msg.scanAll.retries++;
+									SendMsg(msg);
+								}
+								else
+								{
+									nextCV = selectNextCV(nextCV);
+									if (nextCV > 0)
+									{
+										// Next
+										msg.scanAll.cv = nextCV;
+										msg.scanAll.retries = 0;
+										SendMsg(msg);
+									}
+									else
+									{
+										// Done
+										uiMsg.type = EUIMessageType::ScanAllCVsReply;
+										uiMsg.scanAllCVs.result = EErrorCode::Complete;
+										uimsg.Send(uiMsg);
+									}
+								}
 								break;
 							}
 							case EProgTrackMessage::WriteCV:
@@ -316,6 +380,15 @@ public:
 									uimsg.Send(uiMsg);
 									break;
 								}
+							case EProgTrackMessage::ScanAllCVs:
+								{
+									// Send Reply
+									UIMsg uiMsg;
+									uiMsg.type = EUIMessageType::ScanAllCVsReply;
+									uiMsg.result = EErrorCode::Complete;
+									uimsg.Send(uiMsg);
+									break;
+								}
 							default:
 								break;
 						}
@@ -348,3 +421,4 @@ extern void ProgrammingTrack_DCC_EStop(bool stop);
 extern void ProgrammingTrack_DCC_Enable(bool enable); 
 extern void ProgrammingTrack_DCC_ScanProgrammingTrack();
 extern void ProgrammingTrack_DCC_WriteCV(uint16_t cv, uint8_t value);
+extern void ProgrammingTrack_DCC_ScanAllCVs();

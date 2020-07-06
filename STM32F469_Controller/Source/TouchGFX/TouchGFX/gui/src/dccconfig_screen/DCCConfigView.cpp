@@ -243,6 +243,31 @@ void DCCConfigView::scrollWheelDecodersClickHandler(const touchgfx::ScrollWheel&
 	//printf("DCCConfigView::scrollWheelDecodersClickHandler %s\n", RELEASED ? "Release" : "Press");
 }
 
+void DCCConfigView::setConfig(uint8_t cv29)
+{
+	bool isAccessoryDecoder = (cv29 & CV29_ACCESSORY_DECODER) != 0;
+	
+	chkMFDirection.setVisible(!isAccessoryDecoder);
+	chkMFFLLocation.setVisible(!isAccessoryDecoder);
+	chkMFPowerSourceConversion.setVisible(!isAccessoryDecoder);
+	chkMFBiDirectionalComms.setVisible(!isAccessoryDecoder);
+	chkMFSpeedTable.setVisible(!isAccessoryDecoder);
+	chkMFTwoByteAddressing.setVisible(!isAccessoryDecoder);
+	chkAccBiDirectionalComms.setVisible(isAccessoryDecoder);
+	chkAccType.setVisible(isAccessoryDecoder);
+	chkAccAddressMethod.setVisible(isAccessoryDecoder);
+
+	chkMFDirection.setSelected(cv29 & CV29_DIRECTION);
+	chkMFFLLocation.setSelected(cv29 & CV29_FL_LOCATION);
+	chkMFPowerSourceConversion.setSelected(cv29 & CV29_POWER_SOURCE_CONV);
+	chkMFBiDirectionalComms.setSelected(cv29 & CV29_BIDIRECT_COMMS);
+	chkMFSpeedTable.setSelected(cv29 & CV29_FULL_SPEED_TABLE);
+	chkMFTwoByteAddressing.setSelected(cv29 & CV29_TWO_BYTE_ADDRESS );
+	chkAccBiDirectionalComms.setSelected(cv29 & CV29_ACC_BIDIRECT_COMMS);
+	chkAccType.setSelected(cv29 & CV29_ACC_EXTENDED_DECODER);
+	chkAccAddressMethod.setSelected(cv29 & CV29_ACC_EXTENDED_ADDR);
+}
+
 void DCCConfigView::displayDecoder()
 {
 	bool hasDecoder = selectedDecoderItem >= 0 && selectedDecoderItem < uiDecodersConfig.Count();
@@ -254,12 +279,14 @@ void DCCConfigView::displayDecoder()
 		textAddress.setText(addressTextBuffer);
 		textName.setText((const Unicode::UnicodeChar *)d.getName());
 		textDescription.setText((const Unicode::UnicodeChar *)d.getDescription());
+		setConfig(d.getConfig());
 	}
 	else
 	{
 		textAddress.setText((const Unicode::UnicodeChar *)u"----");
 		textName.setText((const Unicode::UnicodeChar *)u"----");
 		textDescription.setText((const Unicode::UnicodeChar *)u"");
+		setConfig(0);
 	}
 	textAddress.setEnabled(hasDecoder && progTrackEnabled);
 	textName.setEnabled(hasDecoder);
@@ -282,8 +309,8 @@ void DCCConfigView::buttonProgTrackClickHandler(const touchgfx::AbstractButton& 
 
 void DCCConfigView::buttonScanTrackClickHandler(const touchgfx::AbstractButton& src)
 {
-	ShowWaitWindow(u"Scanning Programming Track");	
 	audioTask.PlaySound(EAudioSounds::KeyPressTone);
+	ShowWaitWindow(u"Scanning Programming Track");	
 	state = Scanning;
 	presenter->ScanProgrammingTrack();
 }
@@ -291,6 +318,9 @@ void DCCConfigView::buttonScanTrackClickHandler(const touchgfx::AbstractButton& 
 void DCCConfigView::buttonReadAllCVsClickHandler(const touchgfx::AbstractButton& src)
 {
 	audioTask.PlaySound(EAudioSounds::KeyPressTone);
+	ShowWaitWindow(u"Scanning for All CVs");	
+	state = Scanning;
+	presenter->ScanAllCVsTrack();
 }
 
 void DCCConfigView::EditNumeric(EField field, const char16_t *title, uint16_t value, int min, int max)
@@ -371,6 +401,7 @@ void DCCConfigView::closeKeypadWindowHandler(bool success)
 					bool progTrackEnabled = toggleProgTrack.getState();
 					if (isProgTrackEnabled())	
 					{
+						// todo - this should be MVPt
 						ProgrammingTrack_DCC_WriteCV(CV_PRIMARY_ADDRESS, newAddress);
 						ShowWaitWindow(u"Programming Address");
 					}
@@ -411,17 +442,59 @@ void DCCConfigView::closeKeyboardWindowHandler(bool success)
 	}
 }
 
-void DCCConfigView::ScanTrackReply(EErrorCode::EErrorCode result, int16_t address, int16_t config, int16_t extendedAddress, int16_t manufacturer, int16_t version)
+void DCCConfigView::ScanAllCVsReply(EErrorCode::EErrorCode result, uint16_t cv, uint8_t value)
+{
+	if (result == EErrorCode::Complete)
+	{
+		CloseWaitWindow(EErrorCode::Success);
+	}
+	else
+	{
+		if (result == EErrorCode::Success)
+			printf("CV(%d)=%d\n", cv, value);
+		else
+			printf("CV(%d) !%d!\n", cv, result);
+	}
+}
+
+void DCCConfigView::WriteReply(EErrorCode::EErrorCode result)
 {
 	CloseWaitWindow(result);
-	if ( state == Scanning )
+	if (result == EErrorCode::Success)
 	{
-		if (address < 0)
-		{
-			
-		}
-		// If this matches an existing configuration, load it up.
+		state = Editting;
 	}
+}
+
+void DCCConfigView::ScanTrackReply(EErrorCode::EErrorCode result, int16_t address, int16_t config, int16_t extendedAddress, int16_t manufacturer, int16_t version)
+{
+	printf("ScanTrackReply %d addr=%d config=%d extAddr=%d manufacturer=%d version=%d\n", result, address, config, extendedAddress, manufacturer, version);
+	CloseWaitWindow(result);
+	if ( state == Scanning && result == EErrorCode::Success )
+	{
+		int index = uiDecodersConfig.findEncoder(address);
+		if (index >= 0)
+		{
+			// If this matches an existing configuration, load it up.
+			selectedDecoderItem = index;
+			displayDecoder();
+		}
+		else
+		{
+			// Create a new one
+			uiDecodersConfig.newDecoder();
+			selectedDecoderItem = uiDecodersConfig.Count() - 1;
+			Decoders &d = uiDecodersConfig[selectedDecoderItem];
+			d.setAddress(address);
+			d.setConfig(config);
+			scrollWheelDecoders.setNumberOfItems(uiDecodersConfig.Count() + 1);
+			scrollWheelDecoders.itemChanged(selectedDecoderItem);
+			scrollWheelDecoders.invalidate();
+			displayDecoder();
+		}
+	}
+	if (result == EErrorCode::Success)
+		state = Editting;
 }
 
 
@@ -517,4 +590,15 @@ void DCCConfigView::CloseWaitWindow(EErrorCode::EErrorCode result)
 void DCCConfigView::waitButtonClickHandler(const touchgfx::AbstractButton& src)
 {
 	CloseWaitWindow(EErrorCode::Success);
+	state = Editting;
 }
+
+/*
+	- Make clickable sections bigger (Address, Name, etc)
+	- Select a decoder
+	- Read All Cvs
+	- Edit cvs
+		- from "decoder" definition (or "Unknown")
+		- uint8_t, bits, specials (eg speed chart)
+*/
+

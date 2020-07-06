@@ -3,7 +3,6 @@
 #include "Config.h"
 #include "Decoders.h"
 #include <vector>
-#include <vector>
 #include <touchgfx/Unicode.hpp>
 
 using namespace touchgfx;
@@ -14,6 +13,10 @@ class DecodersConfig: public Config<127, 80>	// longest element is a description
 	{
 		None,
 		Decoder,
+		DecoderName,
+		DecoderDescription,
+		DecoderType,
+		DecoderCV29		
 	};
 
 	std::vector<Decoders *> decoders;
@@ -27,15 +30,26 @@ protected:
 		static ElementNames e[] = 
 		{ 
 			{ "Decoder", Decoder },
+			{ "Name", DecoderName },
+			{ "Description", DecoderDescription },
+			{ "Type", DecoderType },
+			{ "CV29", DecoderCV29 },
 		};
-		return matchElement(element, e, countof(e));
+		if (!matchElement(element, e, countof(e)))
+			return false;
+		
+		if ( activeElement == Decoder )
+			newDecoder();
+		return true;
 	}
 	virtual bool elementEnd() 
 	{
-		int n = atoi(buffer);
 		switch (activeElement)
 		{
-			case Decoder: break;
+			case DecoderName:			decoders.back()->setName(buffer); break;
+			case DecoderDescription:	decoders.back()->setDescription(buffer); break;
+			case DecoderType:			decoders.back()->setType((EDecoderType::EDecoderType)atoi(buffer)); break;
+			case DecoderCV29:			decoders.back()->setConfig(atoi(buffer)); break;
 			default:
 				break;
 		}
@@ -54,10 +68,6 @@ public:
 		activeDecoder = -1;
 	}
 	
-//	int getThrottleMin() const { return throttleMin; }
-//	
-//	void setThrottleMin(int n) { if ( throttleMin != n ) {throttleMin = n; dirty();}}
-	
 	void write()
 	{
 		ConfigStream stream(getPath());
@@ -72,6 +82,7 @@ public:
 			stream.WriteElement( "Description", d->getDescription() );
 			stream.WriteElement( "Address", d->getAddress() );
 			stream.WriteElement( "Type", d->getType() );
+			stream.WriteElement( "CV29", d->getConfig() );
 			stream.WriteEndElement( "Decoder" );
 		}
 		stream.WriteEndElement( "Decoders" );
@@ -117,6 +128,15 @@ public:
 	{
 		activeDecoder = decoder;
 	}
+	
+	int16_t findEncoder(int16_t address)
+	{
+		for (int i = 0; i < decoders.size(); i++)
+			if (decoders[i]->getAddress() == address)
+				return i;
+		return -1;
+	}
+	
 };
 
 extern DecodersConfig uiDecodersConfig;

@@ -22,7 +22,7 @@ void ConfigStream::WriteStartElementTag(const char *elem)
 	UINT bytesWritten;
 	f_write(&file, "<", 1, &bytesWritten);
 	f_write(&file, elem, strlen(elem), &bytesWritten);
-	f_write(&file, ">", 2, &bytesWritten);
+	f_write(&file, ">", 1, &bytesWritten);
 }
 
 void ConfigStream::WriteStartElement(const char *elem)
@@ -48,7 +48,24 @@ void ConfigStream::WriteElement(const char *elem, const char16_t *str)
 	while (*str != 0)
 	{
 		UINT bytesWritten;
-		f_write(&file, str, 1, &bytesWritten);
+		switch (*str)
+		{
+			case '&': f_write(&file, "&amp;", 5, &bytesWritten); break;
+			case '<': f_write(&file, "&lt;", 4, &bytesWritten); break;
+			case '>': f_write(&file, "&gt;", 4, &bytesWritten); break;
+			case '\'': f_write(&file, "&apos;", 6, &bytesWritten); break;
+			case '\"': f_write(&file, "&quot;", 6, &bytesWritten); break;
+			default:
+				if ( *str == '\t' || *str == '\n' || *str == '\r' || (*str >= 32 && *str < 128 ) )
+					f_write(&file, str, 1, &bytesWritten);
+				else
+				{
+					char unicode[12];
+					snprintf(unicode, countof(unicode), "&#x%04X;", *str);
+					f_write(&file, unicode, strlen(unicode), &bytesWritten);
+				}
+		}
+		str++;
 	}
 	WriteEndElement(elem);
 }

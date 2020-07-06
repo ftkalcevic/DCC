@@ -157,7 +157,7 @@ public:
 	void Run();
 	void PlaySound(EAudioSounds sound, bool highPriority=false);
 	void SoundEvent(EAudioSounds sound);
-	void Mute(bool mute);
+	void Mute(bool mute = true);
 };
 
 

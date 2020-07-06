@@ -48,6 +48,7 @@ public:
 
 	void EnableProgTrack(bool enable);
 	void ScanProgrammingTrack();
+	void ScanAllCVsTrack();
 	void TakeControl(int decoderIndex, bool control);
 	
 		

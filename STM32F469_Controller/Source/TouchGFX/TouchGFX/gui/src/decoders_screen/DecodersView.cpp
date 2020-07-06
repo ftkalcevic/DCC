@@ -44,4 +44,6 @@ void DecodersView::handleGestureEvent(const GestureEvent & evt)
 void DecodersView::takeControlHandler(int decoderIndex, bool control)
 {
 	presenter->TakeControl(decoderIndex, control);
+	scrollWheelDecoders.itemChanged(decoderIndex);
+	scrollWheelDecoders.invalidate();
 }

@@ -22,6 +22,8 @@ public:
 	virtual void tearDownScreen();
 	
 	void ScanTrackReply(EErrorCode::EErrorCode result, int16_t address, int16_t config, int16_t extendedAddress, int16_t manufacturer, int16_t version);
+	void ScanAllCVsReply(EErrorCode::EErrorCode result, uint16_t cv, uint8_t value);
+	void WriteReply(EErrorCode::EErrorCode result);
 	
 	touchgfx::ClickListener<touchgfx::Box> boxDecoder;
 	touchgfx::Box boxConfig;
@@ -104,6 +106,7 @@ protected:
 	
 	void ShowWaitWindow(const char16_t *msg, bool button = false);
 	void CloseWaitWindow(EErrorCode::EErrorCode result);
+	void setConfig(uint8_t cv29);
 };
 
 #endif // DCCCONFIGVIEW_HPP

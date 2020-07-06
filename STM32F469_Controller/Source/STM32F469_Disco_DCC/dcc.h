@@ -48,6 +48,10 @@ const uint8_t CV29_FULL_SPEED_TABLE		= 0x10;
 const uint8_t CV29_TWO_BYTE_ADDRESS		= 0x20;
 const uint8_t CV29_ACCESSORY_DECODER	= 0x80;
 
+const uint8_t CV29_ACC_BIDIRECT_COMMS   = 0x08;
+const uint8_t CV29_ACC_EXTENDED_DECODER = 0x20;
+const uint8_t CV29_ACC_EXTENDED_ADDR     = 0x40;
+
 struct DCCMessage
 {
 	uint16_t address;
@@ -60,6 +64,7 @@ struct DCCMessage
 enum EProgTrackMessage
 {
 	ScanTrack,
+	ScanAllCVs,
 	WriteCV,
 };
 
@@ -69,12 +74,20 @@ struct CV
 	uint8_t value;
 };
 
+static const uint8_t MAX_SCANALL_RETRIES = 2;
+struct ScanAll
+{
+	uint16_t cv;
+	uint8_t retries;
+};
+
 struct ProgTrackMessage
 {
 	EProgTrackMessage type;
 	union
 	{
 		CV cv;
+		ScanAll scanAll;
 	};
 };
 

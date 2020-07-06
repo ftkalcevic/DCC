@@ -65,43 +65,46 @@ void CustomButton::draw(const Rect& area) const
         HAL::lcd().drawPartialBitmap(bmp, r.x + iconX + offset, r.y + iconY + offset, dirty, alpha);
     }
 	
-    if (typedText.hasValidId())
-    {
-        const Font* fontToDraw = typedText.getFont(); //never return 0
-        uint8_t height = textHeightIncludingSpacing;
-        int16_t offsety;
-        int16_t offsetx;
-        Rect labelRect;
-        switch (rotation)
+	if (text != nullptr)
+	{
+        if (typedText.hasValidId())
         {
-        default:
-        case TEXT_ROTATE_0:
-        case TEXT_ROTATE_180:
-            offsety = this->getHeight() - height - SHADOW_SIZE - 2;
-            offsetx = (this->getWidth() - textWidth)/2;
-            labelRect = Rect(offsetx, offsety, textWidth, height);
-            break;
-        case TEXT_ROTATE_90:
-        case TEXT_ROTATE_270:
-            offsety = this->getWidth() - height - SHADOW_SIZE - 2;
-            labelRect = Rect(offsety, 0, height, this->getHeight());
-            break;
-        }
+            const Font* fontToDraw = typedText.getFont(); //never return 0
+            uint8_t height = textHeightIncludingSpacing;
+            int16_t offsety;
+            int16_t offsetx;
+            Rect labelRect;
+            switch (rotation)
+            {
+                default:
+                case TEXT_ROTATE_0:
+                case TEXT_ROTATE_180:
+                    offsety = this->getHeight() - height - SHADOW_SIZE - 2;
+                    offsetx = (this->getWidth() - textWidth)/2;
+                    labelRect = Rect(offsetx, offsety, textWidth, height);
+                    break;
+                case TEXT_ROTATE_90:
+                case TEXT_ROTATE_270:
+                    offsety = this->getWidth() - height - SHADOW_SIZE - 2;
+                    labelRect = Rect(offsety, 0, height, this->getHeight());
+                    break;
+            }
 
-	    if (pressed)
-	    {
-		    labelRect.x += 5;
-		    labelRect.y += 5;
+	        if (pressed)
+	        {
+		        labelRect.x += 5;
+		        labelRect.y += 5;
+	        }
+	        Rect dirty = labelRect & area;
+            if (!dirty.isEmpty())
+            {
+                dirty.x -= labelRect.x;
+                dirty.y -= labelRect.y;
+                translateRectToAbsolute(labelRect);
+                LCD::StringVisuals visuals(fontToDraw, pressed ? colorPressed : color, alpha, typedText.getAlignment(), 0, rotation, typedText.getTextDirection(), 0, WIDE_TEXT_NONE);
+                HAL::lcd().drawString(labelRect, dirty, visuals, text);
+            }
 	    }
-	    Rect dirty = labelRect & area;
-        if (!dirty.isEmpty())
-        {
-            dirty.x -= labelRect.x;
-            dirty.y -= labelRect.y;
-            translateRectToAbsolute(labelRect);
-            LCD::StringVisuals visuals(fontToDraw, pressed ? colorPressed : color, alpha, typedText.getAlignment(), 0, rotation, typedText.getTextDirection(), 0, WIDE_TEXT_NONE);
-            HAL::lcd().drawString(labelRect, dirty, visuals, text);
-        }
     }
 }
 } // namespace touchgfx
