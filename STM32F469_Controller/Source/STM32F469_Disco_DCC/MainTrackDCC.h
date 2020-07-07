@@ -221,4 +221,4 @@ public:
 
 extern void MainTrack_DCC_EStop(bool stop);
 extern void MainTrack_DCC_Stop(uint16_t address, bool estop=false);
-extern void MainTrack_DCC_SetSpeedAndDirection(uint16_t address, EDirection::EDirection direction, uint8_t throttle, uint8_t brake);
+extern void MainTrack_DCC_SetSpeedAndDirection(uint16_t address, EDirection::EDirection direction, uint16_t throttle, uint16_t brake);

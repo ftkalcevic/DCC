@@ -29,6 +29,7 @@ protected:
 	AnalogInputConfigWidget sliderThrottle;
 	AnalogInputConfigWidget sliderBrake;
     EDirection::EDirection lastDirection;
+	bool calibrateFirst;
 
     touchgfx::Callback<SettingsView, const touchgfx::AbstractButton&> buttonCalibrateClickCallback;
     void buttonCalibrateClickHandler(const touchgfx::AbstractButton& src);

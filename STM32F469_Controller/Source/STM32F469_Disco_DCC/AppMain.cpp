@@ -279,7 +279,7 @@ void AppMain::Run()
 			msg.type = EUIMessageType::InputEvent;
 			
 			msg.input.throttleRaw = throttleRaw;
-			msg.input.throttle = MapAnalog(throttleRaw, uiConfig.getThrottleMin(), uiConfig.getThrottleMax(), uiConfig.getThrottleReverse(), 0, 128);
+			msg.input.throttle = MapAnalog(throttleRaw, uiConfig.getThrottleMin(), uiConfig.getThrottleMax(), uiConfig.getThrottleReverse(), 0, 1024);
 			msg.input.brakeRaw = brakeRaw;
 			msg.input.brake = MapAnalog(brakeRaw, uiConfig.getBrakeMin(), uiConfig.getBrakeMax(), uiConfig.getBrakeReverse(), 0, 100 );
 			if ( uiConfig.getDirectionReverse())

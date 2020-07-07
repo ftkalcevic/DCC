@@ -9,7 +9,8 @@
 
 SettingsView::SettingsView() :
     buttonCalibrateClickCallback(this, &SettingsView::buttonCalibrateClickHandler),
-	checkBoxCallback(this, &SettingsView::checkBoxHandler )
+	checkBoxCallback(this, &SettingsView::checkBoxHandler ),
+	calibrateFirst(false)
 {
 	toggleCalibrate2.setAction(buttonCalibrateClickCallback);
 	
@@ -100,15 +101,15 @@ void SettingsView::UpdateInputs(int throttle, int brake, int throttleRaw, int br
 	bool calibrate = toggleCalibrate2.getState();
 	if (calibrate)
 	{
-		if (throttleRaw < uiConfig.getThrottleMin())
+		if (throttleRaw < uiConfig.getThrottleMin() || calibrateFirst)
 			uiConfig.setThrottleMin(throttleRaw);
-		if (throttleRaw > uiConfig.getThrottleMax())
+		if (throttleRaw > uiConfig.getThrottleMax() || calibrateFirst)
 			uiConfig.setThrottleMax(throttleRaw);
-		if (brakeRaw < uiConfig.getBrakeMin())
+		if (brakeRaw < uiConfig.getBrakeMin() || calibrateFirst)
 			uiConfig.setBrakeMin(brakeRaw);
-		if (brakeRaw > uiConfig.getBrakeMax())
+		if (brakeRaw > uiConfig.getBrakeMax() || calibrateFirst)
 			uiConfig.setBrakeMax(brakeRaw);
-		
+		calibrateFirst = false;
 	}
 }
 
@@ -141,6 +142,7 @@ void SettingsView::buttonCalibrateClickHandler(const touchgfx::AbstractButton& s
 		sliderBrake.setReverse(checkBoxReverseBrake.getSelected());
 		sliderThrottle.setValueRange(sliderThrottle.getValue(), sliderThrottle.getValue());
 		sliderBrake.setValueRange(sliderBrake.getValue(), sliderBrake.getValue());
+		calibrateFirst = true;
 	}
 }
 
