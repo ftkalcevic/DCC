@@ -10,6 +10,17 @@
 #include "ProgTrackDCC.h"		// this should be in model
 
 
+static const int16_t x1 = 17;
+static const int16_t x2 = 417;
+
+
+
+enum EDecoderDisplay
+{
+	Loco = 0x01,
+	Acc = 0x02,
+	Both = Loco | Acc
+};
 
 DCCConfigView::DCCConfigView() :
     buttonProgTrackClickCallback(this, &DCCConfigView::buttonProgTrackClickHandler),
@@ -22,6 +33,8 @@ DCCConfigView::DCCConfigView() :
     scrollWheelDecodersClickCallback(this, &DCCConfigView::scrollWheelDecodersClickHandler),
 	waitOKButtonClickCallback(this, &DCCConfigView::waitOKButtonClickHandler),
 	waitCancelButtonClickCallback(this, &DCCConfigView::waitCancelButtonClickHandler),
+    cboSpeedStepsUpdateItemCallback(this, &DCCConfigView::cboSpeedStepsUpdateItemHandler),
+    cboSpeedStepsSelectionChangedCallback(this, &DCCConfigView::cboSpeedStepsSelectionChangedHandler),
 	state(Editting),
 	selectedDecoderItem(-1)
 {
@@ -46,7 +59,7 @@ DCCConfigView::DCCConfigView() :
 	buttonReadAllCVs.setAction(buttonReadAllCVsClickCallback);
     scrollableContainer1.add(buttonReadAllCVs);
 
-	int16_t yPos = 275, x1 = 17, x2 = 417;
+	int16_t yPos = 275;
     buttonDelete.setXY(x1, yPos);
     buttonDelete.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_MEDIUM_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_MEDIUM_PRESSED_ID), touchgfx::Bitmap(BITMAP_ROUND_EDGE_MEDIUM_DISABLED_ID));
     buttonDelete.setLabelText(touchgfx::TypedText(T_RESOURCEDELETE));
@@ -104,59 +117,20 @@ DCCConfigView::DCCConfigView() :
     textAreaLabelDescription.setTypedText(touchgfx::TypedText(T_DCCCONFIGDESCRIPTION));
     scrollableContainer1.add(textAreaLabelDescription);
 
-
     textDescription.setPosition(x2, yPos, 360, 50);
     textDescription.setFontId(Typography::SANSSERIF20PX);
 	textDescription.setClickAction(editTextClickHandlerCallback);
 	textDescription.setAlignment(CENTER);
     scrollableContainer1.add(textDescription);
 
-	// Config
-	yPos += 60;
-	uint16_t yConfig = 10 + 6*65 + 10;
-    textAreaLabelConfig.setXY(x1, yPos);
-    textAreaLabelConfig.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
-    textAreaLabelConfig.setLinespacing(0);
-    textAreaLabelConfig.setTypedText(touchgfx::TypedText(T_DCCCONFIGCONFIG));
-    scrollableContainer1.add(textAreaLabelConfig);
-
-    boxConfig.setPosition(x2, yPos, 360, yConfig);
-    boxConfig.setColor(touchgfx::Color::getColorFrom24BitRGB(163, 163, 163));
-    scrollableContainer1.add(boxConfig);
-
+	decoderSpecificYStartPos = yPos;
 	
-	chkMFDirection.setPosition(x2+10, yPos + 10 + 65*0, 340, 65 );
-	chkMFFLLocation.setPosition(x2+10, yPos + 10 + 65*1, 340, 65 );
-	chkMFPowerSourceConversion.setPosition(x2+10, yPos + 10 + 65*2, 340, 65 );
-	chkMFBiDirectionalComms.setPosition(x2+10, yPos + 10 + 65*3, 340, 65 );
-	chkMFSpeedTable.setPosition(x2+10, yPos + 10 + 65*4, 340, 65 );
-	chkMFTwoByteAddressing.setPosition(x2+10, yPos + 10 + 65*5, 340, 65 );
-	chkMFDirection.setText(u"Normal Direction of Travel");
-	chkMFFLLocation.setText(u"Advanced Speed Control");
-	chkMFPowerSourceConversion.setText(u"Analog Mode Conversion");
-	chkMFBiDirectionalComms.setText(u"Bi-direction Communications");
-	chkMFSpeedTable.setText(u"Speed Table");
-	chkMFTwoByteAddressing.setText(u"Two Byte Addressing");
-	chkMFDirection.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTLEFT20PXID));
-	chkMFFLLocation.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTLEFT20PXID));
-	chkMFPowerSourceConversion.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTLEFT20PXID));
-	chkMFBiDirectionalComms.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTLEFT20PXID));
-	chkMFSpeedTable.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTLEFT20PXID));
-	chkMFTwoByteAddressing.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTLEFT20PXID));
-
-	chkAccBiDirectionalComms.setPosition(x2+10, yPos + 10 + 65*0, 340, 65 );;
-	chkAccType.setPosition(x2+10, yPos + 10 + 65*1, 340, 65 );
-	chkAccAddressMethod.setPosition(x2+10, yPos + 10 + 65*2, 340, 65 );
-	chkAccBiDirectionalComms.setText(u"Bi-direction Communications");
-	chkAccType.setText(u"Extended Type");
-	chkAccAddressMethod.setText(u"Advanced Addressing");
-	chkAccBiDirectionalComms.setVisible(false);
-	chkAccType.setVisible(false);
-	chkAccAddressMethod.setVisible(false);
-	chkAccBiDirectionalComms.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTLEFT20PXID));
-	chkAccType.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTLEFT20PXID));
-	chkAccAddressMethod.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTLEFT20PXID));
-
+	HideAllCustomConfigs();
+	
+	scrollableContainer1.add(textAreaLabelSpeedSteps);
+	scrollableContainer1.add(cboSpeedSteps);
+	scrollableContainer1.add(textAreaLabelConfig);
+	scrollableContainer1.add(boxConfig);
 	scrollableContainer1.add(chkMFDirection);
 	scrollableContainer1.add(chkMFFLLocation);
 	scrollableContainer1.add(chkMFPowerSourceConversion);
@@ -166,14 +140,8 @@ DCCConfigView::DCCConfigView() :
 	scrollableContainer1.add(chkAccBiDirectionalComms);
 	scrollableContainer1.add(chkAccType);
 	scrollableContainer1.add(chkAccAddressMethod);
-	
-	// All CVs
-	yPos += yConfig + 10;
-    textAreaLabelAllCVs.setXY(x1, yPos);
-    textAreaLabelAllCVs.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
-    textAreaLabelAllCVs.setLinespacing(0);
-    textAreaLabelAllCVs.setTypedText(touchgfx::TypedText(T_DCCCONFIGALLCVS));
 	scrollableContainer1.add(textAreaLabelAllCVs);
+	
 
 	yPos += 60 + 20;
     backgroundImage.setPosition(0, 0, 800, yPos);
@@ -221,6 +189,143 @@ DCCConfigView::DCCConfigView() :
 	waitWindow.add(waitOKButton);
 	waitWindow.add(waitCancelButton);
 }
+
+void DCCConfigView::HideAllCustomConfigs()
+{
+	bool vis = false;
+	
+	textAreaLabelSpeedSteps.setVisible(vis);
+	cboSpeedSteps.setVisible(vis);
+	textAreaLabelConfig.setVisible(vis);
+	boxConfig.setVisible(vis);
+	chkMFDirection.setVisible(vis);
+	chkMFFLLocation.setVisible(vis);
+	chkMFPowerSourceConversion.setVisible(vis);
+	chkMFBiDirectionalComms.setVisible(vis);
+	chkMFSpeedTable.setVisible(vis);
+	chkMFTwoByteAddressing.setVisible(vis);
+	textAreaLabelConfig.setVisible(vis);
+	boxConfig.setVisible(vis);
+	chkAccBiDirectionalComms.setVisible(vis);
+	chkAccType.setVisible(vis);
+	chkAccAddressMethod.setVisible(vis);
+	chkAccBiDirectionalComms.setVisible(vis);
+	chkAccType.setVisible(vis);
+	chkAccAddressMethod.setVisible(vis);
+	textAreaLabelAllCVs.setVisible(vis);	
+}
+void DCCConfigView::showDecoderSpecificSettings( bool loco )
+{
+	bool acc = !loco;
+	
+	
+	HideAllCustomConfigs();
+	
+	int16_t yPos = decoderSpecificYStartPos;
+	uint16_t yConfig = 0;
+	if (loco)
+	{
+		// Multifunction Decoder Options
+		yPos += 60;
+		textAreaLabelSpeedSteps.setXY(x1, yPos);
+		textAreaLabelSpeedSteps.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+		textAreaLabelSpeedSteps.setLinespacing(0);
+		textAreaLabelSpeedSteps.setTypedText(touchgfx::TypedText(T_DCCCONFIGSPEEDSTEPS));
+		textAreaLabelSpeedSteps.setVisible(true);
+
+		cboSpeedSteps.setPosition(x2, yPos, 360, 50);
+		cboSpeedSteps.setUpdateItemCallback(&cboSpeedStepsUpdateItemCallback);
+		cboSpeedSteps.setSelectionChangedCallback(&cboSpeedStepsSelectionChangedCallback);
+		cboSpeedSteps.setNumberOfItems(3);
+		cboSpeedSteps.setVisible(true);
+	
+		// Config
+		yPos += 60;
+		yConfig = 10 + 6 * 65 + 10;
+		textAreaLabelConfig.setXY(x1, yPos);
+		textAreaLabelConfig.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+		textAreaLabelConfig.setLinespacing(0);
+		textAreaLabelConfig.setTypedText(touchgfx::TypedText(T_DCCCONFIGCONFIG));
+		textAreaLabelConfig.setVisible(true);
+
+		boxConfig.setPosition(x2, yPos, 360, yConfig);
+		boxConfig.setColor(touchgfx::Color::getColorFrom24BitRGB(163, 163, 163));
+		boxConfig.setVisible(true);
+
+	
+		chkMFDirection.setPosition(x2 + 10, yPos + 10 + 65 * 0, 340, 65);
+		chkMFFLLocation.setPosition(x2 + 10, yPos + 10 + 65 * 1, 340, 65);
+		chkMFPowerSourceConversion.setPosition(x2 + 10, yPos + 10 + 65 * 2, 340, 65);
+		chkMFBiDirectionalComms.setPosition(x2 + 10, yPos + 10 + 65 * 3, 340, 65);
+		chkMFSpeedTable.setPosition(x2 + 10, yPos + 10 + 65 * 4, 340, 65);
+		chkMFTwoByteAddressing.setPosition(x2 + 10, yPos + 10 + 65 * 5, 340, 65);
+		chkMFDirection.setText(u"Normal Direction of Travel");
+		chkMFFLLocation.setText(u"Advanced Speed Control");
+		chkMFPowerSourceConversion.setText(u"Analog Mode Conversion");
+		chkMFBiDirectionalComms.setText(u"Bi-direction Communications");
+		chkMFSpeedTable.setText(u"Speed Table");
+		chkMFTwoByteAddressing.setText(u"Two Byte Addressing");
+		chkMFDirection.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTLEFT20PXID));
+		chkMFFLLocation.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTLEFT20PXID));
+		chkMFPowerSourceConversion.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTLEFT20PXID));
+		chkMFBiDirectionalComms.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTLEFT20PXID));
+		chkMFSpeedTable.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTLEFT20PXID));
+		chkMFTwoByteAddressing.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTLEFT20PXID));
+
+		chkMFDirection.setVisible(true);
+		chkMFFLLocation.setVisible(true);
+		chkMFPowerSourceConversion.setVisible(true);
+		chkMFBiDirectionalComms.setVisible(true);
+		chkMFSpeedTable.setVisible(true);
+		chkMFTwoByteAddressing.setVisible(true);
+	}
+	
+	
+	if (acc)
+	{
+		// Config
+		yPos += 60;
+		yConfig = 10 + 3 * 65 + 10;
+		textAreaLabelConfig.setXY(x1, yPos);
+		textAreaLabelConfig.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+		textAreaLabelConfig.setLinespacing(0);
+		textAreaLabelConfig.setTypedText(touchgfx::TypedText(T_DCCCONFIGCONFIG));
+		textAreaLabelConfig.setVisible(true);
+
+		boxConfig.setPosition(x2, yPos, 360, yConfig);
+		boxConfig.setColor(touchgfx::Color::getColorFrom24BitRGB(163, 163, 163));
+		boxConfig.setVisible(true);
+
+		chkAccBiDirectionalComms.setPosition(x2 + 10, yPos + 10 + 65 * 0, 340, 65);
+		chkAccType.setPosition(x2 + 10, yPos + 10 + 65 * 1, 340, 65);
+		chkAccAddressMethod.setPosition(x2 + 10, yPos + 10 + 65 * 2, 340, 65);
+		chkAccBiDirectionalComms.setText(u"Bi-direction Communications");
+		chkAccType.setText(u"Extended Type");
+		chkAccAddressMethod.setText(u"Advanced Addressing");
+		chkAccBiDirectionalComms.setVisible(true);
+		chkAccType.setVisible(true);
+		chkAccAddressMethod.setVisible(true);
+		chkAccBiDirectionalComms.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTLEFT20PXID));
+		chkAccType.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTLEFT20PXID));
+		chkAccAddressMethod.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTLEFT20PXID));
+
+		chkAccBiDirectionalComms.setVisible(true);
+		chkAccType.setVisible(true);
+		chkAccAddressMethod.setVisible(true);
+	}
+	
+	// All CVs
+	yPos += yConfig + 10;
+    textAreaLabelAllCVs.setXY(x1, yPos);
+    textAreaLabelAllCVs.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+    textAreaLabelAllCVs.setLinespacing(0);
+    textAreaLabelAllCVs.setTypedText(touchgfx::TypedText(T_DCCCONFIGALLCVS));
+	textAreaLabelAllCVs.setVisible(true);
+
+	yPos += 60 + 20;
+    backgroundImage.setPosition(0, 0, 800, yPos);
+}
+
 
 void DCCConfigView::setupScreen()
 {
@@ -275,15 +380,15 @@ void DCCConfigView::setConfig(uint8_t cv29)
 {
 	bool isAccessoryDecoder = (cv29 & CV29_ACCESSORY_DECODER) != 0;
 	
-	chkMFDirection.setVisible(!isAccessoryDecoder);
-	chkMFFLLocation.setVisible(!isAccessoryDecoder);
-	chkMFPowerSourceConversion.setVisible(!isAccessoryDecoder);
-	chkMFBiDirectionalComms.setVisible(!isAccessoryDecoder);
-	chkMFSpeedTable.setVisible(!isAccessoryDecoder);
-	chkMFTwoByteAddressing.setVisible(!isAccessoryDecoder);
-	chkAccBiDirectionalComms.setVisible(isAccessoryDecoder);
-	chkAccType.setVisible(isAccessoryDecoder);
-	chkAccAddressMethod.setVisible(isAccessoryDecoder);
+//	chkMFDirection.setVisible(!isAccessoryDecoder);
+//	chkMFFLLocation.setVisible(!isAccessoryDecoder);
+//	chkMFPowerSourceConversion.setVisible(!isAccessoryDecoder);
+//	chkMFBiDirectionalComms.setVisible(!isAccessoryDecoder);
+//	chkMFSpeedTable.setVisible(!isAccessoryDecoder);
+//	chkMFTwoByteAddressing.setVisible(!isAccessoryDecoder);
+//	chkAccBiDirectionalComms.setVisible(isAccessoryDecoder);
+//	chkAccType.setVisible(isAccessoryDecoder);
+//	chkAccAddressMethod.setVisible(isAccessoryDecoder);
 
 	chkMFDirection.setSelected(cv29 & CV29_DIRECTION);
 	chkMFFLLocation.setSelected(cv29 & CV29_FL_LOCATION);
@@ -307,7 +412,13 @@ void DCCConfigView::displayDecoder()
 		textAddress.setText(addressTextBuffer);
 		textName.setText((const Unicode::UnicodeChar *)d.getName());
 		textDescription.setText((const Unicode::UnicodeChar *)d.getDescription());
+		showDecoderSpecificSettings(d.getType() == EDecoderType::Multifunction);
 		setConfig(d.getConfig());
+			
+		if (d.getType() == EDecoderType::Multifunction)
+		{
+			cboSpeedSteps.setSelectedItem(d.getLoco().getSpeedSteps());
+		}
 	}
 	else
 	{
@@ -315,6 +426,7 @@ void DCCConfigView::displayDecoder()
 		textName.setText((const Unicode::UnicodeChar *)u"----");
 		textDescription.setText((const Unicode::UnicodeChar *)u"");
 		setConfig(0);
+		HideAllCustomConfigs();
 	}
 	buttonDelete.setEnabled(hasDecoder);
 	textAddress.setEnabled(hasDecoder && progTrackEnabled);
@@ -576,6 +688,23 @@ void DCCConfigView::scrollWheelDecodersUpdateItem(ListItemDecoder& item, int16_t
 	item.setIndex(itemIndex, itemIndex == selectedDecoderItem);
 }
 
+// TODO - this should be part of a generic combobox - pass array of strings 
+void DCCConfigView::cboSpeedStepsUpdateItemHandler(ComboBox& cbo, ComboItem& cboItem, int16_t itemIndex)
+{
+	switch (itemIndex)
+	{
+		case ESpeedSteps::ss14: cboItem.setText(u"14 Steps"); break;
+		case ESpeedSteps::ss28: cboItem.setText(u"28 Steps"); break;
+		case ESpeedSteps::ss128: cboItem.setText(u"128 Steps"); break;
+		default: cboItem.setText(u""); break;
+	}
+}
+
+void DCCConfigView::cboSpeedStepsSelectionChangedHandler(ComboBox& cbo, int16_t itemIndex)
+{
+	Decoders &d = uiDecodersConfig[selectedDecoderItem];
+	d.getLoco().setSpeedSteps((ESpeedSteps::ESpeedSteps)itemIndex);	
+}
 
 void DCCConfigView::ShowWaitWindow(const char16_t *title, const char16_t *subtitle, EButtons buttons )
 {
@@ -666,3 +795,39 @@ void DCCConfigView::waitCancelButtonClickHandler(const touchgfx::AbstractButton&
 		state = EState::Editting;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

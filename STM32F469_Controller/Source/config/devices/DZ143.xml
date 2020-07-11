@@ -1,32 +1,137 @@
-<Decoder Type="Multifunction">
-  <Details Manufacturer="Digitrax"/>
+<?xml version="1.0" encoding="utf-8"?>
+<Decoder xmlns="https://www.franksworkshop.com.au/devices.xsd">
+
+  <Details manufacturer="Digitrax" type="Multifunction"/>
+  <UserTypes>
+    <Type name="FX3" type="bitfield">
+      <BitField bitmask="15" name="Effect" type="enum">
+        <Enum value="0" name="No Effect"/>
+        <Enum value="1" name="Random Flicker"/>
+        <Enum value="2" name="Mars Light"/>
+        <Enum value="3" name="Flashing Headlight"/>
+        <Enum value="4" name="Single Pulse Strobe"/>
+        <Enum value="5" name="Double Pulse Strobe"/>
+        <Enum value="6" name="Rotary Beacon Simulation"/>
+        <Enum value="7" name="Gyralite"/>
+        <Enum value="8" name="Rule 17 Headlight"/>
+        <Enum value="9" name="FRED"/>
+        <Enum value="10" name="Right Ditch Light"/>
+        <Enum value="11" name="Left Ditch Light"/>
+        <Enum value="12" name="Series 6 Decoder Pulse"/>
+      </BitField>
+      <BitField bitmask="15" name="Operation" type="enum">
+        <Enum value="0" name="Forward direction, ON with function ON, effect phase A"/>
+        <Enum value="1" name="Reverse direction, ON with function ON, effect phase B"/>
+        <Enum value="2" name="Non directional effect, ON with function ON, effect phase A"/>
+        <Enum value="3" name="Non directional effect, ON with function ON, effect phase B"/>
+        <Enum value="4" name="Forward direction, ON with F0 ON &amp; function ON, effect phase A"/>
+        <Enum value="5" name="Forward direction, ON with F0 ON &amp; function ON, effect phase B"/>
+        <Enum value="6" name="Special logic for Forward Ditch Light or Rule 17 dimming, standard Ditch Light Operation"/>
+        <Enum value="7" name="Special logic or Reverse Ditch Light or Rule 17 dimming ,standard Ditch Light Operation"/>
+        <Enum value="10" name="Speed=0, non directional effect, phase A and function qualifier"/>
+        <Enum value="11" name="Speed>0, non directional effect, phase B and function qualifier"/>
+        <Enum value="12" name="Ditch light off phase A Alternate Ditch light operation OFF when running flash on with F2"/>
+        <Enum value="13" name="Ditch light off phase B Alternate Ditch light operation OFF when running flash on with F2"/>
+      </BitField>
+    </Type>
+    <Type name="fmap1" type="bitfield">
+      <Bit bit="0" name="F0F"/>
+      <Bit bit="1" name="F0R"/>
+      <Bit bit="2" name="F1"/>
+      <Bit bit="3" name="F2"/>
+      <Bit bit="4" name="F3"/>
+      <Bit bit="5" name="F4"/>
+      <Bit bit="6" name="F5"/>
+      <Bit bit="7" name="F6"/>
+    </Type>
+    <Type name="fmap2" type="bitfield">
+      <Bit bit="0" name="F2"/>
+      <Bit bit="1" name="F3"/>
+      <Bit bit="2" name="F4"/>
+      <Bit bit="3" name="F5"/>
+      <Bit bit="4" name="F6"/>
+    </Type>
+    <Type name="fmap3" type="bitfield">
+      <Bit bit="0" name="F5"/>
+      <Bit bit="2" name="F6"/>
+    </Type>
+  </UserTypes>
   <CVs>
-    <CV number="1" name="Address" type="addr"/>
+    <CV number="1" name="Address" type="address"/>
     <CV number="2" name="Start Voltage" type="int" min="0" max="255"/>
     <CV number="3" name="Acceleration Rate" type="int" min="0" max="31"/>
     <CV number="4" name="Deceleration Rate" type="int" min="0" max="31"/>
     <CV number="5" name="Maximum Voltage" type="int" min="0" max="255"/>
     <CV number="6" name="Mid Point Voltage" type="int" min="0" max="255"/>
     <CV number="7" name="Version ID" type="int" readonly="true"/>
-    <CV number="8" name="Manufacturer ID" type="int" readonly="true"/>
+    <CV number="8" name="Manufacturer ID" type="int"  min="0" max="255"/>
     <!-- <CV number="8" name="Factory Reset" type="int" 0x08 0x09/> -->
+    <CV number="9" name="Motor Freq" type="int" min="0" max="255"/>
     <CV number="13" name="DC Functions On" type="int" min="0" max="255"/>
+    <CV number="15" name="Select Target Decoder" type="int" min="0" max="255"/>
+    <CV number="16" name="Select Target Decoder ID" type="int" min="0" max="255"/>
     <CV number="17" name="4 Digit Address Hi Byte" type="int" min="0" max="255"/>
     <CV number="18" name="4 Digit Address Lo Byte" type="int" min="0" max="255"/>
     <CV number="19" name="Advanced Consist Address" type="int" min="0" max="255"/>
     <CV number="21" name="Advanced Consist Functions F1-F8" type="int" min="0" max="255"/>
     <CV number="22" name="Advanced Consist Functions F0,F9-F12" type="int" min="0" max="63"/>
-    <CV number="29" name="Configuration Register" type="mask">
+    <CV number="29" name="Configuration Register" type="bitfield">
       <!-- bits to set mode -->
-      <Mask bit="0" name="Locomotive Direction" off="normal" on="reversed"/>
-      <Mask bit="1" name="FL Location" off="bit 4 of Speed & Direction" on="bit 4 of Function Group 1"/>
-      <Mask bit="2" name="Power Source Conversion" off="NRMA Digital Only" on="Enabled"/>
-      <Mask bit="3" name="Bi-Directional Comms." off="Disabled" on="Enabled"/>
-      <Mask bit="4" name="Speed Table" off="Set by CV2,5 & 6" on="Set by CV 66-99"/>
-      <Mask bit="5" name="Addressing" off="standard 2-byte" on="extended 4-byte"/>
-      <Mask bit="7" name="Decoder Type" off="Multifunction" on="Accessory"/>
+      <Bit bit="0" name="Locomotive Direction" off="normal" on="reversed"/>
+      <Bit bit="1" name="FL Location" off="bit 4 of Speed &amp; Direction" on="bit 4 of Function Group 1"/>
+      <Bit bit="2" name="Power Source Conversion" off="NRMA Digital Only" on="Enabled"/>
+      <Bit bit="3" name="Bi-Directional Comms." off="Disabled" on="Enabled"/>
+      <Bit bit="4" name="Speed Table" off="Set by CV2,5 &amp; 6" on="Set by CV 66-99"/>
+      <Bit bit="5" name="Addressing" off="standard 2-byte" on="extended 4-byte"/>
+      <Bit bit="7" name="Decoder Type" off="Multifunction" on="Accessory"/>
     </CV>
-    
+    <CV number="33" name="Function Map F0F" type="fmap1"/>
+    <CV number="34" name="Function Map F0R" type="fmap1"/>
+    <CV number="35" name="Function Map F1" type="fmap1"/>
+    <CV number="36" name="Function Map F2" type="fmap1"/>
+    <CV number="37" name="Function Map F3" type="fmap1"/>
 
+    <CV number="38" name="Function Map F4" type="fmap2"/>
+    <CV number="39" name="Function Map F5" type="fmap2"/>
+    <CV number="40" name="Function Map F6" type="fmap2"/>
+    <CV number="41" name="Function Map F7" type="fmap2"/>
+    <CV number="42" name="Function Map F8" type="fmap2"/>
+
+    <CV number="43" name="Function Map F9" type="fmap3"/>
+    <CV number="44" name="Function Map F10" type="fmap3"/>
+    <CV number="45" name="Function Map F11" type="fmap3"/>
+    <CV number="46" name="Function Map F12" type="fmap3"/>
+
+    <CV number="49" name="F0F, Forward light effect (white)" type="FX3" min="0" max="255"/>
+    <CV number="50" name="F0R, Reverse light effect (yellow)" type="FX3" min="0" max="255"/>
+    <CV number="51" name="F1, Function 1 (green)" type="FX3" min="0" max="255"/>
+    <CV number="52" name="F2, Function 2 (violet)" type="FX3" min="0" max="255"/>
+    <CV number="54" name="Torque Comp. and Switching Speed" type="bitfield">
+      <Bit bit="0" name="Switching Speed" off="off" on="on"/>
+      <Bit bit="4" name="Torque Comp." off="on" on="off"/>
+      <Bit bit="6" name="Decoder Lock" off="Enabled" on="Disabled"/>
+    </CV>
+    <CV number="55" name="Static Comp." type="int" min="0" max="255"/>
+    <CV number="56" name="Dynamic Comp." type="int" min="0" max="255"/>
+    <CV number="57" name="Back EMF Intensity" type="bitfield">
+      <BitField bitmask="15" name="loco" type="int" min="0" max="15"/>
+      <BitField bitmask="240" name="consist" type="int" min="0" max="15"/>
+    </CV>
+    <CV number="61" name="Transponding, LED/Lamp Select" type="bitfield">
+      <Bit bit="0" name="Light" off="LED" on="Lamp"/>
+      <Bit bit="1" name="Transponding" off="off" on="on"/>
+    </CV>
+    <CV number="62" name="FX Rate &amp; Keep Alive Adj" type="int" min="0" max="255"/>
+    <CV number="63" name="Ditch Light Blink Hold" type="int" min="0" max="255"/>
+    <CV number="65" name="Kick Start Value" type="int" min="0" max="255"/>
+    <CV number="66" name="Forward Trim" type="int" min="0" max="255"/>
+    <CV number="67" name="28 Speed Table" type="speedTable" min="0" max="255" cvcount="28"/>
+    <CV number="95" name="Reverse Trim" type="int" min="0" max="255"/>
+    <CV number="105" name="User private ID 1" type="int" min="0" max="255"/>
+    <CV number="106" name="User private ID 2" type="int" min="0" max="255"/>
+    <CV number="113" name="F3, Function 3 (brown)" type="FX3" min="0" max="255"/>
+    <CV number="114" name="F4, Function 4 (white/yellow)" type="FX3" min="0" max="255"/>
+    <CV number="115" name="F5, Function 5 (white/green)" type="FX3" min="0" max="255"/>
+    <CV number="116" name="F6, Function 6 (white/blue)" type="FX3" min="0" max="255"/>
   </CVs>
 </Decoder>

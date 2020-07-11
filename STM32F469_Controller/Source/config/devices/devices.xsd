@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema
+    targetNamespace="https://www.franksworkshop.com.au/devices.xsd"
+    elementFormDefault="qualified"
+    xmlns="https://www.franksworkshop.com.au/devices.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+
+  <xs:element name="Decoder">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Details" type="details" minOccurs="1" maxOccurs="1"/>
+        <xs:element name="UserTypes" type="usertype" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="CVs" type="cvstype" minOccurs="1" maxOccurs="1"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="details">
+    <xs:attribute name="manufacturer" type="xs:string" use="required"/>
+    <xs:attribute name="type" type="decodertype" use="required"/>
+  </xs:complexType>
+
+  <xs:simpleType name="decodertype">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Multifunction"/>
+      <xs:enumeration value="Accessory"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="usertype">
+    <xs:sequence>
+      <xs:element name="Type" type="typetype" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="datatype">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="enum"/>
+          <xs:enumeration value="bitfield"/>
+          <xs:enumeration value="address"/>
+          <xs:enumeration value="speedTable"/>
+          <xs:enumeration value="int"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction base="xs:string" />
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+
+  <xs:simpleType name="bitfielddatatype">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="enum"/>
+      <xs:enumeration value="int"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="typetype">
+    <xs:choice minOccurs="1" maxOccurs="1">
+      <xs:element name="Bit" type="bittype" maxOccurs="unbounded"/>
+      <xs:element name="BitField" type="bitfieldtype" maxOccurs="unbounded"/>
+    </xs:choice>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="type" type="datatype" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="cvstype">
+    <xs:sequence>
+      <xs:element name="CV" type="cvtype" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="bittype">
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="bit" type="xs:int" use="required"/>
+    <xs:attribute name="on" type="xs:string" use="optional"/>
+    <xs:attribute name="off" type="xs:string" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="bitfieldtype">
+    <xs:choice minOccurs="0">
+      <xs:element name="Enum" type="enumtype" maxOccurs="unbounded"/>
+    </xs:choice>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="bitmask" type="xs:int" use="required"/>
+    <xs:attribute name="type" type="bitfielddatatype" use="required"/>
+    <xs:attribute name="min" type="xs:int" use="optional"/>
+    <xs:attribute name="max" type="xs:int" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="cvtype">
+    <xs:choice minOccurs="0" maxOccurs="1">
+      <xs:element name="Bit" type="bittype" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:element name="BitField" type="bitfieldtype" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:choice>
+    <xs:attribute name="number" type="xs:int" use="required"/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="type" type="datatype" use="required"/>
+    <xs:attribute name="min" type="xs:int" use="optional"/>
+    <xs:attribute name="max" type="xs:int" use="optional"/>
+    <xs:attribute name="readonly" type="xs:boolean" use="optional"/>
+    <xs:attribute name="cvcount" type="xs:int" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="enumtype">
+    <xs:attribute name="value" type="xs:int" use="required"/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+  </xs:complexType>
+</xs:schema>

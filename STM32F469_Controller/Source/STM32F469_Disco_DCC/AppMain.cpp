@@ -291,7 +291,7 @@ void AppMain::Run()
 			if ( uiDecodersConfig.getActiveDecoder() >= 0 && 
 				 uiDecodersConfig[uiDecodersConfig.getActiveDecoder()].getType() == EDecoderType::Multifunction && uiDecodersConfig[uiDecodersConfig.getActiveDecoder()].getLoco().controlled )
 			{
-				MainTrack_DCC_SetSpeedAndDirection(uiDecodersConfig[uiDecodersConfig.getActiveDecoder()].getAddress(), msg.input.direction, msg.input.throttle, msg.input.brake);
+				MainTrack_DCC_SetSpeedAndDirection(uiDecodersConfig[uiDecodersConfig.getActiveDecoder()].getAddress(), uiDecodersConfig[uiDecodersConfig.getActiveDecoder()].getLoco().getSpeedSteps(), msg.input.direction, msg.input.throttle, msg.input.brake);
 			}
 		}
 		osDelay(pdMS_TO_TICKS(1));
@@ -425,6 +425,10 @@ DCCConfigView
 		- select large icon for decoders view
 		- select large user image for decoders view
 			- decoders view - remove all widgets except take control
+		- Accessory decoder...
+			- images for states
+			- mirror (flip) left/right
+			- miroro top/bottom
 		- other options
 			- Decoder type is read from CV29 bit 7
 			- Speed steps are defined by CV29 bit ?

@@ -10,8 +10,9 @@
       <Background></Background>
       <BackgroundFile></BackgroundFile>
       <DecoderModel></DecoderModel>
-      
+
       <locoReleaseAction></locoReleaseAction>
+      <locoSS></locoSS>
       
       <accType></accType>
       <accNetwork></accNetwork>

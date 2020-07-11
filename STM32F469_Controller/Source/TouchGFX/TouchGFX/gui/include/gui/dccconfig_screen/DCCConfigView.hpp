@@ -12,6 +12,7 @@
 #include <gui/containers/CheckBox.hpp>
 #include <touchgfx/widgets/TextWithFrame.hpp>
 #include <touchgfx/Containers/ModalBoxWindow.hpp>
+#include <gui/containers/ComboBox.hpp>
 
 class DCCConfigView : public DCCConfigViewBase
 {
@@ -65,7 +66,16 @@ public:
 	touchgfx::ButtonWithLabelAndEnable waitOKButton;
 	touchgfx::ButtonWithLabelAndEnable waitCancelButton;
 	
+	touchgfx::TextArea textAreaLabelSpeedSteps;
+    ComboBox cboSpeedSteps;
+    touchgfx::Callback<DCCConfigView, ComboBox&, ComboItem&, int16_t> cboSpeedStepsUpdateItemCallback;
+    void cboSpeedStepsUpdateItemHandler(ComboBox&, ComboItem&, int16_t);
+    touchgfx::Callback<DCCConfigView, ComboBox&, int16_t> cboSpeedStepsSelectionChangedCallback;
+    void cboSpeedStepsSelectionChangedHandler(ComboBox&, int16_t);
+	
 protected:
+	int16_t decoderSpecificYStartPos;
+
 	touchgfx::ButtonWithLabelAndEnable buttonScanTrack;
 	touchgfx::ButtonWithLabelAndEnable buttonReadAllCVs;
 	touchgfx::ButtonWithLabelAndEnable buttonDelete;
@@ -126,6 +136,8 @@ protected:
 	void ShowWaitWindow(const char16_t *title, const char16_t *subtitle = nullptr, EButtons buttons = EButtons::None);
 	void CloseWaitWindow(EErrorCode::EErrorCode result);
 	void setConfig(uint8_t cv29);
+	void showDecoderSpecificSettings(bool loco);
+	void HideAllCustomConfigs();
 };
 
 inline DCCConfigView::EButtons operator | (DCCConfigView::EButtons a, DCCConfigView::EButtons b)

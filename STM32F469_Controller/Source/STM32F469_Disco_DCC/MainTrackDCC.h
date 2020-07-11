@@ -10,6 +10,7 @@
 #include "UIMessage.h"
 #include "AppMain.h"
 #include "DCCHal.h"
+#include "decoders.h"
 
 
 #define MAINTRK_ARR_OFFSET 0
@@ -221,4 +222,4 @@ public:
 
 extern void MainTrack_DCC_EStop(bool stop);
 extern void MainTrack_DCC_Stop(uint16_t address, bool estop=false);
-extern void MainTrack_DCC_SetSpeedAndDirection(uint16_t address, EDirection::EDirection direction, uint16_t throttle, uint16_t brake);
+extern void MainTrack_DCC_SetSpeedAndDirection(uint16_t address, ESpeedSteps::ESpeedSteps speedSteps, EDirection::EDirection direction, uint16_t throttle, uint16_t brake);

@@ -2321,6 +2321,118 @@
         "Y": 0,
         "Width": 338,
         "Height": 65
+      },
+      {
+        "Components": [
+          {
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Alpha": 255,
+            "Name": "background",
+            "X": 0,
+            "Y": 0,
+            "Width": 260,
+            "Height": 50,
+            "Type": "Box",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "TextId": "wildcardTextCentered40pxId",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 0,
+              "Green": 0,
+              "Blue": 0
+            },
+            "Alpha": 255,
+            "AutoSize": false,
+            "LineSpacing": 0,
+            "Wildcard1": {
+              "UseBuffer": false,
+              "BufferSize": 0
+            },
+            "Name": "text",
+            "X": 0,
+            "Y": 0,
+            "Width": 260,
+            "Height": 50,
+            "Type": "TextArea",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          }
+        ],
+        "Interactions": [],
+        "Name": "ComboItem",
+        "X": 0,
+        "Y": 0,
+        "Width": 260,
+        "Height": 50
+      },
+      {
+        "Components": [
+          {
+            "SelectedItemOffset": 40,
+            "UseSelectedStyle": false,
+            "ExtraSizeBefore": 0,
+            "ExtraSizeAfter": 0,
+            "MarginBefore": 0,
+            "MarginAfter": 0,
+            "IsHorizontal": true,
+            "IsCircular": false,
+            "ItemTemplateName": "ComboItem",
+            "NumberofItems": 10,
+            "InitialElement": 0,
+            "ItemMargin": 10,
+            "Easing": "Back",
+            "EasingOption": "Out",
+            "SwipeAcceleration": 1.0,
+            "DragAcceleration": 1.0,
+            "Name": "scrollWheel",
+            "X": 0,
+            "Y": 0,
+            "Width": 360,
+            "Height": 50,
+            "Type": "ScrollWheel",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "FileName": "ComboScrollWheelMask.png",
+            "Alpha": 255,
+            "OffsetX": 0,
+            "OffsetY": 0,
+            "Name": "tiledImage",
+            "X": 0,
+            "Y": 0,
+            "Width": 360,
+            "Height": 50,
+            "Type": "TiledImage",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          }
+        ],
+        "Interactions": [],
+        "Name": "ComboBox",
+        "X": 0,
+        "Y": 0,
+        "Width": 360,
+        "Height": 50
       }
     ],
     "TextEntries": [
@@ -2471,6 +2583,10 @@
       {
         "TextEntryId": "SingleUseId35",
         "IsResource": false
+      },
+      {
+        "TextEntryId": "DCCConfigSpeedSteps",
+        "IsResource": true
       }
     ],
     "Name": "STM32F469I-DISCO",

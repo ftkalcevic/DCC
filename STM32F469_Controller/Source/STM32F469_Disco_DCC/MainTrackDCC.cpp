@@ -98,6 +98,7 @@ static uint8_t MakeSpeed(uint16_t speed, ESpeedSteps::ESpeedSteps speedSteps)	//
 	}
 	else if (speedSteps == ESpeedSteps::ss128)
 	{
+		// For 128 speed steps, 0 = Stop, 1 = E-Stop, 2-127 steps.  (bit 7, is direction).
 		if (speed == 0)
 			return (uint8_t)speed;
 		else
@@ -131,17 +132,16 @@ void MainTrack_DCC_Stop(uint16_t address, bool estop)
 }
 
 
-void MainTrack_DCC_SetSpeedAndDirection(uint16_t address, EDirection::EDirection direction, uint16_t throttle, uint16_t brake)
+void MainTrack_DCC_SetSpeedAndDirection(uint16_t address, ESpeedSteps::ESpeedSteps speedSteps, EDirection::EDirection direction, uint16_t throttle, uint16_t brake)
 {
 	DCCMessage msg;
 	msg.address = address;
 	uint8_t *ptr = msg.msg;
 	
-	SetMultiFunctionAddress(ptr, address);
+	SetMultiFunctionAddress(ptr, address); 
 
-	ESpeedSteps::ESpeedSteps speedSteps = ESpeedSteps::ss28;	// todo - get this from decoder config.
 	uint8_t speedByte = direction == EDirection::Stopped ? 0 : MakeSpeed(throttle, speedSteps);
-	//printf("%d %d\n", throttle, speedByte);
+	printf("%d %d\n", throttle, speedByte);
 	if (speedSteps == ESpeedSteps::ss14)
 	{
 		bool ForwardLight = false;

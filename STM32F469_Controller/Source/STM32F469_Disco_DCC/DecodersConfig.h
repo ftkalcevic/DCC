@@ -7,6 +7,16 @@
 
 using namespace touchgfx;
 
+const char * const DC_DecodersConfig = "DecodersConfig";
+const char * const DC_Decoder = "Decoder";
+const char * const DC_Decoders = "Decoders";
+const char * const DC_DecoderName = "Name";
+const char * const DC_DecoderDesc = "Description";
+const char * const DC_DecoderAddr = "Address";
+const char * const DC_DecoderType = "Type";
+const char * const DC_DecoderCV29 = "CV29";
+const char * const DC_DecoderLocoSpeedSteps = "LocoSS";
+
 class DecodersConfig: public Config<127, 80>	// longest element is a description string, xpath max is about 70
 {
 	enum Elements
@@ -17,7 +27,8 @@ class DecodersConfig: public Config<127, 80>	// longest element is a description
 		DecoderDescription,
 		DecoderAddress,
 		DecoderType,
-		DecoderCV29		
+		DecoderCV29,
+		DecoderLocoSpeedSteps
 	};
 
 	std::vector<Decoders *> decoders;
@@ -30,12 +41,13 @@ protected:
 	{
 		static ElementNames e[] = 
 		{ 
-			{ "Decoder", Decoder },
-			{ "Name", DecoderName },
-			{ "Description", DecoderDescription },
-			{ "Address", DecoderAddress },
-			{ "Type", DecoderType },
-			{ "CV29", DecoderCV29 },
+			{ DC_Decoder, Decoder },
+			{ DC_DecoderName, DecoderName },
+			{ DC_DecoderDesc, DecoderDescription },
+			{ DC_DecoderAddr, DecoderAddress },
+			{ DC_DecoderType, DecoderType },
+			{ DC_DecoderCV29, DecoderCV29 },
+			{ DC_DecoderLocoSpeedSteps, DecoderLocoSpeedSteps },
 		};
 		if (!matchElement(element, e, countof(e)))
 			return false;
@@ -53,6 +65,7 @@ protected:
 			case DecoderAddress:		decoders.back()->setAddress(atoi(contentBuffer)); break;
 			case DecoderType:			decoders.back()->setType((EDecoderType::EDecoderType)atoi(contentBuffer)); break;
 			case DecoderCV29:			decoders.back()->setConfig(atoi(contentBuffer)); break;
+			case DecoderLocoSpeedSteps:	if ( decoders.back()->getType() == EDecoderType::Multifunction ) decoders.back()->getLoco().setSpeedSteps((ESpeedSteps::ESpeedSteps)atoi(contentBuffer)); break;
 			default:
 				break;
 		}
@@ -74,23 +87,27 @@ public:
 	void write()
 	{
 		ConfigStream stream(getPath());
-		stream.WriteStartElement( "DecodersConfig" );
+		stream.WriteStartElement( DC_DecodersConfig );
 		
-		stream.WriteStartElement( "Decoders" );
+		stream.WriteStartElement( DC_Decoders );
 		for (auto it = decoders.begin(); it != decoders.end(); it++)
 		{
 			Decoders *d = *it;
-			stream.WriteStartElement( "Decoder" );
-			stream.WriteElement( "Name", d->getName() );
-			stream.WriteElement( "Description", d->getDescription() );
-			stream.WriteElement( "Address", d->getAddress() );
-			stream.WriteElement( "Type", d->getType() );
-			stream.WriteElement( "CV29", d->getConfig() );
-			stream.WriteEndElement( "Decoder" );
+			stream.WriteStartElement( DC_Decoder );
+			stream.WriteElement( DC_DecoderName, d->getName() );
+			stream.WriteElement( DC_DecoderDesc, d->getDescription() );
+			stream.WriteElement( DC_DecoderAddr, d->getAddress() );
+			stream.WriteElement( DC_DecoderType, d->getType() );
+			stream.WriteElement( DC_DecoderCV29, d->getConfig() );
+			if (d->getType() == EDecoderType::Multifunction)
+			{
+				stream.WriteElement( DC_DecoderLocoSpeedSteps, d->getLoco().getSpeedSteps() );
+			}
+			stream.WriteEndElement( DC_Decoder );
 		}
-		stream.WriteEndElement( "Decoders" );
+		stream.WriteEndElement( DC_Decoders );
 		
-		stream.WriteEndElement( "DecodersConfig" );
+		stream.WriteEndElement( DC_DecodersConfig );
 		stream.Close();
 	}
 

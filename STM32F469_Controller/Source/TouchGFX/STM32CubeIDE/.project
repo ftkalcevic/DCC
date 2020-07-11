@@ -1218,5 +1218,40 @@
 			<type>1</type>
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/audioconfig_screen/AudioConfigViewBase.cpp</locationURI>
 		</link>
+		<link>
+			<name>Application/User/gui/ScrollWheelText.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/containers/ScrollWheelText.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/ScrollWheelTextBase.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/containers/ScrollWheelTextBase.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/ComboBox.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/containers/ComboBox.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/ComboBoxBase.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/containers/ComboBoxBase.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/ComboScrollWheelMask.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/ComboScrollWheelMask.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/ComboItem.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/containers/ComboItem.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/ComboItemBase.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/containers/ComboItemBase.cpp</locationURI>
+		</link>
 	</linkedResources>
 </projectDescription>

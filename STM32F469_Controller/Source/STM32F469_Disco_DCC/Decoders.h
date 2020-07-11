@@ -58,6 +58,12 @@ struct LocoSettings
 	uint8_t currentSpeed;
 	uint8_t currentBraking;
 	EDirection::EDirection direction;
+
+	void setSpeedSteps(ESpeedSteps::ESpeedSteps s) { if (speedSteps != s) { speedSteps = s; dirty(); } }
+	ESpeedSteps::ESpeedSteps getSpeedSteps() const { return speedSteps; }
+	
+	bool dirtyFlag;
+	void dirty() { dirtyFlag = true;}
 };
 
 namespace EAccessoryNetwork
