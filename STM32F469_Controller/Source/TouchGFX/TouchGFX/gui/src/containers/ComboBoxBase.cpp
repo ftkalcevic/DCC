@@ -1,20 +1,20 @@
-#include <gui/containers/ComboBox.hpp>
+#include <gui/containers/ComboBoxBase.hpp>
 #include <stdio.h>
 
-ComboBox::ComboBox() :
-    cboAnimateToPositionCallback(this, &ComboBox::cboAnimateToPositionHandler),
+ComboBoxBase::ComboBoxBase() :
+    cboAnimateToPositionCallback(this, &ComboBoxBase::cboAnimateToPositionHandler),
 	selectingNewItem(false)
 {
 	scrollWheel.setAnimateToCallback(cboAnimateToPositionCallback);
 }
 
-void ComboBox::initialize()
+void ComboBoxBase::initialize()
 {
-    ComboBoxBase::initialize();
+    ComboBoxBaseBase::initialize();
 }
 
 
-void ComboBox::scrollWheelUpdateItem(ComboItem& item, int16_t itemIndex)
+void ComboBoxBase::scrollWheelUpdateItem(ComboItem& item, int16_t itemIndex)
 {
     if (updateCallback && updateCallback->isValid())
     {
@@ -23,7 +23,7 @@ void ComboBox::scrollWheelUpdateItem(ComboItem& item, int16_t itemIndex)
 }
 
 
-void ComboBox::cboAnimateToPositionHandler(int16_t index)
+void ComboBoxBase::cboAnimateToPositionHandler(int16_t index)
 {
     if (!selectingNewItem && isVisible() && selectionChangedCallback && selectionChangedCallback->isValid())
     {

@@ -2428,7 +2428,7 @@
           }
         ],
         "Interactions": [],
-        "Name": "ComboBox",
+        "Name": "ComboBoxBase",
         "X": 0,
         "Y": 0,
         "Width": 360,

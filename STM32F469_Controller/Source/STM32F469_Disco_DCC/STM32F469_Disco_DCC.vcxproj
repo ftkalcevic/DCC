@@ -448,10 +448,10 @@
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\audioconfig_screen\AudioConfigViewBase.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\audioconfig_screen\AudioConfigPresenter.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\audioconfig_screen\AudioConfigView.cpp" />
-    <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\containers\ComboBoxBase.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\ComboScrollWheelMask.cpp" />
-    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\containers\ComboBox.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\containers\ComboItemBase.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\containers\ComboItem.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\containers\ComboBoxBaseBase.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\containers\ComboBoxBase.cpp" />
   </ItemGroup>
 </Project>

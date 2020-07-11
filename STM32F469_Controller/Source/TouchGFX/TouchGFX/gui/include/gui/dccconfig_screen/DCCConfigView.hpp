@@ -12,7 +12,7 @@
 #include <gui/containers/CheckBox.hpp>
 #include <touchgfx/widgets/TextWithFrame.hpp>
 #include <touchgfx/Containers/ModalBoxWindow.hpp>
-#include <gui/containers/ComboBox.hpp>
+#include <gui/containers/ComboBoxBase.hpp>
 
 class DCCConfigView : public DCCConfigViewBase
 {
@@ -68,17 +68,17 @@ public:
 	touchgfx::ButtonWithLabelAndEnable waitCancelButton;
 	
 	touchgfx::TextArea textAreaLabelSpeedSteps;
-    ComboBox cboSpeedSteps;
-    touchgfx::Callback<DCCConfigView, ComboBox&, ComboItem&, int16_t> cboSpeedStepsUpdateItemCallback;
-    void cboSpeedStepsUpdateItemHandler(ComboBox&, ComboItem&, int16_t);
-    touchgfx::Callback<DCCConfigView, ComboBox&, int16_t> cboSpeedStepsSelectionChangedCallback;
-    void cboSpeedStepsSelectionChangedHandler(ComboBox&, int16_t);
+    ComboBoxBase cboSpeedSteps;
+    touchgfx::Callback<DCCConfigView, ComboBoxBase&, ComboItem&, int16_t> cboSpeedStepsUpdateItemCallback;
+    void cboSpeedStepsUpdateItemHandler(ComboBoxBase&, ComboItem&, int16_t);
+    touchgfx::Callback<DCCConfigView, ComboBoxBase&, int16_t> cboSpeedStepsSelectionChangedCallback;
+    void cboSpeedStepsSelectionChangedHandler(ComboBoxBase&, int16_t);
 
 	ModalBoxWindow selectWindow;
 	touchgfx::TextWithFrame selectText;
 	touchgfx::ButtonWithLabelAndEnable selectOKButton;
 	touchgfx::ButtonWithLabelAndEnable selectCancelButton;
-	ComboBox cboSelectList;
+	ComboBoxBase cboSelectList;
 	
 protected:
 	int16_t decoderSpecificYStartPos;

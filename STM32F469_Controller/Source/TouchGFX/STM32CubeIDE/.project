@@ -1253,5 +1253,15 @@
 			<type>1</type>
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/containers/ComboItemBase.cpp</locationURI>
 		</link>
+		<link>
+			<name>Application/User/gui/ComboBoxBase.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/containers/ComboBoxBase.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/ComboBoxBaseBase.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/containers/ComboBoxBaseBase.cpp</locationURI>
+		</link>
 	</linkedResources>
 </projectDescription>

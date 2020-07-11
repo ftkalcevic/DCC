@@ -746,7 +746,7 @@ void DCCConfigView::scrollWheelDecodersUpdateItem(ListItemDecoder& item, int16_t
 }
 
 // TODO - this should be part of a generic combobox - pass array of strings 
-void DCCConfigView::cboSpeedStepsUpdateItemHandler(ComboBox& cbo, ComboItem& cboItem, int16_t itemIndex)
+void DCCConfigView::cboSpeedStepsUpdateItemHandler(ComboBoxBase& cbo, ComboItem& cboItem, int16_t itemIndex)
 {
 	switch (itemIndex)
 	{
@@ -757,7 +757,7 @@ void DCCConfigView::cboSpeedStepsUpdateItemHandler(ComboBox& cbo, ComboItem& cbo
 	}
 }
 
-void DCCConfigView::cboSpeedStepsSelectionChangedHandler(ComboBox& cbo, int16_t itemIndex)
+void DCCConfigView::cboSpeedStepsSelectionChangedHandler(ComboBoxBase& cbo, int16_t itemIndex)
 {
 	Decoders &d = uiDecodersConfig[selectedDecoderItem];
 	d.getLoco().setSpeedSteps((ESpeedSteps::ESpeedSteps)itemIndex);	

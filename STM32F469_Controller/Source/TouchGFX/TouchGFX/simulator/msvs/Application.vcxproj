@@ -76,9 +76,10 @@
     <ClCompile Include="..\..\gui\src\audioconfig_screen\AudioConfigView.cpp"/>
     <ClCompile Include="..\..\generated\gui_generated\src\audioconfig_screen\AudioConfigViewBase.cpp"/>
     <ClCompile Include="..\..\gui\src\containers\ComboBox.cpp"/>
-    <ClCompile Include="..\..\generated\gui_generated\src\containers\ComboBoxBase.cpp"/>
     <ClCompile Include="..\..\gui\src\containers\ComboItem.cpp"/>
     <ClCompile Include="..\..\generated\gui_generated\src\containers\ComboItemBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\containers\ComboBoxBase.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\ComboBoxBaseBase.cpp"/>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(ApplicationRoot)\assets\texts\texts.xlsx"/>
@@ -288,9 +289,10 @@
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\audioconfig_screen\AudioConfigViewBase.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\containers\ScrollWheelText.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\containers\ComboBox.hpp"/>
-    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\ComboBoxBase.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\containers\ComboItem.hpp"/>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\ComboItemBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\containers\ComboBoxBase.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\ComboBoxBaseBase.hpp"/>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="$(ApplicationRoot)\generated\simulator\touchgfx.rc"/>
