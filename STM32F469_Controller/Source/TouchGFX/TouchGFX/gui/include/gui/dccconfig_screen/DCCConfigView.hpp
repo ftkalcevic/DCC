@@ -34,11 +34,11 @@ public:
 	void ScanAllCVsReply(EErrorCode::EErrorCode result, uint16_t cv, uint8_t value);
 	void WriteReply(EErrorCode::EErrorCode result);
 	
-	touchgfx::ClickListener<touchgfx::Box> boxDecoder;
 	touchgfx::Box boxConfig;
 	touchgfx::ClickListener<touchgfx::TextWithFrame> textAddress;
 	touchgfx::ClickListener<touchgfx::TextWithFrame> textName;
 	touchgfx::ClickListener<touchgfx::TextWithFrame> textDescription;
+	touchgfx::ClickListener<touchgfx::TextWithFrame> textDecoder;
 	touchgfx::TextArea textAreaLabelAddress;
 	touchgfx::TextArea textAreaLabelName;
 	touchgfx::TextArea textAreaLabelDescription;
@@ -60,6 +60,7 @@ public:
 	int16_t selectStartY;
 	int selectedDecoderItem;
 	TickType_t selectStartTime;
+	
 	ModalBoxWindow waitWindow;
 	touchgfx::TextWithFrame waitText;
 	touchgfx::TextWithFrame waitSubText;
@@ -72,6 +73,12 @@ public:
     void cboSpeedStepsUpdateItemHandler(ComboBox&, ComboItem&, int16_t);
     touchgfx::Callback<DCCConfigView, ComboBox&, int16_t> cboSpeedStepsSelectionChangedCallback;
     void cboSpeedStepsSelectionChangedHandler(ComboBox&, int16_t);
+
+	ModalBoxWindow selectWindow;
+	touchgfx::TextWithFrame selectText;
+	touchgfx::ButtonWithLabelAndEnable selectOKButton;
+	touchgfx::ButtonWithLabelAndEnable selectCancelButton;
+	ComboBox cboSelectList;
 	
 protected:
 	int16_t decoderSpecificYStartPos;
@@ -138,6 +145,7 @@ protected:
 	void setConfig(uint8_t cv29);
 	void showDecoderSpecificSettings(bool loco);
 	void HideAllCustomConfigs();
+	void SelectDecoderDefinition(const char16_t *title);
 };
 
 inline DCCConfigView::EButtons operator | (DCCConfigView::EButtons a, DCCConfigView::EButtons b)

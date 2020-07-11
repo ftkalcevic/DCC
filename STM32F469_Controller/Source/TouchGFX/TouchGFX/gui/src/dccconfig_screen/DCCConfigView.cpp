@@ -8,7 +8,7 @@
 #include "AudioTask.h"
 #include "dcc.h"
 #include "ProgTrackDCC.h"		// this should be in model
-
+#include "DecoderDefConfig.h"
 
 static const int16_t x1 = 17;
 static const int16_t x2 = 417;
@@ -77,12 +77,11 @@ DCCConfigView::DCCConfigView() :
     textAreaLabelDecoder.setTypedText(touchgfx::TypedText(T_DCCCONFIGDECODER));
     scrollableContainer1.add(textAreaLabelDecoder);
 
-    boxDecoder.setPosition(x2, yPos, 360, 50);
-    boxDecoder.setColor(touchgfx::Color::getColorFrom24BitRGB(163, 163, 163));
-//	boxDecoder.setClickAction(editTextClickHandlerCallback);
-    scrollableContainer1.add(boxDecoder);
+    textDecoder.setPosition(x2, yPos, 360, 50);
+	textName.setAlignment(CENTER);
+	textDecoder.setClickAction(editTextClickHandlerCallback);
+    scrollableContainer1.add(textDecoder);
 
-	
 	// Address	
 	yPos += 60;
     textAreaLabelAddress.setXY(x1, yPos);
@@ -188,6 +187,35 @@ DCCConfigView::DCCConfigView() :
 	waitWindow.add(waitSubText);
 	waitWindow.add(waitOKButton);
 	waitWindow.add(waitCancelButton);
+	
+	
+	selectText.setFontId(Typography::SANSSERIF40PX);
+	selectText.setAlignment(CENTER);
+	selectText.setBoxColor(Color::getColorFrom24BitRGB(255, 255, 255));
+	
+	selectOKButton.setXY(547, 107);
+    selectOKButton.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_PRESSED_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID));
+    selectOKButton.setLabelText(touchgfx::TypedText(T_WAITBUTTONOKID));
+    selectOKButton.setLabelColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+    selectOKButton.setLabelColorPressed(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+	//selectOKButton.setAction(selectOKButtonClickCallback);
+	
+	selectCancelButton.setXY(547, 107);
+    selectCancelButton.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_PRESSED_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID));
+    selectCancelButton.setLabelText(touchgfx::TypedText(T_WAITBUTTONCANCELID));
+    selectCancelButton.setLabelColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+    selectCancelButton.setLabelColorPressed(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+	//selectCancelButton.setAction(selectCancelButtonClickCallback);
+
+	cboSelectList.setPosition(547, 107, 360, 50);
+//	cboSelectList.setUpdateItemCallback(&cboSelectListUpdateItemCallback);
+//	cboSelectList.setSelectionChangedCallback(&cboSelectListSelectionChangedCallback);
+	cboSelectList.setNumberOfItems( decoderDefinitions.Count());
+	
+	selectWindow.add(selectText);
+	selectWindow.add(selectOKButton);
+	selectWindow.add(selectCancelButton);
+	selectWindow.add(cboSelectList);
 }
 
 void DCCConfigView::HideAllCustomConfigs()
@@ -412,6 +440,7 @@ void DCCConfigView::displayDecoder()
 		textAddress.setText(addressTextBuffer);
 		textName.setText((const Unicode::UnicodeChar *)d.getName());
 		textDescription.setText((const Unicode::UnicodeChar *)d.getDescription());
+		//textDecoder.setText(d.getDecoder());
 		showDecoderSpecificSettings(d.getType() == EDecoderType::Multifunction);
 		setConfig(d.getConfig());
 			
@@ -498,7 +527,6 @@ void DCCConfigView::EditText(EField field, const char16_t *title, const char16_t
 	edittingField = field;
 }
 
-//void DCCConfigView::editTextClickHandler(const Box& b, const ClickEvent& evt)
 void DCCConfigView::editTextClickHandler(const TextWithFrame& b, const ClickEvent& evt)
 {
 	if (state == EState::Editting && selectedDecoderItem >= 0 )
@@ -527,7 +555,36 @@ void DCCConfigView::editTextClickHandler(const TextWithFrame& b, const ClickEven
 			audioTask.PlaySound(EAudioSounds::KeyPressTone);
 		    EditText(EField::Description, u"Description", d.getDescription(), d.getDescriptionMaxLen(), Typography::SANSSERIF28PX, CENTER);
 	    }
+	    else if (&b == static_cast<const TextWithFrame *>(&textDecoder) && evt.getType() == ClickEvent::RELEASED )
+	    {
+			audioTask.PlaySound(EAudioSounds::KeyPressTone);
+		    SelectDecoderDefinition(u"Select Decoder Model");
+	    }
 	}
+}
+
+
+void DCCConfigView::SelectDecoderDefinition(const char16_t *title)
+{
+	const int spacing = 15;
+	const int windowWidth = 600;
+	const int windowHeight = 340;
+	const int textwidth = windowWidth - 50;
+	selectWindow.setWindowSize(windowWidth, windowHeight);
+	selectWindow.setWindowBorderColor(Color::getColorFrom24BitRGB(3, 129, 174));
+	
+	selectText.setPosition((windowWidth - textwidth)/2, 40, textwidth, 50);
+
+	cboSelectList.setPosition((windowWidth - 360)/2, 135, 360, 50);
+	
+	int buttonWidth = selectOKButton.getWidth();
+	selectOKButton.setXY(windowWidth / 2 - buttonWidth - spacing, 250);
+	selectCancelButton.setXY(windowWidth / 2 + spacing, 250);
+
+	selectText.setText(title);
+	add(selectWindow);
+	selectWindow.setVisible(true);
+	selectWindow.invalidate();
 }
 
 void DCCConfigView::closeKeypadWindowHandler(bool success)

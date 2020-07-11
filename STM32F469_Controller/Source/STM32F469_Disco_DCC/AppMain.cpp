@@ -8,12 +8,14 @@
 #include "MainTrackDCC.h"
 #include "Config.h"
 #include "DecodersConfig.h"
+#include "DecoderDefConfig.h"
 
 UIMessage uimsg;
 DRV8873S drv8873S(&hspi2);
 AppMain app;
 UIConfig uiConfig;
 DecodersConfig uiDecodersConfig;;
+DecoderDefConfig decoderDefinitions;
 
 
 extern "C" void AppMainTask_Entry(void *argument)
@@ -248,6 +250,7 @@ void AppMain::Run()
 	
 	InitInputs();
 	uiDecodersConfig.parse();
+	decoderDefinitions.init();
 	
 	uint16_t ms_counter;
 	for(;  ;)

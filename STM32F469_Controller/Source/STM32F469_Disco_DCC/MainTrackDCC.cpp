@@ -106,8 +106,8 @@ static uint8_t MakeSpeed(uint16_t speed, ESpeedSteps::ESpeedSteps speedSteps)	//
 			speed = speed * 126 / 1023;
 			if (speed < 1)
 				speed = 1;
-			else if (speed > 125)
-				speed = 125;
+			else if (speed > 126)
+				speed = 126;
 			speed += 1;
 			return speed;
 		}
