@@ -3,6 +3,7 @@
 #include "InputEvent.h"
 #include <touchgfx/Unicode.hpp>
 #include "Common.h"
+#include <string.h>
 
 
 using namespace touchgfx;
@@ -163,7 +164,7 @@ private:
 	char16_t description[100];
 	uint16_t address;	// How do we address LCC devices?
 	uint8_t config;	// cv29
-	// model file
+	char decoderDefFilename[20];	// model file
 	EDecoderType::EDecoderType type;
 	char UserIconFile[MAX_PATH];
 	char UserBackgroundFile[MAX_PATH];
@@ -183,6 +184,7 @@ public:
 	const uint16_t getDescriptionMaxLen() const { return countof(description);}
 	const uint8_t getConfig() const { return config;}
 	uint16_t getAddress() const { return address; }
+	const char *getDecoderDefFilename() const { return decoderDefFilename;}
 	EDecoderType::EDecoderType getType() const { return type; }
 	LocoSettings &getLoco()
 	{
@@ -314,6 +316,16 @@ public:
 			dirty = true;
 		}
 	}
+	void setDecoderDefFilename( const char *newDef )
+	{
+		if (strcmp(decoderDefFilename, newDef) != 0)
+		{
+			strncpy(decoderDefFilename, newDef, countof(decoderDefFilename));
+			decoderDefFilename[countof(decoderDefFilename)] = 0;
+			dirty = true;
+		}
+	}
+	
 	void setConfig(uint8_t newConfig) 
 	{ 
 		if (newConfig != config)

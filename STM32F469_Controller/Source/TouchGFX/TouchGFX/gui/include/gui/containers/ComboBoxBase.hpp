@@ -20,13 +20,15 @@ public:
     virtual void initialize();
 	virtual void scrollWheelUpdateItem(ComboItem& item, int16_t itemIndex);
 	void setUpdateItemCallback( GenericCallback<ComboBoxBase&, ComboItem&, int16_t> *callback ) { updateCallback = callback; }
-	void setSelectionChangedCallback( GenericCallback<ComboBoxBase&, int16_t> *callback ) { selectionChangedCallback = callback; }
+	void setSelectedIndexChangedCallback( GenericCallback<ComboBoxBase&, int16_t> *callback ) { selectedIndexChangedCallback = callback; }
 
     void setNumberOfItems(int16_t n) { scrollWheel.setNumberOfItems(n); }
 	void setSelectedItem(int16_t index, bool animate = false) { Lock l(selectingNewItem); scrollWheel.animateToItem(index, animate ? -1 : 0); }
+	int getSelectedItem() const { return scrollWheel.getSelectedItem(); }
+	
 protected:
     GenericCallback<ComboBoxBase&, ComboItem&, int16_t> * updateCallback;   // The callback to be executed to paint an item
-    GenericCallback<ComboBoxBase&, int16_t> * selectionChangedCallback;     // The callback when the selection changes
+    GenericCallback<ComboBoxBase&, int16_t> * selectedIndexChangedCallback;     // The callback when the selection changes
 
     Callback<ComboBoxBase, int16_t> cboAnimateToPositionCallback; // The callback to be executed to paint an item
     void cboAnimateToPositionHandler(int16_t index);

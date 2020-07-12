@@ -16,6 +16,7 @@ const char * const DC_DecoderAddr = "Address";
 const char * const DC_DecoderType = "Type";
 const char * const DC_DecoderCV29 = "CV29";
 const char * const DC_DecoderLocoSpeedSteps = "LocoSS";
+const char * const DC_DecoderDefFile = "DecoderDef";
 
 class DecodersConfig: public Config<127, 80>	// longest element is a description string, xpath max is about 70
 {
@@ -28,7 +29,8 @@ class DecodersConfig: public Config<127, 80>	// longest element is a description
 		DecoderAddress,
 		DecoderType,
 		DecoderCV29,
-		DecoderLocoSpeedSteps
+		DecoderLocoSpeedSteps,
+		DecoderDefinitionFile
 	};
 
 	std::vector<Decoders *> decoders;
@@ -48,6 +50,7 @@ protected:
 			{ DC_DecoderType, DecoderType },
 			{ DC_DecoderCV29, DecoderCV29 },
 			{ DC_DecoderLocoSpeedSteps, DecoderLocoSpeedSteps },
+			{ DC_DecoderDefFile, DecoderDefinitionFile },
 		};
 		if (!matchElement(element, e, countof(e)))
 			return false;
@@ -66,6 +69,7 @@ protected:
 			case DecoderType:			decoders.back()->setType((EDecoderType::EDecoderType)atoi(contentBuffer)); break;
 			case DecoderCV29:			decoders.back()->setConfig(atoi(contentBuffer)); break;
 			case DecoderLocoSpeedSteps:	if ( decoders.back()->getType() == EDecoderType::Multifunction ) decoders.back()->getLoco().setSpeedSteps((ESpeedSteps::ESpeedSteps)atoi(contentBuffer)); break;
+			case DecoderDefinitionFile:	decoders.back()->setDecoderDefFilename(contentBuffer); break;
 			default:
 				break;
 		}
@@ -98,6 +102,7 @@ public:
 			stream.WriteElement( DC_DecoderDesc, d->getDescription() );
 			stream.WriteElement( DC_DecoderAddr, d->getAddress() );
 			stream.WriteElement( DC_DecoderType, d->getType() );
+			stream.WriteElement( DC_DecoderDefFile, d->getDecoderDefFilename() );
 			stream.WriteElement( DC_DecoderCV29, d->getConfig() );
 			if (d->getType() == EDecoderType::Multifunction)
 			{

@@ -19,7 +19,7 @@ using namespace touchgfx;
 //const char * const DC_DecoderLocoSpeedSteps = "LocoSS";
 
 const char * const Path_Devices = "/config/devices"; 
-const int MAX_FILENAME_LEN = 20;
+const int DECODER_DEF_FILENAME_LEN = 20;
 
 class DecoderDefConfig: public Config<127, 80>	// longest element is a description string, xpath max is about 70
 {
@@ -38,7 +38,7 @@ class DecoderDefConfig: public Config<127, 80>	// longest element is a descripti
 	class DecoderDefFilename
 	{
 	public:
-		char filename[MAX_FILENAME_LEN];
+		char filename[DECODER_DEF_FILENAME_LEN];
 	};
 	std::vector<DecoderDefFilename> decoderDefFilenames;
 	
@@ -82,8 +82,8 @@ protected:
 	void addDecoderDef(const char *name)
 	{
 		decoderDefFilenames.resize(decoderDefFilenames.size() + 1);
-		strncpy(decoderDefFilenames.back().filename, name, MAX_FILENAME_LEN);
-		decoderDefFilenames.back().filename[MAX_FILENAME_LEN - 1] = 0;
+		strncpy(decoderDefFilenames.back().filename, name, DECODER_DEF_FILENAME_LEN);
+		decoderDefFilenames.back().filename[DECODER_DEF_FILENAME_LEN - 1] = 0;
 	}
 	
 public:
@@ -144,6 +144,10 @@ public:
 					{ 
 						return strcmp( a.filename, b.filename) < 0; 
 					});
+	}
+	
+	void loadDecoderDef(const char *filename)
+	{
 	}
 };
 

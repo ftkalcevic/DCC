@@ -25,8 +25,8 @@ void ComboBoxBase::scrollWheelUpdateItem(ComboItem& item, int16_t itemIndex)
 
 void ComboBoxBase::cboAnimateToPositionHandler(int16_t index)
 {
-    if (!selectingNewItem && isVisible() && selectionChangedCallback && selectionChangedCallback->isValid())
+    if (!selectingNewItem && isVisible() && selectedIndexChangedCallback && selectedIndexChangedCallback->isValid())
     {
-        selectionChangedCallback->execute(*this, index);
+        selectedIndexChangedCallback->execute(*this, index);
     }
 }

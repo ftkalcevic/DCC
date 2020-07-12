@@ -136,6 +136,7 @@
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\common\FrontendApplication.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\common\FullKeyboard.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\common\NumericKeypad.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\containers\ComboBox.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\main_screen\MainPresenter.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\main_screen\MainView.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\model\Model.cpp" />
@@ -212,6 +213,7 @@
     <ClCompile Include="ProgTrackDCC.cpp" />
     <ClCompile Include="stm32f4xx_hal_tim_plus.c" />
     <ClCompile Include="upng.cpp" />
+    <ClCompile Include="Utility.cpp" />
     <ClCompile Include="yxml.c" />
     <ClInclude Include="..\OpenLCB\src\Configuration.h" />
     <ClInclude Include="..\OpenLCB\src\Datagram.h" />
@@ -247,6 +249,7 @@
     <ClInclude Include="..\TouchGFX\TouchGFX\gui\include\gui\common\NumericKeypadLayout.hpp" />
     <ClInclude Include="..\TouchGFX\TouchGFX\gui\include\gui\common\PNGFileLoader.h" />
     <ClInclude Include="..\TouchGFX\TouchGFX\gui\include\gui\common\TGAFileLoader.h" />
+    <ClInclude Include="..\TouchGFX\TouchGFX\gui\include\gui\containers\ComboBox.hpp" />
     <ClInclude Include="..\TouchGFX\TouchGFX\gui\src\common\CustomButton.hpp" />
     <ClInclude Include="AnalogInputConfigWidget.h" />
     <ClInclude Include="AppMain.h" />
@@ -270,6 +273,7 @@
     <ClInclude Include="stm32f4xx_hal_tim_plus.h" />
     <ClInclude Include="ToggleButtonIconAndText.h" />
     <ClInclude Include="upng.h" />
+    <ClInclude Include="Utility.h" />
     <None Include="stm32.props" />
     <ClCompile Include="$(BSP_ROOT)\STM32F4xxxx\StartupFiles\startup_stm32f469xx.c" />
     <ClInclude Include="..\TouchGFX\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h" />

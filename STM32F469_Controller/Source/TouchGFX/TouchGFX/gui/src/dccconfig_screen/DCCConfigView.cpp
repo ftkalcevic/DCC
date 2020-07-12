@@ -4,6 +4,7 @@
 #include <texts/TextKeysAndLanguages.hpp>
 #include <stdio.h>
 #include "Common.h"
+#include "Utility.h"
 #include "DecodersConfig.h"
 #include "AudioTask.h"
 #include "dcc.h"
@@ -33,7 +34,8 @@ DCCConfigView::DCCConfigView() :
     scrollWheelDecodersClickCallback(this, &DCCConfigView::scrollWheelDecodersClickHandler),
 	waitOKButtonClickCallback(this, &DCCConfigView::waitOKButtonClickHandler),
 	waitCancelButtonClickCallback(this, &DCCConfigView::waitCancelButtonClickHandler),
-    cboSpeedStepsUpdateItemCallback(this, &DCCConfigView::cboSpeedStepsUpdateItemHandler),
+	selectListOKButtonClickCallback(this, &DCCConfigView::selectListOKButtonClickHandler),
+	selectListCancelButtonClickCallback(this, &DCCConfigView::selectListCancelButtonClickHandler),
     cboSpeedStepsSelectionChangedCallback(this, &DCCConfigView::cboSpeedStepsSelectionChangedHandler),
 	state(Editting),
 	selectedDecoderItem(-1)
@@ -126,6 +128,10 @@ DCCConfigView::DCCConfigView() :
 	
 	HideAllCustomConfigs();
 	
+	cboSpeedSteps.addComboItem(u"14 Steps", ESpeedSteps::ss14);
+	cboSpeedSteps.addComboItem(u"28 Steps", ESpeedSteps::ss28);
+	cboSpeedSteps.addComboItem(u"128 Steps", ESpeedSteps::ss128);
+	
 	scrollableContainer1.add(textAreaLabelSpeedSteps);
 	scrollableContainer1.add(cboSpeedSteps);
 	scrollableContainer1.add(textAreaLabelConfig);
@@ -198,20 +204,20 @@ DCCConfigView::DCCConfigView() :
     selectOKButton.setLabelText(touchgfx::TypedText(T_WAITBUTTONOKID));
     selectOKButton.setLabelColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
     selectOKButton.setLabelColorPressed(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
-	//selectOKButton.setAction(selectOKButtonClickCallback);
+	selectOKButton.setAction(selectListOKButtonClickCallback);
 	
 	selectCancelButton.setXY(547, 107);
     selectCancelButton.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_PRESSED_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID));
     selectCancelButton.setLabelText(touchgfx::TypedText(T_WAITBUTTONCANCELID));
     selectCancelButton.setLabelColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
     selectCancelButton.setLabelColorPressed(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
-	//selectCancelButton.setAction(selectCancelButtonClickCallback);
+	selectCancelButton.setAction(selectListCancelButtonClickCallback);
 
 	cboSelectList.setPosition(547, 107, 360, 50);
-//	cboSelectList.setUpdateItemCallback(&cboSelectListUpdateItemCallback);
-//	cboSelectList.setSelectionChangedCallback(&cboSelectListSelectionChangedCallback);
-	cboSelectList.setNumberOfItems( decoderDefinitions.Count());
-	
+	cboSelectList.addComboItem(u"Other",-1);
+	for ( int i = 0; i < decoderDefinitions.Count(); i++)
+		cboSelectList.addComboItem(decoderDefinitions[i],i);
+		
 	selectWindow.add(selectText);
 	selectWindow.add(selectOKButton);
 	selectWindow.add(selectCancelButton);
@@ -262,7 +268,6 @@ void DCCConfigView::showDecoderSpecificSettings( bool loco )
 		textAreaLabelSpeedSteps.setVisible(true);
 
 		cboSpeedSteps.setPosition(x2, yPos, 360, 50);
-		cboSpeedSteps.setUpdateItemCallback(&cboSpeedStepsUpdateItemCallback);
 		cboSpeedSteps.setSelectionChangedCallback(&cboSpeedStepsSelectionChangedCallback);
 		cboSpeedSteps.setNumberOfItems(3);
 		cboSpeedSteps.setVisible(true);
@@ -429,6 +434,11 @@ void DCCConfigView::setConfig(uint8_t cv29)
 	chkAccAddressMethod.setSelected(cv29 & CV29_ACC_EXTENDED_ADDR);
 }
 
+void DCCConfigView::loadDecoderDef(const char *filename)
+{
+	decoderDefinitions.loadDecoderDef(filename);
+}
+
 void DCCConfigView::displayDecoder()
 {
 	bool hasDecoder = selectedDecoderItem >= 0 && selectedDecoderItem < uiDecodersConfig.Count();
@@ -440,7 +450,16 @@ void DCCConfigView::displayDecoder()
 		textAddress.setText(addressTextBuffer);
 		textName.setText((const Unicode::UnicodeChar *)d.getName());
 		textDescription.setText((const Unicode::UnicodeChar *)d.getDescription());
-		//textDecoder.setText(d.getDecoder());
+		if (strlen(d.getDecoderDefFilename()) == 0)
+		{
+			textDecoder.setText(u"Other"); 
+		}
+		else
+		{
+			strncpy16(decoderDefBuffer, d.getDecoderDefFilename(), countof(decoderDefBuffer));
+			textDecoder.setText(decoderDefBuffer); 
+			loadDecoderDef(d.getDecoderDefFilename());
+		}
 		showDecoderSpecificSettings(d.getType() == EDecoderType::Multifunction);
 		setConfig(d.getConfig());
 			
@@ -458,13 +477,16 @@ void DCCConfigView::displayDecoder()
 		HideAllCustomConfigs();
 	}
 	buttonDelete.setEnabled(hasDecoder);
+	
 	textAddress.setEnabled(hasDecoder && progTrackEnabled);
 	textName.setEnabled(hasDecoder);
 	textDescription.setEnabled(hasDecoder);
+	textDecoder.setEnabled(hasDecoder);
 	
 	textAddress.invalidate();
 	textName.invalidate();
 	textDescription.invalidate();
+	textDecoder.invalidate();
 }
 
 void DCCConfigView::buttonProgTrackClickHandler(const touchgfx::AbstractButton& src)
@@ -585,6 +607,7 @@ void DCCConfigView::SelectDecoderDefinition(const char16_t *title)
 	add(selectWindow);
 	selectWindow.setVisible(true);
 	selectWindow.invalidate();
+	state = EState::SelectDecoderDef;
 }
 
 void DCCConfigView::closeKeypadWindowHandler(bool success)
@@ -745,22 +768,11 @@ void DCCConfigView::scrollWheelDecodersUpdateItem(ListItemDecoder& item, int16_t
 	item.setIndex(itemIndex, itemIndex == selectedDecoderItem);
 }
 
-// TODO - this should be part of a generic combobox - pass array of strings 
-void DCCConfigView::cboSpeedStepsUpdateItemHandler(ComboBoxBase& cbo, ComboItem& cboItem, int16_t itemIndex)
-{
-	switch (itemIndex)
-	{
-		case ESpeedSteps::ss14: cboItem.setText(u"14 Steps"); break;
-		case ESpeedSteps::ss28: cboItem.setText(u"28 Steps"); break;
-		case ESpeedSteps::ss128: cboItem.setText(u"128 Steps"); break;
-		default: cboItem.setText(u""); break;
-	}
-}
 
-void DCCConfigView::cboSpeedStepsSelectionChangedHandler(ComboBoxBase& cbo, int16_t itemIndex)
+void DCCConfigView::cboSpeedStepsSelectionChangedHandler(ComboBoxBase& cbo, int16_t itemIndex, int16_t id)
 {
 	Decoders &d = uiDecodersConfig[selectedDecoderItem];
-	d.getLoco().setSpeedSteps((ESpeedSteps::ESpeedSteps)itemIndex);	
+	d.getLoco().setSpeedSteps((ESpeedSteps::ESpeedSteps)id);	
 }
 
 void DCCConfigView::ShowWaitWindow(const char16_t *title, const char16_t *subtitle, EButtons buttons )
@@ -854,37 +866,30 @@ void DCCConfigView::waitCancelButtonClickHandler(const touchgfx::AbstractButton&
 }
 
 
+void DCCConfigView::selectListOKButtonClickHandler(const touchgfx::AbstractButton& src)
+{
+	if (state == EState::SelectDecoderDef )
+	{
+		Decoders &d = uiDecodersConfig[selectedDecoderItem];
+		int id = cboSelectList.getSelectedId();
+		if (id < 0)
+			d.setDecoderDefFilename("");
+		else
+			d.setDecoderDefFilename(decoderDefinitions[id]);
+		displayDecoder();
+	}
+	
+	selectWindow.setVisible(false);
+	selectWindow.invalidate();
+	remove(selectWindow);
+	state = EState::Editting;
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+void DCCConfigView::selectListCancelButtonClickHandler(const touchgfx::AbstractButton& src)
+{
+	selectWindow.setVisible(false);
+	selectWindow.invalidate();
+	remove(selectWindow);
+	state = EState::Editting;
+}

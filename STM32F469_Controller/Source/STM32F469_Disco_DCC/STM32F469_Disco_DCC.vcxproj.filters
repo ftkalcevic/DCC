@@ -1101,6 +1101,12 @@
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\containers\ComboBoxBase.cpp">
       <Filter>Source files\Application\User\gui</Filter>
     </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\containers\ComboBox.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="Utility.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stm32f4xx_hal_tim_plus.h">
@@ -1272,6 +1278,12 @@
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\include\touchgfx\containers\ModalBoxWindow.hpp">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TouchGFX\TouchGFX\gui\include\gui\containers\ComboBox.hpp">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility.h">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>

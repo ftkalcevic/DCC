@@ -12,7 +12,8 @@
 #include <gui/containers/CheckBox.hpp>
 #include <touchgfx/widgets/TextWithFrame.hpp>
 #include <touchgfx/Containers/ModalBoxWindow.hpp>
-#include <gui/containers/ComboBoxBase.hpp>
+#include <gui/containers/ComboBox.hpp>
+#include "DecoderDefConfig.h"
 
 class DCCConfigView : public DCCConfigViewBase
 {
@@ -68,17 +69,15 @@ public:
 	touchgfx::ButtonWithLabelAndEnable waitCancelButton;
 	
 	touchgfx::TextArea textAreaLabelSpeedSteps;
-    ComboBoxBase cboSpeedSteps;
-    touchgfx::Callback<DCCConfigView, ComboBoxBase&, ComboItem&, int16_t> cboSpeedStepsUpdateItemCallback;
-    void cboSpeedStepsUpdateItemHandler(ComboBoxBase&, ComboItem&, int16_t);
-    touchgfx::Callback<DCCConfigView, ComboBoxBase&, int16_t> cboSpeedStepsSelectionChangedCallback;
-    void cboSpeedStepsSelectionChangedHandler(ComboBoxBase&, int16_t);
+    ComboBox cboSpeedSteps;
+    touchgfx::Callback<DCCConfigView, ComboBoxBase&, int16_t, int16_t> cboSpeedStepsSelectionChangedCallback;
+    void cboSpeedStepsSelectionChangedHandler(ComboBoxBase&, int16_t, int16_t);
 
 	ModalBoxWindow selectWindow;
 	touchgfx::TextWithFrame selectText;
 	touchgfx::ButtonWithLabelAndEnable selectOKButton;
 	touchgfx::ButtonWithLabelAndEnable selectCancelButton;
-	ComboBoxBase cboSelectList;
+	ComboBox cboSelectList;
 	
 protected:
 	int16_t decoderSpecificYStartPos;
@@ -100,10 +99,12 @@ protected:
 		ScanningAllCVs,
 		Keypad,
 		Keyboard,
-		DeleteDecoder
+		DeleteDecoder,
+		SelectDecoderDef
 	} state;
 
 	Unicode::UnicodeChar addressTextBuffer[5];	// max 4 digits plus terminator
+	char16_t decoderDefBuffer[DECODER_DEF_FILENAME_LEN];
 	Unicode::UnicodeChar scanAllTextBuffer[50];
 
 	void EditNumeric(EField field, const char16_t *title, uint16_t value, int min, int max);
@@ -134,6 +135,10 @@ protected:
 	void waitOKButtonClickHandler(const touchgfx::AbstractButton& src);
 	touchgfx::Callback<DCCConfigView, const touchgfx::AbstractButton&> waitCancelButtonClickCallback;
 	void waitCancelButtonClickHandler(const touchgfx::AbstractButton& src);
+	touchgfx::Callback<DCCConfigView, const touchgfx::AbstractButton&> selectListOKButtonClickCallback;
+	void selectListOKButtonClickHandler(const touchgfx::AbstractButton& src);
+	touchgfx::Callback<DCCConfigView, const touchgfx::AbstractButton&> selectListCancelButtonClickCallback;
+	void selectListCancelButtonClickHandler(const touchgfx::AbstractButton& src);
 
 	bool isProgTrackEnabled() const 
 	{
@@ -146,6 +151,7 @@ protected:
 	void showDecoderSpecificSettings(bool loco);
 	void HideAllCustomConfigs();
 	void SelectDecoderDefinition(const char16_t *title);
+	void loadDecoderDef(const char *filename);
 };
 
 inline DCCConfigView::EButtons operator | (DCCConfigView::EButtons a, DCCConfigView::EButtons b)
