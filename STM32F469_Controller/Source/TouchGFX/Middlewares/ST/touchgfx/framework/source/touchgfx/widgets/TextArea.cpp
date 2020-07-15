@@ -163,6 +163,7 @@ int16_t TextArea::calculateTextHeight(const Unicode::UnicodeChar* format, ...) c
     TextProvider textProvider;
     textProvider.initialize(format, pArg, fontToDraw->getGSUBTable());
 
+    int16_t w = getWidth();
     int16_t numLines = LCD::getNumLines(textProvider, wideTextAction, typedText.getTextDirection(), typedText.getFont(), getWidth());
 
     va_end(pArg);

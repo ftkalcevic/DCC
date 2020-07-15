@@ -164,7 +164,7 @@ protected:
 	void clearCVDisplay();
 	void displayCVDisplay();
 	void DisplayCV(EDecoderDataType::EDecoderDataType cvType, uint16_t cvNumber, const char16_t *name, CVDef &cv, uint16_t &yPos);
-	
+	uint16_t DrawCVTitle(const char16_t *name, const uint16_t yPos);
 };
 
 inline DCCConfigView::EButtons operator | (DCCConfigView::EButtons a, DCCConfigView::EButtons b)

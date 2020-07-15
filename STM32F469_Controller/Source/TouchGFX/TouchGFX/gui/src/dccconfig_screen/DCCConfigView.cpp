@@ -13,6 +13,7 @@
 
 static const int16_t x1 = 17;
 static const int16_t x2 = 417;
+static const int16_t LINE_SPACING = 15;
 
 
 
@@ -73,7 +74,7 @@ DCCConfigView::DCCConfigView() :
     scrollableContainer1.add(buttonDelete);
 	
 	// Decoder
-	yPos += 80;
+	yPos += 70 + LINE_SPACING;
     textAreaLabelDecoder.setXY(x1, yPos);
     textAreaLabelDecoder.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
     textAreaLabelDecoder.setLinespacing(0);
@@ -86,7 +87,7 @@ DCCConfigView::DCCConfigView() :
     scrollableContainer1.add(textDecoder);
 
 	// Address	
-	yPos += 60;
+	yPos += 50 + LINE_SPACING;
     textAreaLabelAddress.setXY(x1, yPos);
     textAreaLabelAddress.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
     textAreaLabelAddress.setLinespacing(0);
@@ -99,7 +100,7 @@ DCCConfigView::DCCConfigView() :
     scrollableContainer1.add(textAddress);
 
 	// Name
-	yPos += 60;
+	yPos += 50 + LINE_SPACING;
     textAreaLabelName.setXY(x1, yPos);
     textAreaLabelName.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
     textAreaLabelName.setLinespacing(0);
@@ -112,7 +113,7 @@ DCCConfigView::DCCConfigView() :
     scrollableContainer1.add(textName);
 
 	// Description
-	yPos += 60;
+	yPos += 50 + LINE_SPACING;
     textAreaLabelDescription.setXY(x1, yPos);
     textAreaLabelDescription.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
     textAreaLabelDescription.setLinespacing(0);
@@ -178,7 +179,7 @@ DCCConfigView::DCCConfigView() :
 	btnRaw.setAction(buttonCVDisplayClickCallback);
     scrollableContainer1.add(btnRaw);
 
-	yPos += 60 + 20;
+	yPos += 50 + LINE_SPACING;
     backgroundImage.setPosition(0, 0, 800, yPos);
 	
     scrollableContainer1.setScrollbarsPermanentlyVisible();
@@ -315,7 +316,7 @@ void DCCConfigView::showDecoderSpecificSettings( bool loco )
 	if (loco)
 	{
 		// Multifunction Decoder Options
-		yPos += 60;
+		yPos += 50 + LINE_SPACING;
 		textAreaLabelSpeedSteps.setXY(x1, yPos);
 		textAreaLabelSpeedSteps.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
 		textAreaLabelSpeedSteps.setLinespacing(0);
@@ -328,7 +329,7 @@ void DCCConfigView::showDecoderSpecificSettings( bool loco )
 		cboSpeedSteps.setVisible(true);
 	
 		// Config
-		yPos += 60;
+		yPos += 50 + LINE_SPACING;
 		yConfig = 10 + 6 * 65 + 10;
 		textAreaLabelConfig.setXY(x1, yPos);
 		textAreaLabelConfig.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
@@ -372,7 +373,7 @@ void DCCConfigView::showDecoderSpecificSettings( bool loco )
 	if (acc)
 	{
 		// Config
-		yPos += 60;
+		yPos += 50 + LINE_SPACING;
 		yConfig = 10 + 3 * 65 + 10;
 		textAreaLabelConfig.setXY(x1, yPos);
 		textAreaLabelConfig.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
@@ -403,7 +404,7 @@ void DCCConfigView::showDecoderSpecificSettings( bool loco )
 	}
 	
 	// CV Display buttons
-	yPos += yConfig + 10;
+	yPos += yConfig + LINE_SPACING;
 	
     btnCVs.setXY(x1, yPos);
 	btnCVs.setVisible(true);
@@ -414,10 +415,10 @@ void DCCConfigView::showDecoderSpecificSettings( bool loco )
     btnRaw.setXY(x1 + 260*2, yPos);
 	btnRaw.setVisible(true);
 
-	yPos += 60;
+	yPos += 50 + LINE_SPACING;
 	yCVBegin = yPos;
 	
-	yPos += 20;
+	yPos += LINE_SPACING;
     backgroundImage.setPosition(0, 0, 800, yPos);
 	
 	scrollableContainer1.doScroll(dx, dy);
@@ -520,6 +521,24 @@ void DCCConfigView::clearCVDisplay()
 	scrollableContainer1.childGeometryChanged();
 }
 
+
+uint16_t DCCConfigView::DrawCVTitle(const char16_t *name, const uint16_t yPos )
+{
+	TextAreaWithOneWildcard *text = new TextAreaWithOneWildcard();
+	text->setWideTextAction(touchgfx::WIDE_TEXT_WORDWRAP);
+	text->setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+	text->setLinespacing(0);	// WARNING linespacing!= requires widget box to be resized.
+	text->setTypedText(touchgfx::TypedText(T_WILDCARDTEXTLEFT40PXID));
+	text->setWildcard((const Unicode::UnicodeChar*)name);
+	text->setPosition(x1, yPos, 360, 150);
+	text->resizeHeightToCurrentText();
+	uint16_t h = text->getTextHeight();
+	scrollableContainer1.add(*text);
+	cvDrawables.push_back(text);
+	
+	return h;
+}
+
 void DCCConfigView::DisplayCV(EDecoderDataType::EDecoderDataType cvType, uint16_t cvNumber, const char16_t *name, CVDef &cv, uint16_t &yPos)
 {
 	switch (cvType)
@@ -531,6 +550,8 @@ void DCCConfigView::DisplayCV(EDecoderDataType::EDecoderDataType cvType, uint16_
 			break;
 		case EDecoderDataType::User:
 			{
+				uint16_t h = DrawCVTitle(name, yPos);
+				
 				DecoderDef &def = decoderDefinitions.getDecoderDef(); 
 				std::shared_ptr<UserType> type = def.types[cv.userType]; 
 				for (auto itBF = type->bitFields.begin(); itBF != type->bitFields.end(); itBF++)
@@ -540,19 +561,13 @@ void DCCConfigView::DisplayCV(EDecoderDataType::EDecoderDataType cvType, uint16_
 					{
 					}					
 				}
+				yPos += h + LINE_SPACING;
 			}
 			break;
 		case EDecoderDataType::Address:	// address - only show in raw mode - use common address
 		case EDecoderDataType::Int:
 			{
-				TextAreaWithOneWildcard *text = new TextAreaWithOneWildcard();
-				text->setXY(x1, yPos);
-				text->setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
-				text->setLinespacing(0);
-				text->setTypedText(touchgfx::TypedText(T_WILDCARDTEXTLEFT40PXID));
-				text->setWildcard((const Unicode::UnicodeChar*)name);
-				scrollableContainer1.add(*text);
-				cvDrawables.push_back(text);
+				uint16_t h = DrawCVTitle(name, yPos);
 
 				touchgfx::ClickListener<touchgfx::TextWithFrame> *edit = new touchgfx::ClickListener<touchgfx::TextWithFrame>();
 				edit->setPosition(x2, yPos, 100, 50);
@@ -560,7 +575,7 @@ void DCCConfigView::DisplayCV(EDecoderDataType::EDecoderDataType cvType, uint16_
 				edit->setFontId(Typography::NUMERIC40PX);
 				scrollableContainer1.add(*edit);					
 				cvDrawables.push_back(edit);
-				yPos += 60;
+				yPos += h+ + LINE_SPACING;
 			}
 			break;
 	}
@@ -629,7 +644,7 @@ void DCCConfigView::displayCVDisplay()
 			text->setWildcard((const Unicode::UnicodeChar*)g.name.c_str());
 			scrollableContainer1.add(*text);
 			cvDrawables.push_back(text);
-			yPos += 60;
+			yPos += 50 + LINE_SPACING;
 			
 			for (auto itCVNum = g.cvs.begin(); itCVNum != g.cvs.end(); itCVNum++)
 			{
@@ -639,7 +654,7 @@ void DCCConfigView::displayCVDisplay()
 		}
 	}
 	
-	yPos += 20;
+	yPos += LINE_SPACING;
 	backgroundImage.setPosition(0, 0, 800, yPos);
 	scrollableContainer1.doScroll(dx, dy);
 	scrollableContainer1.childGeometryChanged();

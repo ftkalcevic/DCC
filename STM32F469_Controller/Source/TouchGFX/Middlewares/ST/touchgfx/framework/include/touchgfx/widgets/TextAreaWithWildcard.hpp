@@ -115,7 +115,6 @@ public:
     void setWildcard(const Unicode::UnicodeChar* value)
     {
         wildcard = value;
-	    resizeToCurrentTextWithAlignment();
     }
 
     /**
