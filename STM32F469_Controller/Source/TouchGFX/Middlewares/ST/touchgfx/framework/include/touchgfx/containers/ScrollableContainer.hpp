@@ -355,7 +355,10 @@ public:
      *
      * @return the distance scrolled for the x-axis.
      */
-    int16_t getScrolledX() const;
+    int16_t getScrolledX() const
+    {
+        return scrolledXDistance;
+    }
 
     /**
      * @fn int16_t ScrollableContainer::getScrolledY() const;
@@ -366,7 +369,11 @@ public:
      *
      * @return the distance scrolled for the y-axis.
      */
-    int16_t getScrolledY() const;
+    int16_t getScrolledY() const
+    {
+        return scrolledYDistance;
+    }
+
 
 protected:
     uint8_t   scrollbarPadding;                           ///< The amount of padding. The scrollbar will have a bit of space to the borders of the container.
@@ -455,8 +462,9 @@ protected:
      * @return did the container actually scroll. The call doScroll(0,0) will always return
      *         false.
      */
+public:
     virtual bool doScroll(int16_t deltaX, int16_t deltaY);
-
+protected:
     GestureEvent::GestureType accelDirection; ///< The current direction (horizontal or vertical) of scroll
 
     Box xSlider; ///< The horizontal scrollbar drawable

@@ -56,13 +56,13 @@ void SwipeContainer::add(Drawable& page)
     setHeight(page.getHeight());
 }
 
-void SwipeContainer::remove(Drawable& page)
+bool SwipeContainer::remove(Drawable& page)
 {
     Drawable* tmp = pages.getFirstChild();
 
     if (!numberOfPages)
     {
-        return;
+        return false;
     }
 
     // looks for the child matching page
@@ -83,13 +83,14 @@ void SwipeContainer::remove(Drawable& page)
             {
                 pageIndicator.setNumberOfPages(numberOfPages);
             }
-            return;
+            return true;
         }
         else
         {
             tmp = tmp->getNextSibling();
         }
     }
+	return false;
 }
 
 void SwipeContainer::setEndSwipeElasticWidth(uint16_t width)

@@ -59,12 +59,12 @@ void Container::add(Drawable& d)
     }
 }
 
-void Container::remove(Drawable& d)
+bool Container::remove(Drawable& d)
 {
     if (!firstChild)
     {
         // No children
-        return;
+        return false;
     }
 
     if (&d == firstChild)
@@ -81,7 +81,7 @@ void Container::remove(Drawable& d)
             firstChild = d.nextSibling;
             d.nextSibling = 0;
         }
-        return;
+        return true;
     }
     Drawable* tmp = firstChild;
 
@@ -92,13 +92,14 @@ void Container::remove(Drawable& d)
             tmp->nextSibling = d.nextSibling;
             d.parent = 0;
             d.nextSibling = 0;
-            return;
+            return true;
         }
         else
         {
             tmp = tmp->nextSibling;
         }
     }
+	return false;
 }
 
 void Container::removeAll()

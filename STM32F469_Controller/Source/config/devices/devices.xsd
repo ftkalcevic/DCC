@@ -12,10 +12,28 @@
         <xs:element name="Details" type="details" minOccurs="1" maxOccurs="1"/>
         <xs:element name="UserTypes" type="usertype" minOccurs="0" maxOccurs="1"/>
         <xs:element name="CVs" type="cvstype" minOccurs="1" maxOccurs="1"/>
+        <xs:element name="Groups" type="groupstype" minOccurs="0" maxOccurs="1"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
 
+  <xs:complexType name="groupstype">
+    <xs:sequence>
+      <xs:element name="Group" type="grouptype" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="grouptype">
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="cvs" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:pattern value="^[0-9]+(,[0-9]+)*$"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+  
   <xs:complexType name="details">
     <xs:attribute name="manufacturer" type="xs:string" use="required"/>
     <xs:attribute name="type" type="decodertype" use="required"/>
@@ -95,6 +113,7 @@
     <xs:choice minOccurs="0" maxOccurs="1">
       <xs:element name="Bit" type="bittype" minOccurs="1" maxOccurs="unbounded"/>
       <xs:element name="BitField" type="bitfieldtype" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:element name="Enum" type="enumtype" minOccurs="1" maxOccurs="unbounded"/>
     </xs:choice>
     <xs:attribute name="number" type="xs:int" use="required"/>
     <xs:attribute name="name" type="xs:string" use="required"/>

@@ -2,8 +2,6 @@
 #include "BitmapDatabase.hpp"
 #include <texts/TextKeysAndLanguages.hpp>
 #include <touchgfx/Color.hpp>
-#include <gui/common/CustomButton.hpp>
-//#include <gui/common/BinFileLoader.h>
 #include <stdio.h>
 #include "Common.h"
 #include "AudioTask.h"
@@ -40,7 +38,8 @@ PreferencesView::PreferencesView():
 	// Add buttons (15, 15) 200x200 spacing
 	for(int i = 0 ; i < sizeof(buttonCfg) / sizeof(buttonCfg[0]) ; i++)
 	{
-		touchgfx::CustomButton *button = new touchgfx::CustomButton();
+		std::shared_ptr<touchgfx::CustomButton> button = std::make_shared<touchgfx::CustomButton>();
+		buttons.push_back(button);
 		button->setXY(15 + (i%4)*200, 15 + (i/4)*200);
 		button->setLabelText(touchgfx::TypedText(T_WILDCARDTEXTLEFT20PXID));
 		button->setLabelText(buttonCfg[i].label);
@@ -51,9 +50,6 @@ PreferencesView::PreferencesView():
 		button->setAction(buttonClickCallback);
 		swipeContainerPage1.add(*button);
 	}
-	// TODO - delete buttons
-	
-	
 }
 
 void PreferencesView::setupScreen()

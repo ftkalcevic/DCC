@@ -67,7 +67,6 @@
     <CV number="8" name="Manufacturer ID" type="int"  min="0" max="255"/>
     <!-- <CV number="8" name="Factory Reset" type="int" 0x08 0x09/> -->
     <CV number="9" name="Motor Freq" type="int" min="0" max="255"/>
-    <CV number="13" name="DC Functions On" type="int" min="0" max="255"/>
     <CV number="15" name="Select Target Decoder" type="int" min="0" max="255"/>
     <CV number="16" name="Select Target Decoder ID" type="int" min="0" max="255"/>
     <CV number="17" name="4 Digit Address Hi Byte" type="int" min="0" max="255"/>
@@ -127,11 +126,33 @@
     <CV number="66" name="Forward Trim" type="int" min="0" max="255"/>
     <CV number="67" name="28 Speed Table" type="speedTable" min="0" max="255" cvcount="28"/>
     <CV number="95" name="Reverse Trim" type="int" min="0" max="255"/>
-    <CV number="105" name="User private ID 1" type="int" min="0" max="255"/>
+    <CV number="105" name="User private ID 1" type="enum" min="0" max="255">
+      <Enum value="0" name="None"/>
+      <Enum value="1" name="ID#1"/>
+      <Enum value="2" name="ID#3"/>
+      <Enum value="3" name="All"/>
+    </CV>
     <CV number="106" name="User private ID 2" type="int" min="0" max="255"/>
     <CV number="113" name="F3, Function 3 (brown)" type="FX3" min="0" max="255"/>
     <CV number="114" name="F4, Function 4 (white/yellow)" type="FX3" min="0" max="255"/>
     <CV number="115" name="F5, Function 5 (white/green)" type="FX3" min="0" max="255"/>
     <CV number="116" name="F6, Function 6 (white/blue)" type="FX3" min="0" max="255"/>
   </CVs>
+  <Groups>
+    <Group name="Locomotive Address" cvs="1,17,18" />
+    <Group name="Acceleration &amp; Deceleration" cvs="3,4" />
+    <Group name="3 Step Simple Speed Table" cvs="1,5,6" />
+    <Group name="28 Step Speed Table" cvs="65,66,67,95" />
+    <Group name="Torque Comp. &amp; Switching Speed" cvs="54" />
+    <Group name="Scaleable Speed Stabilization" cvs="55,56,57" />
+    <Group name="Advanced Consist Address" cvs="19" />
+    <Group name="Transponding &amp; LED/Lamp Select" cvs="61" />
+    <Group name="SuperSonic" cvs="9" />
+    <Group name="Light Control" cvs="49,50,51,52,113,114,115,116,62,63" />
+    <Group name="Function Mapping" cvs="33,34,35,36,37,38,39,40,41,42,43,44,45,46"/>
+    <Group name="Advanced Consist Control" cvs="21,22"/>
+    <Group name="Decoder Rest" cvs="8"/>
+    <Group name="Decoder Lock" cvs="15,16"/>
+    <Group name="Decoder IDs" cvs="105,106,7,8"/>
+  </Groups>
 </Decoder>

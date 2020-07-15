@@ -693,13 +693,4 @@ void ScrollableContainer::setScrollbarsPermanentlyVisible()
     invalidateScrollbars();
 }
 
-int16_t ScrollableContainer::getScrolledX() const
-{
-    return scrolledXDistance;
-}
-
-int16_t ScrollableContainer::getScrolledY() const
-{
-    return scrolledYDistance;
-}
 } // namespace touchgfx

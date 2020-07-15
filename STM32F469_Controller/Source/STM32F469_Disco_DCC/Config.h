@@ -7,6 +7,7 @@
 #include "FileSystem.h"
 #include "yxml.h"
 #include <assert.h>
+#include <vector>
 
 
 template<int MAX_ELEMENT_LENGTH, int YXML_WORKING_BUFFER_SIZE = 100, int READ_BUFFER_SIZE=100>
@@ -22,11 +23,14 @@ protected:
 	Config()
 	{
 		dirtyFlag = false;
+		elementStack.reserve(20);
 	}
 	bool dirtyFlag;
 	int activeElement;
+	std::vector<int> elementStack;
 	char contentBuffer[MAX_ELEMENT_LENGTH];
 	int contentBufferIndex;
+	int activeAttribute;
 	
 	void dirty() { dirtyFlag = true;}
 	virtual const char *getPath() const = 0;
@@ -58,6 +62,34 @@ protected:
 		contentBufferIndex = 0;
 		return true;
 	}
+	bool matchAttribute(const char * attribute, ElementNames *e, int elements)
+	{
+		activeAttribute = 0;
+		for ( int i = 0; i < elements; i++ )
+			if (strcmp(attribute, e[i].elementName ) == 0)
+				activeAttribute = e[i].id;
+		contentBufferIndex = 0;
+		return true;
+	}
+	virtual bool attributeStart(const char *element) { return true; }
+	virtual bool attributeContent(const char *data)
+	{
+		if (activeAttribute != 0)
+		{
+			while ((*data) != '\0')
+			{
+				if (contentBufferIndex < countof(contentBuffer) - 1)	
+				{
+					contentBuffer[contentBufferIndex++] = *data++;
+					contentBuffer[contentBufferIndex] = 0;
+				}
+				else 
+					break;
+			}
+		}
+		return true;		
+	}
+	virtual bool attributeEnd() {return true; }
 	
 public:	
 	bool isDirty() const { return dirtyFlag;}
@@ -102,6 +134,7 @@ public:
 							case YXML_OK:				/* Character consumed, no new token present   */
 								break;
 							case YXML_ELEMSTART:		/* Start of an element:   '<Tag ..'           */
+								elementStack.push_back(activeElement);
 								if ( !elementStart(xml.elem) ) run = false;
 								break;
 							case YXML_CONTENT:			/* Element content                            */
@@ -109,10 +142,17 @@ public:
 								break;
 							case YXML_ELEMEND:			/* End of an element:     '.. />' or '</Tag>' */
 								if ( !elementEnd() ) run = false;
+								activeElement = elementStack.back(); elementStack.pop_back();
 								break;
 							case YXML_ATTRSTART:		/* Attribute:             'Name=..'           */
+								if (!attributeStart(xml.attr)) run = false;
+								break;
 							case YXML_ATTRVAL:			/* Attribute value                            */
+								if (!attributeContent(xml.data)) run = false;
+								break;
 							case YXML_ATTREND:			/* End of attribute       '.."'               */
+								if (!attributeEnd()) run = false;
+								break;
 							case YXML_PISTART:			/* Start of a processing instruction          */
 							case YXML_PICONTENT:		/* Content of a PI                            */
 							case YXML_PIEND:			/* End of a processing instruction            */						

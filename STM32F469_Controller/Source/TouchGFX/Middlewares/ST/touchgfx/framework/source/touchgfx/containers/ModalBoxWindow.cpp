@@ -82,9 +82,9 @@ void ModalBoxWindow::add(Drawable& d)
     windowContainer.add(d);
 }
 
-void ModalBoxWindow::remove(Drawable& d)
+bool ModalBoxWindow::remove(Drawable& d)
 {
-    windowContainer.remove(d);
+    return windowContainer.remove(d);
 }
 
 void ModalBoxWindow::setShadeAlpha(uint8_t alpha)

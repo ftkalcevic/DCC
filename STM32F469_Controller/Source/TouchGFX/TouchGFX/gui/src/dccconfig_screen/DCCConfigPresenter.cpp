@@ -16,6 +16,7 @@ void DCCConfigPresenter::activate()
 void DCCConfigPresenter::deactivate()
 {
 	EnableProgTrack(false);
+	decoderDefinitions.clear();
 	uiDecodersConfig.write();
 }
 

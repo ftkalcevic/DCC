@@ -4,6 +4,9 @@
 #include <gui_generated/preferences_screen/PreferencesViewBase.hpp>
 #include <gui/preferences_screen/PreferencesPresenter.hpp>
 #include <touchgfx/widgets/AbstractButton.hpp>
+#include <gui/common/CustomButton.hpp>
+#include <vector>
+#include <memory>
 
 class PreferencesView : public PreferencesViewBase
 {
@@ -20,6 +23,7 @@ protected:
     BitmapId bmpId;
     touchgfx::Callback<PreferencesView, const touchgfx::AbstractButton&> buttonClickCallback;
     void buttonClickHandler(const touchgfx::AbstractButton& src);
+	std::vector<std::shared_ptr<touchgfx::CustomButton>> buttons;
 };
 
 #endif // PREFERENCESVIEW_HPP

@@ -86,7 +86,7 @@ public:
      *
      * @param [in] d The Drawable to remove.
      */
-    virtual void remove(Drawable& d);
+    virtual bool remove(Drawable& d);
 
     /**
      * @fn virtual void Container::removeAll();

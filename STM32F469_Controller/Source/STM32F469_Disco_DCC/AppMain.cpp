@@ -193,6 +193,7 @@ void AppMain::ToggleEStop()
 	ProgrammingTrack_DCC_EStop(eStop);
 	
 	CheckTaskStacks();
+	printHeapStatistics();
 }
 
 void AppMain::YieldControl(Decoders &d)
@@ -241,9 +242,12 @@ void AppMain::TakeControl(int decoderIndex, bool control)
 }
 
 
+
 void AppMain::Run()
 {
+	InitMallocChecking();
 	CheckTaskStacks();
+	printHeapStatistics();
 	// Play startup sound
 	audioTask.PlaySound(EAudioSounds::Bell2);
 	//audioTask.Mute(true);
@@ -251,6 +255,13 @@ void AppMain::Run()
 	InitInputs();
 	uiDecodersConfig.parse();
 	decoderDefinitions.init();
+//	printHeapStatistics();
+//	decoderDefinitions.loadDecoderDef("DZ143");
+//	DecoderDef &def = decoderDefinitions.getDecoderDef(); 
+//	printHeapStatistics();
+//	decoderDefinitions.clear();
+//	printHeapStatistics();
+
 	
 	uint16_t ms_counter;
 	for(;  ;)

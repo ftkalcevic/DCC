@@ -50,7 +50,7 @@ inline const char16_t *ErrorCodeText(EErrorCode::EErrorCode code)
 											u"Value Mismatch",
 											u"No Track Power"
 										   };
-		static_assert(EErrorCode::MAX_ERROR_CODE == countof(errors) && "Number of error strings doesn't match the number of error codes");
+		static_assert(EErrorCode::MAX_ERROR_CODE == countof(errors), "Number of error strings doesn't match the number of error codes");
 		return errors[code];
 	}
 	return u"Unknown Error";

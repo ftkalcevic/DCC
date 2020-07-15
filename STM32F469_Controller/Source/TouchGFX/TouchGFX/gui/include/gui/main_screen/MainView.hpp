@@ -5,6 +5,8 @@
 #include <gui/main_screen/MainPresenter.hpp>
 #include <touchgfx/widgets/AbstractButton.hpp>
 #include <gui/common/CustomButton.hpp>
+#include <vector>
+#include <memory>
 
 
 class MainView : public MainViewBase
@@ -23,8 +25,8 @@ protected:
 	virtual void	handleKeyEvent(uint8_t key);
 private:
 	BitmapId bmpId;
-	touchgfx::Container **pages;
-	touchgfx::CustomButton **buttons;
+	std::vector<std::shared_ptr<touchgfx::Container>> pages;
+	std::vector<std::shared_ptr<touchgfx::CustomButton>> buttons;
 	
     touchgfx::Callback<MainView, const touchgfx::AbstractButton&> buttonClickCallback;
     void buttonClickHandler(const touchgfx::AbstractButton& src);

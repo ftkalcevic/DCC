@@ -63,7 +63,7 @@ public:
      *
      * @note This is safe to call even if page is not a page (in which case nothing happens).
      */
-    virtual void remove(Drawable& page);
+    virtual bool remove(Drawable& page);
 
     /**
      * @fn virtual void SwipeContainer::setSwipeCutoff(uint16_t cutoff);

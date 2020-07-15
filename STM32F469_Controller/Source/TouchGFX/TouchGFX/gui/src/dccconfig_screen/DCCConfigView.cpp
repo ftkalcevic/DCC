@@ -37,6 +37,7 @@ DCCConfigView::DCCConfigView() :
 	selectListOKButtonClickCallback(this, &DCCConfigView::selectListOKButtonClickHandler),
 	selectListCancelButtonClickCallback(this, &DCCConfigView::selectListCancelButtonClickHandler),
     cboSpeedStepsSelectionChangedCallback(this, &DCCConfigView::cboSpeedStepsSelectionChangedHandler),
+    buttonCVDisplayClickCallback(this, &DCCConfigView::buttonCVDisplayClickHandler),
 	state(Editting),
 	selectedDecoderItem(-1)
 {
@@ -145,8 +146,37 @@ DCCConfigView::DCCConfigView() :
 	scrollableContainer1.add(chkAccBiDirectionalComms);
 	scrollableContainer1.add(chkAccType);
 	scrollableContainer1.add(chkAccAddressMethod);
-	scrollableContainer1.add(textAreaLabelAllCVs);
 	
+    btnCVs.setXY(x1, yPos);
+    btnCVs.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_MEDIUM_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_MEDIUM_PRESSED_ID));
+	btnCVs.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTLEFT40PXID));
+	btnCVs.setText(u"Config");
+	btnCVs.setLabelColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+	btnCVs.setLabelColorPressed(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+	btnCVs.setVisible(false);
+	btnCVs.setAction(buttonCVDisplayClickCallback);
+	btnCVs.forceState(true);
+    scrollableContainer1.add(btnCVs);
+	
+    btnGroup.setXY(x1 + 260, yPos);
+    btnGroup.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_MEDIUM_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_MEDIUM_PRESSED_ID));
+	btnGroup.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTLEFT40PXID));
+	btnGroup.setText(u"Grouped");
+	btnGroup.setLabelColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+	btnGroup.setLabelColorPressed(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+	btnGroup.setVisible(false);
+	btnGroup.setAction(buttonCVDisplayClickCallback);
+    scrollableContainer1.add(btnGroup);
+	
+    btnRaw.setXY(x1 + 260*2, yPos);
+    btnRaw.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_MEDIUM_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_MEDIUM_PRESSED_ID));
+	btnRaw.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTLEFT40PXID));
+	btnRaw.setText(u"Raw");
+	btnRaw.setLabelColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+	btnRaw.setLabelColorPressed(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+	btnRaw.setVisible(false);
+	btnRaw.setAction(buttonCVDisplayClickCallback);
+    scrollableContainer1.add(btnRaw);
 
 	yPos += 60 + 20;
     backgroundImage.setPosition(0, 0, 800, yPos);
@@ -217,11 +247,33 @@ DCCConfigView::DCCConfigView() :
 	cboSelectList.addComboItem(u"Other",-1);
 	for ( int i = 0; i < decoderDefinitions.Count(); i++)
 		cboSelectList.addComboItem(decoderDefinitions[i],i);
-		
+	
 	selectWindow.add(selectText);
 	selectWindow.add(selectOKButton);
 	selectWindow.add(selectCancelButton);
 	selectWindow.add(cboSelectList);
+}
+
+void DCCConfigView::buttonCVDisplayClickHandler(const touchgfx::AbstractButton& src)
+{
+	bool raw = false, cv = false, group = false;
+	
+	if (&src == static_cast<AbstractButton *>(&btnRaw))
+		raw = true;
+	else if (&src == static_cast<AbstractButton *>(&btnCVs))
+		cv = true;
+	else if (&src == static_cast<AbstractButton *>(&btnGroup))
+		group = true;
+	
+	btnRaw.forceState(raw);
+	btnCVs.forceState(cv);
+	btnGroup.forceState(group);
+	btnRaw.invalidate();
+	btnCVs.invalidate();
+	btnGroup.invalidate();
+	
+	clearCVDisplay();
+	displayCVDisplay();
 }
 
 void DCCConfigView::HideAllCustomConfigs()
@@ -246,12 +298,15 @@ void DCCConfigView::HideAllCustomConfigs()
 	chkAccBiDirectionalComms.setVisible(vis);
 	chkAccType.setVisible(vis);
 	chkAccAddressMethod.setVisible(vis);
-	textAreaLabelAllCVs.setVisible(vis);	
 }
+
 void DCCConfigView::showDecoderSpecificSettings( bool loco )
 {
 	bool acc = !loco;
 	
+	int16_t dx = scrollableContainer1.getScrolledX();
+	int16_t dy = scrollableContainer1.getScrolledY();
+	scrollableContainer1.doScroll(-dx, -dy);
 	
 	HideAllCustomConfigs();
 	
@@ -347,16 +402,28 @@ void DCCConfigView::showDecoderSpecificSettings( bool loco )
 		chkAccAddressMethod.setVisible(true);
 	}
 	
-	// All CVs
+	// CV Display buttons
 	yPos += yConfig + 10;
-    textAreaLabelAllCVs.setXY(x1, yPos);
-    textAreaLabelAllCVs.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
-    textAreaLabelAllCVs.setLinespacing(0);
-    textAreaLabelAllCVs.setTypedText(touchgfx::TypedText(T_DCCCONFIGALLCVS));
-	textAreaLabelAllCVs.setVisible(true);
+	
+    btnCVs.setXY(x1, yPos);
+	btnCVs.setVisible(true);
+	
+    btnGroup.setXY(x1 + 260, yPos);
+	btnGroup.setVisible(true);
+	
+    btnRaw.setXY(x1 + 260*2, yPos);
+	btnRaw.setVisible(true);
 
-	yPos += 60 + 20;
+	yPos += 60;
+	yCVBegin = yPos;
+	
+	yPos += 20;
     backgroundImage.setPosition(0, 0, 800, yPos);
+	
+	scrollableContainer1.doScroll(dx, dy);
+	scrollableContainer1.childGeometryChanged();
+	scrollableContainer1.invalidate();
+	
 }
 
 
@@ -436,8 +503,149 @@ void DCCConfigView::setConfig(uint8_t cv29)
 
 void DCCConfigView::loadDecoderDef(const char *filename)
 {
+	decoderDefinitions.clear();
 	decoderDefinitions.loadDecoderDef(filename);
 }
+
+void DCCConfigView::clearCVDisplay()
+{
+	for (auto it = cvDrawables.begin(); it != cvDrawables.end(); it++)
+	{
+		touchgfx::Drawable *d = *it;
+		bool removed = scrollableContainer1.remove(*d);
+		assert(removed);
+		delete d;	// todo - use smart pointer
+	}
+	cvDrawables.clear();
+	scrollableContainer1.childGeometryChanged();
+}
+
+void DCCConfigView::DisplayCV(EDecoderDataType::EDecoderDataType cvType, uint16_t cvNumber, const char16_t *name, CVDef &cv, uint16_t &yPos)
+{
+	switch (cvType)
+	{
+		case EDecoderDataType::Enum:
+		case EDecoderDataType::Bitfield:
+			break;
+		case EDecoderDataType::SpeedTable:
+			break;
+		case EDecoderDataType::User:
+			{
+				DecoderDef &def = decoderDefinitions.getDecoderDef(); 
+				std::shared_ptr<UserType> type = def.types[cv.userType]; 
+				for (auto itBF = type->bitFields.begin(); itBF != type->bitFields.end(); itBF++)
+				{
+					BitField &bf = **itBF;
+					//for (auto it = bf.bitFields.begin(); it != type->bitFields.end(); it++)
+					{
+					}					
+				}
+			}
+			break;
+		case EDecoderDataType::Address:	// address - only show in raw mode - use common address
+		case EDecoderDataType::Int:
+			{
+				TextAreaWithOneWildcard *text = new TextAreaWithOneWildcard();
+				text->setXY(x1, yPos);
+				text->setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+				text->setLinespacing(0);
+				text->setTypedText(touchgfx::TypedText(T_WILDCARDTEXTLEFT40PXID));
+				text->setWildcard((const Unicode::UnicodeChar*)name);
+				scrollableContainer1.add(*text);
+				cvDrawables.push_back(text);
+
+				touchgfx::ClickListener<touchgfx::TextWithFrame> *edit = new touchgfx::ClickListener<touchgfx::TextWithFrame>();
+				edit->setPosition(x2, yPos, 100, 50);
+				edit->setClickAction(editTextClickHandlerCallback);
+				edit->setFontId(Typography::NUMERIC40PX);
+				scrollableContainer1.add(*edit);					
+				cvDrawables.push_back(edit);
+				yPos += 60;
+			}
+			break;
+	}
+}
+
+void DCCConfigView::displayCVDisplay()
+{
+	DecoderDef &def = decoderDefinitions.getDecoderDef(); 
+	
+	// Radio buttons
+	// Buttons for [CV] [Group] [Raw]  (group if there are groups).
+	
+	int16_t dx = scrollableContainer1.getScrolledX();
+	int16_t dy = scrollableContainer1.getScrolledY();
+	scrollableContainer1.doScroll(-dx, -dy);
+	// Count cvs (max)
+	int cvSum = 0;
+	for (auto itCV = def.CVs.begin(); itCV != def.CVs.end(); itCV++)
+		cvSum += itCV->second->cvcount;
+		
+	cvNumbers.clear();
+	cvNumbers.reserve(cvSum);	
+	cvDrawables.reserve(cvSum*4);	
+	
+	uint16_t yPos = yCVBegin;
+	
+	if ( btnCVs.getState() )
+	{
+		for (auto itCV = def.CVs.begin(); itCV != def.CVs.end(); itCV++)
+		{
+			CVDef &cv = *(itCV->second);
+			DisplayCV(cv.type, cv.number, cv.name.c_str(), cv, yPos);
+		}
+	}
+	else if ( btnRaw.getState() )
+	{
+		// todo - sort by cv number
+		for (auto itCV = def.CVs.begin(); itCV != def.CVs.end(); itCV++)
+		{
+			CVDef &cv = *(itCV->second);
+			
+			for (int i = 0; i < cv.cvcount; i++)
+			{
+				int cvNum = cv.number + i;
+				
+				char16_t buffer[15];
+				Unicode::snprintf((Unicode::UnicodeChar *)buffer, countof(buffer), "CV%02d", cvNum);
+				cvNumbers.push_back(buffer);
+				const char16_t *str = cvNumbers.back().c_str();
+				
+				DisplayCV(EDecoderDataType::Int, cvNum, str, cv, yPos);
+			}
+		}
+	}
+	else if ( btnGroup.getState() )
+	{
+		for (auto itGroup = def.groups.begin(); itGroup != def.groups.end(); itGroup++)
+		{
+			Group &g = **itGroup;
+			
+			TextAreaWithOneWildcard *text = new TextAreaWithOneWildcard();
+			text->setXY(x1, yPos);
+			text->setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+			text->setLinespacing(0);
+			text->setTypedText(touchgfx::TypedText(T_WILDCARDTEXTLEFT40PXID));
+			text->setWildcard((const Unicode::UnicodeChar*)g.name.c_str());
+			scrollableContainer1.add(*text);
+			cvDrawables.push_back(text);
+			yPos += 60;
+			
+			for (auto itCVNum = g.cvs.begin(); itCVNum != g.cvs.end(); itCVNum++)
+			{
+				CVDef &cv = *(def.CVs[*itCVNum]);
+				DisplayCV(cv.type, cv.number, cv.name.c_str(), cv, yPos);
+			}
+		}
+	}
+	
+	yPos += 20;
+	backgroundImage.setPosition(0, 0, 800, yPos);
+	scrollableContainer1.doScroll(dx, dy);
+	scrollableContainer1.childGeometryChanged();
+	scrollableContainer1.invalidate();
+}
+	
 
 void DCCConfigView::displayDecoder()
 {
@@ -461,6 +669,8 @@ void DCCConfigView::displayDecoder()
 			loadDecoderDef(d.getDecoderDefFilename());
 		}
 		showDecoderSpecificSettings(d.getType() == EDecoderType::Multifunction);
+		clearCVDisplay();
+		displayCVDisplay();
 		setConfig(d.getConfig());
 			
 		if (d.getType() == EDecoderType::Multifunction)
@@ -551,10 +761,10 @@ void DCCConfigView::EditText(EField field, const char16_t *title, const char16_t
 
 void DCCConfigView::editTextClickHandler(const TextWithFrame& b, const ClickEvent& evt)
 {
-	if (state == EState::Editting && selectedDecoderItem >= 0 )
+	if (state == EState::Editting && selectedDecoderItem >= 0 && evt.getType() == ClickEvent::RELEASED )
 	{
 		Decoders &d = uiDecodersConfig[selectedDecoderItem];
-	    if (&b == static_cast<const TextWithFrame *>(&textAddress) && evt.getType() == ClickEvent::RELEASED )
+	    if (&b == static_cast<const TextWithFrame *>(&textAddress) )
 	    {
 		    // todo 2 vs 4 digit address
 			bool trackEnabled = toggleProgTrack.getState();
@@ -567,17 +777,17 @@ void DCCConfigView::editTextClickHandler(const TextWithFrame& b, const ClickEven
 			    audioTask.PlaySound(EAudioSounds::BadKeyPressTone);
 
 	    }
-	    else if (&b == static_cast<const TextWithFrame *>(&textName) && evt.getType() == ClickEvent::RELEASED )
+	    else if (&b == static_cast<const TextWithFrame *>(&textName) )
 	    {
 			audioTask.PlaySound(EAudioSounds::KeyPressTone);
 		    EditText(EField::Name, u"Name", d.getName(), d.getNameMaxLen(), Typography::SANSSERIF40PX, CENTER);
 	    }
-	    else if (&b == static_cast<const TextWithFrame *>(&textDescription) && evt.getType() == ClickEvent::RELEASED )
+	    else if (&b == static_cast<const TextWithFrame *>(&textDescription) )
 	    {
 			audioTask.PlaySound(EAudioSounds::KeyPressTone);
 		    EditText(EField::Description, u"Description", d.getDescription(), d.getDescriptionMaxLen(), Typography::SANSSERIF28PX, CENTER);
 	    }
-	    else if (&b == static_cast<const TextWithFrame *>(&textDecoder) && evt.getType() == ClickEvent::RELEASED )
+	    else if (&b == static_cast<const TextWithFrame *>(&textDecoder) )
 	    {
 			audioTask.PlaySound(EAudioSounds::KeyPressTone);
 		    SelectDecoderDefinition(u"Select Decoder Model");

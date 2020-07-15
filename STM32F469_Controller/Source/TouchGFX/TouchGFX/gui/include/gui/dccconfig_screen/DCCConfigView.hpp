@@ -14,6 +14,7 @@
 #include <touchgfx/Containers/ModalBoxWindow.hpp>
 #include <gui/containers/ComboBox.hpp>
 #include "DecoderDefConfig.h"
+#include "ToggleButtonIconAndText.h"
 
 class DCCConfigView : public DCCConfigViewBase
 {
@@ -54,7 +55,9 @@ public:
 	CheckBox chkAccBiDirectionalComms;
 	CheckBox chkAccType;
 	CheckBox chkAccAddressMethod;
-	touchgfx::TextArea textAreaLabelAllCVs;
+	ToggleButtonIconAndText btnCVs;
+	ToggleButtonIconAndText btnGroup;
+	ToggleButtonIconAndText btnRaw;
 	NumericKeypad numericKeypad;
 	FullKeyboard keyboard;
 	int16_t selectStartX;
@@ -81,6 +84,7 @@ public:
 	
 protected:
 	int16_t decoderSpecificYStartPos;
+	int16_t yCVBegin;
 
 	touchgfx::ButtonWithLabelAndEnable buttonScanTrack;
 	touchgfx::ButtonWithLabelAndEnable buttonReadAllCVs;
@@ -106,7 +110,9 @@ protected:
 	Unicode::UnicodeChar addressTextBuffer[5];	// max 4 digits plus terminator
 	char16_t decoderDefBuffer[DECODER_DEF_FILENAME_LEN];
 	Unicode::UnicodeChar scanAllTextBuffer[50];
-
+	std::vector<std::u16string> cvNumbers;
+	std::vector<touchgfx::Drawable*> cvDrawables;
+	
 	void EditNumeric(EField field, const char16_t *title, uint16_t value, int min, int max);
 	void EditText(EField field, const char16_t *title, const char16_t *text, uint16_t maxLen, FontId font, Alignment align);
 	virtual void scrollWheelDecodersUpdateItem(ListItemDecoder& item, int16_t itemIndex);
@@ -140,6 +146,9 @@ protected:
 	touchgfx::Callback<DCCConfigView, const touchgfx::AbstractButton&> selectListCancelButtonClickCallback;
 	void selectListCancelButtonClickHandler(const touchgfx::AbstractButton& src);
 
+    touchgfx::Callback<DCCConfigView, const touchgfx::AbstractButton&> buttonCVDisplayClickCallback;
+    void buttonCVDisplayClickHandler(const touchgfx::AbstractButton& src);
+		
 	bool isProgTrackEnabled() const 
 	{
 		return toggleProgTrack.getState();
@@ -152,6 +161,10 @@ protected:
 	void HideAllCustomConfigs();
 	void SelectDecoderDefinition(const char16_t *title);
 	void loadDecoderDef(const char *filename);
+	void clearCVDisplay();
+	void displayCVDisplay();
+	void DisplayCV(EDecoderDataType::EDecoderDataType cvType, uint16_t cvNumber, const char16_t *name, CVDef &cv, uint16_t &yPos);
+	
 };
 
 inline DCCConfigView::EButtons operator | (DCCConfigView::EButtons a, DCCConfigView::EButtons b)

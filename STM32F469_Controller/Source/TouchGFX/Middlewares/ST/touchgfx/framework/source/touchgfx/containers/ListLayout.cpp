@@ -229,7 +229,7 @@ void ListLayout::insert(Drawable* previousElement, Drawable& d)
     }
 }
 
-void ListLayout::remove(Drawable& d)
+bool ListLayout::remove(Drawable& d)
 {
     AdjustElements tmp(&d, direction);
     Callback<AdjustElements, Drawable&> function(&tmp, &AdjustElements::handleRemove);
@@ -243,5 +243,6 @@ void ListLayout::remove(Drawable& d)
     {
         parent->childGeometryChanged();
     }
+	return true;
 }
 } // namespace touchgfx

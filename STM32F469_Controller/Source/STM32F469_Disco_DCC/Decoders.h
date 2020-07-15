@@ -15,8 +15,9 @@ namespace EDecoderType
 {
 	enum EDecoderType: uint8_t
 	{
-		Multifunction=0,
-		Accessory=1
+		None=0,
+		Multifunction=1,
+		Accessory=2
 	};
 }
 
@@ -321,7 +322,7 @@ public:
 		if (strcmp(decoderDefFilename, newDef) != 0)
 		{
 			strncpy(decoderDefFilename, newDef, countof(decoderDefFilename));
-			decoderDefFilename[countof(decoderDefFilename)] = 0;
+			decoderDefFilename[countof(decoderDefFilename)-1] = 0;
 			dirty = true;
 		}
 	}

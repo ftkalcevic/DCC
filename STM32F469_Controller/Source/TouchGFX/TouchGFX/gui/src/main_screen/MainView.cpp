@@ -17,74 +17,6 @@ enum EConfigPages
 };
 
 
-/****************************************************************/
-
-/****************************************************************/
-//int activeDecoder = -1;
-//int decoderCount=4;
-//Decoders decoders[4] =
-//{ 
-//	{	
-//		{.name =  u"Loco #0000" }, 
-//		{.description =  u"Marklin 8840 -  DB Class 140 Electric" }, 
-//		.address = 0, 
-//		.type = EDecoderType::Multifunction, 
-//		{ .UserIconFile = "" }, 
-//		{.UserBackgroundFile = ""}, 
-//		.loco = { 
-//			.speedSteps = ESpeedSteps::ss28, 
-//			.FL = EFrontLightPosition::SpeedDirInsBit4 }, 
-//		.func = { 
-//			.Fn1 = EFunctionAction::FrontLight, 
-//			.Fn2 = EFunctionAction::None, 
-//			.Fn3 = EFunctionAction::None, 
-//			.Fn4 = EFunctionAction::None, 
-//			.Fn5 = EFunctionAction::None } 
-//	},
-//	{	
-//		{.name =  u"Loco #0001" }, 
-//		.address = 1, 
-//		.type = EDecoderType::Multifunction, 
-//		{ .UserIconFile = "" }, 
-//		{.UserBackgroundFile = ""}, 
-//		.loco = { 
-//			.speedSteps = ESpeedSteps::ss28, 
-//			.FL = EFrontLightPosition::SpeedDirInsBit4 }, 
-//		.func = { 
-//			.Fn1 = EFunctionAction::FrontLight, 
-//			.Fn2 = EFunctionAction::None, 
-//			.Fn3 = EFunctionAction::None, 
-//			.Fn4 = EFunctionAction::None, 
-//			.Fn5 = EFunctionAction::None } 
-//	},
-//	{	{.name =  u"Switch #10" }, 
-//		{.description =  u"Turnout to Odek Enterprises" }, 
-//		.address = 10, 
-//		.type = EDecoderType::Accessory, 
-//		{ .UserIconFile = "" }, 
-//		{ .UserBackgroundFile = "" }, 
-//		.func = { 
-//			.Fn1 = EFunctionAction::ToggleSwitch, 
-//			.Fn2 = EFunctionAction::None, 
-//			.Fn3 = EFunctionAction::None, 
-//			.Fn4 = EFunctionAction::None, 
-//			.Fn5 = EFunctionAction::None }  
-//	},		
-//	{	{.name =  u"Switch #11" }, 
-//		.address = 11, 
-//		.type = EDecoderType::Accessory, 
-//		{ .UserIconFile = "" }, 
-//		{ .UserBackgroundFile = "" }, 
-//		.func = { 
-//			.Fn1 = EFunctionAction::ToggleSwitch, 
-//			.Fn2 = EFunctionAction::None, 
-//			.Fn3 = EFunctionAction::None, 
-//			.Fn4 = EFunctionAction::None, 
-//			.Fn5 = EFunctionAction::None }  
-//	}		
-//};
-	
-
 MainView::MainView():
     buttonClickCallback(this, &MainView::buttonClickHandler)
 {
@@ -94,25 +26,25 @@ MainView::MainView():
 		backgroundImage.setBitmap(Bitmap(bmpId));
 	}
 	
-	pages = new touchgfx::Container *[(uiDecodersConfig.Count() + 1)/8+1];
-	buttons = new touchgfx::CustomButton * [uiDecodersConfig.Count() + 1];
+	pages.reserve( (uiDecodersConfig.Count() + 1)/8+1 );
+	buttons.reserve( uiDecodersConfig.Count() + 1 );
 	
-	touchgfx::Container *page = NULL;
+	std::shared_ptr<touchgfx::Container> page;
 	for (int i = 0; i < uiDecodersConfig.Count() + 1; i++)
 	{
 		if ((i % 8) == 0)
 		{
 			// New page for every 8 icons		
-			page = new touchgfx::Container();
+			page = std::make_shared<touchgfx::Container>();
 			page->setWidth(800);
 			page->setHeight(430);
 			swipeContainer.add(*page);
-			pages[i%8] = page;
+			pages.push_back( page );
 		}
 
 		// Add buttons (15, 15) 200x200 spacing
-		touchgfx::CustomButton *button = new touchgfx::CustomButton();
-		buttons[i] = button;
+		std::shared_ptr<touchgfx::CustomButton> button = std::make_shared<touchgfx::CustomButton>();
+		buttons.push_back(button);
 		button->setXY(15 + (i%4) * 200, 15 + ((i%8)/4)*200);
 		button->setLabelText(touchgfx::TypedText(T_WILDCARDTEXTLEFT20PXID));
 		button->setLabelColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
@@ -139,11 +71,6 @@ MainView::MainView():
 	swipeContainer.setSelectedPage(0);
 }
 
-void MainView::deletePage(Drawable& d)
-{
-	touchgfx::Container *page = (touchgfx::Container *)&d;
-	delete page;
-}
 
 MainView::~MainView()
 {
@@ -152,14 +79,6 @@ MainView::~MainView()
 		Bitmap::dynamicBitmapDelete(bmpId);
 		bmpId = BITMAP_INVALID;
 	}
-
-	for (int i = 0; i < uiDecodersConfig.Count() + 1; i++)
-		delete buttons[i];
-	delete[] buttons;
-	
-	for (int i = 0; i < (uiDecodersConfig.Count() + 1)/8+1; i++)
-		delete pages[i];
-	delete [] pages;
 }
 
 void MainView::setupScreen() 
