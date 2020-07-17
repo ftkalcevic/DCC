@@ -11,11 +11,6 @@
 #include "ProgTrackDCC.h"		// this should be in model
 #include "DecoderDefConfig.h"
 
-static const int16_t x1 = 17;
-static const int16_t x2 = 417;
-static const int16_t LINE_SPACING = 15;
-
-
 
 enum EDecoderDisplay
 {
@@ -522,7 +517,7 @@ void DCCConfigView::clearCVDisplay()
 }
 
 
-uint16_t DCCConfigView::DrawCVTitle(const char16_t *name, const uint16_t yPos )
+uint16_t DCCConfigView::DrawCVTitle(const char16_t *name, const uint16_t yPos, const uint16_t XOffset, const uint16_t titleWidth )
 {
 	TextAreaWithOneWildcard *text = new TextAreaWithOneWildcard();
 	text->setWideTextAction(touchgfx::WIDE_TEXT_WORDWRAP);
@@ -530,7 +525,7 @@ uint16_t DCCConfigView::DrawCVTitle(const char16_t *name, const uint16_t yPos )
 	text->setLinespacing(0);	// WARNING linespacing!= requires widget box to be resized.
 	text->setTypedText(touchgfx::TypedText(T_WILDCARDTEXTLEFT40PXID));
 	text->setWildcard((const Unicode::UnicodeChar*)name);
-	text->setPosition(x1, yPos, 360, 150);
+	text->setPosition(x1+XOffset, yPos, titleWidth, 150);
 	text->resizeHeightToCurrentText();
 	uint16_t h = text->getTextHeight();
 	scrollableContainer1.add(*text);
@@ -547,21 +542,110 @@ void DCCConfigView::DisplayCV(EDecoderDataType::EDecoderDataType cvType, uint16_
 		case EDecoderDataType::Bitfield:
 			break;
 		case EDecoderDataType::SpeedTable:
-			break;
-		case EDecoderDataType::User:
 			{
 				uint16_t h = DrawCVTitle(name, yPos);
 				
+				ButtonWithLabel *btn = new ButtonWithLabel();
+				btn->setXY(CV_X2, yPos);
+				btn->setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_MEDIUM_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_MEDIUM_PRESSED_ID));
+				btn->setLabelText(touchgfx::TypedText(T_DCCCONFIGSPEEDSTEPS));
+				btn->setLabelColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+				btn->setLabelColorPressed(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+				//btn->setAction(buttonDeleteClickCallback);
+				scrollableContainer1.add(*btn);
+				cvDrawables.push_back(btn);
+				yPos += h + LINE_SPACING;
+			}
+			break;
+		case EDecoderDataType::User:
+			{
 				DecoderDef &def = decoderDefinitions.getDecoderDef(); 
 				std::shared_ptr<UserType> type = def.types[cv.userType]; 
+				
+				uint16_t h = DrawCVTitle(name, yPos, 0, type->hasLabeledTypes() ? CV_FULL_LABEL_WIDTH : CV_LABEL_WIDTH );
+				if (type->hasLabeledTypes())
+				{
+					yPos += h + LINE_SPACING;
+				}
+				
+				uint16_t yBoxStart = yPos-20;
+				touchgfx::Box * box = new Box();
+				box->setPosition(x2-20, yBoxStart, 360+2*20, 100);
+				box->setColor(touchgfx::Color::getColorFrom24BitRGB(163, 163, 163));
+				box->setVisible(true);
+				scrollableContainer1.add(*box);					
+				cvDrawables.push_back(box);
+					
 				for (auto itBF = type->bitFields.begin(); itBF != type->bitFields.end(); itBF++)
 				{
 					BitField &bf = **itBF;
-					//for (auto it = bf.bitFields.begin(); it != type->bitFields.end(); it++)
+					if (bf.type == EDecoderDataType::Int)
 					{
-					}					
+						uint16_t h = DrawCVTitle(bf.name.c_str(), yPos, CV_SUBTITLE_OFFSET);
+				
+						touchgfx::ClickListener<touchgfx::TextWithFrame> *edit = new touchgfx::ClickListener<touchgfx::TextWithFrame>();
+						edit->setPosition(CV_X2, yPos, 100, 50);
+						edit->setClickAction(editTextClickHandlerCallback);
+						edit->setFontId(Typography::NUMERIC40PX);
+						scrollableContainer1.add(*edit);					
+						cvDrawables.push_back(edit);
+						yPos += h+ + LINE_SPACING;
+						
+					}
+					else
+					{
+						for (auto it = bf.bits.begin(); it != bf.bits.end(); it++)
+						{
+							Bit &b = **it;
+							if (b.on.size() > 0 && b.off.size() > 0 )
+							{
+								uint16_t h = DrawCVTitle(b.name.c_str(), yPos, CV_SUBTITLE_OFFSET);
+								
+								ComboBox *cbo = new ComboBox;
+								cbo->setPosition(CV_X2, yPos, CV_EDIT_WIDTH_MAX, 50);
+								//cbo->setSelectionChangedCallback(&cboSpeedStepsSelectionChangedCallback);
+								cbo->setNumberOfItems(2);
+								cbo->setVisible(true);
+								cbo->addComboItem(b.off.c_str(), 0);
+								cbo->addComboItem(b.on.c_str(), 1);
+								scrollableContainer1.add(*cbo);
+								cvDrawables.push_back(cbo);
+								yPos += h + LINE_SPACING;
+							}
+							else
+							{
+								CheckBox *chk = new CheckBox;							
+								chk->setPosition(CV_X2, yPos, 340, 65);
+								chk->setText(b.name.c_str());
+								chk->setTypedText(touchgfx::TypedText(T_WILDCARDTEXTLEFT20PXID));
+								chk->setVisible(true);
+								scrollableContainer1.add(*chk);
+								cvDrawables.push_back(chk);
+								yPos += 50;
+							}
+						}					
+						if (bf.enums.size() > 0)
+						{
+							uint16_t h = DrawCVTitle(bf.name.c_str(), yPos, CV_SUBTITLE_OFFSET);
+								
+							ComboBox *cbo = new ComboBox;
+							cbo->setPosition(CV_X2, yPos, CV_EDIT_WIDTH_MAX, 50);
+							//cbo->setSelectionChangedCallback(&cboSpeedStepsSelectionChangedCallback);
+							cbo->setNumberOfItems(bf.enums.size());
+							cbo->setVisible(true);
+							for (auto it = bf.enums.begin(); it != bf.enums.end(); it++)
+							{
+								Enum &e = **it;
+								cbo->addComboItem(e.name.c_str(), e.value);
+							}
+							scrollableContainer1.add(*cbo);
+							cvDrawables.push_back(cbo);
+							yPos += h + LINE_SPACING;
+						}
+					}
 				}
-				yPos += h + LINE_SPACING;
+				box->setHeight(yPos - yBoxStart + 20);
+				yPos += 40 + LINE_SPACING;
 			}
 			break;
 		case EDecoderDataType::Address:	// address - only show in raw mode - use common address
@@ -570,7 +654,7 @@ void DCCConfigView::DisplayCV(EDecoderDataType::EDecoderDataType cvType, uint16_
 				uint16_t h = DrawCVTitle(name, yPos);
 
 				touchgfx::ClickListener<touchgfx::TextWithFrame> *edit = new touchgfx::ClickListener<touchgfx::TextWithFrame>();
-				edit->setPosition(x2, yPos, 100, 50);
+				edit->setPosition(CV_X2, yPos, 100, 50);
 				edit->setClickAction(editTextClickHandlerCallback);
 				edit->setFontId(Typography::NUMERIC40PX);
 				scrollableContainer1.add(*edit);					
@@ -954,6 +1038,11 @@ void DCCConfigView::ScanTrackReply(EErrorCode::EErrorCode result, int16_t addres
 }
 
 
+void DCCConfigView::SwipePreviousScreen()
+{
+	application().returnToPreferences();
+}
+
 void DCCConfigView::handleGestureEvent(const GestureEvent & evt)
 {
 	if (state != EState::Editting )
@@ -964,13 +1053,9 @@ void DCCConfigView::handleGestureEvent(const GestureEvent & evt)
 	{
 		scrollWheelDecoders.handleGestureEvent(evt);
 	}
-	else if (evt.getType() == GestureEvent::SWIPE_VERTICAL && evt.getVelocity() < -SWIPE_VELOCITY )
-	{
-		application().returnToPreferences();
-	}
 	else
 	{
-		DCCConfigViewBase::handleGestureEvent(evt); 
+		base_class::handleGestureEvent(evt); 
 	}
 }
 
@@ -983,7 +1068,7 @@ void DCCConfigView::handleDragEvent(const DragEvent & evt)
 	}
 	else
 	{
-		DCCConfigViewBase::handleDragEvent(evt); 
+		base_class::handleDragEvent(evt); 
 	}
 }
 

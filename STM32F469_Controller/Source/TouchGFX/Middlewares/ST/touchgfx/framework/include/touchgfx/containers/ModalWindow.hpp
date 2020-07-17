@@ -140,7 +140,7 @@ public:
      *
      * @param [in] d The drawable to remove.
      */
-    virtual void remove(Drawable& d);
+    virtual bool remove(Drawable& d);
 
     /**
      * @fn virtual void ModalWindow::setShadeAlpha(uint8_t alpha);

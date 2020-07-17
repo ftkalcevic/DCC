@@ -15,9 +15,26 @@
 #include <gui/containers/ComboBox.hpp>
 #include "DecoderDefConfig.h"
 #include "ToggleButtonIconAndText.h"
+#include <gui/common/TouchEventHandler.h>
 
-class DCCConfigView : public DCCConfigViewBase
+
+
+static const int16_t x1 = 17;
+static const int16_t x2 = 417;
+static const int16_t LINE_SPACING = 15;
+static const int16_t CV_LABEL_WIDTH = 360;
+static const int16_t CV_FULL_LABEL_WIDTH = 800-2*x1;
+static const int16_t CV_EDIT_WIDTH_MAX = 360;
+static const int16_t CV_X2 = 417;
+static const int16_t CV_SUBTITLE_OFFSET = 50;
+
+
+
+
+class DCCConfigView : public TouchEventHandler<DCCConfigViewBase>
 {
+	using base_class = TouchEventHandler<DCCConfigViewBase>;
+	
 public:
 	enum EButtons
 	{
@@ -113,7 +130,11 @@ protected:
 	std::vector<std::u16string> cvNumbers;
 	std::vector<touchgfx::Drawable*> cvDrawables;
 	
-	void EditNumeric(EField field, const char16_t *title, uint16_t value, int min, int max);
+	virtual void handleGestureEvent(const GestureEvent & evt);
+	virtual void handleDragEvent(const DragEvent& evt);
+	virtual void SwipePreviousScreen();
+
+		void EditNumeric(EField field, const char16_t *title, uint16_t value, int min, int max);
 	void EditText(EField field, const char16_t *title, const char16_t *text, uint16_t maxLen, FontId font, Alignment align);
 	virtual void scrollWheelDecodersUpdateItem(ListItemDecoder& item, int16_t itemIndex);
 	void displayDecoder();
@@ -126,8 +147,6 @@ protected:
 	void buttonReadAllCVsClickHandler(const touchgfx::AbstractButton& src);
 	touchgfx::Callback<DCCConfigView, const touchgfx::AbstractButton&> buttonDeleteClickCallback;
 	void buttonDeleteClickHandler(const touchgfx::AbstractButton& src);
-	virtual void handleGestureEvent(const GestureEvent & evt);
-	virtual void handleDragEvent(const DragEvent& evt);
 	touchgfx::Callback<DCCConfigView, const TextWithFrame&, const ClickEvent& > editTextClickHandlerCallback;
 	void editTextClickHandler(const TextWithFrame& b, const ClickEvent& evt);
 	touchgfx::Callback<DCCConfigView, bool> closeKeypadWindowCallback;
@@ -164,7 +183,7 @@ protected:
 	void clearCVDisplay();
 	void displayCVDisplay();
 	void DisplayCV(EDecoderDataType::EDecoderDataType cvType, uint16_t cvNumber, const char16_t *name, CVDef &cv, uint16_t &yPos);
-	uint16_t DrawCVTitle(const char16_t *name, const uint16_t yPos);
+	uint16_t DrawCVTitle(const char16_t *name, const uint16_t yPos, const uint16_t XOffset = 0, const uint16_t titleWidth = CV_LABEL_WIDTH);
 };
 
 inline DCCConfigView::EButtons operator | (DCCConfigView::EButtons a, DCCConfigView::EButtons b)

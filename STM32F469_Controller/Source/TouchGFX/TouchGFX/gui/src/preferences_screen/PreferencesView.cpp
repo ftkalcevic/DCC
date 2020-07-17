@@ -111,7 +111,7 @@ void PreferencesView::handleDragEvent(const DragEvent & evt)
 void PreferencesView::handleGestureEvent(const GestureEvent & evt)
 {
 	//printf("PreferencesView::%d gesture %d %d\n", count++, evt.getType(), evt.getVelocity());
-	if (evt.getType() == GestureEvent::SWIPE_VERTICAL && evt.getVelocity() < 0 && evt.getX() > SWIPE_VELOCITY)
+	if (evt.getType() == GestureEvent::SWIPE_VERTICAL && evt.getVelocity() < 0 && evt.getX() > EXITSCREEN_SWIPE_VELOCITY)
 	{
 		application().returnToMainScreen();
 	}

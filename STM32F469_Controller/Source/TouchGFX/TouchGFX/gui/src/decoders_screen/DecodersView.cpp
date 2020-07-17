@@ -33,7 +33,7 @@ void DecodersView::scrollWheelDecodersUpdateItem(Decoder& item, int16_t itemInde
 void DecodersView::handleGestureEvent(const GestureEvent & evt)
 {
 	//printf("DCCConfigView gesture %d %d\n", evt.getType(), evt.getVelocity());
-	if (evt.getType() == GestureEvent::SWIPE_VERTICAL && evt.getVelocity() < -SWIPE_VELOCITY )
+	if (evt.getType() == GestureEvent::SWIPE_VERTICAL && evt.getVelocity() < -EXITSCREEN_SWIPE_VELOCITY )
 	{
 		application().returnToMainScreen();
 	}

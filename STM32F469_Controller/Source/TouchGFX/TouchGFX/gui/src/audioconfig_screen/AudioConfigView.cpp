@@ -24,7 +24,7 @@ void AudioConfigView::tearDownScreen()
 
 void AudioConfigView::handleGestureEvent(const GestureEvent & evt)
 {
-	if (evt.getType() == GestureEvent::SWIPE_VERTICAL && evt.getVelocity() < -SWIPE_VELOCITY )
+	if (evt.getType() == GestureEvent::SWIPE_VERTICAL && evt.getVelocity() < -EXITSCREEN_SWIPE_VELOCITY )
 	{
 		application().returnToPreferences();
 	}

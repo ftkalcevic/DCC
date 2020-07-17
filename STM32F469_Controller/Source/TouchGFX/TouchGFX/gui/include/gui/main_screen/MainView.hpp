@@ -7,9 +7,10 @@
 #include <gui/common/CustomButton.hpp>
 #include <vector>
 #include <memory>
+#include <gui/common/TouchEventHandler.h>
 
 
-class MainView : public MainViewBase
+class MainView : public TouchEventHandler<MainViewBase>
 {
 public:
     MainView();
@@ -19,10 +20,10 @@ public:
 
 
 protected:
-	virtual void	handleClickEvent(const ClickEvent & evt);
-	virtual void	handleDragEvent(const DragEvent & evt);
-	virtual void	handleGestureEvent(const GestureEvent & evt);
-	virtual void	handleKeyEvent(uint8_t key);
+//	virtual void	handleClickEvent(const ClickEvent & evt);
+//	virtual void	handleDragEvent(const DragEvent & evt);
+//	virtual void	handleGestureEvent(const GestureEvent & evt);
+//	virtual void	handleKeyEvent(uint8_t key);
 private:
 	BitmapId bmpId;
 	std::vector<std::shared_ptr<touchgfx::Container>> pages;

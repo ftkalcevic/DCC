@@ -48,10 +48,6 @@ void printHeapStatistics()
 
 
 
-/* Prototypes for our hooks.  */
-extern "C" void *my_malloc_hook(size_t size, const void *caller)
-{
-}
 
 
  

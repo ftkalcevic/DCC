@@ -107,28 +107,28 @@ void MainView::buttonClickHandler(const touchgfx::AbstractButton& src)
 	}
 }
 
-
-
-	static int count = 0;
-
-void MainView::handleClickEvent(const ClickEvent & evt)
-{
-	printf("%d click\n", count++);
-	MainViewBase::handleClickEvent(evt);
-}
-void MainView::handleDragEvent(const DragEvent & evt)
-{
-	printf("%d drag\n", count++);
-	MainViewBase::handleDragEvent(evt);
-}
-void MainView::handleGestureEvent(const GestureEvent & evt)
-{
-	printf("%d gesture %d %d\n", count++, evt.getType(), evt.getVelocity());
-	MainViewBase::handleGestureEvent(evt);
-}
-void MainView::handleKeyEvent(uint8_t key)
-{
-	printf("%d key %d\n", count++, key);
-	MainViewBase::handleKeyEvent(key);
-}
-
+//
+//
+//	static int count = 0;
+//
+//void MainView::handleClickEvent(const ClickEvent & evt)
+//{
+//	printf("%d click (%d,%d):%d\n", count++, evt.getX(), evt.getY(), evt.getForce() );
+//	MainViewBase::handleClickEvent(evt);
+//}
+//void MainView::handleDragEvent(const DragEvent & evt)
+//{
+//	printf("%d drag d(%d,%d) n(%d,%d) o(%d,%d)\n", count++, evt.getDeltaX(), evt.getDeltaY(), evt.getNewX(), evt.getNewY(), evt.getOldX(), evt.getOldY());
+//	MainViewBase::handleDragEvent(evt);
+//}
+//void MainView::handleGestureEvent(const GestureEvent & evt)
+//{
+//	printf("%d gesture %d %d (%d,%d)\n", count++, evt.getType(), evt.getVelocity(), evt.getX(), evt.getX());
+//	MainViewBase::handleGestureEvent(evt);
+//}
+//void MainView::handleKeyEvent(uint8_t key)
+//{
+//	printf("%d key %d\n", count++, key);
+//	MainViewBase::handleKeyEvent(key);
+//}
+//

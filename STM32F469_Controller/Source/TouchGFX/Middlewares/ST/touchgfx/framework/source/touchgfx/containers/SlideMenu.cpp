@@ -287,9 +287,9 @@ void SlideMenu::add(Drawable& d)
     menuContainer.add(d);
 }
 
-void SlideMenu::remove(Drawable& d)
+bool SlideMenu::remove(Drawable& d)
 {
-    menuContainer.remove(d);
+    return menuContainer.remove(d);
 }
 
 void SlideMenu::stateChangeButtonClickedHandler(const AbstractButton& /*button*/)

@@ -363,7 +363,7 @@ public:
      *
      * @param d The drawable to remove.
      */
-    virtual void remove(Drawable& d);
+    virtual bool remove(Drawable& d);
 
 protected:
     MoveAnimator<Container> menuContainer;       ///< The container holding the actual menu items. This is the container that performs the state change animation

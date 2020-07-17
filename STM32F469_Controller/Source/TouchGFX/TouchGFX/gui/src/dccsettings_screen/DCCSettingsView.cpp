@@ -65,7 +65,7 @@ void DCCSettingsView::slewRateWheelUpdateItem(scrollWheelItem& item, int16_t ite
 void DCCSettingsView::handleGestureEvent(const GestureEvent & evt)
 {
 	//printf("PreferencesView::%d gesture %d %d\n", count++, evt.getType(), evt.getVelocity());
-	if (evt.getType() == GestureEvent::SWIPE_VERTICAL && evt.getVelocity() < -SWIPE_VELOCITY)
+	if (evt.getType() == GestureEvent::SWIPE_VERTICAL && evt.getVelocity() < -EXITSCREEN_SWIPE_VELOCITY)
 	{
 		application().returnToPreferences();
 	}

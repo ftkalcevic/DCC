@@ -43,7 +43,10 @@ void ComboBox::addComboItem(const char *item, int id)
 
 void ComboBox::updateItemHandler(ComboBoxBase& cbo, ComboItem& cboItem, int16_t itemIndex)
 {
-	cboItem.setText(itemList[itemIndex].str);
+	if (itemIndex < itemList.size())
+	{
+		cboItem.setText(itemList[itemIndex].str);
+	}
 }
 
 

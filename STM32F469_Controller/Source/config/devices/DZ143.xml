@@ -132,7 +132,10 @@
       <Enum value="2" name="ID#3"/>
       <Enum value="3" name="All"/>
     </CV>
-    <CV number="106" name="User private ID 2" type="int" min="0" max="255"/>
+    <CV number="106" name="User private ID 2" type="bitfield" min="0" max="255">
+      <BitField bitmask="15" type="int" name="Low Nibble"/>
+      <BitField bitmask="240" type="int" name="High Nibble"/>
+    </CV>
     <CV number="113" name="F3, Function 3 (brown)" type="FX3" min="0" max="255"/>
     <CV number="114" name="F4, Function 4 (white/yellow)" type="FX3" min="0" max="255"/>
     <CV number="115" name="F5, Function 5 (white/green)" type="FX3" min="0" max="255"/>

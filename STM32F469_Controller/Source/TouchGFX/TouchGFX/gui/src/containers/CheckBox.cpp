@@ -3,7 +3,8 @@
 
 
 CheckBox::CheckBox() :
-    CheckCallback(this, &CheckBox::checkHandler)
+    CheckCallback(this, &CheckBox::checkHandler),
+	action(nullptr)
 {
 	check.setAction(CheckCallback);
 	check.setDeselectedAction(CheckCallback);

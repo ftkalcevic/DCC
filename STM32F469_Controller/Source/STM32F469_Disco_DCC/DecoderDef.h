@@ -175,6 +175,31 @@ public:
 			activeBitField = nullptr;
 		}
 	}
+	
+	bool hasLabeledTypes() const
+	{
+		// return true if any bit type has a label (on/off type), or more than one enum
+		int enumTypes = 0;
+		for(auto it = bitFields.cbegin() ; it != bitFields.cend() ; it++)
+		{
+			BitField &bf = **it;
+			if (bf.type == EDecoderDataType::Int)
+				return true;
+			
+			if (bf.enums.size() > 0)
+				enumTypes++;
+			if (enumTypes > 1)
+				return true;
+			
+			for (auto itB = bf.bits.cbegin(); itB != bf.bits.cend(); itB++)
+			{
+				Bit &b = **itB;
+				if (b.on.size() > 0 && b.off.size() > 0)
+					return true;
+			}
+		}
+		return false;
+	}
 
 };
 
