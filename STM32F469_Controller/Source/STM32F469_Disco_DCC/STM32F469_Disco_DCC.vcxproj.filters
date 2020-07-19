@@ -1344,6 +1344,9 @@
     <ClCompile Include="..\TouchGFX\Middlewares\ST\touchgfx\framework\source\touchgfx\containers\CacheableContainer.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="Decoders.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stm32f4xx_hal_tim_plus.h">

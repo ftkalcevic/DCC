@@ -2587,6 +2587,14 @@
       {
         "TextEntryId": "DCCConfigSpeedSteps",
         "IsResource": true
+      },
+      {
+        "TextEntryId": "DCCConfigSmallImage",
+        "IsResource": true
+      },
+      {
+        "TextEntryId": "DCCConfigLargeImage",
+        "IsResource": true
       }
     ],
     "Name": "STM32F469I-DISCO",

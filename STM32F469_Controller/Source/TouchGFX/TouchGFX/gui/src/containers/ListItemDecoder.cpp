@@ -1,7 +1,7 @@
 #include <gui/containers/ListItemDecoder.hpp>
 #include <texts/TextKeysAndLanguages.hpp>
-#include "DecodersConfig.h"
 #include <touchgfx/Color.hpp>
+#include "DecodersConfig.h"
 
 ListItemDecoder::ListItemDecoder()
 {

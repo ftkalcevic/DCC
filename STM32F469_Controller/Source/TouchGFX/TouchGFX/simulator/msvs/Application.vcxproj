@@ -293,6 +293,7 @@
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\ComboItemBase.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\containers\ComboBoxBase.hpp"/>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\ComboBoxBaseBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\common\TouchEventHandler.h"/>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="$(ApplicationRoot)\generated\simulator\touchgfx.rc"/>

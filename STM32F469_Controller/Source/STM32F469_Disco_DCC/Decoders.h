@@ -4,6 +4,7 @@
 #include <touchgfx/Unicode.hpp>
 #include "Common.h"
 #include <string.h>
+#include "Utility.h"
 
 
 using namespace touchgfx;
@@ -158,6 +159,38 @@ struct Functions
 	EFunctionAction::EFunctionAction Fn1, Fn2, Fn3, Fn4, Fn5;
 };
 
+namespace EUserImage
+{
+	enum EUserImage
+	{
+		None = 0,
+		UserFile=1,
+		LocoSteamIcon=2,
+		LocoDieselIcon=3,
+		AccTurnoutIcon=4,
+	};
+}
+
+const uint8_t MASK_LOCO = 0x01;
+const uint8_t MASK_ACC  = 0x02;
+
+class EUserImageClass
+{
+	EUserImage::EUserImage id;
+public:
+	EUserImageClass(EUserImage::EUserImage ui)
+		: id(ui) {}
+	static struct SUserImageInfo
+	{
+		EUserImage::EUserImage id;
+		const char16_t *name;
+		uint8_t usage;
+	} UserImageInfo[];
+	static const char16_t *iconName(EUserImage::EUserImage img);
+};
+
+
+
 struct Decoders
 {
 private:
@@ -167,7 +200,10 @@ private:
 	uint8_t config;	// cv29
 	char decoderDefFilename[20];	// model file
 	EDecoderType::EDecoderType type;
-	char UserIconFile[MAX_PATH];
+	EUserImage::EUserImage smallImageType;
+	char smallImageFile[MAX_PATH];
+	EUserImage::EUserImage largeImageType;
+	char largeImageFile[MAX_PATH];
 	char UserBackgroundFile[MAX_PATH];
 	union
 	{
@@ -187,6 +223,11 @@ public:
 	uint16_t getAddress() const { return address; }
 	const char *getDecoderDefFilename() const { return decoderDefFilename;}
 	EDecoderType::EDecoderType getType() const { return type; }
+	EUserImage::EUserImage getSmallImageType() const { return smallImageType; }
+	const char *getSmallImageFile() const { return smallImageFile; }
+	EUserImage::EUserImage getLargeImageType() const { return largeImageType; }
+	const char *getLargeImageFile() const { return largeImageFile; }
+
 	LocoSettings &getLoco()
 	{
 		assert(type == EDecoderType::Multifunction && "Can only getLoco if decoder type is multifunction");
@@ -206,82 +247,6 @@ public:
 		}
 	}
 	
-	void utf8ToChar16(char16_t *dest, const char *src, int destlen)
-	{
-		int i = 0;
-		for (i = 0; i < destlen; i++)		
-		{
-			uint8_t c = (uint8_t)*src++;
-			if (c <= 0x007F)
-			{
-				dest[i] = c;
-			}
-			else 
-			{
-				uint32_t u = '?';
-				if ((c & 0b11100000) == 0b11000000)
-				{
-					uint8_t c2 = (uint8_t)*src++;
-					if (c2 != 0)
-						u = ((c & 0x1F) << 6) | (c2 & 0x3F);
-					else
-						break;
-				}
-				else if ((c & 0b11110000) == 0b11100000)
-				{
-					uint8_t c2 = (uint8_t)*src++;
-					if (c2 != 0)
-					{
-						uint8_t c3 = (uint8_t)*src++;
-						if (c3 != 0)
-						{
-							if ((c2 & 0b11000000) == 0b10000000 && (c3 & 0b11000000) == 0b10000000)
-							{
-								u = ((c & 0xF) << 12) | ((c2 & 0x3F) << 6) | (c3 & 0x3F);
-							}
-						}
-						else
-							break;
-					}
-					else
-						break;
-				} 
-				else if ((c & 0b11111000) == 0b11110000)
-				{
-					uint8_t c2 = (uint8_t)*src++;
-					if (c2 != 0)
-					{
-						uint8_t c3 = (uint8_t)*src++;
-						if (c3 != 0)
-						{
-							uint8_t c4 = (uint8_t)*src++;
-							if (c4 != 0)
-							{
-								if ((c2 & 0b11000000) == 0b10000000 && (c3 & 0b11000000) == 0b10000000 && (c4 & 0b11000000) == 0b10000000)
-								{
-									u = ((c & 0xF) << 18) | ((c2 & 0x3F) << 12) | ((c3 & 0x3F) << 6) | (c4 & 0x3F);
-								}
-							}
-							else
-								break;
-						}
-						else
-							break;
-					}
-					else
-						break;
-				}
-				if (u > 0 && u <= 0xFFFF)
-					dest[i] = u;
-				else
-					dest[i] = '?';
-			}	
-		}
-		if ( i == destlen)
-			dest[destlen-1] = 0;
-		else
-			dest[i] = 0;
-	}
 	void setName( const char *newName )
 	{
 		utf8ToChar16(name, newName, countof(name));

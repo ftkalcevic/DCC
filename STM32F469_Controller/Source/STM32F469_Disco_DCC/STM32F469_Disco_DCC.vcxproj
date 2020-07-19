@@ -282,6 +282,7 @@
     <ClCompile Include="Arduino.cpp" />
     <ClCompile Include="AudioTask.cpp" />
     <ClCompile Include="DCC.cpp" />
+    <ClCompile Include="Decoders.cpp" />
     <ClCompile Include="DecoderWidget.cpp" />
     <ClCompile Include="DRV8873S.cpp" />
     <ClCompile Include="FileSystem.cpp" />

@@ -58,11 +58,15 @@ public:
 	touchgfx::ClickListener<touchgfx::TextWithFrame> textName;
 	touchgfx::ClickListener<touchgfx::TextWithFrame> textDescription;
 	touchgfx::ClickListener<touchgfx::TextWithFrame> textDecoder;
+	touchgfx::ClickListener<touchgfx::TextWithFrame> textSmallImage;
+	touchgfx::ClickListener<touchgfx::TextWithFrame> textLargeImage;
 	touchgfx::TextArea textAreaLabelAddress;
 	touchgfx::TextArea textAreaLabelName;
 	touchgfx::TextArea textAreaLabelDescription;
 	touchgfx::TextArea textAreaLabelDecoder;
 	touchgfx::TextArea textAreaLabelConfig;
+	touchgfx::TextArea textAreaLabelSmallImage;
+	touchgfx::TextArea textAreaLabelLargeImage;
 	CheckBox chkMFDirection;
 	CheckBox chkMFFLLocation;
 	CheckBox chkMFPowerSourceConversion;
@@ -111,7 +115,9 @@ protected:
 	{
 		Address,
 		Name,
-		Description
+		Description,
+		SmallImage,
+		LargeImage
 	} edittingField;
 	enum EState
 	{
@@ -124,9 +130,11 @@ protected:
 		SelectDecoderDef
 	} state;
 
-	Unicode::UnicodeChar addressTextBuffer[5];	// max 4 digits plus terminator
-	char16_t decoderDefBuffer[DECODER_DEF_FILENAME_LEN];
-	Unicode::UnicodeChar scanAllTextBuffer[50];
+	std::u16string addressTextBuffer;	// max 4 digits plus terminator
+	std::u16string decoderDefBuffer;
+	std::u16string scanAllTextBuffer;
+	std::u16string smallImageTextBuffer;
+	std::u16string largeImageTextBuffer;
 	std::vector<std::u16string> cvNumbers;
 	std::vector<touchgfx::Drawable*> cvDrawables;
 	

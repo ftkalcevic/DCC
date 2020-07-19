@@ -245,6 +245,7 @@ void AppMain::TakeControl(int decoderIndex, bool control)
 
 void AppMain::Run()
 {
+	setupLocale();
 	InitMallocChecking();
 	CheckTaskStacks();
 	printHeapStatistics();
@@ -427,11 +428,21 @@ TODO
 DCCConfigView
 	- Make clickable sections bigger (Address, Name, etc)
 	- Select a comerical decoder
+		- Make this bigger
 	- Read All Cvs
 		- And do something with them
+		- store them in the custom decoder bit
 	- Edit cvs
 		- from "decoder" definition (or "Unknown")
 		- uint8_t, bits, specials (eg speed chart)
+		- move to separate screens
+			- 3 buttons 
+				- CVS - numeric order eg "[01] Address"
+					- swipe container - many pages.
+				- grouped
+					- swipe container - many pages.
+				- raw - single panel - enter #, read, edit, write.
+					  - maybe list all CVS [01]=255, [02]=27, etc
 	- More config
 		- don't change icon on DCCConfig screen, will either be loco or accessory
 		- select small icon for MainView
@@ -440,10 +451,11 @@ DCCConfigView
 		- select large user image for decoders view
 			- decoders view - remove all widgets except take control
 		- Accessory decoder...
-			- images for states
-			- mirror (flip) left/right
-			- miroro top/bottom
+			- large image for each states
+				- mirror (flip) left/right
+				- miroro top/bottom
 		- other options
+			- Address - 2/4 digit is automatic
 			- Decoder type is read from CV29 bit 7
 			- Speed steps are defined by CV29 bit ?
 				- 0 - 14 speed steps
@@ -469,4 +481,9 @@ decoders view
 
 General
 	- re-read spec.  Find and reference key design points
+	
+	
+Next
+	- move CVs to separate screens
+	- add graphics
 */

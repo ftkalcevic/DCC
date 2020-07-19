@@ -3,6 +3,9 @@
 #include "BitmapDatabase.hpp"
 #include <texts/TextKeysAndLanguages.hpp>
 #include <stdio.h>
+#include <iomanip>
+#include <iostream>
+#include <sstream>
 #include "Common.h"
 #include "Utility.h"
 #include "DecodersConfig.h"
@@ -10,7 +13,6 @@
 #include "dcc.h"
 #include "ProgTrackDCC.h"		// this should be in model
 #include "DecoderDefConfig.h"
-
 
 enum EDecoderDisplay
 {
@@ -120,6 +122,34 @@ DCCConfigView::DCCConfigView() :
 	textDescription.setClickAction(editTextClickHandlerCallback);
 	textDescription.setAlignment(CENTER);
     scrollableContainer1.add(textDescription);
+
+	// SmallImage
+	yPos += 50 + LINE_SPACING;
+    textAreaLabelSmallImage.setXY(x1, yPos);
+    textAreaLabelSmallImage.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+    textAreaLabelSmallImage.setLinespacing(0);
+    textAreaLabelSmallImage.setTypedText(touchgfx::TypedText(T_DCCCONFIGSMALLIMAGE));
+    scrollableContainer1.add(textAreaLabelSmallImage);
+
+    textSmallImage.setPosition(x2, yPos, 360, 50);
+    textSmallImage.setFontId(Typography::SANSSERIF40PX);
+	textSmallImage.setClickAction(editTextClickHandlerCallback);
+	textSmallImage.setAlignment(CENTER);
+    scrollableContainer1.add(textSmallImage);
+
+	// LargeImage
+	yPos += 50 + LINE_SPACING;
+    textAreaLabelLargeImage.setXY(x1, yPos);
+    textAreaLabelLargeImage.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+    textAreaLabelLargeImage.setLinespacing(0);
+    textAreaLabelLargeImage.setTypedText(touchgfx::TypedText(T_DCCCONFIGLARGEIMAGE));
+    scrollableContainer1.add(textAreaLabelLargeImage);
+
+    textLargeImage.setPosition(x2, yPos, 360, 50);
+    textLargeImage.setFontId(Typography::SANSSERIF40PX);
+	textLargeImage.setClickAction(editTextClickHandlerCallback);
+	textLargeImage.setAlignment(CENTER);
+    scrollableContainer1.add(textLargeImage);
 
 	decoderSpecificYStartPos = yPos;
 	
@@ -269,7 +299,7 @@ void DCCConfigView::buttonCVDisplayClickHandler(const touchgfx::AbstractButton& 
 	btnGroup.invalidate();
 	
 	clearCVDisplay();
-	displayCVDisplay();
+	//displayCVDisplay();
 }
 
 void DCCConfigView::HideAllCustomConfigs()
@@ -753,23 +783,47 @@ void DCCConfigView::displayDecoder()
 	if (hasDecoder)
 	{
 		Decoders &d = uiDecodersConfig[selectedDecoderItem];
-		Unicode::snprintf(addressTextBuffer, countof(addressTextBuffer), (const Unicode::UnicodeChar *)u"%04d", d.getAddress());
-		textAddress.setText(addressTextBuffer);
+		u16stringstream s;
+		s << std::setw(4) << std::setfill(u'0') << d.getAddress();
+		addressTextBuffer = s.str();
+		textAddress.setText((const Unicode::UnicodeChar *)addressTextBuffer.c_str());
 		textName.setText((const Unicode::UnicodeChar *)d.getName());
 		textDescription.setText((const Unicode::UnicodeChar *)d.getDescription());
+		s.str(u"");
+		if (d.getSmallImageType() == EUserImage::UserFile)
+		{
+			s << u"File:" << d.getSmallImageFile();
+		}
+		else
+		{
+			s << u"Icon:" << EUserImageClass::iconName(d.getSmallImageType());
+		}
+		smallImageTextBuffer = s.str();
+		textSmallImage.setText((const Unicode::UnicodeChar *)smallImageTextBuffer.c_str());
+		s.str(u"");
+		if (d.getLargeImageType() == EUserImage::UserFile)
+		{
+			s << u"File:" << d.getLargeImageFile();
+		}
+		else
+		{
+			s << u"Icon:" << EUserImageClass::iconName(d.getLargeImageType());
+		}
+		largeImageTextBuffer = s.str();
+		textLargeImage.setText((const Unicode::UnicodeChar *)largeImageTextBuffer.c_str());
 		if (strlen(d.getDecoderDefFilename()) == 0)
 		{
 			textDecoder.setText(u"Other"); 
 		}
 		else
 		{
-			strncpy16(decoderDefBuffer, d.getDecoderDefFilename(), countof(decoderDefBuffer));
-			textDecoder.setText(decoderDefBuffer); 
+			strcpy16(decoderDefBuffer, d.getDecoderDefFilename());
+			textDecoder.setText((const Unicode::UnicodeChar *)decoderDefBuffer.c_str()); 
 			loadDecoderDef(d.getDecoderDefFilename());
 		}
 		showDecoderSpecificSettings(d.getType() == EDecoderType::Multifunction);
 		clearCVDisplay();
-		displayCVDisplay();
+		//displayCVDisplay();
 		setConfig(d.getConfig());
 			
 		if (d.getType() == EDecoderType::Multifunction)
@@ -782,6 +836,8 @@ void DCCConfigView::displayDecoder()
 		textAddress.setText((const Unicode::UnicodeChar *)u"----");
 		textName.setText((const Unicode::UnicodeChar *)u"----");
 		textDescription.setText((const Unicode::UnicodeChar *)u"");
+		textSmallImage.setText((const Unicode::UnicodeChar *)u"");
+		textLargeImage.setText((const Unicode::UnicodeChar *)u"");
 		setConfig(0);
 		HideAllCustomConfigs();
 	}
@@ -987,10 +1043,10 @@ void DCCConfigView::ScanAllCVsReply(EErrorCode::EErrorCode result, uint16_t cv, 
 	else
 	{
 		if (result == EErrorCode::Success)
-			Unicode::snprintf((Unicode::UnicodeChar *)scanAllTextBuffer, countof(scanAllTextBuffer), "CV[%d]=%d", cv, value);
+			Unicode::snprintf((Unicode::UnicodeChar *)scanAllTextBuffer.c_str(), countof(scanAllTextBuffer), "CV[%d]=%d", cv, value);
 		else
-			Unicode::snprintf((Unicode::UnicodeChar *)scanAllTextBuffer, countof(scanAllTextBuffer), "CV[%d]=%s!", cv, ErrorCodeText(result) );
-		waitSubText.setText(scanAllTextBuffer);
+			Unicode::snprintf((Unicode::UnicodeChar *)scanAllTextBuffer.c_str(), countof(scanAllTextBuffer), "CV[%d]=%s!", cv, ErrorCodeText(result) );
+		waitSubText.setText(scanAllTextBuffer.c_str());
 		waitSubText.invalidate();
 	}
 }
@@ -1029,7 +1085,8 @@ void DCCConfigView::ScanTrackReply(EErrorCode::EErrorCode result, int16_t addres
 			d.setConfig(config);
 			scrollWheelDecoders.setNumberOfItems(uiDecodersConfig.Count() + 1);
 			scrollWheelDecoders.itemChanged(selectedDecoderItem);
-			scrollWheelDecoders.invalidate();
+			scrollWheelDecoders.animateToItem(selectedDecoderItem);
+			//scrollWheelDecoders.invalidate();
 			displayDecoder();
 		}
 	}
