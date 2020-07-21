@@ -1392,59 +1392,6 @@
       {
         "Components": [
           {
-            "FileName": "__designer\\Dark_Textures_carbon_fibre.png",
-            "Alpha": 255,
-            "OffsetX": 0,
-            "OffsetY": 0,
-            "Name": "backgroundImage",
-            "X": 0,
-            "Y": 0,
-            "Width": 800,
-            "Height": 480,
-            "Type": "TiledImage",
-            "Visible": true,
-            "Draggable": false,
-            "Clickable": false,
-            "Fadeable": false,
-            "Moveable": false
-          },
-          {
-            "CustomContainerDefinitionName": "StatusBar",
-            "Name": "statusBar",
-            "X": 0,
-            "Y": 0,
-            "Width": 800,
-            "Height": 25,
-            "Type": "CustomContainerInstance",
-            "Visible": true,
-            "Draggable": false,
-            "Clickable": false,
-            "Fadeable": false,
-            "Moveable": false
-          },
-          {
-            "CustomContainerDefinitionName": "FunctionButtons",
-            "Name": "functionButtons",
-            "X": 0,
-            "Y": 455,
-            "Width": 800,
-            "Height": 25,
-            "Type": "CustomContainerInstance",
-            "Visible": true,
-            "Draggable": false,
-            "Clickable": false,
-            "Fadeable": false,
-            "Moveable": false
-          }
-        ],
-        "Interactions": [],
-        "Name": "DCCConfig_1",
-        "OverrideDefaultBufferSize": false,
-        "CanvasBufferSize": 0
-      },
-      {
-        "Components": [
-          {
             "Pressed": "__designer\\Blue_Buttons_Round_Edge_medium_pressed.png",
             "Released": "__designer\\Blue_Buttons_Round_Edge_medium.png",
             "Alpha": 255,
@@ -1600,8 +1547,8 @@
             "ButtonStyle": "Style1",
             "IconStyle": "Icon5",
             "Name": "buttonRev",
-            "X": 355,
-            "Y": 198,
+            "X": 235,
+            "Y": 334,
             "Width": 60,
             "Height": 60,
             "Type": "ButtonWithIcon",
@@ -1624,8 +1571,8 @@
             "ButtonStyle": "Style1",
             "IconStyle": "Icon39",
             "Name": "buttonFwd",
-            "X": 531,
-            "Y": 198,
+            "X": 411,
+            "Y": 334,
             "Width": 60,
             "Height": 60,
             "Type": "ButtonWithIcon",
@@ -1648,8 +1595,8 @@
             "ButtonStyle": "Style1",
             "IconStyle": "Icon61",
             "Name": "buttonStop",
-            "X": 441,
-            "Y": 198,
+            "X": 321,
+            "Y": 334,
             "Width": 60,
             "Height": 60,
             "Type": "ButtonWithIcon",
@@ -2433,6 +2380,62 @@
         "Y": 0,
         "Width": 360,
         "Height": 50
+      },
+      {
+        "Components": [
+          {
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Alpha": 255,
+            "Name": "background",
+            "X": 0,
+            "Y": 0,
+            "Width": 360,
+            "Height": 50,
+            "Type": "Box",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "TextId": "wildcardTextCentered28pxId",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 0,
+              "Green": 0,
+              "Blue": 0
+            },
+            "Alpha": 255,
+            "AutoSize": false,
+            "LineSpacing": 0,
+            "Wildcard1": {
+              "UseBuffer": false,
+              "BufferSize": 0
+            },
+            "Name": "text",
+            "X": 0,
+            "Y": 11,
+            "Width": 360,
+            "Height": 39,
+            "Type": "TextArea",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          }
+        ],
+        "Interactions": [],
+        "Name": "FileItem",
+        "X": 0,
+        "Y": 0,
+        "Width": 360,
+        "Height": 50
       }
     ],
     "TextEntries": [
@@ -2594,6 +2597,10 @@
       },
       {
         "TextEntryId": "DCCConfigLargeImage",
+        "IsResource": true
+      },
+      {
+        "TextEntryId": "wildcardTextCentered28pxId",
         "IsResource": true
       }
     ],

@@ -9,6 +9,7 @@
 #include "Config.h"
 #include "DecodersConfig.h"
 #include "DecoderDefConfig.h"
+#include "ImageFile.h"
 
 UIMessage uimsg;
 DRV8873S drv8873S(&hspi2);
@@ -16,6 +17,7 @@ AppMain app;
 UIConfig uiConfig;
 DecodersConfig uiDecodersConfig;;
 DecoderDefConfig decoderDefinitions;
+ImageFiles imageFiles;
 
 
 extern "C" void AppMainTask_Entry(void *argument)
@@ -242,7 +244,6 @@ void AppMain::TakeControl(int decoderIndex, bool control)
 }
 
 
-
 void AppMain::Run()
 {
 	setupLocale();
@@ -263,6 +264,7 @@ void AppMain::Run()
 //	decoderDefinitions.clear();
 //	printHeapStatistics();
 
+	imageFiles.Init();
 	
 	uint16_t ms_counter;
 	for(;  ;)

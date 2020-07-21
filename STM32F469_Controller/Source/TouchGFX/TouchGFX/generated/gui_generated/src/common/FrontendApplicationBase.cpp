@@ -23,8 +23,6 @@
 #include <gui/about_screen/AboutPresenter.hpp>
 #include <gui/dccconfig_screen/DCCConfigView.hpp>
 #include <gui/dccconfig_screen/DCCConfigPresenter.hpp>
-#include <gui/dccconfig_1_screen/DCCConfig_1View.hpp>
-#include <gui/dccconfig_1_screen/DCCConfig_1Presenter.hpp>
 #include <gui/placeholderscreen_screen/placeHolderScreenView.hpp>
 #include <gui/placeholderscreen_screen/placeHolderScreenPresenter.hpp>
 #include <gui/decoders_screen/DecodersView.hpp>

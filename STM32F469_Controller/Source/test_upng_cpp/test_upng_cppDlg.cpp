@@ -23,11 +23,11 @@
 // CAboutDlg dialog used for App About
 
 //#define INPUTFILE "..\\Images\\simple.png"
-#define INPUTFILE "..\\Images\\test.png"
+//#define INPUTFILE "..\\Images\\test.png"
 //#define INPUTFILE "..\\Images\\Lines.png"
 //#define INPUTFILE "..\\Images\\Splash.png"
 //#define INPUTFILE "..\\Images\\background.png"
-
+#define INPUTFILE "..\\sdmedia\\Images\\Marklin8840_small.png"
 
 class CAboutDlg : public CDialogEx
 {

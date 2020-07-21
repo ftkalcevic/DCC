@@ -16,6 +16,7 @@
 #include "DecoderDefConfig.h"
 #include "ToggleButtonIconAndText.h"
 #include <gui/common/TouchEventHandler.h>
+#include "SelectImageDialog.h"
 
 
 
@@ -127,7 +128,9 @@ protected:
 		Keypad,
 		Keyboard,
 		DeleteDecoder,
-		SelectDecoderDef
+		SelectDecoderDef,
+		SelectLargeIcon,
+		SelectSmallIcon
 	} state;
 
 	std::u16string addressTextBuffer;	// max 4 digits plus terminator
@@ -175,6 +178,10 @@ protected:
 
     touchgfx::Callback<DCCConfigView, const touchgfx::AbstractButton&> buttonCVDisplayClickCallback;
     void buttonCVDisplayClickHandler(const touchgfx::AbstractButton& src);
+
+    touchgfx::Callback<DCCConfigView, SelectImageDialog&, bool> selectImageDialogCloseCallback;
+    void selectImageDialogCloseHandler(SelectImageDialog&, bool);
+	std::shared_ptr<SelectImageDialog> selectFileDialog;
 		
 	bool isProgTrackEnabled() const 
 	{

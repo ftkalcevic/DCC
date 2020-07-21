@@ -17,6 +17,10 @@ const char * const DC_DecoderType = "Type";
 const char * const DC_DecoderCV29 = "CV29";
 const char * const DC_DecoderLocoSpeedSteps = "LocoSS";
 const char * const DC_DecoderDefFile = "DecoderDef";
+const char * const DC_DecoderSmallImageType = "SmallImageType";
+const char * const DC_DecoderSmallImageFile = "SmallImageFile";
+const char * const DC_DecoderLargeImageType = "LargeImageType";
+const char * const DC_DecoderLargeImageFile = "LargeImageFile";
 
 class DecodersConfig: public Config<127, 80>	// longest element is a description string, xpath max is about 70
 {
@@ -30,7 +34,11 @@ class DecodersConfig: public Config<127, 80>	// longest element is a description
 		DecoderType,
 		DecoderCV29,
 		DecoderLocoSpeedSteps,
-		DecoderDefinitionFile
+		DecoderDefinitionFile,
+		DecoderSmallImageType,
+		DecoderSmallImageFile,
+		DecoderLargeImageType,
+		DecoderLargeImageFile
 	};
 
 	std::vector<Decoders *> decoders;
@@ -51,6 +59,10 @@ protected:
 			{ DC_DecoderCV29, DecoderCV29 },
 			{ DC_DecoderLocoSpeedSteps, DecoderLocoSpeedSteps },
 			{ DC_DecoderDefFile, DecoderDefinitionFile },
+			{ DC_DecoderSmallImageType, DecoderSmallImageType },
+			{ DC_DecoderSmallImageFile,	DecoderSmallImageFile },
+			{ DC_DecoderLargeImageType,	DecoderLargeImageType },
+			{ DC_DecoderLargeImageFile,	DecoderLargeImageFile }
 		};
 		if (!matchElement(element, e, countof(e)))
 			return false;
@@ -70,6 +82,10 @@ protected:
 			case DecoderCV29:			decoders.back()->setConfig(atoi(contentBuffer)); break;
 			case DecoderLocoSpeedSteps:	if ( decoders.back()->getType() == EDecoderType::Multifunction ) decoders.back()->getLoco().setSpeedSteps((ESpeedSteps::ESpeedSteps)atoi(contentBuffer)); break;
 			case DecoderDefinitionFile:	decoders.back()->setDecoderDefFilename(contentBuffer); break;
+			case DecoderSmallImageType: decoders.back()->setSmallImageType((EUserImage::EUserImage)atoi(contentBuffer)); break;
+			case DecoderSmallImageFile: decoders.back()->setSmallImageFile(contentBuffer); break;
+			case DecoderLargeImageType: decoders.back()->setLargeImageType((EUserImage::EUserImage)atoi(contentBuffer)); break;
+			case DecoderLargeImageFile:	decoders.back()->setLargeImageFile(contentBuffer); break;
 			default:
 				break;
 		}
@@ -104,6 +120,10 @@ public:
 			stream.WriteElement( DC_DecoderType, d->getType() );
 			stream.WriteElement( DC_DecoderDefFile, d->getDecoderDefFilename() );
 			stream.WriteElement( DC_DecoderCV29, d->getConfig() );
+			stream.WriteElement( DC_DecoderSmallImageType, d->getSmallImageType() );
+			stream.WriteElement( DC_DecoderSmallImageFile, d->getSmallImageFile() );	
+			stream.WriteElement( DC_DecoderLargeImageType, d->getLargeImageType() );
+			stream.WriteElement( DC_DecoderLargeImageFile, d->getLargeImageFile() );
 			if (d->getType() == EDecoderType::Multifunction)
 			{
 				stream.WriteElement( DC_DecoderLocoSpeedSteps, d->getLoco().getSpeedSteps() );
@@ -141,6 +161,8 @@ public:
 		decoder->setDescription(u"");
 		decoder->setAddress(0);
 		decoder->setType(EDecoderType::Multifunction);
+		decoder->setSmallImageType(EUserImage::LocoSteamIcon);
+		decoder->setLargeImageType(EUserImage::LocoSteamIcon);
 		return decoders.size()-1;
 	}
 	

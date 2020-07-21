@@ -26,6 +26,7 @@ Artwork:
 background.png: https://wallpaperaccess.com/train
 Splash.png: https://www.pinterest.com.au/pin/320177854738516822/
 locoIcon.png: Icons made by Freepik from www.flaticon.com
+DieselIcon.png: Based on 'Locomotive Icon #7964' https://icon-library.net/icon/locomotive-icon-17.html
 spkrIcon.png: https://commons.wikimedia.org/wiki/File:Speaker_Icon.svg
 )";
 	

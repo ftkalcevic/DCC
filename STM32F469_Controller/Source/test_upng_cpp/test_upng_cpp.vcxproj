@@ -23,7 +23,7 @@
     <ProjectGuid>{1335747A-6006-487E-8E85-913F2656AFA0}</ProjectGuid>
     <Keyword>MFCProj</Keyword>
     <RootNamespace>testupngcpp</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

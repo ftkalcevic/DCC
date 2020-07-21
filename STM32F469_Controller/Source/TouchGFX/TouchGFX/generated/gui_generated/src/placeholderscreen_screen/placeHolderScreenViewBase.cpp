@@ -41,15 +41,15 @@ placeHolderScreenViewBase::placeHolderScreenViewBase()
     sliderBrake.setValueRange(0, 100);
     sliderBrake.setValue(0);
 
-    buttonRev.setXY(355, 198);
+    buttonRev.setXY(235, 334);
     buttonRev.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_ICON_BUTTON_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_ICON_BUTTON_PRESSED_ID), touchgfx::Bitmap(BITMAP_BLUE_ICONS_BACK_ARROW_32_ID), touchgfx::Bitmap(BITMAP_BLUE_ICONS_BACK_ARROW_32_ID));
     buttonRev.setIconXY(22, 15);
 
-    buttonFwd.setXY(531, 198);
+    buttonFwd.setXY(411, 334);
     buttonFwd.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_ICON_BUTTON_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_ICON_BUTTON_PRESSED_ID), touchgfx::Bitmap(BITMAP_BLUE_ICONS_NEXT_ARROW_32_ID), touchgfx::Bitmap(BITMAP_BLUE_ICONS_NEXT_ARROW_32_ID));
     buttonFwd.setIconXY(22, 15);
 
-    buttonStop.setXY(441, 198);
+    buttonStop.setXY(321, 334);
     buttonStop.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_ICON_BUTTON_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_ICON_BUTTON_PRESSED_ID), touchgfx::Bitmap(BITMAP_BLUE_ICONS_STOP_32_ID), touchgfx::Bitmap(BITMAP_BLUE_ICONS_STOP_32_ID));
     buttonStop.setIconXY(15, 15);
 

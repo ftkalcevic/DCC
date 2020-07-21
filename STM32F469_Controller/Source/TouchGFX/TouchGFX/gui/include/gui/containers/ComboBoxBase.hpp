@@ -23,6 +23,7 @@ public:
 	void setSelectedIndexChangedCallback( GenericCallback<ComboBoxBase&, int16_t> *callback ) { selectedIndexChangedCallback = callback; }
 
     void setNumberOfItems(int16_t n) { scrollWheel.setNumberOfItems(n); }
+    uint16_t getNumberOfItems() const { return scrollWheel.getNumberOfItems(); }
 	void setSelectedItem(int16_t index, bool animate = false) { Lock l(selectingNewItem); scrollWheel.animateToItem(index, animate ? -1 : 0); }
 	int getSelectedItem() const { return scrollWheel.getSelectedItem(); }
 	

@@ -846,9 +846,6 @@
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\containers\scrollWheelItemBase.cpp">
       <Filter>Source files\Application\User\generated</Filter>
     </ClCompile>
-    <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\dccconfig_1_screen\DCCConfig_1ViewBase.cpp">
-      <Filter>Source files\Application\User\generated</Filter>
-    </ClCompile>
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\dccconfig_screen\DCCConfigViewBase.cpp">
       <Filter>Source files\Application\User\generated</Filter>
     </ClCompile>
@@ -859,12 +856,6 @@
       <Filter>Source files\Application\User\generated</Filter>
     </ClCompile>
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\containers\scrollWheelItem.cpp">
-      <Filter>Source files\Application\User\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\dccconfig_1_screen\DCCConfig_1Presenter.cpp">
-      <Filter>Source files\Application\User\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\dccconfig_1_screen\DCCConfig_1View.cpp">
       <Filter>Source files\Application\User\gui</Filter>
     </ClCompile>
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\dccconfig_screen\DCCConfigPresenter.cpp">
@@ -1347,6 +1338,33 @@
     <ClCompile Include="Decoders.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="SelectImageDialog.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\largeImageBackground.cpp">
+      <Filter>Source files\Application\User\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\smallImageBackground.cpp">
+      <Filter>Source files\Application\User\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\containers\FileItemBase.cpp">
+      <Filter>Source files\Application\User\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\containers\FileItem.cpp">
+      <Filter>Source files\Application\User\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageFile.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\dieselIcon_small.cpp">
+      <Filter>Source files\Application\User\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\electricIcon_large.cpp">
+      <Filter>Source files\Application\User\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\electricIcon_small.cpp">
+      <Filter>Source files\Application\User\generated</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stm32f4xx_hal_tim_plus.h">
@@ -1524,6 +1542,12 @@
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="Utility.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectImageDialog.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageFile.h">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>

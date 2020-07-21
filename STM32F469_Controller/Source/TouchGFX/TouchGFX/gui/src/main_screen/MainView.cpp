@@ -39,7 +39,7 @@ MainView::MainView():
 			page->setWidth(800);
 			page->setHeight(430);
 			swipeContainer.add(*page);
-			pages.push_back( page );
+			pages.push_back(page);
 		}
 
 		// Add buttons (15, 15) 200x200 spacing
@@ -59,11 +59,18 @@ MainView::MainView():
 		}
 		else
 		{
-			if ( uiDecodersConfig[i].getType() == EDecoderType::Multifunction )
+			Decoders &d = uiDecodersConfig[i];
+		
+			if (d.getSmallImageType() == EUserImage::UserFile)
+			{
 				button->setBitmaps(touchgfx::Bitmap(BITMAP_BUTTONUP_ID), touchgfx::Bitmap(BITMAP_BUTTONDOWN_ID), touchgfx::Bitmap(BITMAP_LOCOICON_ID), touchgfx::Bitmap(BITMAP_LOCOICON_ID));
+			}
 			else
-				button->setBitmaps(touchgfx::Bitmap(BITMAP_BUTTONUP_ID), touchgfx::Bitmap(BITMAP_BUTTONDOWN_ID), touchgfx::Bitmap(BITMAP_ACCESSORYICON_ID), touchgfx::Bitmap(BITMAP_ACCESSORYICON_ID));
-			button->setLabelText( uiDecodersConfig[i].getName());
+			{
+				BitmapId bmpId = EUserImageClass::UserImage(d.getSmallImageType()).bmpId;
+				button->setBitmaps(touchgfx::Bitmap(BITMAP_BUTTONUP_ID), touchgfx::Bitmap(BITMAP_BUTTONDOWN_ID), touchgfx::Bitmap(bmpId), touchgfx::Bitmap(bmpId));
+			}
+			button->setLabelText( d.getName());
 			button->setId(i);
 		}
 		page->add(*button);

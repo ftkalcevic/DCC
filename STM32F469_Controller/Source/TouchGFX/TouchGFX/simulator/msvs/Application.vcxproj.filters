@@ -250,18 +250,6 @@
     <Filter Include="Source Files\gui\dccconfig_screen">
       <UniqueIdentifier>E8837E49-CA18-312D-923C-F55046C91C1B</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\gui\dccconfig_1_screen">
-      <UniqueIdentifier>95B7F3A1-E6E6-6673-C857-F5937C988369</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\gui\dccconfig_1_screen">
-      <UniqueIdentifier>52DBA5A7-0E2E-DE0C-878F-259893D04C2B</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\generated\gui_generated\dccconfig_1_screen">
-      <UniqueIdentifier>5F24E397-BDD0-0257-2523-3CF26A691BB4</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\generated\gui_generated\dccconfig_1_screen">
-      <UniqueIdentifier>653F3DDC-59C8-9155-1C22-92B38BCB78AB</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\generated\gui_generated\dccconfig_screen">
       <UniqueIdentifier>F6C163B0-1E9D-26D7-A1F4-B4DB906BC3F2</UniqueIdentifier>
     </Filter>
@@ -420,15 +408,6 @@
     <ClCompile Include="..\..\generated\gui_generated\src\about_screen\AboutViewBase.cpp">
       <Filter>Source Files\generated\gui_generated\about_screen</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\gui\src\dccconfig_1_screen\DCCConfig_1Presenter.cpp">
-      <Filter>Source Files\gui\dccconfig_1_screen</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\gui\src\dccconfig_1_screen\DCCConfig_1View.cpp">
-      <Filter>Source Files\gui\dccconfig_1_screen</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\generated\gui_generated\src\dccconfig_1_screen\DCCConfig_1ViewBase.cpp">
-      <Filter>Source Files\generated\gui_generated\dccconfig_1_screen</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\gui\src\dccconfig_screen\DCCConfigPresenter.cpp">
       <Filter>Source Files\gui\dccconfig_screen</Filter>
     </ClCompile>
@@ -511,6 +490,12 @@
       <Filter>Source Files\gui\containers</Filter>
     </ClCompile>
     <ClCompile Include="..\..\generated\gui_generated\src\containers\ComboBoxBaseBase.cpp">
+      <Filter>Source Files\generated\gui_generated\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\containers\FileItem.cpp">
+      <Filter>Source Files\gui\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\FileItemBase.cpp">
       <Filter>Source Files\generated\gui_generated\containers</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1036,15 +1021,6 @@
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\about_screen\AboutViewBase.hpp">
       <Filter>Header Files\generated\gui_generated\about_screen</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\gui\include\gui\dccconfig_1_screen\DCCConfig_1Presenter.hpp">
-      <Filter>Header Files\gui\dccconfig_1_screen</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\gui\include\gui\dccconfig_1_screen\DCCConfig_1View.hpp">
-      <Filter>Header Files\gui\dccconfig_1_screen</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\dccconfig_1_screen\DCCConfig_1ViewBase.hpp">
-      <Filter>Header Files\generated\gui_generated\dccconfig_1_screen</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\gui\include\gui\dccconfig_screen\DCCConfigPresenter.hpp">
       <Filter>Header Files\gui\dccconfig_screen</Filter>
     </ClInclude>
@@ -1146,6 +1122,12 @@
     </ClInclude>
     <ClInclude Include="..\..\gui\include\gui\common\TouchEventHandler.h">
       <Filter>Source Files\gui\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\containers\FileItem.hpp">
+      <Filter>Header Files\gui\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\FileItemBase.hpp">
+      <Filter>Header Files\generated\gui_generated\containers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

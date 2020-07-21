@@ -5,7 +5,7 @@
 #include "Common.h"
 #include <string.h>
 #include "Utility.h"
-
+#include <touchgfx/Bitmap.hpp>
 
 using namespace touchgfx;
 
@@ -17,7 +17,7 @@ namespace EDecoderType
 	enum EDecoderType: uint8_t
 	{
 		None=0,
-		Multifunction=1,
+		Multifunction=1,	// These area also used as a bit mask
 		Accessory=2
 	};
 }
@@ -164,10 +164,11 @@ namespace EUserImage
 	enum EUserImage
 	{
 		None = 0,
-		UserFile=1,
-		LocoSteamIcon=2,
-		LocoDieselIcon=3,
+		LocoSteamIcon=1,
+		LocoDieselIcon=2,
+		LocoElectricIcon=3,
 		AccTurnoutIcon=4,
+		UserFile=5,
 	};
 }
 
@@ -184,9 +185,13 @@ public:
 	{
 		EUserImage::EUserImage id;
 		const char16_t *name;
+		BitmapId bmpId;
 		uint8_t usage;
 	} UserImageInfo[];
 	static const char16_t *iconName(EUserImage::EUserImage img);
+	static uint16_t Count();
+	static const SUserImageInfo& UserImage(uint16_t index);
+	static const SUserImageInfo &UserImage(EUserImage::EUserImage);
 };
 
 
@@ -224,9 +229,9 @@ public:
 	const char *getDecoderDefFilename() const { return decoderDefFilename;}
 	EDecoderType::EDecoderType getType() const { return type; }
 	EUserImage::EUserImage getSmallImageType() const { return smallImageType; }
-	const char *getSmallImageFile() const { return smallImageFile; }
+	char *getSmallImageFile() { return smallImageFile; }
 	EUserImage::EUserImage getLargeImageType() const { return largeImageType; }
-	const char *getLargeImageFile() const { return largeImageFile; }
+	char *getLargeImageFile() { return largeImageFile; }
 
 	LocoSettings &getLoco()
 	{
@@ -300,5 +305,40 @@ public:
 			dirty = true;
 		}
 	}
+	void setSmallImageType(EUserImage::EUserImage id) 
+	{ 
+		if (smallImageType != id) 
+		{
+			smallImageType = id;
+			dirty = true;
+		} 
+	}
+	void setSmallImageFile(const char *s) 
+	{ 
+		if (strcmp(smallImageFile, s) != 0)
+		{
+			strncpy(smallImageFile, s, countof(smallImageFile));
+			smallImageFile[countof(smallImageFile)-1] = 0;
+			dirty = true;
+		}
+	}
+	void setLargeImageType(EUserImage::EUserImage id)
+	{ 
+		if (largeImageType != id) 
+		{
+			largeImageType = id;
+			dirty = true;
+		} 
+	}
+	void setLargeImageFile(const char *s)
+	{ 
+		if (strcmp(largeImageFile, s) != 0)
+		{
+			strncpy(largeImageFile, s, countof(largeImageFile));
+			largeImageFile[countof(largeImageFile)-1] = 0;
+			dirty = true;
+		}
+	}
+	
 };
 

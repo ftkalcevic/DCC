@@ -52,7 +52,7 @@
     <Link>
       <LibrarySearchDirectories>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\Middlewares\ST\touchgfx\lib\core\cortex_m4f\gcc;%(Link.LibrarySearchDirectories)</LibrarySearchDirectories>
       <AdditionalLibraryNames>touchgfx-float-abi-hard;%(Link.AdditionalLibraryNames)</AdditionalLibraryNames>
-      <AdditionalLinkerInputs>;%(Link.AdditionalLinkerInputs)</AdditionalLinkerInputs>
+      <AdditionalLinkerInputs>%(Link.AdditionalLinkerInputs)</AdditionalLinkerInputs>
       <AdditionalOptions />
       <LinkerScript>..\TouchGFX\STM32CubeIDE\STM32F469NIHX_FLASH.ld</LinkerScript>
     </Link>
@@ -287,10 +287,12 @@
     <ClCompile Include="DRV8873S.cpp" />
     <ClCompile Include="FileSystem.cpp" />
     <ClCompile Include="Geometry.cpp" />
+    <ClCompile Include="ImageFile.cpp" />
     <ClCompile Include="LCCTask.cpp" />
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="MainTrackDCC.cpp" />
     <ClCompile Include="ProgTrackDCC.cpp" />
+    <ClCompile Include="SelectImageDialog.cpp" />
     <ClCompile Include="stm32f4xx_hal_tim_plus.c" />
     <ClCompile Include="upng.cpp" />
     <ClCompile Include="Utility.cpp" />
@@ -342,6 +344,7 @@
     <ClInclude Include="DRV8873S.h" />
     <ClInclude Include="FileSystem.h" />
     <ClInclude Include="Geometry.h" />
+    <ClInclude Include="ImageFile.h" />
     <ClInclude Include="InputEvent.h" />
     <ClInclude Include="KeyEvent.h" />
     <ClInclude Include="LCCTask.h" />
@@ -350,6 +353,7 @@
     <ClInclude Include="PaintContext.h" />
     <ClInclude Include="ProgTrackDCC.h" />
     <ClInclude Include="ScalableAspectImage.h" />
+    <ClInclude Include="SelectImageDialog.h" />
     <ClInclude Include="stm32f4xx_hal_tim_plus.h" />
     <ClInclude Include="ToggleButtonIconAndText.h" />
     <ClInclude Include="upng.h" />
@@ -462,13 +466,10 @@
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\about_screen\AboutView.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\aboutIcon.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\containers\scrollWheelItemBase.cpp" />
-    <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\dccconfig_1_screen\DCCConfig_1ViewBase.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\dccconfig_screen\DCCConfigViewBase.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\AccessoryDecoderIcon.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\MultifunctionAccessoryIcon.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\containers\scrollWheelItem.cpp" />
-    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\dccconfig_1_screen\DCCConfig_1Presenter.cpp" />
-    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\dccconfig_1_screen\DCCConfig_1View.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\dccconfig_screen\DCCConfigPresenter.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\dccconfig_screen\DCCConfigView.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\ProgTrackButtonDown.cpp" />
@@ -537,5 +538,12 @@
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\containers\ComboItem.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\containers\ComboBoxBaseBase.cpp" />
     <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\containers\ComboBoxBase.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\largeImageBackground.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\smallImageBackground.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\gui_generated\src\containers\FileItemBase.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\gui\src\containers\FileItem.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\dieselIcon_small.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\electricIcon_large.cpp" />
+    <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\electricIcon_small.cpp" />
   </ItemGroup>
 </Project>

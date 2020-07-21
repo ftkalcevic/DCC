@@ -14,12 +14,6 @@
 #include "ProgTrackDCC.h"		// this should be in model
 #include "DecoderDefConfig.h"
 
-enum EDecoderDisplay
-{
-	Loco = 0x01,
-	Acc = 0x02,
-	Both = Loco | Acc
-};
 
 DCCConfigView::DCCConfigView() :
     buttonProgTrackClickCallback(this, &DCCConfigView::buttonProgTrackClickHandler),
@@ -36,6 +30,7 @@ DCCConfigView::DCCConfigView() :
 	selectListCancelButtonClickCallback(this, &DCCConfigView::selectListCancelButtonClickHandler),
     cboSpeedStepsSelectionChangedCallback(this, &DCCConfigView::cboSpeedStepsSelectionChangedHandler),
     buttonCVDisplayClickCallback(this, &DCCConfigView::buttonCVDisplayClickHandler),
+	selectImageDialogCloseCallback(this, &DCCConfigView::selectImageDialogCloseHandler),
 	state(Editting),
 	selectedDecoderItem(-1)
 {
@@ -947,7 +942,54 @@ void DCCConfigView::editTextClickHandler(const TextWithFrame& b, const ClickEven
 			audioTask.PlaySound(EAudioSounds::KeyPressTone);
 		    SelectDecoderDefinition(u"Select Decoder Model");
 	    }
+	    else if (&b == static_cast<const TextWithFrame *>(&textSmallImage) )
+	    {
+		    selectFileDialog = std::make_shared<SelectImageDialog>(BITMAP_SMALLIMAGEBACKGROUND_ID, u"Small Image (130x130)", d.getType(), d.getSmallImageType(), d.getSmallImageFile() );
+		    add(*selectFileDialog);
+		    selectFileDialog->setButtonPressedCallback(&selectImageDialogCloseCallback);
+		    selectFileDialog->setVisible(true);
+		    selectFileDialog->invalidate();
+		    state = EState::SelectSmallIcon;
+	    }
+	    else if (&b == static_cast<const TextWithFrame *>(&textLargeImage) )
+	    {
+		    selectFileDialog = std::make_shared<SelectImageDialog>(BITMAP_LARGEIMAGEBACKGROUND_ID, u"Large Image (380x210)", d.getType(), d.getLargeImageType(), d.getLargeImageFile() );
+		    add(*selectFileDialog);
+		    selectFileDialog->setButtonPressedCallback(&selectImageDialogCloseCallback);
+		    selectFileDialog->setVisible(true);
+		    selectFileDialog->invalidate();
+		    state = EState::SelectLargeIcon;
+	    }
 	}
+}
+
+
+void DCCConfigView::selectImageDialogCloseHandler(SelectImageDialog & dialog, bool ok)
+{
+	if (ok)
+	{
+		if ( selectedDecoderItem >= 0 )
+		{
+			Decoders &d = uiDecodersConfig[selectedDecoderItem];
+			EUserImage::EUserImage newImg = dialog.getUserImage();
+			const char *newFile = dialog.getUserFile();
+			if (state == EState::SelectSmallIcon)
+			{
+				d.setSmallImageType(newImg);
+				d.setSmallImageFile(newFile);
+			}
+			else if (state == EState::SelectLargeIcon)
+			{
+				d.setLargeImageType(newImg);
+				d.setLargeImageFile(newFile);
+			}
+			displayDecoder();
+		}
+	}
+	state = EState::Editting;
+	selectFileDialog->setVisible(false);
+	selectFileDialog->invalidate();
+	remove(*selectFileDialog);
 }
 
 

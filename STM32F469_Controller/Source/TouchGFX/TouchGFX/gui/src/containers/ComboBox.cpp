@@ -52,7 +52,7 @@ void ComboBox::updateItemHandler(ComboBoxBase& cbo, ComboItem& cboItem, int16_t 
 
 void ComboBox::selectedIndexChangedHandler(ComboBoxBase& cbo, int16_t index)
 {
-    if ( selectionChangedCallback && selectionChangedCallback->isValid())
+    if ( selectionChangedCallback && selectionChangedCallback->isValid() && index >= 0 && index < itemList.size() )
     {
         selectionChangedCallback->execute(*this, index, itemList[index].id);
     }

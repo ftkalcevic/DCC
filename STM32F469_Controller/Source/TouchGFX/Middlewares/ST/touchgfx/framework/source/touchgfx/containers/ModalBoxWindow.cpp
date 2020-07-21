@@ -50,6 +50,8 @@ ModalBoxWindow::~ModalBoxWindow()
 void ModalBoxWindow::setWindowSize(const uint16_t width, const uint16_t height)
 {
 	windowBox.setPosition(0,0,width,height);
+	uint16_t w = getWidth();
+	uint16_t wbw = windowBox.getWidth();
     windowContainer.setPosition((getWidth() - windowBox.getWidth()) / 2, (getHeight() - windowBox.getHeight()) / 2, windowBox.getWidth(), windowBox.getHeight());
     invalidate();
 }

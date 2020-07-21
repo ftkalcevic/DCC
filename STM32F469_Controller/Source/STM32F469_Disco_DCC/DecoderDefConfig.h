@@ -40,6 +40,7 @@ const char * const DD_Attr_CVCount = "cvcount";
 const char * const DD_Attr_CVS = "cvs";
 
 const char * const Path_Devices = "/config/devices"; 
+const char * const Path_Images = "/Images";
 const int DECODER_DEF_FILENAME_LEN = 20;
 
 class DecoderDefConfig: public Config<127, 80>	// longest element is a description string, xpath max is about 70

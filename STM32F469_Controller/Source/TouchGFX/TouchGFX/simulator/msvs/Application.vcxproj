@@ -49,9 +49,6 @@
     <ClCompile Include="..\..\gui\src\about_screen\AboutPresenter.cpp"/>
     <ClCompile Include="..\..\gui\src\about_screen\AboutView.cpp"/>
     <ClCompile Include="..\..\generated\gui_generated\src\about_screen\AboutViewBase.cpp"/>
-    <ClCompile Include="..\..\gui\src\dccconfig_1_screen\DCCConfig_1Presenter.cpp"/>
-    <ClCompile Include="..\..\gui\src\dccconfig_1_screen\DCCConfig_1View.cpp"/>
-    <ClCompile Include="..\..\generated\gui_generated\src\dccconfig_1_screen\DCCConfig_1ViewBase.cpp"/>
     <ClCompile Include="..\..\gui\src\dccconfig_screen\DCCConfigPresenter.cpp"/>
     <ClCompile Include="..\..\gui\src\dccconfig_screen\DCCConfigView.cpp"/>
     <ClCompile Include="..\..\generated\gui_generated\src\dccconfig_screen\DCCConfigViewBase.cpp"/>
@@ -80,6 +77,8 @@
     <ClCompile Include="..\..\generated\gui_generated\src\containers\ComboItemBase.cpp"/>
     <ClCompile Include="..\..\gui\src\containers\ComboBoxBase.cpp"/>
     <ClCompile Include="..\..\generated\gui_generated\src\containers\ComboBoxBaseBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\containers\FileItem.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\FileItemBase.cpp"/>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(ApplicationRoot)\assets\texts\texts.xlsx"/>
@@ -257,9 +256,6 @@
     <ClInclude Include="..\..\gui\include\gui\about_screen\AboutPresenter.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\about_screen\AboutView.hpp"/>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\about_screen\AboutViewBase.hpp"/>
-    <ClInclude Include="..\..\gui\include\gui\dccconfig_1_screen\DCCConfig_1Presenter.hpp"/>
-    <ClInclude Include="..\..\gui\include\gui\dccconfig_1_screen\DCCConfig_1View.hpp"/>
-    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\dccconfig_1_screen\DCCConfig_1ViewBase.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\dccconfig_screen\DCCConfigPresenter.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\dccconfig_screen\DCCConfigView.hpp"/>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\dccconfig_screen\DCCConfigViewBase.hpp"/>
@@ -294,6 +290,8 @@
     <ClInclude Include="..\..\gui\include\gui\containers\ComboBoxBase.hpp"/>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\ComboBoxBaseBase.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\common\TouchEventHandler.h"/>
+    <ClInclude Include="..\..\gui\include\gui\containers\FileItem.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\FileItemBase.hpp"/>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="$(ApplicationRoot)\generated\simulator\touchgfx.rc"/>

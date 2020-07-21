@@ -10,43 +10,44 @@ TEXT_LOCATION_FLASH_PRAGMA
 KEEP extern const uint32_t indicesGb[] TEXT_LOCATION_FLASH_ATTRIBUTE =
 {
     0, // T_ResourceId1
-    28, // T_wildcardTextLeft20pxId
+    14, // T_wildcardTextLeft20pxId
     252, // T_SingleUseId14
-    28, // T_wildcardTextCenter20pxId
-    43, // T_SingleUseId15
-    151, // T_SingleUseId16
-    220, // T_SingleUseId17
+    14, // T_wildcardTextCenter20pxId
+    30, // T_SingleUseId15
+    171, // T_SingleUseId16
+    213, // T_SingleUseId17
     240, // T_SingleUseId18
     135, // T_SingleUseId19
     246, // T_SingleUseId20
-    141, // T_SingleUseId21
-    56, // T_SingleUseId22
-    161, // T_SingleUseId23
-    48, // T_SingleUseId28
+    161, // T_SingleUseId21
+    69, // T_SingleUseId22
+    151, // T_SingleUseId23
+    35, // T_SingleUseId28
     130, // T_resourceIdScanTrack
-    69, // T_resourceReadAllCVs
-    14, // T_ResourceId2
-    30, // T_ResourceId3
-    28, // T_wildcardTextCentered40pxId
+    56, // T_resourceReadAllCVs
+    16, // T_ResourceId2
+    43, // T_ResourceId3
+    14, // T_wildcardTextCentered40pxId
     181, // T_SingleUseId30
-    28, // T_wildcardTextLeft40pxId
-    171, // T_SingleUseId34
-    198, // T_DccConfigAddress
+    14, // T_wildcardTextLeft40pxId
+    141, // T_SingleUseId34
+    190, // T_DccConfigAddress
     257, // T_DccConfigName
-    106, // T_DccConfigDescription
-    190, // T_DccConfigDecoder
+    94, // T_DccConfigDescription
+    198, // T_DccConfigDecoder
     206, // T_DccConfigConfig
-    74, // T_DccConfigAllCVs
-    28, // T_wildcardTextLeft40pxNumericId
-    28, // T_EnteredText
+    61, // T_DccConfigAllCVs
+    14, // T_wildcardTextLeft40pxNumericId
+    14, // T_EnteredText
     266, // T_NumMode
     262, // T_AlphaMode
-    28, // T_wildcardTextLeft28px
+    14, // T_wildcardTextLeft28px
     270, // T_waitButtonOKId
-    213, // T_resourceDelete
-    227, // T_waitButtonCancelId
+    227, // T_resourceDelete
+    220, // T_waitButtonCancelId
     234, // T_SingleUseId35
     82, // T_DCCConfigSpeedSteps
-    94, // T_DCCConfigSmallImage
-    118  // T_DCCConfigLargeImage
+    106, // T_DCCConfigSmallImage
+    118, // T_DCCConfigLargeImage
+    14  // T_wildcardTextCentered28pxId
 };

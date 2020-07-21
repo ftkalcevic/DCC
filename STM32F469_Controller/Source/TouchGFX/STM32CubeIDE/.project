@@ -1263,5 +1263,40 @@
 			<type>1</type>
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/containers/ComboBoxBaseBase.cpp</locationURI>
 		</link>
+		<link>
+			<name>Application/User/generated/largeImageBackground.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/largeImageBackground.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/smallImageBackground.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/smallImageBackground.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/FileItem.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/gui/src/containers/FileItem.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/FileItemBase.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/gui_generated/src/containers/FileItemBase.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/dieselIcon_small.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/dieselIcon_small.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/electricIcon_large.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/electricIcon_large.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/electricIcon_small.cpp</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/generated/images/src/electricIcon_small.cpp</locationURI>
+		</link>
 	</linkedResources>
 </projectDescription>
