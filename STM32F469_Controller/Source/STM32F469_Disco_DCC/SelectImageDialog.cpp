@@ -233,9 +233,9 @@ void SelectImageDialog::oKButtonClickHandler(const touchgfx::AbstractButton& src
 
 void SelectImageDialog::cancelButtonClickHandler(const touchgfx::AbstractButton& src)
 {
-	//notify(false);
-	Rect r(imgImage.getWidth()/2, imgImage.getHeight()/2, imgImage.getWidth()/2, imgImage.getHeight()/2);
-	imgImage.invalidateRect(r);
+	notify(false);
+//	Rect r(imgImage.getWidth()/2, imgImage.getHeight()/2, imgImage.getWidth()/2, imgImage.getHeight()/2);
+//	imgImage.invalidateRect(r);
 }
 
 
