@@ -2,6 +2,7 @@
 #include <touchgfx/Color.hpp>
 #include <texts/TextKeysAndLanguages.hpp>
 #include <gui/common/BinFileLoader.h>
+#include "AudioTask.h"
 
 StartupScreenView::StartupScreenView()
 {
@@ -24,6 +25,7 @@ StartupScreenView::StartupScreenView()
         add(box1);
         add(textArea1);
 	}
+	audioTask.PlaySound(EAudioSounds::Bell2);
 }
 
 void StartupScreenView::setupScreen()

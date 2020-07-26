@@ -108,7 +108,7 @@ public:
 		BaseType_t res = xQueueSend(queueHandle, &msg, 0);
 		if (res != pdPASS)
 		{
-			assert(false && "UI Queue Send failed");
+			//assert(false && "UI Queue Send failed");
 		}
 	}
 	

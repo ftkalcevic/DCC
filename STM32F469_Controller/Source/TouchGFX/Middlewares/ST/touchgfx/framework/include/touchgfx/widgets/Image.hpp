@@ -46,7 +46,7 @@ public:
      *
      * @param bmp The bitmap to display.
      */
-    Image(const Bitmap& bmp = Bitmap()) : Widget(), alpha(255)
+    Image(const Bitmap& bmp = Bitmap()) : Widget(), alpha(255), flipHorizontal(false), flipVertical(false)
     {
         setBitmap(bmp);
     }
@@ -131,10 +131,20 @@ public:
      */
     virtual Rect getSolidRect() const;
 
+	void setFlipHorizontal( bool f) { flipHorizontal = f; }
+	void setFlipVertical( bool f) { flipVertical = f; }
+	
 protected:
     Bitmap  bitmap;               ///< The Bitmap to display.
     uint8_t alpha;                ///< The Alpha for this image.
     bool    hasTransparentPixels; ///< true if this object has transparent pixels
+	bool    flipHorizontal;
+	bool    flipVertical;
+    static BitmapId  bitmapRGB888Id;
+    static BitmapId  bitmapARGB8888Id;
+public:	
+	static BitmapId GetLineBitmap(Bitmap::BitmapFormat fmt);
+	static void DrawBitmap(const Bitmap &bitmap, Rect widgetRect, int16_t xPos, int16_t yPos, Rect dirtyBitmapArea, bool flipHorizontal, bool flipVertical, uint8_t alpha);
 };
 } // namespace touchgfx
 

@@ -85,16 +85,16 @@ BitmapId BinFileLoader::makeBitmap(const char *filename)
 			uint16_t width = png.get_width();
 			uint16_t height = png.get_height();
 			upng_format format = png.get_format();
-			uint16_t bpp = png.get_bpp();
+			uint16_t bpp = png.get_pixelsize()/8;	// bytes per pixel
 			uint16_t color_depth = png.get_bitdepth();
 
 			if (color_depth == 8 && (format == UPNG_RGB8 || format == UPNG_RGBA8))
 			{
-				//Create (24bit) dynamic bitmap of same dimension
+				//Create (24bit) dynamic bitmap of same dimension (width + 1 required for working space)
 				if ( format == UPNG_RGB8 )
-					bmpId = Bitmap::dynamicBitmapCreate(width, height + 1, Bitmap::RGB888);
+					bmpId = Bitmap::dynamicBitmapCreate(width+1, height, Bitmap::RGB888);
 				else
-					bmpId = Bitmap::dynamicBitmapCreate(width, height + 1, Bitmap::ARGB8888);
+					bmpId = Bitmap::dynamicBitmapCreate(width+1, height, Bitmap::ARGB8888);
 				
 				if (bmpId != BITMAP_INVALID)
 				{

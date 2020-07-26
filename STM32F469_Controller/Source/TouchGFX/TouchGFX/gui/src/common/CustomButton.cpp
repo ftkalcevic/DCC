@@ -17,18 +17,22 @@
 #include <touchgfx/FontManager.hpp>
 #include <touchgfx/hal/HAL.hpp>
 #include <touchgfx/Color.hpp>
+#include <touchgfx/widgets/Image.hpp>
 
 namespace touchgfx
 {
 CustomButton::CustomButton()
-    : Button(), color(0), colorPressed(0), rotation(TEXT_ROTATE_0), textHeightIncludingSpacing(0), textWidth(0), buttonId(0)
+    : Button(), color(0), colorPressed(0), rotation(TEXT_ROTATE_0), textHeightIncludingSpacing(0), textWidth(0), buttonId(0), flipIconHoriz(false), flipIconVert(false)
 {
 }
 	
 void CustomButton::setBitmaps(const Bitmap& newBackgroundReleased, const Bitmap& newBackgroundPressed,
-                                const Bitmap& newIconReleased, const Bitmap& newIconPressed)
+                              const Bitmap& newIconReleased, const Bitmap& newIconPressed,
+		                      bool flipHoriz, bool flipVert )
 {
     Button::setBitmaps(newBackgroundReleased, newBackgroundPressed);
+	flipIconHoriz = flipHoriz;
+	flipIconVert = flipVert;
 
     iconReleased = newIconReleased;
     iconPressed = newIconPressed;
@@ -53,16 +57,21 @@ void CustomButton::draw(const Rect& area) const
     Rect dirty = area & iconRect;
     if ((bmp.getId() != BITMAP_INVALID) && !dirty.isEmpty())
     {
-	    int offset = 0;
-	    if (pressed)
-	    {
-		    offset = 5;
-	    }
+	    int offset = pressed ? 5 : 0;
         Rect r;
         translateRectToAbsolute(r);
-        dirty.x -= iconX;
-        dirty.y -= iconY;
-        HAL::lcd().drawPartialBitmap(bmp, r.x + iconX + offset, r.y + iconY + offset, dirty, alpha);
+	    dirty.x -= iconX;
+	    dirty.y -= iconY;
+	    Image::DrawBitmap(bmp, bmp.getRect(), r.x + iconX + offset, r.y + iconY + offset, dirty, flipIconHoriz, flipIconVert, alpha);
+	    
+//	    int offset = 0;
+//	    if (pressed)
+//	    {
+//		    offset = 5;
+//	    }
+//        dirty.x -= iconX;
+//        dirty.y -= iconY;
+//        HAL::lcd().drawPartialBitmap(bmp, r.x + iconX + offset, r.y + iconY + offset, dirty, alpha);
     }
 	
 	if (text != nullptr)

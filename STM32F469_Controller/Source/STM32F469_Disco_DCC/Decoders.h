@@ -159,6 +159,17 @@ struct Functions
 	EFunctionAction::EFunctionAction Fn1, Fn2, Fn3, Fn4, Fn5;
 };
 
+namespace EImageAttributes
+{
+	// Mask
+	enum EImageAttributes: uint8_t
+	{
+		None = 0,
+		FlipHorizontal = 0x01,
+		FlipVertical = 0x02,
+	};
+}
+
 namespace EUserImage
 {
 	enum EUserImage
@@ -207,8 +218,10 @@ private:
 	EDecoderType::EDecoderType type;
 	EUserImage::EUserImage smallImageType;
 	char smallImageFile[MAX_PATH];
+	EImageAttributes::EImageAttributes smallImageAttributes;
 	EUserImage::EUserImage largeImageType;
 	char largeImageFile[MAX_PATH];
+	EImageAttributes::EImageAttributes largeImageAttributes;
 	char UserBackgroundFile[MAX_PATH];
 	union
 	{
@@ -229,8 +242,10 @@ public:
 	const char *getDecoderDefFilename() const { return decoderDefFilename;}
 	EDecoderType::EDecoderType getType() const { return type; }
 	EUserImage::EUserImage getSmallImageType() const { return smallImageType; }
+	EImageAttributes::EImageAttributes getSmallImageAttributes() const { return smallImageAttributes; }
 	char *getSmallImageFile() { return smallImageFile; }
 	EUserImage::EUserImage getLargeImageType() const { return largeImageType; }
+	EImageAttributes::EImageAttributes getLargeImageAttributes() const { return largeImageAttributes; }
 	char *getLargeImageFile() { return largeImageFile; }
 
 	LocoSettings &getLoco()
@@ -339,6 +354,21 @@ public:
 			dirty = true;
 		}
 	}
-	
+	void setSmallImageAttributes(EImageAttributes::EImageAttributes newAttr)
+	{
+		if (newAttr != smallImageAttributes)
+		{
+			smallImageAttributes = newAttr;
+			dirty = true;
+		}
+	}
+	void setLargeImageAttributes(EImageAttributes::EImageAttributes newAttr)
+	{
+		if (newAttr != largeImageAttributes)
+		{
+			largeImageAttributes = newAttr;
+			dirty = true;
+		}
+	}
 };
 

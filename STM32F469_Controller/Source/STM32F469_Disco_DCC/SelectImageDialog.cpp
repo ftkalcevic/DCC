@@ -8,13 +8,14 @@
 
 const int windowWidth = 800;
 const int windowHeight = 480;
-SelectImageDialog::SelectImageDialog(BitmapId backgroundBitmapId, const char16_t *title, EDecoderType::EDecoderType decoderType, EUserImage::EUserImage imageType, const char *imageFile ) :
+SelectImageDialog::SelectImageDialog(BitmapId backgroundBitmapId, const char16_t *title, EDecoderType::EDecoderType decoderType, EUserImage::EUserImage imageType, const char *imageFile, EImageAttributes::EImageAttributes attr ) :
 	bmpIdCurrentImage(BITMAP_INVALID),
     swFiles_updateItemCallback(this, &SelectImageDialog::updateItemCallbackHandler),
     swFilesAnimateToPositionCallback(this, &SelectImageDialog::swFilesAnimateToPositionHandler),
 	cboImageListSelectionChangedCallback(this, &SelectImageDialog::cboImageListSelectionChangedHandler),
 	okButtonClickCallback(this, &SelectImageDialog::oKButtonClickHandler),
-	cancelButtonClickCallback(this, &SelectImageDialog::cancelButtonClickHandler)
+	cancelButtonClickCallback(this, &SelectImageDialog::cancelButtonClickHandler),
+	flipFlagChangedCallback(this, &SelectImageDialog::flipFlagChangedHandler )
 {
 	touchgfx::colortype backgroundColor = Color::getColorFrom24BitRGB(174, 174, 174);
 	
@@ -60,12 +61,16 @@ SelectImageDialog::SelectImageDialog(BitmapId backgroundBitmapId, const char16_t
 	chkFlipHoriz.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTLEFT40PXID));
 	chkFlipHoriz.setText(u"Horiz");
 	chkFlipHoriz.setVisible(true);
+	chkFlipHoriz.setAction(flipFlagChangedCallback);
+	chkFlipHoriz.setSelected((attr & EImageAttributes::FlipHorizontal) != 0);
 	add(chkFlipHoriz);
 
 	chkFlipVert.setPosition(600, 314, 180, 65);
 	chkFlipVert.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTLEFT40PXID));
 	chkFlipVert.setText(u"Vert");
 	chkFlipVert.setVisible(true);
+	chkFlipVert.setAction(flipFlagChangedCallback);
+	chkFlipVert.setSelected((attr & EImageAttributes::FlipVertical) != 0);
 	add(chkFlipVert);
 
 	cboImageList.setPosition(20, 84, 360, 50);
@@ -191,16 +196,24 @@ void SelectImageDialog::ShowBitmap(BitmapId id)
 {
 	Bitmap bmp(id);
 	imgImage.setBitmap(bmp);
-	if ( imgImage.getWidth() < imgImageBackground.getWidth() - 4 )
-		imgImage.setX( imgImageBackground.getX() +  2 + (imgImageBackground.getWidth() - imgImage.getWidth())/2 );
+	if (imgImage.getWidth() < imgImageBackground.getWidth() - 4)
+	{
+		imgImage.setX(imgImageBackground.getX() +  2 + (imgImageBackground.getWidth() - imgImage.getWidth()) / 2);
+	}
 	else
+	{
 		imgImage.setX( imgImageBackground.getX() +  2 );
-	if ( imgImage.getHeight() < imgImageBackground.getHeight() - 4 )
-		imgImage.setY( imgImageBackground.getY() + 2 + (imgImageBackground.getHeight() - imgImage.getHeight())/2 );
+		imgImage.setWidth(imgImageBackground.getWidth() - 4);
+	}
+	if (imgImage.getHeight() < imgImageBackground.getHeight() - 4)
+	{
+		imgImage.setY(imgImageBackground.getY() + 2 + (imgImageBackground.getHeight() - imgImage.getHeight()) / 2);
+	}
 	else
+	{
 		imgImage.setY( imgImageBackground.getY() + 2 );
-	imgImage.setWidth(imgImageBackground.getWidth() - 4);
-	imgImage.setHeight(imgImageBackground.getHeight() - 4);
+		imgImage.setHeight(imgImageBackground.getHeight() - 4);
+	}
 	imgImageBackground.invalidate();
 }
 
@@ -220,7 +233,9 @@ void SelectImageDialog::oKButtonClickHandler(const touchgfx::AbstractButton& src
 
 void SelectImageDialog::cancelButtonClickHandler(const touchgfx::AbstractButton& src)
 {
-	notify(false);
+	//notify(false);
+	Rect r(imgImage.getWidth()/2, imgImage.getHeight()/2, imgImage.getWidth()/2, imgImage.getHeight()/2);
+	imgImage.invalidateRect(r);
 }
 
 
@@ -238,3 +253,16 @@ const char *SelectImageDialog::getUserFile() const
 	return "";
 }
 
+
+void SelectImageDialog::flipFlagChangedHandler(const CheckBox& src)
+{
+	imgImage.setFlipHorizontal(chkFlipHoriz.getSelected());
+	imgImage.setFlipVertical(chkFlipVert.getSelected());
+	//imgImageBackground.invalidate();
+	imgImage.invalidate();
+}
+
+EImageAttributes::EImageAttributes SelectImageDialog::getImageAttributes() const
+{
+	return (EImageAttributes::EImageAttributes)((chkFlipVert.getSelected() ? EImageAttributes::FlipVertical : 0) | (chkFlipHoriz.getSelected() ? EImageAttributes::FlipHorizontal : 0));
+}

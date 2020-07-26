@@ -18,12 +18,13 @@
 class SelectImageDialog: public ModalBoxWindow
 {
 public:
-	SelectImageDialog(BitmapId backgroundBitmapId, const char16_t *title, EDecoderType::EDecoderType decoderType, EUserImage::EUserImage imageType, const char *imageFile );
+	SelectImageDialog(BitmapId backgroundBitmapId, const char16_t *title, EDecoderType::EDecoderType decoderType, EUserImage::EUserImage imageType, const char *imageFile, EImageAttributes::EImageAttributes attr );
 	~SelectImageDialog();
 	
 	void setButtonPressedCallback( GenericCallback<SelectImageDialog&, bool> *callback ) { buttonCallback = callback; }
 	EUserImage::EUserImage getUserImage() const;
 	const char *getUserFile() const;
+	EImageAttributes::EImageAttributes getImageAttributes() const;
 	
 protected:
 	touchgfx::TextWithFrame txtTitle;
@@ -61,6 +62,9 @@ private:
 	touchgfx::Callback<SelectImageDialog, const touchgfx::AbstractButton&> cancelButtonClickCallback;
 	void cancelButtonClickHandler(const touchgfx::AbstractButton& src);
 	
+    touchgfx::Callback<SelectImageDialog, const CheckBox&> flipFlagChangedCallback;
+    void flipFlagChangedHandler(const CheckBox& src);
+		
     GenericCallback<SelectImageDialog&, bool> * buttonCallback;
 };
 

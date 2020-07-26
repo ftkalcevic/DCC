@@ -6,7 +6,7 @@
 #include "BitmapDatabase.hpp"
 #include <texts/TextKeysAndLanguages.hpp>
 #include "DecodersConfig.h"
-
+#include "BitmapManager.h"
 
 Decoder::Decoder()
 	: index(-1)
@@ -160,7 +160,18 @@ void Decoder::setIndex(int newIndex)
 void Decoder::SetupMultiFunction(Decoders &decoder)
 {
     boxDecoderBackground.setBorderSize(decoder.getLoco().controlled ? 10 : 0);
-	imageDecoder.setBitmap(touchgfx::Bitmap(BITMAP_LOCOICON_ID));
+	BitmapId bmpId;
+	if (decoder.getLargeImageType() == EUserImage::UserFile)
+	{
+		bmpId = BitmapManager::FindBitmap(decoder.getLargeImageFile());
+	}
+	else
+	{
+		bmpId = EUserImageClass::UserImage(decoder.getLargeImageType()).bmpId;
+	}
+	imageDecoder.setBitmap(touchgfx::Bitmap(bmpId));
+	imageDecoder.setFlipHorizontal(decoder.getLargeImageAttributes() & EImageAttributes::FlipHorizontal);
+	imageDecoder.setFlipVertical(decoder.getLargeImageAttributes() & EImageAttributes::FlipVertical);
 	imageDecoder.setPosition(20, 15, 380, 210);
 }
 

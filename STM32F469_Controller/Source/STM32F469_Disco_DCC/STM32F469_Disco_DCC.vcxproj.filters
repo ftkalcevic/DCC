@@ -1365,6 +1365,9 @@
     <ClCompile Include="..\TouchGFX\TouchGFX\generated\images\src\electricIcon_small.cpp">
       <Filter>Source files\Application\User\generated</Filter>
     </ClCompile>
+    <ClCompile Include="BitmapManager.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stm32f4xx_hal_tim_plus.h">
@@ -1548,6 +1551,9 @@
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="ImageFile.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="BitmapManager.h">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>

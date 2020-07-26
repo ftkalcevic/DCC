@@ -6,6 +6,7 @@
 #include <gui/common/CustomButton.hpp>
 #include <stdio.h>
 #include "DecodersConfig.h"
+#include "BitmapManager.h"
 #ifndef SIMULATOR
 #include "AudioTask.h"
 #endif
@@ -53,7 +54,7 @@ MainView::MainView():
 		
 		if (i == uiDecodersConfig.Count())	// Last icons is always the preferences button
 		{
-			button->setBitmaps(touchgfx::Bitmap(BITMAP_BUTTONUP_ID), touchgfx::Bitmap(BITMAP_BUTTONDOWN_ID), touchgfx::Bitmap(BITMAP_PREFERENCESICON_ID), touchgfx::Bitmap(BITMAP_PREFERENCESICON_ID));
+			button->setBitmaps(touchgfx::Bitmap(BITMAP_BUTTONUP_ID), touchgfx::Bitmap(BITMAP_BUTTONDOWN_ID), touchgfx::Bitmap(BITMAP_PREFERENCESICON_ID), touchgfx::Bitmap(BITMAP_PREFERENCESICON_ID), false, false );
 			button->setLabelText("Preferences");
 			button->setId(i);
 		}
@@ -63,12 +64,13 @@ MainView::MainView():
 		
 			if (d.getSmallImageType() == EUserImage::UserFile)
 			{
-				button->setBitmaps(touchgfx::Bitmap(BITMAP_BUTTONUP_ID), touchgfx::Bitmap(BITMAP_BUTTONDOWN_ID), touchgfx::Bitmap(BITMAP_LOCOICON_ID), touchgfx::Bitmap(BITMAP_LOCOICON_ID));
+				BitmapId id = BitmapManager::FindBitmap(d.getSmallImageFile());
+				button->setBitmaps(touchgfx::Bitmap(BITMAP_BUTTONUP_ID), touchgfx::Bitmap(BITMAP_BUTTONDOWN_ID), touchgfx::Bitmap(id), touchgfx::Bitmap(id), (d.getSmallImageAttributes() & EImageAttributes::FlipHorizontal) != 0, (d.getSmallImageAttributes() & EImageAttributes::FlipVertical) != 0 );
 			}
 			else
 			{
 				BitmapId bmpId = EUserImageClass::UserImage(d.getSmallImageType()).bmpId;
-				button->setBitmaps(touchgfx::Bitmap(BITMAP_BUTTONUP_ID), touchgfx::Bitmap(BITMAP_BUTTONDOWN_ID), touchgfx::Bitmap(bmpId), touchgfx::Bitmap(bmpId));
+				button->setBitmaps(touchgfx::Bitmap(BITMAP_BUTTONUP_ID), touchgfx::Bitmap(BITMAP_BUTTONDOWN_ID), touchgfx::Bitmap(bmpId), touchgfx::Bitmap(bmpId), (d.getSmallImageAttributes() & EImageAttributes::FlipHorizontal) != 0, (d.getSmallImageAttributes() & EImageAttributes::FlipVertical) != 0 );
 			}
 			button->setLabelText( d.getName());
 			button->setId(i);

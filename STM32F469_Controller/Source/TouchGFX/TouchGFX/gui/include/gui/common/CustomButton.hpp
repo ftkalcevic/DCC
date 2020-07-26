@@ -104,7 +104,8 @@ public:
 
     virtual void draw(const Rect& area) const;
     void setBitmaps(const Bitmap& newBackgroundReleased, const Bitmap& newBackgroundPressed,
-                                const Bitmap& newIconReleased, const Bitmap& newIconPressed);
+                    const Bitmap& newIconReleased, const Bitmap& newIconPressed,
+		            bool flipHoriz, bool flipVert );
     void setIconXY(int16_t x, int16_t y)
     {
         iconX = x;
@@ -132,6 +133,8 @@ protected:
     int16_t iconX;        ///< x coordinate offset for icon.
     int16_t iconY;        ///< y coordinate offset for icon.	
 	int buttonId;
+	bool flipIconHoriz;
+	bool flipIconVert;
 };
 } // namespace touchgfx
 

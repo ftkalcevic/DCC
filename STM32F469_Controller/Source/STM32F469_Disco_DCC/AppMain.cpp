@@ -251,7 +251,6 @@ void AppMain::Run()
 	CheckTaskStacks();
 	printHeapStatistics();
 	// Play startup sound
-	audioTask.PlaySound(EAudioSounds::Bell2);
 	//audioTask.Mute(true);
 	
 	InitInputs();

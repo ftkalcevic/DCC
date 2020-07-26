@@ -944,7 +944,7 @@ void DCCConfigView::editTextClickHandler(const TextWithFrame& b, const ClickEven
 	    }
 	    else if (&b == static_cast<const TextWithFrame *>(&textSmallImage) )
 	    {
-		    selectFileDialog = std::make_shared<SelectImageDialog>(BITMAP_SMALLIMAGEBACKGROUND_ID, u"Small Image (130x130)", d.getType(), d.getSmallImageType(), d.getSmallImageFile() );
+		    selectFileDialog = std::make_shared<SelectImageDialog>(BITMAP_SMALLIMAGEBACKGROUND_ID, u"Small Image (130x130)", d.getType(), d.getSmallImageType(), d.getSmallImageFile(), d.getSmallImageAttributes() );
 		    add(*selectFileDialog);
 		    selectFileDialog->setButtonPressedCallback(&selectImageDialogCloseCallback);
 		    selectFileDialog->setVisible(true);
@@ -953,7 +953,7 @@ void DCCConfigView::editTextClickHandler(const TextWithFrame& b, const ClickEven
 	    }
 	    else if (&b == static_cast<const TextWithFrame *>(&textLargeImage) )
 	    {
-		    selectFileDialog = std::make_shared<SelectImageDialog>(BITMAP_LARGEIMAGEBACKGROUND_ID, u"Large Image (380x210)", d.getType(), d.getLargeImageType(), d.getLargeImageFile() );
+		    selectFileDialog = std::make_shared<SelectImageDialog>(BITMAP_LARGEIMAGEBACKGROUND_ID, u"Large Image (380x210)", d.getType(), d.getLargeImageType(), d.getLargeImageFile(), d.getLargeImageAttributes() );
 		    add(*selectFileDialog);
 		    selectFileDialog->setButtonPressedCallback(&selectImageDialogCloseCallback);
 		    selectFileDialog->setVisible(true);
@@ -973,15 +973,19 @@ void DCCConfigView::selectImageDialogCloseHandler(SelectImageDialog & dialog, bo
 			Decoders &d = uiDecodersConfig[selectedDecoderItem];
 			EUserImage::EUserImage newImg = dialog.getUserImage();
 			const char *newFile = dialog.getUserFile();
+			EImageAttributes::EImageAttributes attr = dialog.getImageAttributes();
+			
 			if (state == EState::SelectSmallIcon)
 			{
 				d.setSmallImageType(newImg);
 				d.setSmallImageFile(newFile);
+				d.setSmallImageAttributes(attr);
 			}
 			else if (state == EState::SelectLargeIcon)
 			{
 				d.setLargeImageType(newImg);
 				d.setLargeImageFile(newFile);
+				d.setLargeImageAttributes(attr);
 			}
 			displayDecoder();
 		}

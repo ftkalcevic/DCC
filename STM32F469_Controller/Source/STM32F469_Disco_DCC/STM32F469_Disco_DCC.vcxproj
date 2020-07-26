@@ -281,6 +281,7 @@
     <ClCompile Include="AppMain.cpp" />
     <ClCompile Include="Arduino.cpp" />
     <ClCompile Include="AudioTask.cpp" />
+    <ClCompile Include="BitmapManager.cpp" />
     <ClCompile Include="DCC.cpp" />
     <ClCompile Include="Decoders.cpp" />
     <ClCompile Include="DecoderWidget.cpp" />
@@ -337,6 +338,7 @@
     <ClInclude Include="AppMain.h" />
     <ClInclude Include="Arduino.h" />
     <ClInclude Include="AudioTask.h" />
+    <ClInclude Include="BitmapManager.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="CurrentGraphWidget.h" />
     <ClInclude Include="DCCHal.h" />
