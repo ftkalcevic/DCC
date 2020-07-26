@@ -151,9 +151,9 @@ void Image::DrawBitmap(const Bitmap &bitmap, Rect widgetRect, int16_t xPos, int1
 						// optimisation for 4 bytes per pixel
 						for(;;)
 						{
-							if ( y <= MIN(yOutStart,yOutEnd) + (yOutStart+yOutEnd)/10 )
-								*((uint32_t *)dest) = 0xFF0000FF;
-							else
+//							if ( y <= MIN(yOutStart,yOutEnd) + (yOutStart+yOutEnd)/10 )
+//								*((uint32_t *)dest) = 0xFF0000FF;
+//							else
 								*((uint32_t *)dest) = *((const uint32_t *)src);
 							if (x == xOutStart)
 								break;
