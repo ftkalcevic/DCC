@@ -82,6 +82,136 @@ public:
 		return true;
 	}
 
+	bool VerifyMsg(uint8_t *msg, uint8_t len)
+	{
+		bool ret = false;
+		
+		uint32_t baseCurrent = ReadCurrent();
+		uint16_t count = 1;
+		for (int n = 0; n < 3; n++)
+		{
+			SendReset(EPreamble::Long);
+			CVDEBUG("R%d ", ReadCurrent());
+			while (xSemaphoreTake(sentSemaphoreHandle, pdMS_TO_TICKS(1)) == pdFAIL)
+			{
+				uint16_t current = ReadCurrent();
+				CVDEBUG("r%d ", current);
+				baseCurrent += current;
+				count++;
+			}
+		}
+		baseCurrent /= count;
+		
+		uint8_t ackCount = 0;
+		for (int n = 0; n < 5; n++)
+		{
+			CVDEBUG("S%d ", ReadCurrent());
+			SendDCCMessage(msg, len, EPreamble::Long);
+			while (xSemaphoreTake(sentSemaphoreHandle, pdMS_TO_TICKS(1)) == pdFAIL)
+			{
+				uint16_t current = ReadCurrent();
+				CVDEBUG("s%d ", current);
+				if (current > baseCurrent + DCC_ACK_CURRENT)
+					ackCount++;
+			}
+		}
+		
+		// send resets for 20ms (maximum time to wait for ack)
+		TickType_t endTime = xTaskGetTickCount() + pdMS_TO_TICKS(20);
+		while (xTaskGetTickCount() < endTime)
+		{
+			CVDEBUG("P%d ", ReadCurrent());
+			SendReset(EPreamble::Long);
+			//xSemaphoreTake(sentSemaphoreHandle, portMAX_DELAY);
+			while(xSemaphoreTake(sentSemaphoreHandle, pdMS_TO_TICKS(1)) == pdFAIL)
+			{
+				uint16_t current = ReadCurrent();
+				CVDEBUG("p%d ", current);
+				if (current > baseCurrent + DCC_ACK_CURRENT)
+					ackCount++;
+			}
+		}
+			
+		if (ackCount > DCC_ACK_PERIOD)
+			ret = true;
+
+		return ret;
+	}
+	
+	
+	void SetAccessoryAddress(uint8_t *msg, uint16_t addr)
+	{
+		if (addr <=  ADDR_ACCESSORY_9BIT_MAX)
+		{
+			// 9.2.1:431 The most significant bits of the 9-bit address are bits 4-6 of the second data byte. By convention these bits (bits 4-6 of
+			// the second data byte) are in ones complement.
+			msg[0] = ADDR_ACCESSORY | (addr & 0b00111111);
+			msg[1] = ADDR2_ACCESSORY | ((~(addr >> 2) ) & 0b01110000);
+		}
+		else
+		{
+			// 9.2.1:431  seems to apply to 11 bit addresses too.  I'm guessing bits 10-11 of the address are ones complement, and are stored in bits 1-2 of byte two.
+			msg[0] = ADDR_ACCESSORY | (addr & 0b00111111);
+			msg[1] = ADDR2_ACCESSORY_EXTENDED | ((~(addr >> 2) ) & 0b01110000) | ((addr >> 9) & 0b110);
+		}
+	}
+	
+	bool VerifyAccessoryCVBit(uint16_t addr, uint16_t cv, uint8_t bit, bool set)
+	{
+		CVDEBUG("B:%d ", bit);
+		
+		uint8_t msg[6] = { 0, 0, (uint8_t)(INS_ACC_CV_ACCESS | INS_ACC_CV_BIT | (((cv - 1) >> 8) & 3)), (uint8_t)((cv - 1) & 0xFF), (uint8_t)(DATA_CV_VERIFY_BIT | (set ? DATA_BIT : 0) | bit), 0 };
+		SetAccessoryAddress(msg, addr);
+			
+		SetErrorByte(msg, countof(msg));
+		bool ret = VerifyMsg(msg, countof(msg));
+
+		CVDEBUG("\n");
+		return ret;
+	}
+	
+	bool VerifyAccessoryByte(uint16_t addr, uint16_t cv, uint8_t value)
+	{
+		CVDEBUG("U8:%d ", value);
+		
+		uint8_t msg[6] = { 0, 0, (uint8_t)(INS_ACC_CV_ACCESS | INS_ACC_CV_VERIFY_BYTE | (((cv - 1) >> 8) & 3)), (uint8_t)((cv - 1) & 0xFF), value, 0 };
+		SetAccessoryAddress(msg, addr);
+
+		SetErrorByte(msg, countof(msg));
+		bool ret = VerifyMsg(msg, countof(msg));
+
+		CVDEBUG("\n");
+		return ret;
+	}	
+	
+	EErrorCode::EErrorCode ReadAccessoryCV(uint16_t addr, uint16_t cv, uint8_t &value)
+	{
+		value = 0;
+		for (int i = 0; i < 8; i++)
+		{
+			bool bitValue = VerifyAccessoryCVBit(addr, cv, i, true);
+			if ( bitValue )
+				value |= 1 << i;
+			if (i == 0 && !bitValue)
+			{
+				// double check the first bit acks when we send 0 (ie check we are actually talking to someone)
+				if (!VerifyAccessoryCVBit(addr, cv, 0, false))
+					return EErrorCode::NoACK;
+			}
+		}
+		
+		if(VerifyAccessoryByte(addr, cv, value))					// verify byte
+		{
+			CVDEBUG("Verified CV(%d)=%d\n", cv, value);
+			return EErrorCode::Success;
+		}
+		else
+		{
+			CVDEBUG("Failed Verification! CV(%d)=%d\n", cv, value);
+			return EErrorCode::ValueMismatch;
+		}
+	}
+	
 	bool VerifyMsg_SM(uint8_t *msg, uint8_t len)
 	{
 		bool ret = false;
@@ -106,7 +236,7 @@ public:
 		for (int n = 0; n < 5; n++)
 		{
 			CVDEBUG("S%d ", ReadCurrent());
-			SendDCCMessage(msg, countof(msg), EPreamble::Long);
+			SendDCCMessage(msg, len, EPreamble::Long);
 			while (xSemaphoreTake(sentSemaphoreHandle, pdMS_TO_TICKS(1)) == pdFAIL)
 			{
 				uint16_t current = ReadCurrent();
@@ -139,32 +269,32 @@ public:
 		return ret;
 	}
 	
-	bool VerifyBit_SM(uint8_t cv, uint8_t bit, bool set)
+	bool VerifyBit_SM(uint16_t cv, uint8_t bit, bool set)
 	{
 		CVDEBUG("B:%d ", bit);
 		
 		uint8_t msg[4] = { (uint8_t)(INS_CV_BIT | (((cv - 1) >> 8) & 3)), (uint8_t)((cv - 1) & 0xFF), (uint8_t)(DATA_CV_VERIFY_BIT | (set ? DATA_BIT : 0) | bit), 0 };
-		SetErrorByte(msg, 4);
-		bool ret = VerifyMsg_SM(msg, 4);
+		SetErrorByte(msg, countof(msg));
+		bool ret = VerifyMsg_SM(msg, countof(msg));
 
 		CVDEBUG("\n");
 		return ret;
 	}
 	
-	bool VerifyByte_SM(uint8_t cv, uint8_t value)
+	bool VerifyByte_SM(uint16_t cv, uint8_t value)
 	{
 		CVDEBUG("U8:%d ", value);
 		
 		uint8_t msg[4] = { (uint8_t)(INS_CV_VERIFY_BYTE | (uint8_t)(((cv - 1) >> 8) & 3)), (uint8_t)((cv - 1) & 0xFF), value, 0 };
-		SetErrorByte(msg, 4);
-		bool ret = VerifyMsg_SM(msg, 4);
+		SetErrorByte(msg, countof(msg));
+		bool ret = VerifyMsg_SM(msg, countof(msg));
 
 		CVDEBUG("\n");
 		return ret;
 	}
 
 	// Direct mode
-	EErrorCode::EErrorCode ReadCV_SM(uint8_t cv, uint8_t &value)
+	EErrorCode::EErrorCode ReadCV_SM(uint16_t cv, uint8_t &value)
 	{
 		value = 0;
 		for (int i = 0; i < 8; i++)
@@ -259,22 +389,44 @@ public:
 							case EProgTrackMessage::ScanTrack:
 							{
 								// Read CV1,  CV7,CV8, CV29,  (CV17,CV18 extended address)
-								uint8_t address, config, manufacturer, version;
+								uint8_t address=0, config=0, manufacturer=0, version=0;
 								uint16_t extendedAddress = 0;
 								EErrorCode::EErrorCode result;
 								
 								result = ReadCV_SM(1, address);
-								if ( result == EErrorCode::Success ) ReadCV_SM(29, config);
-								if ( result == EErrorCode::Success ) ReadCV_SM(8, manufacturer);
-								if ( result == EErrorCode::Success ) ReadCV_SM(7, version);
-								extendedAddress = 0;
-								if (config > 0 && (config & CV29_TWO_BYTE_ADDRESS) != 0)
+								if(result == EErrorCode::Success) 
 								{
-									uint8_t addrMSB, addrLSB;
-									if ( result == EErrorCode::Success ) ReadCV_SM(17, addrMSB);
-									if ( result == EErrorCode::Success ) ReadCV_SM(18, addrLSB);
-									extendedAddress = (addrMSB << 8) | addrLSB;
+									if ( result == EErrorCode::Success ) ReadCV_SM(29, config);
+									if ( result == EErrorCode::Success ) ReadCV_SM(8, manufacturer);
+									if ( result == EErrorCode::Success ) ReadCV_SM(7, version);
+									extendedAddress = 0;
+									if (config > 0 && (config & CV29_TWO_BYTE_ADDRESS) != 0)
+									{
+										uint8_t addrMSB, addrLSB;
+										if ( result == EErrorCode::Success ) ReadCV_SM(17, addrMSB);
+										if ( result == EErrorCode::Success ) ReadCV_SM(18, addrLSB);
+										extendedAddress = (addrMSB << 8) | addrLSB;
+									}
 								}
+								else  // if this fails, try reading accessory decoders
+								{
+									result = ReadAccessoryCV(ADDR_ACCESSORY_BROADCAST, 1, address);
+									if (result == EErrorCode::Success) 
+									{
+										uint8_t addrMSB, addrLSB;
+										addrLSB = address;
+										result = ReadAccessoryCV(ADDR_ACCESSORY_BROADCAST, 9, addrMSB);
+										if (result == EErrorCode::Success)
+										{
+											extendedAddress = (addrMSB << 8) | addrLSB;
+											address = extendedAddress;
+										}
+									}
+									if ( result == EErrorCode::Success ) ReadAccessoryCV(ADDR_ACCESSORY_BROADCAST, 29, config);
+									if ( result == EErrorCode::Success ) ReadAccessoryCV(ADDR_ACCESSORY_BROADCAST, 8, manufacturer);
+									if ( result == EErrorCode::Success ) ReadAccessoryCV(ADDR_ACCESSORY_BROADCAST, 7, version);
+								}
+								
 								
 								// Send Reply
 								UIMsg uiMsg;

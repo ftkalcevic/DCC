@@ -11,13 +11,20 @@ const int DCC_ONE_TIME = 58;	// usec
 const int DCC_ZERO_TIME = 100;	// usec
 const int MAX_DCC_MESSAGE_LEN = 6;
 const int MAX_DCC_MESSAGES = 100;
-const int BIT_BUFFER_SIZE = (LONG_PREAMBLE_BITS + MAX_DCC_MESSAGE_LEN*(8 + 1) + 1);	// max bits
+const int BIT_BUFFER_SIZE = (LONG_PREAMBLE_BITS + MAX_DCC_MESSAGE_LEN*(8 + 1) + 5);	// max bits
 
 const uint8_t ADDR_BROADCAST = 0;
+const uint16_t ADDR_ACCESSORY_BROADCAST = 0x1FF;
 const uint8_t ADDR_EXTENDED = 0b11000000;
+const uint8_t ADDR_ACCESSORY = 0b10000000;
+const uint8_t ADDR_ACCESSORY_MASK = 0b11000000;
+const uint8_t ADDR2_ACCESSORY = 0b10000000;
+const uint8_t ADDR2_ACCESSORY_EXTENDED = 0b00000001;
+const uint8_t ADDR2_ACCESSORY_EXTENDED_MASK = 0b10001001;
 const uint8_t ADDR_IDLE = 0xFF;
 const uint16_t NO_ADDRESS = 0xFFFF;
 
+const uint16_t ADDR_ACCESSORY_9BIT_MAX	= 0b1'11111111;
 
 const uint8_t INS_SPEED_AND_DIRECTION = 0b01000000;
 const uint8_t INS_ADVANCED_OPERATION  = 0b00100000;
@@ -26,6 +33,11 @@ const uint8_t INS_CV_ACCESS = 0b01110000;
 const uint8_t INS_CV_VERIFY_BYTE = INS_CV_ACCESS | 0b0100;
 const uint8_t INS_CV_WRITE_BYTE = INS_CV_ACCESS | 0b1100;
 const uint8_t INS_CV_BIT = INS_CV_ACCESS | 0b1000;
+
+const uint8_t INS_ACC_CV_ACCESS = 0b11100000;
+const uint8_t INS_ACC_CV_VERIFY_BYTE = 0b0100;
+const uint8_t INS_ACC_CV_WRITE_BYTE = 0b1100;
+const uint8_t INS_ACC_CV_BIT = 0b1000;
 
 const uint8_t ADVOP_128_SPEED_STEP	   = 0b00011111;
 
