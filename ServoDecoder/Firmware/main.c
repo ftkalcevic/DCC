@@ -80,6 +80,7 @@ static byte nCurrentBit;
 
 #define SCALE_SERVO_POS( n )                (7200 + ((((uint16_t)(n)) * 96)))
 
+#define SHOW_MESSAGES
 //#define BIT_CAPTURE
 #ifdef BIT_CAPTURE
 static volatile byte times[70];
@@ -193,8 +194,13 @@ typedef enum _ESignalStates ESignalStates;
     #define EE_PER_SERVO_COUNT          4
 #define EE_CV577_INTERACTIVE_ADDR   (EE_CV545_SERVO_CONFIG + EE_PER_SERVO_COUNT*MAX_SERVOS)
 
+#define VERSION								(1)
+#define MANUFACTURER						(13)
 
+#define CV512_OFFSET								(512)
 #define CV513_LSB_ADDRESS                           (513-1)
+#define CV519_VERSION								(519-1)
+#define CV520_MANUFACTURER							(520-1)
 #define CV521_MSB_ADDRESS                           (521-1)
 #define CV541_CONFIGURATION                         (541-1)
 #define CV545_SERVO_CONFIG                          (545-1)
@@ -462,6 +468,8 @@ byte GetCV( uint16_t nCV )
     RS232SendCRLF();
 #endif
     nServoConfig = 0;
+	if ( nCV < CV512_OFFSET )
+		nCV += CV512_OFFSET;
     if ( nCV == CV513_LSB_ADDRESS )
     {
         return nDecoderAddress & 0xFF;
@@ -473,6 +481,14 @@ byte GetCV( uint16_t nCV )
     else if ( nCV == CV541_CONFIGURATION )
     {
         return nConfiguration;
+    }
+    else if ( nCV == CV519_VERSION )
+    {
+	    return VERSION;
+    }
+    else if ( nCV == CV520_MANUFACTURER )
+    {
+	    return MANUFACTURER;
     }
     else if ( nCV == CV577_SERVO_INTERACTIVE_CONFIG_ADDRESS )
     {
@@ -496,6 +512,8 @@ void SetCV( uint16_t nCV, byte nValue )
 #endif
     if ( nCV != CV578_SERVO_INTERACTIVE_CONFIG_SERVO )
         nServoConfig = 0;
+	if ( nCV < CV512_OFFSET )
+		nCV += CV512_OFFSET;
     if ( nCV == CV513_LSB_ADDRESS )
     {
         nDecoderAddress = (nDecoderAddress & 0xFF00) | nValue;
@@ -965,12 +983,14 @@ int main (void)
             bNewPacket = false;
 
 #ifdef DEBUG
-            //for ( byte i = 0; i < nBytes; i++ )
-            //{
-            //    RS232SendHex( nTempPacket[i] );
-            //    RS232SendChar( ' ' );
-            //}
-            //RS232SendCRLF();
+#ifdef SHOW_MESSAGES
+			for ( byte i = 0; i < nBytes; i++ )
+			{
+			    RS232SendHex( nTempPacket[i] );
+			    RS232SendChar( ' ' );
+			}
+			RS232SendCRLF();
+#endif
 #endif
 
             if ( nTempPacket[0] != 0xFF ) // (idle Packet)

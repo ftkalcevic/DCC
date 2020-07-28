@@ -220,7 +220,12 @@ void RS232SetCharSize( byte nBits )
 		unsigned char tmphead;
 		/* Calculate buffer index */
 		tmphead = ( UART_TxHead + 1 ) & UART_TX_BUFFER_MASK; /* Wait for free space in buffer */
+#ifdef BLOCK_ON_SEND
 		while ( tmphead == UART_TxTail );
+#else
+		if ( tmphead == UART_TxTail )
+			return;
+#endif
 
 		UART_TxBuf[tmphead] = data;           /* Store data in buffer */
 		UART_TxHead = tmphead;                /* Store new index */
