@@ -64,6 +64,10 @@
       <AdditionalOptions />
       <CLanguageStandard />
       <CPPLanguageStandard />
+      <WarnOnUnusedVariables>Warning</WarnOnUnusedVariables>
+      <WarnOnShadowedDeclarations>Warning</WarnOnShadowedDeclarations>
+      <WarnOnNonVirtualDestructors>Warning</WarnOnNonVirtualDestructors>
+      <WarnOnOverloadedVirtualFunctions>Warning</WarnOnOverloadedVirtualFunctions>
     </ClCompile>
     <Link>
       <LibrarySearchDirectories>D:\Projects\DCC\STM32F469_Controller\Source\TouchGFX\Middlewares\ST\touchgfx\lib\core\cortex_m4f\gcc;%(Link.LibrarySearchDirectories)</LibrarySearchDirectories>

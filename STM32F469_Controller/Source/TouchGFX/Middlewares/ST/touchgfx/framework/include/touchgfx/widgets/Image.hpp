@@ -140,10 +140,7 @@ protected:
     bool    hasTransparentPixels; ///< true if this object has transparent pixels
 	bool    flipHorizontal;
 	bool    flipVertical;
-    static BitmapId  bitmapRGB888Id;
-    static BitmapId  bitmapARGB8888Id;
 public:	
-	static BitmapId GetLineBitmap(Bitmap::BitmapFormat fmt);
 	static void DrawBitmap(const Bitmap &bitmap, Rect widgetRect, int16_t xPos, int16_t yPos, Rect dirtyBitmapArea, bool flipHorizontal, bool flipVertical, uint8_t alpha);
 };
 } // namespace touchgfx
