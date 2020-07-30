@@ -142,6 +142,7 @@ public:
 
 struct LocoSettings 
 {
+private:
 	ESpeedSteps::ESpeedSteps speedSteps;
 	DCCImage smallImage;
 	DCCImage largeImage;
@@ -152,14 +153,17 @@ struct LocoSettings
 	uint8_t currentSpeed;
 	uint8_t currentBraking;
 	EDirection::EDirection direction;
-
+	
+	bool dirtyFlag;
+	void dirty() { dirtyFlag = true;}
+	
+public:
 	void setSpeedSteps(ESpeedSteps::ESpeedSteps s) { if (speedSteps != s) { speedSteps = s; dirty(); } }
 	ESpeedSteps::ESpeedSteps getSpeedSteps() const { return speedSteps; }
 	DCCImage &getSmallImage() { return smallImage;}
 	DCCImage &getLargeImage() { return largeImage;}
-	
-	bool dirtyFlag;
-	void dirty() { dirtyFlag = true;}
+	bool getControlled() const { return controlled; }
+	void setControlled(bool c) { controlled = c; }
 };
 
 namespace EAccessoryNetwork
@@ -221,19 +225,37 @@ namespace ESoundEffect
 	};
 }
 	
-	
-struct AccessorySettings
+const uint8_t MAX_ACCESSORY_DEVICE = 8;
+const uint8_t MAX_ACCESSORY_DEVICE_STATES = 3;	
+
+struct AccessoryDevice 
 {
-	EAccessoryNetwork::EAccessoryNetwork network;
-	EAccessoryType::EAccessoryType type;
-	EAccessoryImage::EAccessoryImage image;
-	char userImage[MAX_PATH];
+private:
+	uint8_t numberOfStates;
+	struct
+	{
+		DCCImage smallImage;
+		DCCImage largeImage;
+	} states[MAX_ACCESSORY_DEVICE_STATES];
 	EDefaultAccessoryState::EDefaultAccessoryState defaultState;
-	uint8_t numberOfStates;	// How to do the turntable?
 	ESoundEffect::ESoundEffect soundEffect;
 	char userSoundEffect[MAX_PATH];
 
-	uint8_t currentState;
+	uint8_t currentState;	
+public:
+	uint8_t getCurrentState() const { return currentState; }
+	void setCurrentState(uint8_t s) { if ( s > numberOfStates ) currentState = numberOfStates-1; else currentState = s; }
+};
+
+struct AccessorySettings
+{
+private:
+	EAccessoryNetwork::EAccessoryNetwork network;
+	EAccessoryType::EAccessoryType type;
+	uint8_t numberOfDevices;
+	AccessoryDevice devices[MAX_ACCESSORY_DEVICE];
+public:
+	AccessoryDevice &getDevice(uint8_t index) { assert(index < MAX_ACCESSORY_DEVICE); return devices[index]; }
 };
 
 namespace EFunctionAction

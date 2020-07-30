@@ -200,9 +200,9 @@ void AppMain::ToggleEStop()
 
 void AppMain::YieldControl(Decoders &d)
 {
-	if (d.getLoco().controlled)
+	if (d.getLoco().getControlled())
 	{
-		d.getLoco().controlled = false;
+		d.getLoco().setControlled(false);
 		// Send something to mainTrackDCC
 		MainTrack_DCC_Stop(d.getAddress());
 	}
@@ -232,7 +232,7 @@ void AppMain::TakeControl(int decoderIndex, bool control)
 						uiDecodersConfig.setActiveDecoder(-1);
 					}
 
-				d.getLoco().controlled = control;
+				d.getLoco().setControlled(control);
 				// Mark this as the active 
 				uiDecodersConfig.setActiveDecoder(decoderIndex);
 				// Send something to mainTrackDCC (happens every 50ms)
@@ -305,7 +305,7 @@ void AppMain::Run()
 			
 			uimsg.Send(msg);
 			if ( uiDecodersConfig.getActiveDecoder() >= 0 && 
-				 uiDecodersConfig[uiDecodersConfig.getActiveDecoder()].getType() == EDecoderType::Multifunction && uiDecodersConfig[uiDecodersConfig.getActiveDecoder()].getLoco().controlled )
+				 uiDecodersConfig[uiDecodersConfig.getActiveDecoder()].getType() == EDecoderType::Multifunction && uiDecodersConfig[uiDecodersConfig.getActiveDecoder()].getLoco().getControlled() )
 			{
 				MainTrack_DCC_SetSpeedAndDirection(uiDecodersConfig[uiDecodersConfig.getActiveDecoder()].getAddress(), uiDecodersConfig[uiDecodersConfig.getActiveDecoder()].getLoco().getSpeedSteps(), msg.input.direction, msg.input.throttle, msg.input.brake);
 			}

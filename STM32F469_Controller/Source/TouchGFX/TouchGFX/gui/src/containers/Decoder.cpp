@@ -136,7 +136,7 @@ void Decoder::setIndex(int newIndex)
 	Decoders &d = uiDecodersConfig[index];
 	
 	bool isMultiFunction = d.getType() == EDecoderType::Multifunction;
-	SetWidgetVisibility(isMultiFunction, isMultiFunction ? d.getLoco().controlled : false);
+	SetWidgetVisibility(isMultiFunction, isMultiFunction ? d.getLoco().getControlled() : false);
 
 	if (*d.getName())
 	{
@@ -160,7 +160,7 @@ void Decoder::setIndex(int newIndex)
 void Decoder::SetupMultiFunction(Decoders &decoder)
 {
 	LocoSettings &loco = decoder.getLoco();
-    boxDecoderBackground.setBorderSize(decoder.getLoco().controlled ? 10 : 0);
+    boxDecoderBackground.setBorderSize(decoder.getLoco().getControlled() ? 10 : 0);
 	BitmapId bmpId;
 	if (loco.getLargeImage().getType() == EUserImage::UserFile)
 	{
@@ -178,7 +178,7 @@ void Decoder::SetupMultiFunction(Decoders &decoder)
 
 void Decoder::SetupAccessory(Decoders &decoder)
 {
-	if ( decoder.getAcc().currentState == 0 )
+	if ( decoder.getAcc().getDevice(0).getCurrentState() == 0 )
 	    imageDecoder.setBitmap(touchgfx::Bitmap(BITMAP_TURNOUT_STRAIGHT_NORMAL_ID));
 	else
 	    imageDecoder.setBitmap(touchgfx::Bitmap(BITMAP_TURNOUT_STRAIGHT_REVERSE_ID));
@@ -191,7 +191,7 @@ void Decoder::imageClickHandler(const ScalableAspectImage& img, const ClickEvent
 	Decoders &d = uiDecodersConfig[index];
 	if (d.getType() == EDecoderType::Accessory && e.getType() == ClickEvent::PRESSED )
 	{
-		d.getAcc().currentState = (d.getAcc().currentState + 1) & 1;
+		d.getAcc().getDevice(0).setCurrentState( d.getAcc().getDevice(0).getCurrentState() + 1  );
 		SetupAccessory(d);
 		imageDecoder.invalidate();
 	}
@@ -209,7 +209,7 @@ void Decoder::TakeControl(bool control)
 		//          maybe disable other locos
 		//      update the function keys
 		//      
-		d.getLoco().controlled = control;
+		d.getLoco().setControlled(control);
 		boxDecoderBackground.setBorderSize(control ? 10 : 0);
         buttonTakeControl.setVisible(!control);;
         buttonYieldControl.setVisible(control);;
