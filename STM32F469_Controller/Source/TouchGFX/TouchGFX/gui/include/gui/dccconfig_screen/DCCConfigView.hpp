@@ -22,7 +22,7 @@
 
 static const int16_t x1 = 17;
 static const int16_t x2 = 417;
-static const int16_t LINE_SPACING = 15;
+static const int16_t LINE_SPACING = 45;
 static const int16_t CV_LABEL_WIDTH = 360;
 static const int16_t CV_FULL_LABEL_WIDTH = 800-2*x1;
 static const int16_t CV_EDIT_WIDTH_MAX = 360;

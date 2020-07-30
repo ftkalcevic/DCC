@@ -159,19 +159,20 @@ void Decoder::setIndex(int newIndex)
 
 void Decoder::SetupMultiFunction(Decoders &decoder)
 {
+	LocoSettings &loco = decoder.getLoco();
     boxDecoderBackground.setBorderSize(decoder.getLoco().controlled ? 10 : 0);
 	BitmapId bmpId;
-	if (decoder.getLargeImageType() == EUserImage::UserFile)
+	if (loco.getLargeImage().getType() == EUserImage::UserFile)
 	{
-		bmpId = BitmapManager::FindBitmap(decoder.getLargeImageFile());
+		bmpId = BitmapManager::FindBitmap(loco.getLargeImage().getFile());
 	}
 	else
 	{
-		bmpId = EUserImageClass::UserImage(decoder.getLargeImageType()).bmpId;
+		bmpId = EUserImageClass::UserImage(loco.getLargeImage().getType()).bmpId;
 	}
 	imageDecoder.setBitmap(touchgfx::Bitmap(bmpId));
-	imageDecoder.setFlipHorizontal(decoder.getLargeImageAttributes() & EImageAttributes::FlipHorizontal);
-	imageDecoder.setFlipVertical(decoder.getLargeImageAttributes() & EImageAttributes::FlipVertical);
+	imageDecoder.setFlipHorizontal(loco.getLargeImage().getAttributes() & EImageAttributes::FlipHorizontal);
+	imageDecoder.setFlipVertical(loco.getLargeImage().getAttributes() & EImageAttributes::FlipVertical);
 	imageDecoder.setPosition(20, 15, 380, 210);
 }
 

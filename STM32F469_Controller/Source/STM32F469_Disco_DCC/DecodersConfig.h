@@ -74,7 +74,7 @@ protected:
 			return false;
 		
 		if ( activeElement == Decoder )
-			newDecoder();
+			newDecoder(EDecoderType::None);
 		return true;
 	}
 	virtual bool elementEnd() 
@@ -86,14 +86,14 @@ protected:
 			case DecoderAddress:		decoders.back()->setAddress(atoi(contentBuffer)); break;
 			case DecoderType:			decoders.back()->setType((EDecoderType::EDecoderType)atoi(contentBuffer)); break;
 			case DecoderCV29:			decoders.back()->setConfig(atoi(contentBuffer)); break;
-			case DecoderLocoSpeedSteps:	if ( decoders.back()->getType() == EDecoderType::Multifunction ) decoders.back()->getLoco().setSpeedSteps((ESpeedSteps::ESpeedSteps)atoi(contentBuffer)); break;
 			case DecoderDefinitionFile:	decoders.back()->setDecoderDefFilename(contentBuffer); break;
-			case DecoderSmallImageType: decoders.back()->setSmallImageType((EUserImage::EUserImage)atoi(contentBuffer)); break;
-			case DecoderSmallImageFile: decoders.back()->setSmallImageFile(contentBuffer); break;
-			case DecoderSmallImageAttr: decoders.back()->setSmallImageAttributes((EImageAttributes::EImageAttributes)atoi(contentBuffer)); break;
-			case DecoderLargeImageType: decoders.back()->setLargeImageType((EUserImage::EUserImage)atoi(contentBuffer)); break;
-			case DecoderLargeImageFile:	decoders.back()->setLargeImageFile(contentBuffer); break;
-			case DecoderLargeImageAttr: decoders.back()->setLargeImageAttributes((EImageAttributes::EImageAttributes)atoi(contentBuffer)); break;
+			case DecoderLocoSpeedSteps:	if ( decoders.back()->getType() == EDecoderType::Multifunction ) decoders.back()->getLoco().setSpeedSteps((ESpeedSteps::ESpeedSteps)atoi(contentBuffer)); break;
+			case DecoderSmallImageType: if ( decoders.back()->getType() == EDecoderType::Multifunction ) decoders.back()->getLoco().getSmallImage().setType((EUserImage::EUserImage)atoi(contentBuffer)); break;
+			case DecoderSmallImageFile: if ( decoders.back()->getType() == EDecoderType::Multifunction ) decoders.back()->getLoco().getSmallImage().setFile(contentBuffer); break;
+			case DecoderSmallImageAttr: if ( decoders.back()->getType() == EDecoderType::Multifunction ) decoders.back()->getLoco().getSmallImage().setAttributes((EImageAttributes::EImageAttributes)atoi(contentBuffer)); break;
+			case DecoderLargeImageType: if ( decoders.back()->getType() == EDecoderType::Multifunction ) decoders.back()->getLoco().getLargeImage().setType((EUserImage::EUserImage)atoi(contentBuffer)); break;
+			case DecoderLargeImageFile:	if ( decoders.back()->getType() == EDecoderType::Multifunction ) decoders.back()->getLoco().getLargeImage().setFile(contentBuffer); break;
+			case DecoderLargeImageAttr: if ( decoders.back()->getType() == EDecoderType::Multifunction ) decoders.back()->getLoco().getLargeImage().setAttributes((EImageAttributes::EImageAttributes)atoi(contentBuffer)); break;
 			default:
 				break;
 		}
@@ -128,14 +128,14 @@ public:
 			stream.WriteElement( DC_DecoderType, d->getType() );
 			stream.WriteElement( DC_DecoderDefFile, d->getDecoderDefFilename() );
 			stream.WriteElement( DC_DecoderCV29, d->getConfig() );
-			stream.WriteElement( DC_DecoderSmallImageType, d->getSmallImageType() );
-			stream.WriteElement( DC_DecoderSmallImageFile, d->getSmallImageFile() );	
-			stream.WriteElement( DC_DecoderSmallImageAttr, d->getSmallImageAttributes() );	
-			stream.WriteElement( DC_DecoderLargeImageType, d->getLargeImageType() );
-			stream.WriteElement( DC_DecoderLargeImageFile, d->getLargeImageFile() );
-			stream.WriteElement( DC_DecoderLargeImageAttr, d->getLargeImageAttributes() );
 			if (d->getType() == EDecoderType::Multifunction)
 			{
+				stream.WriteElement( DC_DecoderSmallImageType, d->getLoco().getSmallImage().getType() );
+				stream.WriteElement( DC_DecoderSmallImageFile, d->getLoco().getSmallImage().getFile() );	
+				stream.WriteElement( DC_DecoderSmallImageAttr, d->getLoco().getSmallImage().getAttributes() );	
+				stream.WriteElement( DC_DecoderLargeImageType, d->getLoco().getLargeImage().getType() );
+				stream.WriteElement( DC_DecoderLargeImageFile, d->getLoco().getLargeImage().getFile() );
+				stream.WriteElement( DC_DecoderLargeImageAttr, d->getLoco().getLargeImage().getAttributes() );
 				stream.WriteElement( DC_DecoderLocoSpeedSteps, d->getLoco().getSpeedSteps() );
 			}
 			stream.WriteEndElement( DC_Decoder );
@@ -162,7 +162,7 @@ public:
 		return decoders.size();
 	}
 	
-	int newDecoder()
+	int newDecoder(EDecoderType::EDecoderType type)
 	{
 		Decoders *decoder = new Decoders();
 		memset(decoder, 0, sizeof(Decoders));
@@ -170,9 +170,12 @@ public:
 		decoder->setName(u"New Decoder");
 		decoder->setDescription(u"");
 		decoder->setAddress(0);
-		decoder->setType(EDecoderType::Multifunction);
-		decoder->setSmallImageType(EUserImage::LocoSteamIcon);
-		decoder->setLargeImageType(EUserImage::LocoSteamIcon);
+		decoder->setType(type);
+		if (type == EDecoderType::Multifunction)
+		{
+			decoder->getLoco().getSmallImage().setType(EUserImage::LocoSteamIcon);
+			decoder->getLoco().getSmallImage().setType(EUserImage::LocoSteamIcon);
+		}
 		return decoders.size()-1;
 	}
 	

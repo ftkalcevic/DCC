@@ -459,7 +459,7 @@ void DCCConfigView::tearDownScreen()
 }
 
 const int16_t FINGER_WIGGLE_SPACE = 15;
-const TickType_t FINGER_HOLD_TIME = 750;
+const TickType_t FINGER_HOLD_TIME = 40;
 
 // Use tap and hold to select a decoder
 void DCCConfigView::scrollWheelDecodersClickHandler(const touchgfx::ScrollWheel& src, const ClickEvent& evt)
@@ -485,7 +485,7 @@ void DCCConfigView::scrollWheelDecodersClickHandler(const touchgfx::ScrollWheel&
 			if (selectedDecoderItem >= uiDecodersConfig.Count())
 			{
 				// <New> selected.  <New> becomes the new item.  Add another row.
-				uiDecodersConfig.newDecoder();
+				uiDecodersConfig.newDecoder(EDecoderType::None);
 				scrollWheelDecoders.setNumberOfItems(uiDecodersConfig.Count() + 1);
 			}
 			scrollWheelDecoders.itemChanged(selectedDecoderItem);
@@ -778,34 +778,44 @@ void DCCConfigView::displayDecoder()
 	if (hasDecoder)
 	{
 		Decoders &d = uiDecodersConfig[selectedDecoderItem];
+		
 		u16stringstream s;
 		s << std::setw(4) << std::setfill(u'0') << d.getAddress();
 		addressTextBuffer = s.str();
 		textAddress.setText((const Unicode::UnicodeChar *)addressTextBuffer.c_str());
+		
 		textName.setText((const Unicode::UnicodeChar *)d.getName());
+		
 		textDescription.setText((const Unicode::UnicodeChar *)d.getDescription());
-		s.str(u"");
-		if (d.getSmallImageType() == EUserImage::UserFile)
+		
+		if (d.getType() == EDecoderType::Multifunction)
 		{
-			s << u"File:" << d.getSmallImageFile();
+			LocoSettings &loco = d.getLoco();
+			cboSpeedSteps.setSelectedItem(d.getLoco().getSpeedSteps());
+		
+			s.str(u"");
+			if (loco.getSmallImage().getType() == EUserImage::UserFile)
+			{
+				s << u"File:" << loco.getSmallImage().getFile();
+			}
+			else
+			{
+				s << u"Icon:" << EUserImageClass::iconName(loco.getSmallImage().getType());
+			}
+			smallImageTextBuffer = s.str();
+			textSmallImage.setText((const Unicode::UnicodeChar *)smallImageTextBuffer.c_str());
+			s.str(u"");
+			if (loco.getLargeImage().getType() == EUserImage::UserFile)
+			{
+				s << u"File:" << loco.getLargeImage().getFile();
+			}
+			else
+			{
+				s << u"Icon:" << EUserImageClass::iconName(loco.getLargeImage().getType());
+			}
+			largeImageTextBuffer = s.str();
+			textLargeImage.setText((const Unicode::UnicodeChar *)largeImageTextBuffer.c_str());
 		}
-		else
-		{
-			s << u"Icon:" << EUserImageClass::iconName(d.getSmallImageType());
-		}
-		smallImageTextBuffer = s.str();
-		textSmallImage.setText((const Unicode::UnicodeChar *)smallImageTextBuffer.c_str());
-		s.str(u"");
-		if (d.getLargeImageType() == EUserImage::UserFile)
-		{
-			s << u"File:" << d.getLargeImageFile();
-		}
-		else
-		{
-			s << u"Icon:" << EUserImageClass::iconName(d.getLargeImageType());
-		}
-		largeImageTextBuffer = s.str();
-		textLargeImage.setText((const Unicode::UnicodeChar *)largeImageTextBuffer.c_str());
 		if (strlen(d.getDecoderDefFilename()) == 0)
 		{
 			textDecoder.setText(u"Other"); 
@@ -821,10 +831,6 @@ void DCCConfigView::displayDecoder()
 		//displayCVDisplay();
 		setConfig(d.getConfig());
 			
-		if (d.getType() == EDecoderType::Multifunction)
-		{
-			cboSpeedSteps.setSelectedItem(d.getLoco().getSpeedSteps());
-		}
 	}
 	else
 	{
@@ -944,7 +950,7 @@ void DCCConfigView::editTextClickHandler(const TextWithFrame& b, const ClickEven
 	    }
 	    else if (&b == static_cast<const TextWithFrame *>(&textSmallImage) )
 	    {
-		    selectFileDialog = std::make_shared<SelectImageDialog>(BITMAP_SMALLIMAGEBACKGROUND_ID, u"Small Image (130x130)", d.getType(), d.getSmallImageType(), d.getSmallImageFile(), d.getSmallImageAttributes() );
+		    selectFileDialog = std::make_shared<SelectImageDialog>(BITMAP_SMALLIMAGEBACKGROUND_ID, u"Small Image (130x130)", d.getType(), d.getLoco().getSmallImage().getType(), d.getLoco().getSmallImage().getFile(), d.getLoco().getSmallImage().getAttributes() );
 		    add(*selectFileDialog);
 		    selectFileDialog->setButtonPressedCallback(&selectImageDialogCloseCallback);
 		    selectFileDialog->setVisible(true);
@@ -953,7 +959,7 @@ void DCCConfigView::editTextClickHandler(const TextWithFrame& b, const ClickEven
 	    }
 	    else if (&b == static_cast<const TextWithFrame *>(&textLargeImage) )
 	    {
-		    selectFileDialog = std::make_shared<SelectImageDialog>(BITMAP_LARGEIMAGEBACKGROUND_ID, u"Large Image (380x210)", d.getType(), d.getLargeImageType(), d.getLargeImageFile(), d.getLargeImageAttributes() );
+		    selectFileDialog = std::make_shared<SelectImageDialog>(BITMAP_LARGEIMAGEBACKGROUND_ID, u"Large Image (380x210)", d.getType(), d.getLoco().getLargeImage().getType(), d.getLoco().getLargeImage().getFile(), d.getLoco().getLargeImage().getAttributes() );
 		    add(*selectFileDialog);
 		    selectFileDialog->setButtonPressedCallback(&selectImageDialogCloseCallback);
 		    selectFileDialog->setVisible(true);
@@ -977,15 +983,15 @@ void DCCConfigView::selectImageDialogCloseHandler(SelectImageDialog & dialog, bo
 			
 			if (state == EState::SelectSmallIcon)
 			{
-				d.setSmallImageType(newImg);
-				d.setSmallImageFile(newFile);
-				d.setSmallImageAttributes(attr);
+				d.getLoco().getSmallImage().setType(newImg);
+				d.getLoco().getSmallImage().setFile(newFile);
+				d.getLoco().getSmallImage().setAttributes(attr);
 			}
 			else if (state == EState::SelectLargeIcon)
 			{
-				d.setLargeImageType(newImg);
-				d.setLargeImageFile(newFile);
-				d.setLargeImageAttributes(attr);
+				d.getLoco().getLargeImage().setType(newImg);
+				d.getLoco().getLargeImage().setFile(newFile);
+				d.getLoco().getLargeImage().setAttributes(attr);
 			}
 			displayDecoder();
 		}
@@ -1124,7 +1130,7 @@ void DCCConfigView::ScanTrackReply(EErrorCode::EErrorCode result, int16_t addres
 		else
 		{
 			// Create a new one
-			uiDecodersConfig.newDecoder();
+			uiDecodersConfig.newDecoder(config & CV29_ACCESSORY_DECODER == 0 ? EDecoderType::Multifunction : EDecoderType::Accessory );
 			selectedDecoderItem = uiDecodersConfig.Count() - 1;
 			Decoders &d = uiDecodersConfig[selectedDecoderItem];
 			d.setAddress(address);

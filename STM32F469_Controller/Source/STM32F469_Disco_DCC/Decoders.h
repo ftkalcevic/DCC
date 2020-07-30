@@ -52,9 +52,100 @@ namespace EControlReleaseAction
 	};
 }
 
+namespace EUserImage
+{
+	enum EUserImage
+	{
+		None = 0,
+		LocoSteamIcon=1,
+		LocoDieselIcon=2,
+		LocoElectricIcon=3,
+		AccTurnoutIcon=4,
+		UserFile=5,
+	};
+}
+
+const uint8_t MASK_LOCO = 0x01;
+const uint8_t MASK_ACC  = 0x02;
+
+class EUserImageClass
+{
+	EUserImage::EUserImage id;
+public:
+	EUserImageClass(EUserImage::EUserImage ui)
+		: id(ui) {}
+	static struct SUserImageInfo
+	{
+		EUserImage::EUserImage id;
+		const char16_t *name;
+		BitmapId bmpId;
+		uint8_t usage;
+	} UserImageInfo[];
+	static const char16_t *iconName(EUserImage::EUserImage img);
+	static uint16_t Count();
+	static const SUserImageInfo& UserImage(uint16_t index);
+	static const SUserImageInfo &UserImage(EUserImage::EUserImage);
+};
+
+namespace EImageAttributes
+{
+	// Mask
+	enum EImageAttributes: uint8_t
+	{
+		None = 0,
+		FlipHorizontal = 0x01,
+		FlipVertical = 0x02,
+	};
+}
+
+struct DCCImage
+{
+private:
+	EUserImage::EUserImage type;
+	char file[MAX_PATH];
+	EImageAttributes::EImageAttributes attributes;
+	bool dirtyFlag;
+	void dirty() { dirtyFlag = true; }
+	
+public:
+	EUserImage::EUserImage getType() const { return type; }
+	void setType(EUserImage::EUserImage id)
+	{ 
+		if (type != id) 
+		{
+			type = id;
+			dirty();
+		} 
+	}
+	
+	char *getFile() { return file; }
+	void setFile(const char *s)
+	{ 
+		if (strcmp(file, s) != 0)
+		{
+			strncpy(file, s, countof(file));
+			file[countof(file)-1] = 0;
+			dirty();
+		}
+	}
+	
+	EImageAttributes::EImageAttributes getAttributes() const { return attributes; }
+	void setAttributes(EImageAttributes::EImageAttributes newAttr)
+	{
+		if (newAttr != attributes)
+		{
+			attributes = newAttr;
+			dirty();
+		}
+	}
+};
+
 struct LocoSettings 
 {
 	ESpeedSteps::ESpeedSteps speedSteps;
+	DCCImage smallImage;
+	DCCImage largeImage;
+	
 	EFrontLightPosition::EFrontLightPosition FL;
 	EControlReleaseAction::EControlReleaseAction releaseAction;
 	bool controlled;
@@ -64,6 +155,8 @@ struct LocoSettings
 
 	void setSpeedSteps(ESpeedSteps::ESpeedSteps s) { if (speedSteps != s) { speedSteps = s; dirty(); } }
 	ESpeedSteps::ESpeedSteps getSpeedSteps() const { return speedSteps; }
+	DCCImage &getSmallImage() { return smallImage;}
+	DCCImage &getLargeImage() { return largeImage;}
 	
 	bool dirtyFlag;
 	void dirty() { dirtyFlag = true;}
@@ -159,54 +252,6 @@ struct Functions
 	EFunctionAction::EFunctionAction Fn1, Fn2, Fn3, Fn4, Fn5;
 };
 
-namespace EImageAttributes
-{
-	// Mask
-	enum EImageAttributes: uint8_t
-	{
-		None = 0,
-		FlipHorizontal = 0x01,
-		FlipVertical = 0x02,
-	};
-}
-
-namespace EUserImage
-{
-	enum EUserImage
-	{
-		None = 0,
-		LocoSteamIcon=1,
-		LocoDieselIcon=2,
-		LocoElectricIcon=3,
-		AccTurnoutIcon=4,
-		UserFile=5,
-	};
-}
-
-const uint8_t MASK_LOCO = 0x01;
-const uint8_t MASK_ACC  = 0x02;
-
-class EUserImageClass
-{
-	EUserImage::EUserImage id;
-public:
-	EUserImageClass(EUserImage::EUserImage ui)
-		: id(ui) {}
-	static struct SUserImageInfo
-	{
-		EUserImage::EUserImage id;
-		const char16_t *name;
-		BitmapId bmpId;
-		uint8_t usage;
-	} UserImageInfo[];
-	static const char16_t *iconName(EUserImage::EUserImage img);
-	static uint16_t Count();
-	static const SUserImageInfo& UserImage(uint16_t index);
-	static const SUserImageInfo &UserImage(EUserImage::EUserImage);
-};
-
-
-
 struct Decoders
 {
 private:
@@ -216,12 +261,6 @@ private:
 	uint8_t config;	// cv29
 	char decoderDefFilename[20];	// model file
 	EDecoderType::EDecoderType type;
-	EUserImage::EUserImage smallImageType;
-	char smallImageFile[MAX_PATH];
-	EImageAttributes::EImageAttributes smallImageAttributes;
-	EUserImage::EUserImage largeImageType;
-	char largeImageFile[MAX_PATH];
-	EImageAttributes::EImageAttributes largeImageAttributes;
 	char UserBackgroundFile[MAX_PATH];
 	union
 	{
@@ -241,12 +280,6 @@ public:
 	uint16_t getAddress() const { return address; }
 	const char *getDecoderDefFilename() const { return decoderDefFilename;}
 	EDecoderType::EDecoderType getType() const { return type; }
-	EUserImage::EUserImage getSmallImageType() const { return smallImageType; }
-	EImageAttributes::EImageAttributes getSmallImageAttributes() const { return smallImageAttributes; }
-	char *getSmallImageFile() { return smallImageFile; }
-	EUserImage::EUserImage getLargeImageType() const { return largeImageType; }
-	EImageAttributes::EImageAttributes getLargeImageAttributes() const { return largeImageAttributes; }
-	char *getLargeImageFile() { return largeImageFile; }
 
 	LocoSettings &getLoco()
 	{
@@ -317,56 +350,6 @@ public:
 		if (newConfig != config)
 		{
 			config = newConfig;
-			dirty = true;
-		}
-	}
-	void setSmallImageType(EUserImage::EUserImage id) 
-	{ 
-		if (smallImageType != id) 
-		{
-			smallImageType = id;
-			dirty = true;
-		} 
-	}
-	void setSmallImageFile(const char *s) 
-	{ 
-		if (strcmp(smallImageFile, s) != 0)
-		{
-			strncpy(smallImageFile, s, countof(smallImageFile));
-			smallImageFile[countof(smallImageFile)-1] = 0;
-			dirty = true;
-		}
-	}
-	void setLargeImageType(EUserImage::EUserImage id)
-	{ 
-		if (largeImageType != id) 
-		{
-			largeImageType = id;
-			dirty = true;
-		} 
-	}
-	void setLargeImageFile(const char *s)
-	{ 
-		if (strcmp(largeImageFile, s) != 0)
-		{
-			strncpy(largeImageFile, s, countof(largeImageFile));
-			largeImageFile[countof(largeImageFile)-1] = 0;
-			dirty = true;
-		}
-	}
-	void setSmallImageAttributes(EImageAttributes::EImageAttributes newAttr)
-	{
-		if (newAttr != smallImageAttributes)
-		{
-			smallImageAttributes = newAttr;
-			dirty = true;
-		}
-	}
-	void setLargeImageAttributes(EImageAttributes::EImageAttributes newAttr)
-	{
-		if (newAttr != largeImageAttributes)
-		{
-			largeImageAttributes = newAttr;
 			dirty = true;
 		}
 	}

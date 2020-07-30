@@ -62,15 +62,19 @@ MainView::MainView():
 		{
 			Decoders &d = uiDecodersConfig[i];
 		
-			if (d.getSmallImageType() == EUserImage::UserFile)
+			if (d.getType() == EDecoderType::Multifunction)
 			{
-				BitmapId id = BitmapManager::FindBitmap(d.getSmallImageFile());
-				button->setBitmaps(touchgfx::Bitmap(BITMAP_BUTTONUP_ID), touchgfx::Bitmap(BITMAP_BUTTONDOWN_ID), touchgfx::Bitmap(id), touchgfx::Bitmap(id), (d.getSmallImageAttributes() & EImageAttributes::FlipHorizontal) != 0, (d.getSmallImageAttributes() & EImageAttributes::FlipVertical) != 0 );
-			}
-			else
-			{
-				BitmapId bmpId = EUserImageClass::UserImage(d.getSmallImageType()).bmpId;
-				button->setBitmaps(touchgfx::Bitmap(BITMAP_BUTTONUP_ID), touchgfx::Bitmap(BITMAP_BUTTONDOWN_ID), touchgfx::Bitmap(bmpId), touchgfx::Bitmap(bmpId), (d.getSmallImageAttributes() & EImageAttributes::FlipHorizontal) != 0, (d.getSmallImageAttributes() & EImageAttributes::FlipVertical) != 0 );
+				LocoSettings &loco = d.getLoco();
+				if (loco.getSmallImage().getType() == EUserImage::UserFile)
+				{
+					BitmapId id = BitmapManager::FindBitmap(loco.getSmallImage().getFile());
+					button->setBitmaps(touchgfx::Bitmap(BITMAP_BUTTONUP_ID), touchgfx::Bitmap(BITMAP_BUTTONDOWN_ID), touchgfx::Bitmap(id), touchgfx::Bitmap(id), (loco.getSmallImage().getAttributes() & EImageAttributes::FlipHorizontal) != 0, (loco.getSmallImage().getAttributes() & EImageAttributes::FlipVertical) != 0 );
+				}
+				else
+				{
+					BitmapId bmpId = EUserImageClass::UserImage(loco.getSmallImage().getType()).bmpId;
+					button->setBitmaps(touchgfx::Bitmap(BITMAP_BUTTONUP_ID), touchgfx::Bitmap(BITMAP_BUTTONDOWN_ID), touchgfx::Bitmap(bmpId), touchgfx::Bitmap(bmpId), (loco.getSmallImage().getAttributes() & EImageAttributes::FlipHorizontal) != 0, (loco.getSmallImage().getAttributes() & EImageAttributes::FlipVertical) != 0 );
+				}
 			}
 			button->setLabelText( d.getName());
 			button->setId(i);

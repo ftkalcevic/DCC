@@ -2,6 +2,7 @@
 #include <texts/TextKeysAndLanguages.hpp>
 #include <touchgfx/Color.hpp>
 #include "DecodersConfig.h"
+#include "BitmapDatabase.hpp"
 
 ListItemDecoder::ListItemDecoder()
 {
@@ -21,9 +22,13 @@ void ListItemDecoder::setIndex(int i, bool selected)
 
 	if (index < uiDecodersConfig.Count())
 	{
+		Decoders &d = uiDecodersConfig[index];
 		textArea.setTypedText(touchgfx::TypedText(T_WILDCARDTEXTLEFT20PXID));
-		textArea.setWildcard((const Unicode::UnicodeChar *)uiDecodersConfig[index].getName());
-		
+		textArea.setWildcard((const Unicode::UnicodeChar *)d.getName());
+		if (d.getType() == EDecoderType::Multifunction)
+			image.setBitmap(Bitmap(BITMAP_MULTIFUNCTIONACCESSORYICON_ID));
+		else
+			image.setBitmap(Bitmap(BITMAP_ACCESSORYDECODERICON_ID));
 	}
 	else
 	{
